@@ -1,0 +1,530 @@
+<?php
+require_once 'Flux/LogFile.php';
+require_once 'Flux/Config.php';
+require_once 'Flux/Error.php';
+
+/**
+ * Handles PayPal instant payment notifications.
+ */
+class Flux_PaymentNotifyRequest {
+	/**
+	 * Logger class for logging to the PayPal log stored on disk.
+	 *
+	 * @access private
+	 * @var Flux_LogFile
+	 */
+	private $ppLogFile;
+
+	/**
+	 * Set to true after the notification has been verified by PayPal.
+	 *
+	 * @access private
+	 * @var bool
+	 */
+	private $txnIsValid = false;
+
+	/**
+	 * PayPal server name to use for verification.
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $ppServer;
+
+	/**
+	 * Your currently configured PayPal business email.
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $myBusinessEmail;
+
+	/**
+	 * Your currently configured currency code.
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $myCurrencyCode;
+
+	/**
+	 * PayPal's IPN variables organized into a Flux_Config instance.
+	 *
+	 * @access public
+	 * @var Flux_Config
+	 */
+	public $ipnVariables;
+
+	/**
+	 * Transactions log table.
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $txnLogTable;
+
+	/**
+	 * Account credit balance table.
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $creditsTable;
+
+	/**
+	 * Construct new PaymentNotifyRequest instance from specified IPN variables.
+	 *
+	 * @param array $ipnPostVars
+	 * @access public
+	 */
+	public function __construct(array $ipnPostVars)
+	{
+		$this->ppLogFile       = new Flux_LogFile(FLUX_DATA_DIR.'/logs/paypal.log');
+		$this->ppServer        = Flux::config('PayPalIpnUrl');
+		$this->myBusinessEmail = Flux::config('PayPalBusinessEmail');
+		$this->myCurrencyCode  = strtoupper(Flux::config('DonationCurrency'));
+		$this->ipnVariables    = new Flux_Config($ipnPostVars);
+		$this->txnLogTable     = Flux::config('FluxTables.TransactionTable');
+		$this->creditsTable    = Flux::config('FluxTables.CreditsTable');
+	}
+
+	/**
+	 * Log to PayPal log file. Works like printf().
+	 *
+	 * @param string $format
+	 * @param mixed ...
+	 * @return string
+	 * @access protected
+	 */
+	protected function logPayPal()
+	{
+		$args = func_get_args();
+		$func = array($this->ppLogFile, 'puts');
+		return call_user_func_array($func, $args);
+	}
+
+	/**
+	 * Process transaction.
+	 *
+	 * @access public
+	 */
+	public function process()
+	{
+		$this->logPayPal('Notificação recebida de %s (%s)', $_SERVER['REMOTE_ADDR'], gethostbyaddr($_SERVER['REMOTE_ADDR']));
+
+		if ($this->verify()) {
+			$this->logPayPal('Processo para validar a autenticidade da transação...');
+
+			$accountEmails = Flux::config('PayPalReceiverEmails');
+			$accountEmails = array_merge(array($this->myBusinessEmail), $accountEmails->toArray());
+			$receiverEmail = $this->ipnVariables->get('receiver_email');
+			$transactionID = $this->ipnVariables->get('txn_id');
+			$paymentStatus = $this->ipnVariables->get('payment_status');
+			$payerEmail    = $this->ipnVariables->get('payer_email');
+			$currencyCode  = strtoupper(substr($this->ipnVariables->get('mc_currency'), 0, 3));
+			$trusted       = true;
+
+			// Identify transaction number.
+			$this->logPayPal('Transação identificada como %s.', $transactionID);
+
+			if (!in_array($receiverEmail, $accountEmails)) {
+				$this->logPayPal('E-mail do receptor (%s) não é reconhecido, não autorizado para continuar.', $receiverEmail);
+			}
+			else {
+				$customArray  = @unserialize(base64_decode((string)$this->ipnVariables->get('custom')));
+				$customArray  = $customArray && is_array($customArray) ? $customArray : array();
+				$customData   = new Flux_Config($customArray);
+				$accountID    = $customData->get('account_id');
+				$serverName   = $customData->get('server_name');
+
+				if ($currencyCode != $this->myCurrencyCode) {
+					$this->logPayPal('Moeda de transação não passíveis de troca, aceitando qualquer forma. (recebido: %s, espera: %s)',
+						$currencyCode, $this->myCurrencyCode);
+
+					$exchangeableCurrency = false;
+				}
+				else {
+					$exchangeableCurrency = true;
+				}
+
+				// How much was received? (and in what currency?)
+				$this->logPayPal('Recebido %s (%s).', $this->ipnVariables->get('mc_gross'), $currencyCode);
+
+				// How much will be deposited?
+				$settleAmount   = $this->ipnVariables->get('settle_amount');
+				$settleCurrency = $this->ipnVariables->get('settle_currency');
+
+				if ($settleAmount && $settleCurrency) {
+					$this->logPayPal('Depositado na conta do PayPal: %s %s.', $settleAmount, $settleCurrency);
+				}
+
+				// Let's see where the donation credits should go to.
+				$this->logPayPal('Nome do servidor do jogo: %s, account ID: %s',
+					($serverName ? $serverName : '(absent)'), ($accountID ? $accountID : '(absent)'));
+
+				if (!$accountID || !$serverName) {
+					$this->logPayPal('ID de conta e/ou nome no servidor de jogo ausente, não é possível trocar por créditos.');
+				}
+				elseif ($this->ipnVariables->get('txn_type') != 'web_accept') {
+					$this->logPayPal('Tipo de transação não é web_accept, a quantidade não será trocada por créditos.');
+				}
+				elseif (!($servGroup = Flux::getServerGroupByName($serverName))) {
+					$this->logPayPal('Servidor de jogo desconhecido "%s", não é possível processo de doação para créditos.', $serverName);
+				}
+
+				if ($paymentStatus == 'Completed') {
+					$this->logPayPal('Pagamento para txn_id#%s foi concluído.', $transactionID);
+
+					if ($servGroup && $exchangeableCurrency) {
+						$sql = "SELECT COUNT(account_id) AS acc_id_count FROM {$servGroup->loginDatabase}.login WHERE sex != 'S' AND group_id >= 0 AND account_id = ?";
+						$sth = $servGroup->connection->getStatement($sql);
+						$sth->execute(array($accountID));
+						$res = $sth->fetch();
+
+						if (!$res) {
+							$this->logPayPal('Conta desconhecida #%s no servidor %s, não é possível trocar por créditos.', $accountID, $serverName);
+						}
+						else {
+							if (!$servGroup->loginServer->hasCreditsRecord($accountID)) {
+								$this->logPayPal('Identificado como doação pela primeira vez desta conta ao servidor.');
+							}
+
+							$amount  = (float)$this->ipnVariables->get('mc_gross');
+							$minimum = (float)Flux::config('MinDonationAmount');
+
+							if ($amount >= $minimum) {
+								$trustTable = Flux::config('FluxTables.DonationTrustTable');
+								$holdHours  = +(int)Flux::config('HoldUntrustedAccount');
+
+								if ($holdHours) {
+									$sql = "SELECT account_id, email FROM {$servGroup->loginDatabase}.$trustTable WHERE account_id = ? AND email = ? LIMIT 1";
+									$sth = $servGroup->connection->getStatement($sql);
+									$sth->execute(array($accountID, $payerEmail));
+									$res = $sth->fetch();
+
+									if ($res && $res->account_id) {
+										$this->logPayPal('Account ID and e-mail are trusted.');
+										$trusted = true;
+									}
+									else {
+										$trusted = false;
+									}
+								}
+
+								$rate    = Flux::config('CreditExchangeRate');
+								$credits = floor($amount / $rate);
+
+								if ($trusted) {
+									$sql = "SELECT * FROM {$servGroup->loginDatabase}.{$this->creditsTable} WHERE account_id = ?";
+									$sth = $servGroup->connection->getStatement($sql);
+									$sth->execute(array($accountID));
+									$acc = $sth->fetch();
+
+									$this->logPayPal('Atualizando o saldo de crédito de %s para %s', (int)$acc->balance, $acc->balance + $credits);
+									$res = $servGroup->loginServer->depositCredits($accountID, $credits, $amount);
+
+									if ($res) {
+										$this->logPayPal('Créditos depositados.');
+									}
+									else {
+										$this->logPayPal('Não conseguiu depositar créditos.');
+									}
+								}
+								else {
+									$this->logPayPal('Conta/e-mail não é confiável, mantendo os créditos de doação para %d horas.', $holdHours);
+								}
+							}
+							else {
+								$this->logPayPal('Usuário doou menos do que o mínimo configurado, não trocar créditos.');
+							}
+						}
+					}
+				}
+				else {
+					$this->logPayPal('Status de pagamento incompleto: %s (troca por créditos não vai ocorrer)', $paymentStatus);
+
+					$banStatuses = Flux::config('BanPaymentStatuses');
+
+					if ($banStatuses instanceOf Flux_Config) {
+						$banStatuses = $banStatuses->toArray();
+					}
+					else {
+						$banStatuses = array();
+					}
+
+					$pymntStatus = strtolower($paymentStatus);
+					$banStatuses = array_map('strtolower', $banStatuses);
+
+					if (in_array($pymntStatus, $banStatuses)) {
+						$this->logPayPal('Auto-banimento status de pagamento detectado: %s', $paymentStatus);
+
+						if ($servGroup && $serverName && $accountID) {
+							$this->logPayPal('Conta Banida! (servidor: %s, ID da Conta: %s)', $serverName, $accountID);
+							$servGroup->loginServer->permanentlyBan(
+								null, "Banido por status de pagamento inválido: $paymentStatus",
+								$accountID
+							);
+						}
+						else {
+							$this->logPayPal("Não poderia proibir conta, ele é desconhecido.");
+						}
+					}
+				}
+
+				if (!$servGroup) {
+					foreach (Flux::$loginAthenaGroupRegistry as $servGroup) {
+						$this->logToPayPalTable($servGroup, $accountID, $serverName, $trusted);
+					}
+				}
+				else {
+					if (empty($credits)) {
+						$credits = 0;
+					}
+					$this->logToPayPalTable($servGroup, $accountID, $serverName, $trusted, $credits);
+				}
+
+				$this->logPayPal('Detalhes de transações de poupança %s...', $transactionID);
+
+				if ($logFile=$this->saveDetailsToFile()) {
+					$this->logPayPal('Salvo os detalhes de transações %s para: %s', $transactionID, $logFile);
+				}
+				else {
+					$this->logPayPal('Falha ao salvar detalhes de transações %s para arquivo.', $transactionID);
+				}
+
+				$this->logPayPal('Processamento feito %s.', $transactionID);
+			}
+		}
+		else {
+			$this->logPayPal('Transação inválida, abortando.');
+		}
+
+		return false;
+	}
+
+	/**
+	 * Translate the IPN variables into a query string for use in a POST
+	 * request.
+	 *
+	 * @return string
+	 * @access private
+	 */
+	private function ipnVarsToQueryString()
+	{
+		$ipnVars = $this->ipnVariables->toArray();
+		$qString = '';
+		foreach ($ipnVars as $key => $value) {
+			$qString .= sprintf('&%s=%s', $key, urlencode($value));
+		}
+		$qString = ltrim($qString, '&');
+		return $qString;
+	}
+
+	/**
+	 * Verify IPN variables against PayPal server.
+	 *
+	 * @return bool True if verified, false if not.
+	 * @access private
+	 */
+	private function verify()
+	{
+		$qString  = 'cmd=_notify-validate&'.$this->ipnVarsToQueryString();
+		$request  = "POST /cgi-bin/webscr HTTP/1.0\r\n";
+		$request .= "Content-Type: application/x-www-form-urlencoded\r\n";
+		$request .= 'Content-Length: '.strlen($qString)."\r\n\r\n";
+		$request .= $qString;
+
+		$this->logPayPal('Query string: %s', $qString);
+		$this->logPayPal('Estabelecer conexão com o servidor do PayPal em %s:80...', $this->ppServer);
+
+		$fp = @fsockopen($this->ppServer, 80, $errno, $errstr, 20);
+		if (!$fp) {
+			$this->logPayPal("Falha ao conectar ao servidor do PayPal: [%d] %s", $errno, $errstr);
+			return false;
+		}
+		else {
+			$this->logPayPal('Conectado. Solicitação de envio para o PayPal...');
+
+			// Send POST request just as PayPal sent it.
+
+			$this->logPayPal('Enviado %d bytes de dados de transação. Tamanho do pedido: %d bytes.', strlen($qString), fputs($fp, $request));
+			$this->logPayPal('Leitura de volta, resposta do PayPal...');
+
+			// Read until EOF, last line contains VERIFIED or INVALID.
+			while (!feof($fp)) {
+				$line = trim(fgets($fp));
+			}
+
+			// Close connection.
+			fclose($fp);
+
+			// Check verification status of the notify request.
+			if (strtoupper($line) == 'VERIFIED') {
+				$this->logPayPal('Notificação verificada. (recebido: VERIFICADO)');
+				$this->txnIsValid = true;
+				return true;
+			}
+			else {
+				$this->logPayPal('Notificação não conseguiu verificar. (recebido: %s)', strtoupper($line));
+				return false;
+			}
+		}
+	}
+
+	/**
+	 * Save the transaction details to disk in the file name format of:
+	 * data/logs/transactions/TXN_TYPE/PAYMENT_STATUS.log
+	 *
+	 * @return string File name
+	 * @access private
+	 */
+	private function saveDetailsToFile()
+	{
+		if ($this->txnIsValid) {
+			$logDir1 = realpath(FLUX_DATA_DIR.'/logs/transactions');
+			$logDir2 = $logDir1.'/'.$this->ipnVariables->get('txn_type');
+			$logDir3 = $logDir2.'/'.$this->ipnVariables->get('payment_status');
+			$logFile = $logDir3.'/'.$this->ipnVariables->get('txn_id').'.log.php';
+
+			if (!is_dir($logDir2)) {
+				mkdir($logDir2, 0600);
+			}
+			if (!is_dir($logDir3)) {
+				mkdir($logDir3, 0600);
+			}
+
+			$fp = fopen($logFile, 'w');
+			if ($fp) {
+				foreach ($this->ipnVariables->toArray() as $key => $value) {
+					fwrite($fp, "$key: $value\n");
+				}
+				fclose($fp);
+				return $logFile;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Log the transaction details into the flux_paypal_transactions table.
+	 *
+	 * @param Flux_LoginAthenaGroup $servGroup
+	 * @param string $accountID
+	 * @param string $serverName
+	 * @access private
+	 */
+	private function logToPayPalTable(Flux_LoginAthenaGroup $servGroup, $accountID, $serverName, $trusted, $credits = 0)
+	{
+		if ($this->txnIsValid) {
+			$holdUntil = null;
+			if (!$trusted) {
+				$email = $this->ipnVariables->get('payer_email');
+				$sql   = "SELECT hold_until FROM {$servGroup->loginDatabase}.{$this->txnLogTable} ";
+				$sql  .= "WHERE account_id = ? AND payer_email = ? AND hold_until > NOW() AND payment_status = 'Completed' LIMIT 1";
+				$sth   = $sth = $servGroup->connection->getStatement($sql);
+
+				$sth->execute(array($accountID, $email));
+				$row = $sth->fetch();
+
+				if ($row && $row->hold_until) {
+					$holdUntil = $row->hold_until;
+				}
+				else {
+					$hours     = +(int)Flux::config('HoldUntrustedAccount');
+					$holdUntil = date('Y-m-d H:i:s', time()+($hours*60*60));
+				}
+			}
+
+			$this->logPayPal('Saving transaction details to PayPal transactions table...');
+			$sql = "
+				INSERT INTO {$servGroup->loginDatabase}.{$this->txnLogTable} (
+					account_id,
+					server_name,
+					credits,
+					receiver_email,
+					item_name,
+					item_number,
+					quantity,
+					payment_status,
+					pending_reason,
+					payment_date,
+					mc_gross,
+					mc_fee,
+					tax,
+					mc_currency,
+					parent_txn_id,
+					txn_id,
+					txn_type,
+					first_name,
+					last_name,
+					address_street,
+					address_city,
+					address_state,
+					address_zip,
+					address_country,
+					address_status,
+					payer_email,
+					payer_status,
+					payment_type,
+					notify_version,
+					verify_sign,
+					referrer_id,
+					process_date,
+					hold_until
+				) VALUES (
+					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+					?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(),
+					?
+				)
+			";
+			$var = $this->ipnVariables;
+			$sth = $servGroup->connection->getStatement($sql);
+			$ret = $sth->execute(array(
+				$accountID,
+				$serverName,
+				$credits,
+				$var->get('receiver_email'),
+				$var->get('item_name'),
+				$var->get('item_number'),
+				$var->get('quantity'),
+				$var->get('payment_status'),
+				$var->get('pending_reason'),
+				$var->get('payment_date'),
+				$var->get('mc_gross'),
+				$var->get('mc_fee'),
+				$var->get('tax'),
+				$var->get('mc_currency'),
+				$var->get('parent_txn_id'),
+				$var->get('txn_id'),
+				$var->get('txn_type'),
+				$var->get('first_name'),
+				$var->get('last_name'),
+				$var->get('address_street'),
+				$var->get('address_city'),
+				$var->get('address_state'),
+				$var->get('address_zip'),
+				$var->get('address_country'),
+				$var->get('address_status'),
+				$var->get('payer_email'),
+				$var->get('payer_status'),
+				$var->get('payment_type'),
+				$var->get('notify_version'),
+				$var->get('verify_sign'),
+				$var->get('receiver_id'),
+				$holdUntil
+			));
+
+			if ($ret) {
+				if (!trim($serverName)) {
+					$serverName = '(Desconhecido)';
+				}
+				$this->logPayPal('Informações armazenadas na tabela de transações PayPal para o servidor %s.', $serverName);
+			}
+			else {
+				$errorInfo = implode('/', $sth->errorInfo());
+				$this->logPayPal('Falha ao salvar informações em tabela de operações do PayPal. (%s)', $errorInfo);
+			}
+		}
+	}
+}
+?>

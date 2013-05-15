@@ -1,0 +1,163 @@
+/*
+Ceres Control Panel
+
+This is a control pannel program for Athena and Freya
+Copyright (C) 2005 by Beowulf and Nightroad
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+To contact any of the authors about special permissions send
+a mail to cerescp@gmail.com
+*/
+
+body {
+	color: #FFF;
+	background: #000;
+	margin-top: 0;
+	margin-bottom: 0;
+	font: 10px verdana;
+}
+
+p {
+	margin: 2px;
+}
+
+#banner {
+	background: url(images/ceres.png);
+	width: 782px;
+	height: 200px;
+	margin: auto;
+}
+
+#main_menu {
+	background: url(images/wide.png);
+	height: 25px;
+	width: 782px;
+	line-height: 25px;
+	color: #FFFFFF;
+	font-weight: bold;
+	margin: auto;
+	text-align: center;
+	-moz-border-radius: 10px 10px 0px 0px;
+	-webkit-border-radius: 10px 10px 0px 0px;
+}
+
+#load_div {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 92px;
+	height: 23px;
+	line-height: 23px;
+	background: url(images/loading.gif) #000000;
+	color: #FFFFFF;
+}
+
+#sub_menu {
+	text-align: center;
+	background: url(images/wide.png);
+	height: 25px;
+	line-height: 25px;
+	width: 782px;
+	margin: auto;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+
+#content {
+	position: relative;
+	background: url(images/wide.png);
+	min-height: 400px;
+	width: 782px;
+	margin: auto;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#main_div {
+	width: 626px;
+	min-height: 400px;
+}
+
+#sidebar {
+	text-align: center;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	background: url(images/wide.png);
+	width: 156px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+#copyright {
+	text-align: center;
+	color:#FFFFFF; 
+	line-height: 8pt;
+	height: 40px;
+	width: 772px;
+	margin-top:4px;
+	margin: auto;
+	background: url(images/wide.png);
+	padding: 5px;
+}
+
+tr, td {
+	font-size: 10px;
+	FONT-FAMILY: verdana,arial;
+	color: 000000;
+}
+
+input, select, option, textarea { 
+	background-color: #FFF;
+	color: #000000;
+	border: 1px solid;
+	font-family: verdana, arial;
+	font-size: 10px;
+}
+
+.head {
+	font-weight: bold;
+}
+
+.title { 
+	font-family: verdana,arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: #F90;
+}
+
+#copyright a {
+	color:#FFFFFF; 
+	font-weight: bold;
+	text-decoration: none;
+}
+#td {
+	width: 995px;
+	height: 668px;
+	background:url(images/bg.png);
+	margin: 0 auto;
+}
+.destaque {
+	background:url(images/destaque.png);
+	width: 460px;
+	padding-left: 20px;
+	height: 20px;
+	line-height: 19px;
+		-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	margin-bottom: 2px;
+}
