@@ -1,0 +1,37 @@
+// --- Exteria Ragnarok Online [ExRO] 's Property ---
+// ---   Please visit http://www.exteriaro.com    ---
+// ---           Scripted By: ARTHistic           ---
+// ---         Do Not Revomed the Credits         ---
+
+prontera,130,205,5	script	Treasure Box Summoner	856,{
+	mes "[ Treasure Hunt Event ]";
+	mes "Hello, I'm a new mage here in Midgard. Every hour, I tried to cast my summoning spells and there a chance that i can summon a Treasure Box that will give you items once you destroy it. I only cast my spell on main city and I immediately announce to everyone once I perfectly cast my spells. Anyways, I will give you a little hint...";
+        if( $@tboxevent == 0 ){
+        	mes "I ^ff0000failed^000000 to summoned the Treasure Box last time.^000000";
+	}else {
+        	mes "^I successfully summoned the Treasure Box last time.";
+	}
+	mes " ";
+	mes "Scripted by: ^777777ARTHistic^000000";
+	close;
+
+OnMinute00:
+	set $@tboxevent, rand(2);
+	if ( $@tboxevent != 0 ){
+		announce "Treasure Chest Event Manager: I perfectly cast my summoning skills.",0;
+		sleep2 5000;
+		announce "A rare Treasure Box will be spawned in 30 seconds at Prontera.",0;
+		sleep2 30000;
+		monster "prontera.gat",0,0,"Treasure Box",1845,1,"Treasure Box Oracle::OnTBoxKilled";
+		end;
+	}else {
+		announce "Treasure Chest Event Manager: I cast my summoning skills.",0;
+		end;
+	}
+	end;
+
+OnTBoxKilled:
+	announce "The rare Treasure Box has been founded and destroyed by "+strcharinfo(0)+"!", bc_all;
+	getitem 7539, 5;
+	end;
+}

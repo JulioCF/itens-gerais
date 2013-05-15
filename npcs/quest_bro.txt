@@ -1,0 +1,336 @@
+//=============================================
+prontera,142,202,4	script	Sr.das Quest	63,{
+	mes "[Sr.das Quest]";
+	mes "Olá "+StrCharInfo(0)+"!";
+	mes "Eu tenho alguns itens interessantes aqui, deseja dar uma olhada?";
+	next;
+	if( select("Claro!:Talvez mais tarde...") == 2 )
+	{
+		mes "[Sr.das Quest]";
+		mes "Tudo bem, estarei aqui se você mudar de idéia.";
+		close;
+	}
+	mes "[Sr.das Quest]";
+	mes "Bem, estes são os itens que eu tenho...";
+	mes "Sobre qual deles vai querer saber mais?";
+	next;
+	switch(select("Asinhas de Peco Peco:Antique Pipe:Chapéu de Bebê Dragão:Máscara da Morte:Rubor de Batalha:Touca de Pijama Azul:Olhos Biônicos :Orelhas de Ifrit :Mascara de Fugitivo:Nenhum"))
+	{
+	case 1:
+		mes "[Asinhas de Peco Peco]";
+		mes "Recompensa:";
+		mes "1x "+getitemname(5358);
+		mes " ";
+		mes "Requerimento:";
+		mes "250x "+getitemname(7101);
+		mes "200x "+getitemname(7063);
+		mes "10x "+getitemname(978);
+		mes "1x "+getitemname(2286);
+		mes "1000000 Zenys";
+		next;
+		mes "[Sr.das Quest]";
+		mes "Deseja fazer esta quest?";
+		next;
+		if( select("Sim!:Agora não...") == 2 )
+		{
+			mes "[Sr.das Quest]";
+			mes "Tudo bem... Até mais!";
+			close;
+		}
+		if(countitem(7101) >= 250 && countitem(7063) >= 200 && countitem(978) >= 10 && countitem(2286) >= 1 && Zeny >= 1000000)
+		{
+			delitem 7101,250;
+			delitem 7063,200;
+			delitem 978,10;
+			delitem 2286,1;
+			set Zeny,Zeny-1000000;
+			getitem 5358,1;
+			mes "[Sr.das Quest]";
+			mes "Parabéns! Aqui está!";
+			close;
+		}
+		break;
+	case 2:
+		mes "[Antique Pipe]";
+		mes "Recompensa:";
+		mes "1x "+getitemname(5377);
+		mes " ";
+		mes "Requerimento:";
+		mes "300x "+getitemname(914);
+		mes "200x "+getitemname(1031);
+		mes "250x "+getitemname(1019);
+		mes "1x "+getitemname(2208);
+		mes "3000000 Zenys";
+		next;
+		mes "[Sr.das Quest]";
+		mes "Deseja fazer esta quest?";
+		next;
+		if( select("Sim!:Agora não...") == 2 )
+		{
+			mes "[Sr.das Quest]";
+			mes "Tudo bem... Até mais!";
+			close;
+		}
+		if(countitem(914) >= 300 && countitem(1031) >= 200 && countitem(1019) >= 250 && countitem(2208) >= 1 && Zeny >= 3000000)
+		{
+			delitem 914,300;
+			delitem 1031,200;
+			delitem 1019,250;
+			delitem 2208,1;
+			set Zeny,Zeny-3000000;
+			getitem 5377,1;
+			mes "[Sr.das Quest]";
+			mes "Parabéns! Aqui está!";
+			close;
+		}
+		break;
+	case 3:
+		mes "[Chapéu de Bebê Dragão]";
+		mes "Recompensa:";
+		mes "1x "+getitemname(5531);
+		mes " ";
+		mes "Requerimento:";
+		mes "500x "+getitemname(7123);
+		mes "400x "+getitemname(6073);
+		mes "4x "+getitemname(7443);
+		mes "1x "+getitemname(7451);
+		mes "5000000 Zenys";
+		next;
+		mes "[Sr.das Quest]";
+		mes "Deseja fazer esta quest?";
+		next;
+		if( select("Sim!:Agora não...") == 2 )
+		{
+			mes "[Sr.das Quest]";
+			mes "Tudo bem... Até mais!";
+			close;
+		}
+		if(countitem(7123) >= 500 && countitem(6073) >= 400 && countitem(7443) >= 4 && countitem(7451) >= 1 && Zeny >= 5000000)
+		{
+			delitem 7123,500;
+			delitem 6073,400;
+			delitem 7443,4;
+			delitem 7451,1;
+			set Zeny,Zeny-5000000;
+			getitem 5531,1;
+			mes "[Sr.das Quest]";
+			mes "Parabéns! Aqui está!";
+			close;
+		}
+		break;
+	case 4:
+		mes "[Máscara da Morte]";
+		mes "Recompensa:";
+		mes "1x "+getitemname(5564);
+		mes " ";
+		mes "Requerimento:";
+		mes "400x "+getitemname(1001);
+		mes "400x "+getitemname(999);
+		mes "200x "+getitemname(923);
+		mes "1x "+getitemname(5053);
+		mes "5000000 Zenys";
+		next;
+		mes "[Sr.das Quest]";
+		mes "Deseja fazer esta quest?";
+		next;
+		if( select("Sim!:Agora não...") == 2 )
+		{
+			mes "[Sr.das Quest]";
+			mes "Tudo bem... Até mais!";
+			close;
+		}
+		if(countitem(1001) >= 400 && countitem(999) >= 400 && countitem(923) >= 200 && countitem(5053) >= 1 && Zeny >= 5000000)
+		{
+			delitem 1001,400;
+			delitem 999,400;
+			delitem 923,200;
+			delitem 5053,1;
+			set Zeny,Zeny-5000000;
+			getitem 5564,1;
+			mes "[Sr.das Quest]";
+			mes "Parabéns! Aqui está!";
+			close;
+		}
+		break;
+	case 5:
+		mes "[Rubor de Batalha]";
+		mes "Recompensa:";
+		mes "1x "+getitemname(5800);
+		mes " ";
+		mes "Requerimento:";
+		mes "500x "+getitemname(1061);
+		mes "100x "+getitemname(739);
+		mes "50x "+getitemname(973);
+		mes "1x "+getitemname(5040);
+		mes "1x "+getitemname(5085);
+		mes "1000000 Zenys";
+		next;
+		mes "[Sr.das Quest]";
+		mes "Deseja fazer esta quest?";
+		next;
+		if( select("Sim!:Agora não...") == 2 )
+		{
+			mes "[Sr.das Quest]";
+			mes "Tudo bem... Até mais!";
+			close;
+		}
+		if(countitem(1061) >= 500 && countitem(739) >= 100 && countitem(973) >= 50 && countitem(5040) >= 1 && countitem(5085) >= 1 && Zeny >= 1000000)
+		{
+			delitem 1061,500;
+			delitem 739,100;
+			delitem 973,50;
+			delitem 5040,1;
+			delitem 5085,1;
+			set Zeny,Zeny-1000000;
+			getitem 5800,1;
+			mes "[Sr.das Quest]";
+			mes "Parabéns! Aqui está!";
+			close;
+		}
+		break;
+	case 6:
+		mes "[Touca de Pijama Azul]";
+		mes "Recompensa:";
+		mes "1x "+getitemname(5506);
+		mes " ";
+		mes "Requerimento:";
+		mes "250x "+getitemname(7166);
+		mes "300x "+getitemname(1059);
+		mes "10x "+getitemname(978);
+		mes "1x "+getitemname(5076);
+		mes "5000000 Zenys";
+		next;
+		mes "[Sr.das Quest]";
+		mes "Deseja fazer esta quest?";
+		next;
+		if( select("Sim!:Agora não...") == 2 )
+		{
+			mes "[Sr.das Quest]";
+			mes "Tudo bem... Até mais!";
+			close;
+		}
+		if(countitem(7166) >= 250 && countitem(1059) >= 300 && countitem(978) >= 10 && countitem(5076) >= 1 && Zeny >= 5000000)
+		{
+			delitem 7166,250;
+			delitem 1059,300;
+			delitem 978,10;
+			delitem 5076,1;
+			set Zeny,Zeny-5000000;
+			getitem 5506,1;
+			mes "[Sr.das Quest]";
+			mes "Parabéns! Aqui está!";
+			close;
+		}
+		break;
+	case 7:
+		mes "[Olhos Biônicos ]";
+		mes "Recompensa:";
+		mes "1x "+getitemname(5325);
+		mes " ";
+		mes "Requerimento:";
+		mes "500x "+getitemname(747);
+		mes "300x "+getitemname(730);
+		mes "5x "+getitemname(2296);
+		mes "1x "+getitemname(2201);
+		mes "5000000 Zenys";
+		next;
+		mes "[Sr.das Quest]";
+		mes "Deseja fazer esta quest?";
+		next;
+		if( select("Sim!:Agora não...") == 2 )
+		{
+			mes "[Sr.das Quest]";
+			mes "Tudo bem... Até mais!";
+			close;
+		}
+		if(countitem(747) >= 500 && countitem(730) >= 300 && countitem(2296) >= 5 && countitem(2201) >= 1 && Zeny >= 5000000)
+		{
+			delitem 747,500;
+			delitem 730,300;
+			delitem 2296,5;
+			delitem 2201,1;
+			set Zeny,Zeny-5000000;
+			getitem 5325,1;
+			mes "[Sr.das Quest]";
+			mes "Parabéns! Aqui está!";
+			close;
+		}
+		break;
+	case 8:
+		mes "[Orelhas de Ifrit ]";
+		mes "Recompensa:";
+		mes "1x "+getitemname(5421);
+		mes " ";
+		mes "Requerimento:";
+		mes "400x "+getitemname(7097);
+		mes "250x "+getitemname(994);
+		mes "200x "+getitemname(7262);
+		mes "1x "+getitemname(5068);
+		mes "5000000 Zenys";
+		next;
+		mes "[Sr.das Quest]";
+		mes "Deseja fazer esta quest?";
+		next;
+		if( select("Sim!:Agora não...") == 2 )
+		{
+			mes "[Sr.das Quest]";
+			mes "Tudo bem... Até mais!";
+			close;
+		}
+		if(countitem(7097) >= 400 && countitem(994) >= 250 && countitem(7262) >= 200 && countitem(5068) >= 1 && Zeny >= 5000000)
+		{
+			delitem 7097,400;
+			delitem 994,250;
+			delitem 7262,200;
+			delitem 5068,1;
+			set Zeny,Zeny-5000000;
+			getitem 5421,1;
+			mes "[Sr.das Quest]";
+			mes "Parabéns! Aqui está!";
+			close;
+		}
+		break;
+	case 9:
+		mes "[Mascara de Fugitivo]";
+		mes "Recompensa:";
+		mes "1x "+getitemname(5361);
+		mes " ";
+		mes "Requerimento:";
+		mes "300x "+getitemname(7216);
+		mes "300x "+getitemname(7210);
+		mes "5x "+getitemname(975);
+		mes "1x "+getitemname(5096);
+		mes "4000000 Zenys";
+		next;
+		mes "[Sr.das Quest]";
+		mes "Deseja fazer esta quest?";
+		next;
+		if( select("Sim!:Agora não...") == 2 )
+		{
+			mes "[Sr.das Quest]";
+			mes "Tudo bem... Até mais!";
+			close;
+		}
+		if(countitem(7216) >= 300 && countitem(7210) >= 300 && countitem(975) >= 5 && countitem(5096) >= 1 && Zeny >= 4000000)
+		{
+			delitem 7216,300;
+			delitem 7210,300;
+			delitem 975,5;
+			delitem 5096,1;
+			set Zeny,Zeny-4000000;
+			getitem 5361,1;
+			mes "[Sr.das Quest]";
+			mes "Parabéns! Aqui está!";
+			close;
+		}
+		break;
+	case 10:
+		mes "[Sr.das Quest]";
+		mes "Tudo bem, estarei aqui se você mudar de idéia.";
+		close;
+	}
+	mes "[Sr.das Quest]";
+	mes "Me desculpe, mas você não tem todos os itens necessários para esta quest.";
+	mes "Volte quando você tiver todos os itens!";
+	close;
+}

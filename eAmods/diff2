@@ -1,0 +1,15 @@
+Index: vending.c
+===================================================================
+--- vending.c	(revision 297)
++++ vending.c	(revision 298)
+@@ -241,8 +241,8 @@
+ 			return;
+ 		}
+ 
+-		log_pick(&vsd->bl, LOG_TYPE_VENDING, vsd->vend_coin, (int)z, &sd->status.inventory[i], &sd->status.inventory[i].serial );
+-		log_pick( &sd->bl, LOG_TYPE_VENDING, vsd->vend_coin, -(int)z, &sd->status.inventory[i], &sd->status.inventory[i].serial );
++		log_pick(&vsd->bl, LOG_TYPE_VENDING, vsd->vend_coin, (int)z, &sd->status.inventory[i], sd->status.inventory[i].serial );
++		log_pick( &sd->bl, LOG_TYPE_VENDING, vsd->vend_coin, -(int)z, &sd->status.inventory[i], sd->status.inventory[i].serial );
+ 
+ 		pc_additem(vsd,&sd->status.inventory[i],(int)z);
+ 		pc_delitem(sd,i,(int)z,0,6);

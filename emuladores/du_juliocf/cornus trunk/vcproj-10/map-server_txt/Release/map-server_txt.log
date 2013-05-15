@@ -1,0 +1,111 @@
+﻿Build started 19/07/2012 01:12:35.
+     1>Project "C:\Users\ZangaoInfo\Downloads\cornus trunk\vcproj-10\map-server_txt.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "map-server_txt\Release\map-server_txt.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\3rdparty\zlib\include /I..\3rdparty\pcre\include /I..\3rdparty\msinttypes\include /I..\3rdparty\mt19937ar /Zi /nologo /W3 /WX- /O2 /Ob2 /Oi /Ot /Oy /GT /GL /D WIN32 /D _WIN32 /D __WIN32 /D NDEBUG /D PCRE_SUPPORT /D TXT_ONLY /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D FD_SETSIZE=4096 /D DB_MANUAL_CAST_TO_UNION /D _MBCS /GF /Gm- /EHsc /MT /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo"map-server_txt\Release\\" /Fd"map-server_txt\Release\vc100.pdb" /Gd /TC /wd4018 /wd4100 /wd4800 /analyze- /errorReport:prompt ..\src\common\core.c ..\src\common\db.c ..\src\common\mapindex.c ..\src\common\plugins.c ..\src\common\socket.c ..\src\common\utils.c ..\src\map\atcommand.c ..\src\map\battle.c ..\src\map\battleground.c ..\src\map\buyingstore.c ..\src\map\chat.c ..\src\map\chrif.c ..\src\map\clif.c ..\src\map\duel.c ..\src\map\guild.c ..\src\map\homunculus.c ..\src\map\instance.c ..\src\map\intif.c ..\src\map\itemdb.c ..\src\map\log.c ..\src\map\map.c ..\src\map\mercenary.c ..\src\map\mob.c ..\src\map\npc.c ..\src\map\npc_chat.c ..\src\map\party.c ..\src\map\path.c ..\src\map\pc.c ..\src\map\pet.c ..\src\map\quest.c ..\src\map\script.c ..\src\map\searchstore.c ..\src\map\skill.c ..\src\map\status.c ..\src\map\storage.c ..\src\map\trade.c ..\src\map\unit.c ..\src\map\vending.c
+         core.c
+         db.c
+         mapindex.c
+         plugins.c
+         socket.c
+         utils.c
+         atcommand.c
+         battle.c
+         battleground.c
+         buyingstore.c
+         chat.c
+         chrif.c
+         clif.c
+         duel.c
+         guild.c
+         homunculus.c
+         instance.c
+         intif.c
+         itemdb.c
+         log.c
+         Compiling...
+         map.c
+         mercenary.c
+         mob.c
+         npc.c
+         npc_chat.c
+         party.c
+         path.c
+         pc.c
+         pet.c
+         quest.c
+         script.c
+         searchstore.c
+         skill.c
+         status.c
+         storage.c
+         trade.c
+         unit.c
+         vending.c
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\map-server.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:..\3rdparty\zlib\lib /LIBPATH:..\3rdparty\pcre\lib libcmt.lib oldnames.lib ws2_32.lib zdll.lib pcre.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB /MANIFEST /ManifestFile:"map-server_txt\Release\map-server.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"..\map-server.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"..\map-server.lib" /MACHINE:X86 "map-server_txt\Release\atcommand.obj"
+         "map-server_txt\Release\battle.obj"
+         "map-server_txt\Release\battleground.obj"
+         "map-server_txt\Release\buyingstore.obj"
+         "map-server_txt\Release\chat.obj"
+         "map-server_txt\Release\chrif.obj"
+         "map-server_txt\Release\clif.obj"
+         "map-server_txt\Release\date.obj"
+         "map-server_txt\Release\duel.obj"
+         "map-server_txt\Release\guild.obj"
+         "map-server_txt\Release\homunculus.obj"
+         "map-server_txt\Release\instance.obj"
+         "map-server_txt\Release\intif.obj"
+         "map-server_txt\Release\itemdb.obj"
+         "map-server_txt\Release\log.obj"
+         "map-server_txt\Release\mail.obj"
+         "map-server_txt\Release\map.obj"
+         "map-server_txt\Release\mapreg_txt.obj"
+         "map-server_txt\Release\mercenary.obj"
+         "map-server_txt\Release\mob.obj"
+         "map-server_txt\Release\npc.obj"
+         "map-server_txt\Release\npc_chat.obj"
+         "map-server_txt\Release\party.obj"
+         "map-server_txt\Release\path.obj"
+         "map-server_txt\Release\pc.obj"
+         "map-server_txt\Release\pet.obj"
+         "map-server_txt\Release\quest.obj"
+         "map-server_txt\Release\script.obj"
+         "map-server_txt\Release\searchstore.obj"
+         "map-server_txt\Release\skill.obj"
+         "map-server_txt\Release\status.obj"
+         "map-server_txt\Release\storage.obj"
+         "map-server_txt\Release\trade.obj"
+         "map-server_txt\Release\unit.obj"
+         "map-server_txt\Release\vending.obj"
+         "map-server_txt\Release\core.obj"
+         "map-server_txt\Release\db.obj"
+         "map-server_txt\Release\ers.obj"
+         "map-server_txt\Release\grfio.obj"
+         "map-server_txt\Release\lock.obj"
+         "map-server_txt\Release\malloc.obj"
+         "map-server_txt\Release\mapindex.obj"
+         "map-server_txt\Release\md5calc.obj"
+         "map-server_txt\Release\nullpo.obj"
+         "map-server_txt\Release\plugins.obj"
+         "map-server_txt\Release\random.obj"
+         "map-server_txt\Release\showmsg.obj"
+         "map-server_txt\Release\socket.obj"
+         "map-server_txt\Release\strlib.obj"
+         "map-server_txt\Release\timer.obj"
+         "map-server_txt\Release\utils.obj"
+         "map-server_txt\Release\mt19937ar.obj"
+         Generating code
+         Finished generating code
+         map-server_txt.vcxproj -> C:\Users\ZangaoInfo\Downloads\cornus trunk\vcproj-10\..\map-server.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"..\map-server.exe;#1" /manifest "map-server_txt\Release\map-server.exe.intermediate.manifest"
+       FinalizeBuildStatus:
+         Deleting file "map-server_txt\Release\map-server_txt.unsuccessfulbuild".
+         Touching "map-server_txt\Release\map-server_txt.lastbuildstate".
+     1>Done Building Project "C:\Users\ZangaoInfo\Downloads\cornus trunk\vcproj-10\map-server_txt.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:21.37

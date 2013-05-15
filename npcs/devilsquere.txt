@@ -1,0 +1,647 @@
+// .----------------------------------------------------------.
+// .  		    SoulBlaker Scripts Apresenta:             .
+// .		    ___________________ 		      .
+// .		   /   _____/\______   \                      .
+// .		   \_____  \  |    |  _/		      .
+// .		   /        \ |    |   \		      .
+// .		  /_______  / |______  /		      .
+// .			  \/         \/		              .
+// .           	[ eAthena Advanced Scripts ]                  .
+// .							v1.0  .
+// .----------------------------------------------------------.
+// ;   http://www.eathena.ws/board/SoulBlaker-m271867.html    ;
+// .----------------------------------------------------------.
+// . Script:                                                  .
+// .  Devil Square                                            .
+// .----------------------------------------------------------.
+// . Por: SoulBlaker   Compátivel: eAthena SVN	 versão: 2.5  .
+// .----------------------------------------------------------.
+// . Descrição:                                               .
+// .  Evento Devil Square, ocorre  de 1 a 1hr.                .
+// .----------------------------------------------------------.
+// . Changelog da Versão:                                     .
+// .   - 1.0 Iniciado o NPC. [SoulBlaker]                     .
+// .   - 1.1 Corrigido nome de uma var. [SoulBlaker]	      .
+// .   - 1.2 Corrigido evento da Square 2. [SoulBlaker]       .
+// .   - 1.3 Corrigido info para ver se a Devil Square já     .
+// .	     está acontecendo. [SoulBlaker]                   .
+// .   - 1.4 Fixado erro quando todos jogadores morrem na     .
+// .         Devil Square e adicionado todos anuncios em      .
+// .         verde e mapflag nowarpto, também foi adicionado  .
+// .         a checagem e remoção de Zeny e a BaseLevel da    .
+// .         Devil Square. [SoulBlaker]                       .
+// .  - 1.5 Reforçado a checagem de players que restão na     .
+// .        arena com uma váriavel Global. [SoulBlaker]       .
+// .  - 1.6 Adicionado Sleep. [SoulBlaker]                    .
+// .        Tempo para Eliminação do Evento da DS.            .
+// .  - 1.7 Adicionado Suporte a um Monstro Assassino.        .
+// .        A pedidos de alguns Membros. [SoulBlaker]         .
+// .  - 1.8 Trocado váriaveis globais para temporárias.       .
+// .        Evita bugs na DevilSquare quando o server for     .
+// .        fechado, e outros bugs, como logout. [SoulBlaker] .
+// .  - 1.9 Feito mais algumas correções. [SoulBlaker]        .
+// .  - 2.0 Adicionado Suporte a CustomMobs. [SoulBlaker]     .
+// .  - 2.1 Feito algumas correções. [SoulBlaker]             .
+// .  - 2.2 Corrigido um pequeno erro, e adicionado um pequeno.
+// .        Menu Administrativo. [SoulBlaker]                 .
+// .  - 2.3 Corrigido checagem de players na arena, estava    .
+// .        trocado os itens da comparação, da váriavel de    .
+// .        waitingroomstate. (bugreport:200410). [SoulBlaker].
+// .  - 2.4 Reformulado comparações, consertando ainda a      .
+// .	    checagem de jogadores. [SoulBlaker]               .
+// .  - 2.5 Separado configurações do npc e corrigido checagem.
+// .	    de jogadores na arena. [SoulBlaker]		      .
+// .  - 2.6 Algumas correções. [SoulBlaker]		      .
+// .  - 2.6a Mais correções de português. [SoulBlaker]        .
+// *----------------------------------------------------------*
+-	script	DevilGlobalConf#devil	-1,{
+
+OnInit:
+	// Configurações
+
+	// Qual nível de Base para Entrar na Devil Square?
+	set $SquareBaseLevel, 80;
+
+	// Qual o custo de Zeny para entrar na Devil Square?
+	set $SquareZenyCost, 0;
+
+	// Configurações das Recompensas
+	// Os itens são entregue aos jogadores que quebrarem
+	// o Arca do Tesouro ao terminar o combate contra os
+	// monstros. Logo abaixo, terá uma série de informações
+	// e configurações, para você configurar da melhor
+	// maneira que achar para o seu servidor.
+
+	// Configurações de EXP
+	// Quanto de Experiência de Base o Jogador vai ganhar
+	// ao matar uma Arca do Tesouro?
+	// Se você deixar com o valor '0', o jogador não vai
+	// ganhar experiência de Base.
+	set $SquareBaseEXP,0;
+
+	// Quanto de Experiência de Classe o jogador vai ganhar
+	// ao matar uma Arca do Tesouro?
+	// Se você deixar com o valor '0', o jogador não vai
+	// ganhar experiência de Classe.
+	set $SquareJobExp,0;
+
+	// Configurações dos Itens!
+	// Os itens são gravados e váriaveis (arrays).
+	// Você deve determinar o ponto da array e o valor dela
+	// como o Exemplo abaixo:
+	//
+	// set $SquareItem[<ponto>],<id do item>;
+	// set $SquareItem[0],501;
+	// OBS: Aqui o valor do array $SquareItem[0] será 501.
+	//
+	// set $SquareItem[0],501;
+	// set $SquareItem[1],502;
+	// OBS: Aqui o valor do ponto '0' da Array $SquareItem
+	//      será 501, e o ponto '1' será 502.
+
+	//
+	// Você somente pode adicionar números no ponto,
+	// e não utrapassar de 127 arrays. Ou seja o máximo de
+	// ponto no é '127'.
+	//
+	// Se você for um usuário avançado, poderá adicionar vários
+	// valores em um setarray.
+	// Exemplo:
+	//
+	// setarray $SquareItem[0],501,502,503;
+	//
+	// Ele irá setar desta maneira: 0 = 501, 1 = 502 e 3 = 503.
+	// Alguns Itens vem padarão para não haver erro durante os eventos.
+	// Então Sinta-se livre para setar os itens que deseja ou editar
+	// os padrão do script. :)
+	set $SquareItem[0],501;
+	set $SquareItem[1],502;
+	set $SquareItem[2],503;
+
+	// Qual o Máximo da quantidade de Item que o jogador pode ganhar?
+	// Se você defenir o valor para 10, o jogador irá ganhar 10x o
+	// item ganho no evento.
+	set $SquareAmount,1;
+
+	// Qual o Máximo de Jogador que pode entrar na arena de Devil Square?
+	// Se você botar '0', está opção será desabilitada.
+	set $SquarePlayers,10;
+
+	// Qual o Minimo de Jogadores para iniciar o evento?
+	set $SquareMinPlayer,1;
+
+	// Deseja bloquear o uso de Habilidades ao gerar a Arca do Tesouro?
+	// Bote 1 se deseja, bote 0 se não deseja.
+	set $SquareTreasureNoSkill,0;
+
+	// Quanto tempo de checagem se não tem mais jogadores no Evento (Todos Foram Eliminados).
+	// Em Milisegundos
+	// 15000 = 15segundos
+	set $Square_eliminate_time, 15000;
+
+	// Habilitar Monstro Mode Assassino?
+	// Ponha '0' se deseja desabilitar.
+	set $Square_monster_assasin,1;
+
+	// Habilitar apenas um baú do tesouro para cada player da DevilSquare?
+	// 0 = Não, 1 = Sim.
+	// Nota-se que as coordenadas do Baú do Tesouro não vai ser definida, vai ser em random com os valores '0',
+	// ou seja, pode aparecer em qualquer parte do mapa.
+	// A quantidade de Baú do Tesouro é definido por quantia de jogadores no mapa.
+	set $Square_treasure_players,0;
+
+	// Habilitar o suporte a Custom mobs?
+	// 0 = Não, 1 = Sim.
+	set $Square_enable_custommob, 0;
+
+	// Se o suporte a custom mobs estiverem ativado, define o ID e quantia dos mobs, e o round
+	// que vão aparecer em arrays.
+	//
+	// Arrays:
+	//
+	// $Square_custommob_mobid[<ponto>], < Mob ID >; -> Array das IDs dos Custom Mob.
+	// $Square_custommob_quant[<ponto>], < Quantidade >; -> Array das Quantidades dos Custom Mob.
+	// $Square_custommob_round[<ponto>], < Rounde de Invocação >; -> Array dos Rounds dos Custom Mob.
+	//
+	// Exemplo:
+	//
+	// set $Square_custommob_mobid[0], 1001; // Mob ID: Scorpion
+	// set $Square_custommob_quant[0], 5; // Quantidade de Scorpion [5]
+	// set $Square_custommob_round[0], 2; // Irá ser sumonado no Round 2
+	// set $Square_custommob_mobid[1], 1002; // Mob ID: Poring
+	// set $Square_custommob_quant[1], 3; // Quantidade de Poring [3]
+	// set $Square_custommob_round[1], 1; // Irá ser sumonado no Round 3
+	//
+	// Nota-se, que a ID -> Quantia -> Rounds vão ser definido para cada Mob com o ponto do Array.
+	set $Square_custommob_mobid[0], 1001;
+	set $Square_custommob_quant[0], 5;
+	set $Square_custommob_round[0], 2;
+	set $Square_custommob_mobid[1], 1002;
+	set $Square_custommob_quant[1], 3;
+	set $Square_custommob_round[1], 1;
+
+	// end script
+	donpcevent "Devil Square#devil_01::OnSquareInit";
+	end;
+}
+
+prontera,129,211,5	script	Devil Square#devil_01	733,{
+
+	// Configurações da Administração
+
+	// Level de GM para acessar a Administração do Evento.
+	// Ponha 100 para Cancelar esta opção.
+	set .@GmLevel,99;
+
+	// Habilitar Menssagem que o Evento foi cancelado, quando o administrador Cancelar o Evento Atual?
+	// Ponha 0 para desabilitar a Menssagem.
+	set .@GmResetMessage,1;
+
+
+	if( GetGmLevel() >= .@GmLevel )
+	{
+		mes "[Recepcionista da Devil Square]";
+		mes "Deseja administrar o evento?";
+		next;
+		if ( select("Menu dos Jogadores.","Cancelar Evento Atual.") == 2 )
+		{
+			if( $@squareinf )
+			{
+				// Reset Current Event
+				set $@square_round, 0;
+				set $@squareinf, 0;
+				removemapflag "ordeal_1-1",mf_nomemo;
+				removemapflag "ordeal_1-1",mf_noteleport;
+				removemapflag "ordeal_1-1",mf_nowarp;
+				removemapflag "ordeal_1-1",mf_nogo;
+				removemapflag "ordeal_1-1",mf_nowarpto;
+				removemapflag "ordeal_1-1",mf_nomemo;
+				removemapflag "ordeal_1-1",mf_noskill;
+				removemapflag "ordeal_1-1",mf_noreturn;
+				killmonsterall "ordeal_1-1";
+
+				if( .@GmResetMessage )
+					announce "Devil Square: O Evento foi Cancelado pela Equipe de GM!!",bc_all,"0x00FF00";
+
+				mes "[Recepcionista da Devil Square]";
+				mes "O Evento atual foi cancelado.";
+				close;
+			}
+			else
+			{
+				mes "[Recepcionista da Devil Square]";
+				mes "Não está ocorrendo nenhum evento na DevilSquare.";
+				close;
+			}
+		}
+	}
+	mes "[Recepcionista da Devil Square]";
+	mes "Seja Bem-vindo,";
+	mes "a ^ff0000 Devil Square ^000000.";
+	mes "Se você passar você morre, a";
+	mes "porta é fechada e você deve";
+	mes "esperar na sala de Espera da Devil Square!!";
+	next;
+	switch ( select ("Sala de Espera?","Informações.","Saír.") ) {
+		case 1:
+			mes "[Recepcionista da Devil Square]";
+			mes " Sim, para entrar na Devil Square...";
+			mes "... você deve clicar duas vezes";
+			mes "no balão escrito 'Devil Square' emcima de mim.";
+			mes " Assim que estiver lá, aguarde o inicio da";
+			mes "Devil Square que você será teletransportado";
+			mes "automáticamente para a arena.";
+			break;
+		case 2:
+			mes "[Recepcionista da Devil Square]";
+			mes " A Devil Square é determinada por";
+			mes "nível de Base...";
+			mes " Para participar deste evento você";
+			mes "deve ter o Nível de Base " + $SquareBaseLevel + " ou maior.";
+			next;
+			mes "[Recepcionista da Devil Square]";
+			if( $SquareZenyCost ) {
+				mes " Ah! Para entrar na arena";
+				mes "você precisa ter no minimo de";
+
+				mes $SquareZenyCost + " zenys.";
+				mes " Mais pode trazer muitos";
+				mes "beneficios a você.";
+			}
+			else {
+				mes " Para entrar na arena";
+				mes "é totalmente grátis.";
+				mes "Ou seja não leva nenhum";
+				mes "custo, e pode trazer";
+				mes "muitos beneficios...";
+			}
+			next;
+			mes "[Recepcionista da Devil Square]";
+			mes "No final do evento, será invocado";
+			mes "algumas Arca do Tesouro, possibilitando";
+			mes "você a mata-las e ganhar recompensas";
+			mes "do evento, preste muita atenção quando";
+			mes "elas forem invocadas...";
+			next;
+			mes "[Recepcionista da Devil Square]";
+			mes " A Devil Square ocorre de 1 em 1 hora.";
+			mes "Então fique sempre ligado nestes horários.";
+			break;
+		case 3:
+			mes "[Recepcionista da Devil Square]";
+			mes "Já sabe, se falar morre...";
+			break;
+	}
+	close;
+
+OnSquareInit:
+	// Sets mapflags
+	setmapflag "ordeal_1-1",mf_nomemo;
+	setmapflag "ordeal_1-1",mf_noteleport;
+	setmapflag "ordeal_1-1",mf_nowarp;
+	setmapflag "ordeal_1-1",mf_nowarpto;
+	setmapflag "ordeal_1-1",mf_nogo;
+	setmapflag "ordeal_1-1",mf_nomemo;
+	setmapflag "ordeal_1-1",mf_noreturn;
+
+	// Set Waiting Rom
+	set $@player,10000;
+	if( $SquarePlayers )
+		set $@player, $SquarePlayers;
+
+	waitingroom "Devil Square",$@player;
+	disablenpc "Devil Square#check";
+	end;
+
+OnMinute00:
+	killmonsterall "ordeal_1-1";
+	if( $@squareinf == 0 ) {
+		set $@clock,5;
+		donpcevent "Devil Square#devil_01::OnSquareEvent";
+	}
+	end;
+OnMinute01:
+	if( $@squareinf == 0 ) {
+		set $@clock,4;
+		donpcevent "Devil Square#devil_01::OnSquareEvent";
+	}
+	end;
+OnMinute02:
+	if( $@squareinf == 0) {
+		set $@clock,3;
+		donpcevent "Devil Square#devil_01::OnSquareEvent";
+	}
+	end;
+OnMinute03:
+	if( $@squareinf == 0 ) {
+		set $@clock,2;
+		donpcevent "Devil Square#devil_01::OnSquareEvent";
+	}
+	end;
+OnMinute04:
+	if( $@squareinf == 0 ) {
+		set $@clock,1;
+		donpcevent "Devil Square#devil_01::OnSquareEvent";
+	}
+	end;
+OnMinute05:
+	if( $@squareinf == 0 ) {
+		set $@clock,0;
+		disablenpc "Devil Square#exit";
+		donpcevent "Devil Square#devil_01::OnSquareEvent";
+	}
+	end;
+
+OnSquareEvent:
+	// Tome cuidado ao editar os eventos.
+	if( $@clock > 0 )
+		announce "A Devil Square está-ra aberta em " + $@clock + " minutos, corram para a arena!",bc_all,"0x00FF00";
+	else if( $@square_die >= 6 && getwaitingroomstate(0) < $SquareMinPlayer ) {
+		announce "A Devil Square foi Cancelada por falta do Jogadores!",bc_all,"0x00FF00";
+		set $@square_round, 0;
+		set $@square_die, 0;
+		set $@squareinf, 0;
+		end;
+	}
+	else if( $@square_round == 0 && getwaitingroomstate(0) < $SquareMinPlayer ) {
+		announce "A Devil Square requer o minimo de " + $SquareMinPlayer + " Jogadores na Arena, faltam " + ($SquareMinPlayer - getwaitingroomstate(0)) + " Jogadores para o Evento!",bc_all,"0x00FF00";
+		sleep 60000;
+		set $@square_die, $@square_die + 1;
+		donpcevent "Devil Square#devil_01::OnSquareEvent";
+		end;
+	}
+	else if( ($@square_round == 0 || $@square_round == 1) && (getwaitingroomstate(0) >= $SquareMinPlayer) ) {
+		announce "A Devil Square começou, boa sorte para todos!",bc_all,"0x00FF00";
+		
+		enablenpc "Devil Square#check";
+		warpwaitingpc "ordeal_1-1",183,182,10000;
+
+		set $@squareinf, 1;
+		set $@squaremob, 75;
+		set $@square_round, 1;
+		set $@square_die, 0;
+
+		// Mobs Padrão de 15 Spaws
+		areamonster "ordeal_1-1",183,182,246,144,"[Devil Square] Orc Herói",1189,15,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,144,"[Devil Square] Esqueleto Arqueiro",1016,15,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,144,"[Devil Square] Minorous",1149,15,"Devil Square#devil_01::OnDevilMobDead";
+		
+		// Mobs Padrão de 10 Spaws
+		areamonster "ordeal_1-1",183,182,246,144,"[Devil Square] Esqueleto Soldado",1028,10,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,144,"[Devil Square] Arenoso",1165,10,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,144,"[Devil Square] Réquiem",1164,10,"Devil Square#devil_01::OnDevilMobDead";
+
+	}
+	else if( $@square_round == 2 ) {
+		announce "Devil Square: Começou a 2° Square!! Boa Sorte a todos",bc_all,"0x00FF00";
+		set $@squaremob, 60;
+		
+		// Mobs Padrão de 15 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Gárgula",1253,15,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Mímico",1191,15,"Devil Square#devil_01::OnDevilMobDead";
+		
+		// Mobs Padrão de 10 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Alarme",1193,10,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Injustiçado",1257,10,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Alma Penada",1192,10,"Devil Square#devil_01::OnDevilMobDead";
+
+	}
+	else if( $@square_round == 3 ) {
+		announce "Devil Square: Começou a 3° Square!! Boa Sorte a todos",bc_all,"0x00FF00";
+		set $@squaremob, 59;
+
+		// Mobs Padrão de 15 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Anolian",1206,15,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Andarilho",1208,15,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Coringa",1131,15,"Devil Square#devil_01::OnDevilMobDead";
+
+		// Mobs Padrão de 10 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Deviruchi",1109,10,"Devil Square#devil_01::OnDevilMobDead";
+
+		// Mobs Padrão de 1 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Ilusão das Trevas",1302,1,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Senhor dos Orcs",1190,1,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Senhor das Trevas",1272,1,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Amon-ra",1511,1,"Devil Square#devil_01::OnDevilMobDead";
+
+	}
+	else if( $@square_round == 4 ) {
+		announce "Devil Square: Começou a 4° Square e os Mini-Boss Atacam! Boa Sorte a todos",bc_all,"0x00FF00";
+		set $@squaremob, 35;
+
+		// Mobs Padrão de 6 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Serial Killer",1507,6,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Dragão Mutante",1449,6,"Devil Square#devil_01::OnDevilMobDead";
+
+		// Mobs Padrão de 5 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Cavaleiro Sanguinário",1268,5,"Devil Square#devil_01::OnDevilMobDead";
+
+		// Mobs Padrão de 4 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Quimera",1456,4,"Devil Square#devil_01::OnDevilMobDead";
+
+		// Mobs Padrão de 3 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] ArchAngeling",1388,3,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Ghostring",1120,3,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Grifo",1259,3,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Panzer Goblin",1308,3,"Devil Square#devil_01::OnDevilMobDead";
+
+		// Mobs Padrão de 2 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Líder Cobold",1296,2,"Devil Square#devil_01::OnDevilMobDead";
+
+	}
+	else if( $@square_round == 5 ) {
+		announce "Devil Square: Começou a 5° Square e os MVP's Atacam! Boa Sorte a todos",bc_all,"0x00FF00";
+		set $@squaremob, 15;
+
+		// Mobs Padrão de 2 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Bafomé",1399,2,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Senhor dos Mortos",1373,2,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] General Tartaruga",1312,2,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Senhor dos Orcs",1190,2,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Senhor das Trevas",1272,2,"Devil Square#devil_01::OnDevilMobDead";
+
+		// Mobs Padrão de 1 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Drácula",1389,1,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Faraó",1157,1,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Osíris",1038,1,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Serpente Suprema",1418,1,"Devil Square#devil_01::OnDevilMobDead";
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Orc Herói",1087,1,"Devil Square#devil_01::OnDevilMobDead";
+
+		// Mob Assassino
+		if( $Square_monster_assasin )
+			areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Assassino",1785,1,"Devil Square#devil_01::OnDevilAssDead";
+
+	}
+	else if( $@square_round == 6 ) {
+		set $@squaremob, 10;
+
+		// Mobs Padrão de 5 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Amon-ra",1511,5,"Devil Square#devil_01::OnDevilMobFinish";
+
+		// Mobs Padrão de 3 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Osíris",1038,3,"Devil Square#devil_01::OnDevilMobFinish";
+
+		// Mobs Padrão de 2 Spaws
+		areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] Senhor dos Mortos",1373,2,"Devil Square#devil_01::OnDevilMobFinish";
+
+	}
+	else {
+		// Atenção, aqui fica todas as Caixas de recompensa...
+		if( $Square_treasure_players ) {
+			for( set $@i,0; $@i <= getmapusers("ordeal_1-1"); set $@i, $@i + 1 ) {
+				monster "ordeal_1-1",0,0,"Arca do Tesouro",1324,1,strnpcinfo(O)+"::OnTreasureDied";// linha arrumada
+				//monster "ordeal_1-1",0,0,0,0,"Arca do Tesouro",1324,1,"Devil Square#devil_01::OnTreasureDied";// linha com erro
+				set $@squaremob, $@squaremob + 1;
+			}
+			setmapflag "ordeal_1-1",mf_noskill;
+		}
+		else {
+			set $@squaremob, 10;
+			monster "ordeal_1-1",231,250,"Arca do Tesouro",1324,1,"Devil Square#devil_01::OnTreasureDied";
+			monster "ordeal_1-1",234,247,"Arca do Tesouro",1328,1,"Devil Square#devil_01::OnTreasureDied";
+			monster "ordeal_1-1",237,244,"Arca do Tesouro",1332,1,"Devil Square#devil_01::OnTreasureDied";
+			monster "ordeal_1-1",240,241,"Arca do Tesouro",1336,1,"Devil Square#devil_01::OnTreasureDied";
+			monster "ordeal_1-1",243,238,"Arca do Tesouro",1340,1,"Devil Square#devil_01::OnTreasureDied";
+			monster "ordeal_1-1",246,235,"Arca do Tesouro",1344,1,"Devil Square#devil_01::OnTreasureDied";
+			monster "ordeal_1-1",249,232,"Arca do Tesouro",1348,1,"Devil Square#devil_01::OnTreasureDied";
+			monster "ordeal_1-1",252,229,"Arca do Tesouro",1352,1,"Devil Square#devil_01::OnTreasureDied";
+			monster "ordeal_1-1",249,241,"Arca do Tesouro",1356,1,"Devil Square#devil_01::OnTreasureDied";
+			monster "ordeal_1-1",240,249,"Arca do Tesouro",1360,1,"Devil Square#devil_01::OnTreasureDied";
+			if( !$SquareTreasureNoSkill )
+				setmapflag "ordeal_1-1",mf_noskill;
+		}
+
+	}
+	// Suporte a Custom Mobs
+	if( $Square_enable_custommob ) {
+		for( set $@i,0; $@i < GetArraySize($Square_custommob_mobid); set $@i, $@i + 1 ) {
+			if( $Square_custommob_round[$@i] == $@square_round ) {
+				areamonster "ordeal_1-1",183,182,246,244,"[Devil Square] "+strmobinfo(1,$Square_custommob_mobid[$@i]),$Square_custommob_mobid[$@i],$Square_custommob_quant[$@i],"Devil Square#devil_01::OnDevilMobDead";
+				set $@squaremob, $@squaremob + $Square_custommob_quant[$@i];
+			}
+		}
+	}
+	end;
+
+OnDevilMobDead:
+	set $@squaremob, $@squaremob - 1;
+	if( $@squaremob > 0 )
+		mapannounce "ordeal_1-1","Devil Square: Faltam " + $@squaremob + " monstros para a " + ($@square_round + 1) + "° Square.",bc_map,"0x00FF00";
+	else {
+		set $@square_round, $@square_round + 1;
+		donpcevent "Devil Square#devil_01::OnSquareEvent";
+	}
+	end;
+
+OnDevilMobFinish:
+	set $@squaremob, $@squaremob - 1;
+	if( $@squaremob > 0 )
+		mapannounce "ordeal_1-1","Devil Square: Faltam " + $@squaremob + " monstros para terminar os ataques dos Monstros.",bc_map,"0x00FF00";
+	else {
+		announce "Devil Square: Parabéns jovens guerreiros, vocês derrotaram todos ataques dos monstros. Agora as Arca do Tesouro irão aparecer.",bc_all,"0x00FF00";
+		set $@square_round, 7;
+		donpcevent "Devil Square#devil_01::OnSquareEvent";
+	}
+	end;
+
+OnTreasureDied:
+	set $@squaremob, $@squaremob - 1;
+	mapannounce "ordeal_1-1","Devil Square: O Jogador [ " + strcharinfo(0) + " ] abriu uma das Arcas do Tesouro.",bc_map,"0x00FF00";
+	doevent "Devil Square#devil_01::OnTreasure";
+	if( $@squaremob == 0 ) {
+		announce "Parabéns a todos bravos guerreiros que venceram a luta contra os Monstros na Devil Square.",bc_all,"0x00FF00";
+		announce "Evento criado por [ SoulBlaker ] do fórum eAthena.",bc_all,"0x00FF00";
+		enablenpc "Devil Square#exit";
+		enablewaitingroomevent "Devil Square#exit";
+		set $@square_round, 0;
+		set $@squareinf, 0;
+
+		// Remove mapflags
+		removemapflag "ordeal_1-1",mf_nomemo;
+		removemapflag "ordeal_1-1",mf_noteleport;
+		removemapflag "ordeal_1-1",mf_nowarp;
+		removemapflag "ordeal_1-1",mf_nogo;
+		removemapflag "ordeal_1-1",mf_nowarpto;
+		removemapflag "ordeal_1-1",mf_nomemo;
+		removemapflag "ordeal_1-1",mf_noskill;
+		removemapflag "ordeal_1-1",mf_noreturn;
+
+	}
+
+	end;
+
+OnTreasure:
+
+	set BaseExp, BaseExp + $SquareBaseEXP;
+	set JobExp, JobExp + $SquareBaseEXP;
+	set $@rand_1,rand(getarraysize($SquareItem));
+	if( $SquareAmount )
+		set $@rand_2,rand(1,$SquareAmount);
+	else
+		set $@rand_2,1;
+	getitem $SquareItem[$@rand_1],$@rand_2;
+	if( $Square_treasure_players )
+		warp "prontera",0,0;
+	end;
+
+OnDevilAssDead:
+	mapannounce "ordeal_1-1","Devil Square: O Jogador [ " + strcharinfo(0) + " ] matou o Monstro Assassino.",bc_map,"0x00FF00";
+	end;
+
+OnPCDieEvent:
+OnPCLogoutEvent:
+
+	// Tempo de Espera da Saída da Arena
+	sleep $Square_eliminate_time;
+
+	if( $@squareinf && getmapusers("ordeal_1-1") == 0 )
+	{
+		announce "Devil Square: Todos falharam na Devil Square, os Monstros sairam vitoriosos na " + $@square_round + "º Square.",bc_all,"0x00FF00";
+		killmonsterall "ordeal_1-1";
+		set $@square_round, 0;
+		set $@squareinf, 0;
+	}
+	end;
+
+}
+
+ordeal_1-1,246,245,7	script	Devil Square#exit	51,{
+
+	mes "[Recepcionista da Saída]";
+	mes "Deseja retornar a Prontera?";
+	next;
+	if( Select ("Sim.","Não.") == 1) {
+		mes "[Recepcionista da Saída]";
+		mes "Muito bem, boa viajem!";
+		close2;
+		warp "prontera",155,171;
+		end;
+	}
+	mes "[Recepcionista da Saída]";
+	mes "Você deve saír logo... ou pode ter grandes problemas...";
+	close;
+
+OnInit:
+	waitingroom "Devil Square Saída",10000;
+	disablewaitingroomevent;
+	end;
+		
+}
+
+ordeal_1-1,183,182,4	script	Devil Square#check	111,2,2,{
+
+OnTouch:
+	if( BaseLevel < $SquareBaseLevel ) {
+		dispbottom "Você não tem nível de Base para entrar na arena.";
+		dispbottom "A Arena é limitada para Jogadores com o Nível de Base " + $SquareBaseLevel + " ou superior.";
+		warp "prontera",0,0;
+	}
+	if( $SquareZenyCost && Zeny < $SquareZenyCost ) {
+		dispbottom "Você não tem zeny para entrar na arena.";
+		dispbottom "E será chutado para bem longe...";
+		warp "prontera",0,0;
+	}
+	set Zeny, Zeny - $SquareZenyCost;
+	end;
+
+}

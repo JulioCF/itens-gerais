@@ -1,0 +1,51 @@
+//===== Script ===============================================
+//= Warper
+//===== By ===================================================
+//= Jonyll
+//===== Version ==============================================
+//= 1.0
+//===== Compatible With ======================================
+//= eAthena, Cronus & brAthena
+//===== Description ==========================================
+//= NPC que leva para gef_dun03, mapa reservado para vips.
+//===== Comments =============================================
+//= 1.0 iniciado e feito.
+//============================================================
+
+gef_dun02,216,68,5	script	BIBI	704,{
+
+		if(getgmlevel()<1) {
+		mes "Você não é vip!";
+		next;
+
+		mes "Você não pode acessar este mapa";
+		specialeffect2 666;
+		percentheal -50,-50;
+		next;
+		mes "Se torne Vip você também.";
+		mes "Faça uma doação para o servidor você também; site: www.site.brasilragnarok.com.br";
+		mes "aproveite e ajude o servidor.";
+		//next;
+		//warp "prontera",0,0;
+		close;
+		}
+
+	if(getgmlevel()>1){
+
+	mes "Bem vindo, deseja ir agora para seu mapa especial?";
+	next;
+	switch(select("Sim, Por favor:Não, obrigado")) {
+	case 1:
+		mes "Ok, bom up e tome cuidado!";
+		specialeffect2 66;
+		specialeffect2 207;
+		specialeffect2 348;
+		next;
+		warp "gef_dun03",0,0;
+		percentheal 100,100;
+		close;
+		}
+	//case 2:
+	close;
+	}
+}

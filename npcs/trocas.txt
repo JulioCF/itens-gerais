@@ -1,0 +1,165 @@
+//===== Script ===============================================
+//= Itens trade
+//===== By ===================================================
+//= Jonyll
+//===== Version ==============================================
+//= 1.2
+//===== Compatible With ======================================
+//= eAthena, Cronus & brAthena
+//===== Description ==========================================
+//= npc de troca de itens, ele pega uma quantidade
+//= e transforma em caixa ou unidades.
+//===== Comments =============================================
+//= 1.0 iniciado
+//= 1.1 correções aplicadas, recolhimento e entregas
+//= 1.2 adicionado trocas por itens enriquecidos
+//============================================================
+
+-	script	njord trader#01::trader	-1,{
+
+	mes "[Trader Man]";
+	mes "hello";
+	mes "estou aqui para ajudar os jogadores empacotanto alguns itens";
+	next;
+	mes "Por enquanto, estou trabalhando com estes itens:";
+	next;
+	mes "100 Honey > box honey 100";
+	mes "500 Empty Bottle > box empty bottle 500";
+	mes "100 Blue Gemstone > box blue gemstone 100";
+	mes "25 Blue Potion > box light blue 25";
+	mes "10 Oridecom > box oridecom 10";
+	mes "10 Elunium > box elunium 10";
+	next;
+	mes "Go trade itens?";
+	switch(select("Troque por favor:Não, obrigado:Troca especial")) {
+		case 1:
+		mes "Qual item deseja empacotar?";
+		next;
+		switch(select("Honey:Empty Bottle:Blue Gemstone:Blue Potion:Oridecom:Elunium:Não, obrigado")) {
+			case 1:
+				if (countitem(518) < 100) {
+				mes "Desculpe, você não tem os Mels.";
+				close;
+				}
+			delitem 518,100; //honey
+			getitem 13760,1; //box honey
+			close;
+			case 2:
+				if (countitem(713) < 500) {
+				mes "Desculpe, você não tem as garrafas.";
+				close;
+				}
+			delitem 713,500; //empty bottle
+			getitem 13761,1; //box empty bottle
+			close;
+			case 3:
+				if (countitem(717) < 100) {
+				mes "Desculpe, você não tem as gemas.";
+				close;
+				}
+			delitem 717,100; //blue gemstone
+			getitem 13809,1; //box blue gemstone
+			close;
+			case 4:
+				if (countitem(505) < 25) {
+				mes "Desculpe, você não tem os pots azuis.";
+				close;
+				}
+			delitem 505,25; //blue potion
+			getitem 13810,1; //box blue potion
+				mes "Esta caixa não pode ser usada em mapas GvG!";
+			close;
+			case 5:
+				if (countitem(984) < 10) {
+				mes "Desculpe, você não tem os Oridecons.";
+				close;
+				}
+			delitem 984,10; //oridecon
+			getitem 13890,1; //box oridecon
+			close;
+			case 6:
+				if (countitem(985) < 10) {
+				mes "Desculpe, você não tem os Eluniums.";
+				close;
+				}
+			delitem 985,10; //elunium
+			getitem 13889,1; //box elunium
+			close;
+			case 7:
+			mes"ok.";
+			close;
+			}
+	case 2:
+	close;
+		case 3:
+		mes "Hoooo! quer meus trabalhos especiais?";
+		next;
+		mes "Ok, no momento eu posso trocar estes:";
+		mes "Trocar 50 Eluniuns por 1 Elunium enriquecido.";
+		mes "Trocar 50 Oridecons por 1 Oridecom enriquecido.";
+		mes "Ou..";
+		next;
+		mes "250 Elunium > 1 box 5 Enriched Elunium";
+		mes "250 Oridecom > 1 box 5 Enriched Oridecom";
+		next;
+		switch(select("Troque por favor:Não obrigado.")) {
+		case 1:
+			mes"Qual você deseja trocar?";
+			next;
+			switch(select("50 Elunium > 1 Enriched Elunium:50 Oridecom > 1 Enriched Oridecom:250 Eluniuns > 1 Box 5 Enriched Elunium:250 Oridecons > 1 Box 5 Enriched Oridecons:Exit")) {
+			case 1:
+			if (countitem(985) < 50) {
+			mes "Desculpe, você está sem itens.";
+			close;
+			}
+			delitem 985,50; //elunium
+			getitem 7619,1; //elunium enriquecido
+			close;
+			case 2:
+			if (countitem(984) < 50) {
+			mes "Desculpe, você está sem itens.";
+			close;
+			}
+			delitem 984,50; //oridecon
+			getitem 7620,1; //ordecom enriquecido
+			close;
+			case 3:
+			if (countitem(985) < 250) {
+			mes "Desculpe, você está sem itens.";
+			close;
+			}
+			delitem 985,250; //elunium
+			getitem 13610,1; //box elunium enriquecido
+			close;
+			case 4:
+			if (countitem(984) < 250) {
+			mes "Desculpe, você está sem itens.";
+			close;
+			}
+			delitem 984,250; //oridecon
+			getitem 13611,1; //box oridecom enriquecido
+			close;
+			}
+			case 5:
+			close;
+	case 2:
+	close;
+	}
+}
+}
+// duplicatas
+alberta,39,240,5	duplicate(trader)	njord trader#02	120
+prontera,146,197,5	duplicate(trader)	njord trader#03	120
+geffen,128,67,5	duplicate(trader)	njord trader#04	120
+morocc,166,102,5	duplicate(trader)	njord trader#05	120
+aldebaran,132,120,5	duplicate(trader)	njord trader#06	120
+
+//================================================================
+//13760 - pacote mel 100 - id 518
+//13761 - pacote garrafa vazia 500 - id 713
+//13809 - pacote gema azul 100 - id 717
+//13810 - pacote pot azul 25 - id 505( proibir entrada em castelo - mudar o ID de entrega da pot azul )
+//13890 - pacote oridecon 10 - id 984( mudar para 50 )
+//13889 - pacote elunium 10 - id 985( mudar para 50 )
+//7620 - oridecom enriquecido
+//7619 - elunium enriquecudo

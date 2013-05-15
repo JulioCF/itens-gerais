@@ -1,0 +1,79 @@
+prontera,150,150,5	script	Mary Jane	53,{
+
+	set .@coinID, 7539;
+	
+	mes "["+strnpcinfo(1)+"]";
+	mes "Olá, eu posso trocar "+getitemname(.@coinID)+" que são dropadas de monstro por serviços.";
+	next;
+	switch (select ("Trocar Sexo [5 Moedas]:Trocar Líder do Clã [5 Moedas]:Receber 15 Dias VIP [20 Moedas]:Cancelar"))
+	{
+		case 1:
+			mes "["+strnpcinfo(1)+"]";
+			if (countitem(.@coinID) < 5)
+				callsub S_MesClose, "Você não possui essa quantia de moedas!";
+			mes "Tem certeza que deseja virar "+((Sex)?"mulher":"homem")+" ?";
+			next;
+			if (select ("Não:Tenho") == 1) close;
+			mes "["+strnpcinfo(1)+"]";
+			mes "Você se sente um pouco tont"+((Sex)?"o":"a")+" e desmaia...";
+			sleep2 2000;
+			close2;
+			changesex;
+			atcommand "@kick "+strcharinfo(0);
+			delitem .@coinID, 5;
+			end;
+			
+		case 2:
+			mes "["+strnpcinfo(1)+"]";
+			if (!getcharid(2))
+				callsub S_MesClose, "Você não possui um clã!";
+			if (getguildmaster(getcharid(2)) != strcharinfo(0))
+				callsub S_MesClose, "Você não é o líder de seu clã!";
+			mes "Digite o nome do novo líder:";
+			input .@input$;
+			next;
+			mes "["+strnpcinfo(1)+"]";
+			if (!getstrlen(.@input$) || getstrlen(.@input$) > 24)
+				callsub S_MesClose, "Nome inválido!";
+			if (!isloggedin(getcharid(3,.@input$)))
+				callsub S_MesClose, "Personagem está offline ou não existe!";
+			query_sql "SELECT `name` FROM `guild` WHERE `name`='"+.@input$+"'", .@name$;
+			if (!getstrlen(.@name$) || !getarraysize(.@name$))
+				callsub S_MesClose, "Este personagem não está em seu clã!";
+			mes "Tem certeza que deseja dar a liderança do seu clã para "+.@name$+" ?";
+			next;
+			if (select ("Não:Tenho") == 1) close;
+			mes "["+strnpcinfo(1)+"]";
+			mes "Pronto!";
+			close2;
+			if (!isloggedin(getcharid(3,.@input$)))
+				end;
+			else
+			{
+				atcommand "@changegm "+.@name$;
+				delitem .@coinID, 5;
+				end;
+			}
+			
+		case 3:
+			mes "["+strnpcinfo(1)+"]";
+			mes "Quer mesmo receber 15 dias VIP?";
+			next;
+			if (select ("Não:Quero") == 1) close;
+			mes "["+strnpcinfo(1)+"]";
+			mes "Você acaba de receber 15 dias VIP !";
+			close2;
+			query_sql "UPDATE `login` SET `diasvip`=`diasvip`+'15' WHERE `account_id`='"+getcharid(3)+"'";
+			query_sql "UPDATE `login` SET `level`='1' WHERE `account_id`='"+getcharid(3)+"' AND `level`='0'";
+			delitem .@coinID, 20;
+			end;
+	
+		case 4:
+			close;
+	}
+	
+	S_MesClose:
+		mes getarg(0);
+		close;
+	return;
+}

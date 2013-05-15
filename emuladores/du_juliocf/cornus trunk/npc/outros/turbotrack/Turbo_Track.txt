@@ -1,0 +1,1045 @@
+//===== Cronus Script ========================================
+//= NPCs da Turbo Track
+//===== Por: =================================================
+//= L0ne_W0lf
+//===== Versão Atual: ========================================
+//= 1.3a
+//===== Compatível Com: ======================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= [Conversão do Aegis]
+//= NPCs geral da Turbo Track, inclusos Kafra e mercador de utilidades
+//===== Comentários Adicionais: ==============================
+//= 1.1 Traduzido para o português [Sensei/Poringão]
+//= 1.2 Revisado e convertido para o Cronus [Kamper]
+//= 1.3 Correção nos nomes dos npcs. [SoulBlaker]
+//= 1.3a Revisado e corrigidos erros gramaticais. [Mara]
+//============================================================
+
+turbo_room,130,92,3	script	Funcionária Kafra#tt	115,{
+	cutin "kafra_03",2;
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo, ao Serviço Kafra";
+	mes "estamos sempre do seu lado. Deixe-me";
+	mes "lembrar que ao você usar";
+	mes "o Serviço de Retorno, seu Ponto de Retorno";
+	mes "será mudado para Al de Baran.";
+	mes "Agora, como posso ajudar?";
+	callfunc "F_Kafra",5,8,1,40,0;
+
+	M_Save:
+		savepoint "aldebaran",168,112;
+		callfunc "F_KafEnd",0,1,"in Al De Baran";
+
+}
+
+turbo_room,124,86,0	shop	Mercador da Turbo Track	90,501:-1,502:-1,503:-1,504:-1,645:-1,656:-1,1065:-1,1750:-1
+
+turbo_room,99,120,4	script	Guia TBT#Broadcast	124,{
+	mes "[Guia da Turbo Track]";
+	mes "Bom dia!";
+	mes "Eu estou aqui para ajudá-lo fornecendo informações sobre a Turbo Track. Em que posso ajudar?";
+	next;
+	while(1) {
+		switch(select("Regras do Jogo:Pistas do Jogo:Modos do Jogo:Itens e Habilidades Proibidas:Cancelar")) {
+		case 1:
+			mes "[Guia da Turbo Track]";
+			mes "As regras são essencialmente";
+			mes "simples. Apenas passe por todos os obstáculos e chegue na Linha de Chegada o mais rápido possível.";
+			next;
+			mes "[Guia da Turbo Track]";
+			mes "Claro, podem ocorrer";
+			mes "algumas situações inesperadas nas pistas, mas eu não posso ilustrar um exemplo para você.";
+			next;
+			mes "[Guia da Turbo Track]";
+			mes "Classes que podem";
+			mes "montar um PecoPeco,";
+			mes "como Cavaleiros, Lordes,";
+			mes "Templários e Paladinos, devem desmontar de seus PecoPecos antes de entrar na Arena.";
+			next;
+			mes "[Guia da Turbo Track]";
+			mes "Mas não se preocupe...";
+			mes "Você pode pegar o seu";
+			mes "PecoPeco de volta";
+			mes "depois que o jogo terminar.";
+			next;
+			mes "[Guia da Turbo Track]";
+			mes "O vencedor é a pessoa que primeiro alcançar a Linha de Chegada. Assim que alguém vencer, o";
+			mes "jogo terminará e todos os participantes serão automaticamente teletransportados para uma Sala de Espera.";
+			next;
+			mes "[Guia da Turbo Track]";
+			mes "Além disso, quando o tempo atribuido à partida acabar, o jogo termina,";
+			mes "mesmo se um vencedor não tiver sido determinado.";
+			next;
+			mes "[Guia da Turbo Track]";
+			mes "Não há nenhuma exigência de nível ou classe de personagem para participar da Turbo Track. Entretanto, esse serviço requer uma taxa de";
+			mes "1.000 Zenys.";
+			next;
+			break;
+		case 2:
+			mes "[Guia da Turbo Track]";
+			mes "A Turbo Track é formada por várias pistas: a ^4d4dffPonte de Mandeira, Caixas Empilhadas, do Deserto, Labirinto, Caracol, da Serpente, da Caverna e o Labirinto Invisível.";
+			next;
+			mes "[Guia da Turbo Track]";
+			mes "As pistas que estarão presentes vão depender do modo de jogo. Basicamente, uma partida consiste de seis pistas, além das linhas de Largada e Chegada. Gostaria de ouvir mais sobre alguma pista em particular?";
+			next;
+			set .@exitloop,1;
+			while (.@exitloop) {
+				switch(select("Ponte de Madeira e Caixas Empilhadas:do Deserto e Labirinto:Caracol e Labirinto Invisível:da Serpente e da Caverna:Não, obrigado.")) {
+				case 1:
+					mes "[Guia da Turbo Track]";
+					mes "Na pista da Ponte de Madeira,";
+					mes "você deve passar";
+					mes "por uma simples tora de lenha. Se cair, você será levado de volta para o começo da ponte.";
+					next;
+					mes "[Guia da Turbo Track]";
+					mes "As Caixas Empilhadas é uma pista feita de uma colina de caixas. Você deve achar o caminho certo pelas caixas para prosseguir para a próxima pista. Não deve ser muito difícil, porém.";
+					next;
+					break;
+				case 2:
+					mes "[Guia da Turbo Track]";
+					mes "O do Deserto é";
+					mes "uma pista curta e cheia de surpresas. Se for realmente azarado você pode acabar";
+					mes "confuso ou até amaldiçoado!";
+					next;
+					mes "[Guia da Turbo Track]";
+					mes "O Labirinto está cheio de armadilhas que vão te atrasar, então tenha cuidado. Talvez seja mais sábio não se apressar e evitar as armadilhas do que simplismente sair correndo apressado.";
+					next;
+					break;
+				case 3:
+					mes "[Guia da Turbo Track]";
+					mes "O Caracol é um caminho estreito e espiral no formato de uma concha de caracol. Não há nenhum obstáculo difícil, mas será duro correr o mais rápido possível.";
+					next;
+					mes "[Guia da Turbo Track]";
+					mes "O Labirinto Invisível parece uma enorme sala aberta, mas existem";
+					mes "muitas paredes invisíveis. Porém, você receberá algumas pistas, então não será nada impossível.";
+					next;
+					break;
+				case 4:
+					mes "[Guia da Turbo Track]";
+					mes "A da Serpente";
+					mes "é uma pista";
+					mes "sinuosa, mais ou menos como o corpo de uma cobra. E ainda tem o fator da sorte nessa pista também, mas isso é segredo!";
+					next;
+					mes "[Guia da Turbo Track]";
+					mes "A pista da Caverna é uma situação da Caverna de Payon.";
+					mes "Se você tá acostumando a se aventurar nas Cavernas de Payon, essa parte deve ser muito fácil.";
+					next;
+					break;
+				case 5:
+					mes "[Guia da Turbo Track]";
+					mes "Entendo.";
+					mes "Certo, então,,";
+					mes "boa sorte pra";
+					mes "você nas corridas!";
+					next;
+					set .@exitloop,0;
+				}
+			}
+			mes "[Guia da Turbo Track]";
+			mes "Você gostaria de saber";
+			mes "qualquer coisa além";
+			mes "disso sobre a Turbo Track?";
+			next;
+			break;
+		case 3:
+			mes "[Guia da Turbo Track]";
+			mes "A Turbo Track lhe fornece três modos diferentes de jogo: Modo Normal, Modo Avançado e Modo Solo.";
+			next;
+			mes "[Guia da Turbo Track]";
+			mes "Os participantes são liberados para usar quase qualquer habilidades na Turbo Track. Diferente dos outros modos, o ^4d4dffModo Avançado permite aos jogadores fazerem PvP^000000. Esse modo é ideal para corridas entre grupos ou guildas.";
+			next;
+			mes "[Guia da Turbo Track]";
+			mes "O Labirinto Invisível é um mapa especial que só é fornecido para os modos ^4d4dffNormal^000000 e ^4D4DFFAvançado^000000 de 16 pessoas.";
+			next;
+			mes "[Guia da Turbo Track]";
+			mes "Você pode experimentar qualquer pista no Modo Solo. O nome e o tempo";
+			mes "transcorrido do jogador mais rápido também serão gravados em nossos recordes. Por que você não aceita o desafio?";
+			next;
+			break;
+		case 4:
+			mes "[Guia da Turbo Track]";
+			mes "Agora na Turbo Track, os";
+			mes "sequinte itens são proibidos";
+			mes "de uso: Poção Verde, Panacéa";
+			mes "e Asa de Mosca. Se você tentar usá-los, eles não irão funcionar até que você deixe a corrida.";
+			next;
+			mes "[Guia da Turbo Track]";
+			mes "A seguinte habilidades não podem";
+			mes "ser usadas durante a corrida da";
+			mes "Turbo Track: Rapto, Teleporte,";
+			mes "Portal, Esconderijo, Furtividade, Espreitar, Medicar, Barreira de Gelo, Frenesi, Basilica, Bênção Protetora e Rapidez com Lança.";
+			next;
+			//this aopears to suposed to fall through.
+		case 5:
+			mes "[Guia da Turbo Track]";
+			mes "Por favor, aproveite o seu";
+			mes "tempo aqui na";
+			mes "Turbo Track! Obrigada.";
+			close;
+		}
+	}
+
+OnInit:
+	// This will only ever be run ONCE!
+	// Unless you eradicate the variable.
+	//
+	// This OnInit initiallizes and sets the starting
+	// data for the Turbo Track's "Record" Logs.
+	// WARNING/ATTENTION: DO NOT MODIFY ANY OF THE DATA.
+	// DOING SO WILL CAUSE INTERNAL PROBLEMS IN THE SCRIPT.
+	if ($ttnames$[0] == "") {
+		setarray $ttnames$[0],"Breezy Havana";	// Solo Mode/Time Attack
+		setarray $ttnames$[1],"RS125";	// Normal 4 Player
+		setarray $ttnames$[2],"Hollgrehenn";	// Normal 8 Players
+		setarray $ttnames$[3],"Antonio";	// Noomal 16 Players
+
+		setarray $ttnames$[4],"Aragham";	// Expert 4 Players
+		setarray $ttnames$[5],"Kafra Jasmine";	// Expert 8 Players
+		setarray $ttnames$[6],"Chris";	// Expert 16 Players
+
+		setarray $ttnames$[7],"Breezy Havana";	// Honor Place 1
+		setarray $ttnames$[8],"RS125";	// Honor Place 2
+
+		setarray $ttnames$[9],"Breezy Havana";	// Top 1
+		setarray $ttnames$[10],"Nari";	// Top 2
+		setarray $ttnames$[11],"Senorita Sylvia";	// Top 3
+		setarray $ttnames$[12],"Joo Jahk";	// Top 4
+		setarray $ttnames$[13],"RS125";	// Top 5
+
+		setarray $ttranks[0],999999,0,0,0,0,0;
+	}
+	end;
+
+Onend_n1:
+	mapannounce "turbo_room","[Modo Normal - Solo] O jogo terminará brevemente.",bc_map,"0xadff2f";
+	end;
+
+Onend_n4:
+	mapannounce "turbo_room","[Modo Normal - 4 Pessoas] O jogo terminará brevemente.",bc_map,"0xadff2f";
+	end;
+
+Onend_n8:
+	mapannounce "turbo_room","[Modo Normal - 8 Pessoas] O jogo terminará brevemente.",bc_map,"0xadff2f";
+	end;
+
+Onend_n16:
+	mapannounce "turbo_room","[Modo Normal - 16 Pessoas] O jogo terminará brevemente.",bc_map,"0xadff2f";
+	end;
+
+Onend_e4:
+	mapannounce "turbo_room","[Modo Avançado - 4 Pessoas] O jogo terminará brevemente.",bc_map,"0xadff2f";
+	end;
+
+Onend_e8:
+	mapannounce "turbo_room","[Modo Avançado - 8 Pessoas] O jogo terminará brevemente.",bc_map,"0xadff2f";
+	end;
+
+Onend_e16:
+	mapannounce "turbo_room","[Modo Avançado - 16 Pessoas] O jogo terminará brevemente.",bc_map,"0xadff2f";
+	end;
+
+Onnew_top1:
+	mapannounce "turbo_room","Parabéns! " + $ttnames$[9] + " classificou-se como Número Um no Hall da Fama da Turbo Track!",bc_map,"0x00ff00";
+	end;
+
+Onnew_top2:
+	mapannounce "turbo_room","Parabéns! " + $ttnames$[10] + " classificou-se como Segundo no Hall da Fama da Turbo Track!",bc_map,"0x00ff00";
+	end;
+
+Onnew_top3:
+	mapannounce "turbo_room","Parabéns! " + $ttnames$[11] + " classificou-se como Terceiro no Hall da Fama da Turbo Track!",bc_map,"0x00ff00";
+	end;
+
+Onnew_top4:
+	mapannounce "turbo_room","Parabéns! " + $ttnames$[12] + " classificou-se como Quarto no Hall da Fama da Turbo Track!",bc_map,"0x00ff00";
+	end;
+
+Onnew_top5:
+	mapannounce "turbo_room","Parabéns! " + $ttnames$[13] + " classificou-se como Quinto no Hall da Fama da Turbo Track!",bc_map,"0x00ff00";
+	end;
+
+Onwin_n4:
+	mapannounce "turbo_room","Parabéns! " + $ttnames$[1] + " venceu o [Modo Normal - 4 Pessoas]!",bc_map,"0x70DBDB";
+	end;
+
+Onwin_n8:
+	mapannounce "turbo_room","Parabéns! " + $ttnames$[2] + " venceu o [Modo Normal - 8 Pessoas]!",bc_map,"0x70DBDB";
+	end;
+
+Onwin_n16:
+	mapannounce "turbo_room","Parabéns! " + $ttnames$[3] + " venceu o [Modo Normal - 16 Pessoas]!",bc_map,"0x70DBDB";
+	end;
+
+Onwin_e4:
+	mapannounce "turbo_room","Parabéns! " + $ttnames$[4] + " venceu o [Modo Avançado - 4 Pessoas]!",bc_map,"0x70DBDB";
+	end;
+
+Onwin_e8:
+	mapannounce "turbo_room","Parabéns! " + $ttnames$[5] + " venceu o [Modo Avançado - 8 Pessoas]!",bc_map,"0x70DBDB";
+	end;
+
+Onwin_e16:
+	mapannounce "turbo_room","Parabéns! " + $ttnames$[6] + " venceu o [Modo Avançado - 16 Pessoas]!",bc_map,"0x70DBDB";
+	end;
+}
+
+turbo_room,102,117,3	script	Hall da Fama#tt	857,{
+	mes "^2F4F4FHall da Fama da Turbo Track^000000";
+	mes " ";
+	mes "O Primeiro:";
+	mes "^4d4dff" + $ttnames$[7] + "^000000";
+	mes " ";
+	mes "O Último:";
+	mes "^4d4dff" + $ttnames$[8] + "^000000";
+	close;
+}
+
+turbo_room,77,115,5	script	Modo Solo#tt::TurboSoloNames	857,{
+	mes "^2F4F4FRecorde do Modo Solo^000000";
+	mes " ";
+	mes "O Melhor Jogador";
+	mes "do Modo Solo!";
+	mes "^4d4dff" + $ttnames$[0] + "^000000 !";
+	close;
+}
+
+turbo_room,87,114,5	script	Recordes do Modo Normal::TurboNormalNames	857,{
+	mes "<<Melhores Jogadores Recentes>>";
+	mes "Vencedores do Modo Normal - 4 Pessoas";
+	mes "^4d4dff" + $ttnames$[1] + "^000000";
+	mes "Vencedores do Modo Normal - 8 Pessoas";
+	mes "^4d4dff" + $ttnames$[2] + "^000000";
+	mes "Vencedores do Modo Normal - 16 Pessoas";
+	mes "^4d4dff" + $ttnames$[3] + "^000000";
+	close;
+}
+
+turbo_room,112,114,3	script	Recordes do Modo Avança.::TurboExpertNames	857,{
+	mes "<<Melhores Jogadores Recentes>>";
+	mes "Vencedores do Modo Avançado - 4 Pessoas";
+	mes "^4d4dff" + $ttnames$[4] + "^000000";
+	mes "Vencedores do Modo Avançado - 8 Pessoas";
+	mes "^4d4dff" + $ttnames$[5] + "^000000";
+	mes "Vencedores do Modo Avançado - 16 Pessoas";
+	mes "^4d4dff" + $ttnames$[6] + "^000000";
+	close;
+}
+
+turbo_room,97,117,5	script	Hall da Fama do TBT#t2	857,{
+	mes "^2F4F4FHall da Fama da Turbo Track^000000";
+	mes " ";
+	mes "1º: ^4d4dff" + $ttnames$[9] + "^000000";
+	mes "2º: ^4d4dff" + $ttnames$[10] + "^000000";
+	mes "3º: ^4d4dff" + $ttnames$[11] + "^000000";
+	mes "4º: ^4d4dff" + $ttnames$[12] + "^000000";
+	mes "5º: ^4d4dff" + $ttnames$[13] + "^000000";
+	close;
+}
+
+turbo_room,75,95,5	duplicate(TurboSoloNames)	Modo Solo#1	857
+turbo_room,67,95,5	duplicate(TurboNormalNames)	Recordes do Modo Nor#2	857
+turbo_room,71,95,5	duplicate(TurboExpertNames)	Recordes do Modo Ava#2	857
+
+// Turbo Track Item Exchanger
+turbo_room,93,117,5	script	Distribuidor de Pontos	125,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FFEspere um segundo!";
+		mes "Certo, você está carregando";
+		mes "muitos itens com você. Por";
+		mes "favor volte depois que você";
+		mes "tiver colocado alguns de";
+		mes "seus itens no baú, usando o Serviço Kafra.^000000";
+		close;
+	}
+	if (tt_point < 10) {
+		mes "[Distribuidor de Pontos]";
+		mes "Bom dia,";
+		mes "" + strcharinfo(0) + ".";
+		mes "Você tem um total de";
+		mes "" + tt_point + " pontos da Turbo Track.";
+		next;
+		mes "[Distribuidor de Pontos]";
+		mes "Se você tiver pelo menos";
+		mes "10 Pontos da Turbo Track,";
+		mes "é possível trocar esses";
+		mes "pontos por itens. Você";
+		mes "gostaria de ver a lista de";
+		mes "itens que você pode ganhar com Pontos de Turbo Track?";
+		next;
+		if (select("Sim.:Cancelar.") == 1) {
+			mes "[Distribuidor de Pontos]";
+			mes "1 Vale-Teletransporte";
+			mes "da Kafra: ^3355FF10 pts^000000";
+			mes "1 Pergaminho Mágico de Nível 5: ^3355FF12 pts^000000";
+			mes "Pontos de Experiência: ^3355FF40 pts^000000";
+			next;
+			mes "[Distribuidor de Pontos]";
+			mes "1 Diamande de 3 Quilates: ^3355FF150 pts^000000";
+			mes "1 Caixa de Presente: ^3355FF300 pts^000000";
+			mes "1 Poção do Vento: ^3355FF400 pts^000000";
+			next;
+			mes "[Distribuidor de Pontos]";
+			mes "Você também pode converter Pontos de Turbo Track em Pontos de Arena. Para mais informações, por favor, fale com o Encarregado da Arena. Obrigado.";
+			close;
+		}
+		mes "[Distribuidor de Pontos]";
+		mes "Eu espero que você divirta-se";
+		mes "aqui na Turbo Track.";
+		mes "Tente ganhar o máximo de pontos";
+		mes "possíveis para você poder";
+		mes "trocá-los por coisas úteis";
+		mes "mais tarde! Boa corrida.";
+		close;
+	}
+	else {
+		mes "[Distribuidor de Pontos]";
+		mes "Bom dia,";
+		mes "" + strcharinfo(0) + ".";
+		mes "Você tem um total de";
+		mes "" + tt_point + " pontos da Turbo Track";
+		mes "Você gostaria de trocar";
+		mes "esses pontos por itens?";
+		next;
+		switch(select("Trocar.:Cancelar.")) {
+		case 1:
+			mes "[Distribuidor de Pontos]";
+			mes "Por favor escolha o item pelo";
+			mes "o qual você gostaria de trocar";
+			mes "seus Pontos da Turbo Track.";
+			next;
+			switch(select("Vale-Teletransporte:Pergaminhos Mágico Nível 5:Pontos de Experiência:Diamante de 3 quilates:Caixa de Presente:Poção do Vento:Cancelar.")) {
+			case 1:
+				mes "[Distribuidor de Pontos]";
+				mes "Cada Vale-Teletransporte";
+				mes "custa 10 Pontos da Turbo";
+				mes "Track. Por favor entre";
+				mes "com a quantidade que você";
+				mes "deseja ter. Para cancelar,";
+				mes "por favor coloque ''^3355FF0^000000.''";
+				next;
+				input .@input;
+				if (.@input == 0) {
+					mes "[Distribuidor de Pontos]";
+					mes "Você";
+					mes "cancelou";
+					mes "seu pedido.";
+					close;
+				}
+				else if (.@input < 0 || .@input > 50) {
+					mes "[Distribuidor de Pontos]";
+					mes "Seu pedido excedeu";
+					mes "o limite máximo. Você";
+					mes "pode receber o máximo de";
+					mes "50 vales de cada vez.";
+					close;
+				}
+				else {
+					set .@total_point,10 * .@input;
+					if (.@total_point > tt_point) {
+						mes "[Distribuidor de Pontos]";
+						mes "Sinto muito, mais você";
+						mes "não tem Pontos da Turbo";
+						mes "Track o bastante. Por favor";
+						mes "cheque a quantia de Pontos da Turbo";
+						mes "Track que você ganhou antes";
+						mes "de gastar seus pontos novamente.";
+						close;
+					}
+					set tt_point,tt_point-.@total_point;
+					getitem 7060,.@input; //Warp_Free_Ticket
+					mes "[Distribuidor de Pontos]";
+					mes "Obrigado por";
+					mes "sua preferência.";
+					mes "Nós esperamos que";
+					mes "desfrute de seu tempo";
+					mes "aqui na Turbo Track~";
+					close;
+				}
+			case 2:
+				mes "[Distribuidor de Pontos]";
+				mes "Cada Pergaminho Mágico custa";
+				mes "12 Pontos da Turbo Track. Por favor,";
+				mes "escolha o Pergaminho Mágico que você gostaria de receber. Cada Pergaminho habilita uma vez o uso de magia nível 5 ou habilidade.";
+				next;
+				switch(select("Coluna de Pedra:Lanças de Gelo:Lanças de Fogo:Relâmpago:Espíritos Anciões:Bolas de Fogo:Barreira de Fogo:Rajada Congelante:Curar")) {
+				case 1:
+					set .@scroll,687; //Earth_Scroll_1_5
+					set .@name$,"Coluna de Pedra";
+					break;
+				case 2:
+					set .@scroll,689; //Cold_Scroll_1_5
+					set .@name$,"Lanças de Gelo";
+					break;
+				case 3:
+					set .@scroll,691; //Fire_Scroll_1_5
+					set .@name$,"Lanças de Fogo";
+					break;
+				case 4:
+					set .@scroll,693; //Wind_Scroll_1_5
+					set .@name$,"Relâmpago";
+					break;
+				case 5:
+					set .@scroll,695; //Ghost_Scroll_1_5
+					set .@name$,"Espíritos Anciões";
+					break;
+				case 6:
+					set .@scroll,697; //Fire_Scroll_2_5
+					set .@name$,"Bolas de Fogo";
+					break;
+				case 7:
+					set .@scroll,699; //Fire_Scroll_3_5
+					set .@name$,"Barreira de Fogo";
+					break;
+				case 8:
+					set .@scroll,12000; //Cold_Scroll_2_5
+					set .@name$,"Rajada Congelante";
+					break;
+				case 9:
+					set .@scroll,12002; //Holy_Scroll_1_5
+					set .@name$,"Curar";
+					break;
+				}
+				mes "[Distribuidor de Pontos]";
+				mes "Por favor entre com o número";
+				mes "de ^4d4dff"+.@name$+"^000000 Pergaminhos Mágicos";
+				mes "que você quer receber. Para";
+				mes "cancelar, coloque ''^3355FF0^000000.''";
+				next;
+				input .@input;
+				if (.@input == 0) {
+					mes "[Distribuidor de Pontos]";
+					mes "Você";
+					mes "cancelou";
+					mes "seu pedido.";
+					close;
+				}
+				else if (.@input < 0 || .@input > 50) {
+					mes "[Distribuidor de Pontos]";
+					mes "Sinto muito, mas seu pedido";
+					mes "excedeu o limite máximo.";
+					mes "Você só pode pedir acima";
+					mes "de 50 pergaminhos de cada vez. ^FFFFFFcobo^000000";
+					close;
+				}
+				else {
+					set .@total_point,12 * .@input;
+					if (.@total_point > tt_point) {
+						mes "[Distribuidor de Pontos]";
+						mes "Sinto muito, mais você";
+						mes "não tem Pontos da Turbo";
+						mes "Track o bastante. Por favor";
+						mes "cheque a quantia de Pontos da Turbo";
+						mes "Track que você ganhou antes";
+						mes "de gastar seus pontos novamente.";
+						close;
+					}
+					set tt_point,tt_point-.@total_point;
+					getitem .@scroll,.@input;
+					mes "[Distribuidor de Pontos]";
+					mes "Obrigado por";
+					mes "sua preferência.";
+					mes "Nós esperamos que";
+					mes "desfrute de seu tempo";
+					mes "aqui na Turbo Track~";
+					close;
+				}
+			case 3:
+				mes "[Distribuidor de Pontos]";
+				mes "Você pode trocar";
+				mes "40 Pontos da Turbo Track";
+				mes "por Experiência de Base.";
+				mes "Você gostaria de";
+				mes "trocar seus pontos da Turbo Track";
+				mes "por Experiência?";
+				next;
+				if (select("Não:Sim") == 2) {
+					if (tt_point < 40) {
+						mes "[Distribuidor de Pontos]";
+						mes "Sinto muito, mais você";
+						mes "não tem Pontos da Turbo";
+						mes "Track o bastante. Por favor";
+						mes "cheque a quantia de Pontos da Turbo";
+						mes "Track que você ganhou antes";
+						mes "de gastar seus pontos novamente.";
+						close;
+	
+					}
+					set tt_point,tt_point-40;
+					if (BaseLevel < 70)
+						getexp 3000,0;
+					else if (BaseLevel < 80)
+						getexp 9000,0;
+					else if (BaseLevel < 90)
+						getexp 10000,0;
+					else if (BaseLevel < 100)
+						getexp 30000,0;
+					mes "[Distribuidor de Pontos]";
+					mes "Obrigado, Seus";
+					mes "Pontos daTurbo Track";
+					mes "foram convertido em";
+					mes "Experiência de Base.";
+					close;
+				}
+				mes "[Distribuidor de Pontos]";
+				mes "Você";
+				mes "cancelou";
+				mes "seu pedido.";
+				close;
+			case 4:
+				mes "[Distribuidor de Pontos]";
+				mes "Você pode trocar";
+				mes "150 Pontos da Turbo Track";
+				mes "por ^3131FF1 Diamante de 3 quilates^000000.";
+				mes "Por favor, entre com o número de";
+				mes "diamantes que você gostaria de receber.";
+				mes "Para cancelar, coloque ''^3355FF0^000000.''";
+				next;
+				input .@input;
+				if (.@input == 0) {
+					mes "[Distribuidor de Pontos]";
+					mes "Você";
+					mes "cancelou";
+					mes "seu pedido.";
+					close;
+				}
+				else if (.@input < 0 || .@input > 10) {
+					mes "[Distribuidor de Pontos]";
+					mes "Seu pedido excedeu";
+					mes "o limite máximo. Você";
+					mes "só pode receber um máximo";
+					mes "de 10 diamantes de cada vez.";
+					close;
+				}
+				else {
+					set .@total_point,150 * .@input;
+					if (.@total_point > tt_point) {
+						mes "[Distribuidor de Pontos]";
+						mes "Sinto muito, mas você";
+						mes "não tem Pontos da Turbo";
+						mes "Track o bastante. Por favor";
+						mes "cheque a quantia de Pontos da Turbo";
+						mes "Track que você ganhou antes";
+						mes "de gastar seus pontos novamente.";
+						close;
+					}
+					set tt_point,tt_point-.@total_point;
+					getitem 732,.@input; //Crystal_Jewel__
+					mes "[Distribuidor de Pontos]";
+					mes "Obrigado por";
+					mes "sua preferência.";
+					mes "Nós esperamos que";
+					mes "desfrute de seu tempo";
+					mes "aqui na Turbo Track~";
+					close;
+				}
+			case 5:
+				mes "[Distribuidor de Pontos]";
+				mes "Você pode trocar";
+				mes "300 Pontos da Turbo Track";
+				mes "por ^3131FF1 Caixa de Presente^000000. Por favor,";
+				mes "entre com o número de Caixas de";
+				mes "Presente que você gostaria";
+				mes "de receber. Pra cancelar, coloque ''^3355FF0^000000.''";
+				next;
+				input .@input;
+				if (.@input == 0) {
+					mes "[Distribuidor de Pontos]";
+					mes "Você";
+					mes "cancelou";
+					mes "seu pedido.";
+					close;
+				}
+				else if (.@input < 0 || .@input > 10) {
+					mes "[Distribuidor de Pontos]";
+					mes "Seu pedido excedeu o";
+					mes "limite máximo. Você só";
+					mes "pode receber um máximo";
+					mes "de 10 Caixas de Presente de cada vez.";
+					close;
+				}
+				else {
+					set .@total_point,300 * .@input;
+					if (.@total_point > tt_point) {
+						mes "[Distribuidor de Pontos]";
+						mes "Sinto muito, mais você";
+						mes "não tem Pontos da Turbo";
+						mes "Track o bastante. Por favor";
+						mes "cheque a quantia de Pontos da Turbo";
+						mes "Track que você ganhou antes";
+						mes "de gastar seus pontos novamente.";
+						close;
+					}
+					set tt_point,tt_point-.@total_point;
+					getitem 644,.@input; //Gift_Box
+					mes "[Distribuidor de Pontos]";
+					mes "Obrigado por";
+					mes "sua preferência.";
+					mes "Nós esperamos que";
+					mes "desfrute de seu tempo";
+					mes "aqui na Turbo Track~";
+					close;
+				}
+			case 6:
+				mes "[Distribuidor de Pontos]";
+				mes "Você pode trocar 400";
+				mes "Pontos da Turbo Track";
+				mes "por ^3131FF1 Poção do Vento^000000. Por favor,";
+				mes "entre com o número de poções";
+				mes "que você gostaria de receber.";
+				mes "Para cancelar, coloque ''^3355FF0^000000.''";
+				next;
+				input .@input;
+				if (.@input == 0) {
+					mes "[Distribuidor de Pontos]";
+					mes "Você";
+					mes "cancelou";
+					mes "seu pedido.";
+					close;
+				}
+				else if (.@input < 0 || .@input > 10) {
+					mes "[Distribuidor de Pontos]";
+					mes "Seu pedido excedeu o";
+					mes "limite máximo. Você só";
+					mes "pode receber um máximo";
+					mes "de 10 poções de cada vez.";
+					close;
+				}
+				else {
+					set .@total_point,400 * .@input;
+					if (.@total_point > tt_point) {
+						mes "[Distribuidor de Pontos]";
+						mes "Sinto muito, mais você";
+						mes "não tem Pontos da Turbo";
+						mes "Track o bastante. Por favor";
+						mes "cheque a quantia de Pontos da Turbo";
+						mes "Track que você ganhou antes";
+						mes "de gastar seus pontos novamente.";
+						close;
+					}
+					set tt_point,tt_point-.@total_point;
+					getitem 12016,.@input; //Speed_Up_Potion
+					mes "[Distribuidor de Pontos]";
+					mes "Obrigado por";
+					mes "sua preferência.";
+					mes "Nós esperamos que";
+					mes "desfrute de seu tempo";
+					mes "aqui na Turbo Track~";
+					close;
+				}
+			case 7:
+				mes "[Distribuidor de Pontos]";
+				mes "Este Serviço de Troca";
+				mes "de item é trazido para";
+				mes "você pela...";
+				next;
+				mes "[Distribuidor de Pontos]";
+				mes "Este Serviço de Troca de item";
+				mes "é trazido para você pela";
+				mes "Corporação Kafra, Sindicato dos";
+				mes "Ferreiros, Cassino de Comodo";
+				mes "e a Administração dos Castelos de Luina";
+				mes "em Al De Baran.";
+				close;
+			}
+		case 2:
+			mes "[Distribuidor de Pontos]";
+			mes "Pontos da Turbo Track podem ser";
+			mes "convertidos em Pontos de Arena.";
+			mes "Você pode salvar o máximo de";
+			mes "^4D4DFF29,000 Pontos da Turbo Track.";
+			next;
+			mes "[Distribuidor de Pontos]";
+			mes "Antes de alcançar o máximo";
+			mes "da quantia de Pontos da Turbo";
+			mes "Track, você poderia querer";
+			mes "gastar alguns deles de forma";
+			mes "que você possa continuar obtendo sua recompensa depois de vencer as corridas da Turbo Track.";
+			close;
+		}
+	}
+}
+
+turbo_room,106,117,3	script	Encarregado da TBT#tt	833,{
+	mes "[Encarregado]";
+	mes "Bom dia.";
+	mes "Você curtiu a sua";
+	mes "visita à Turbo Track?";
+	mes "Em que posso";
+	mes "ajudar?";
+	next;
+	switch(select("Verificar Pontos:Converter Pontos:^660000Informação de Conversão^000000")) {
+	case 1:
+		mes "[Encarregado]";
+		mes "" + strcharinfo(0) + ",";
+		mes "você tem atualmente";
+		mes "" + tt_point + " Pontos da Turbo Track";
+		mes "e " + arena_point + " Pontos de Arena.";
+		close;
+	case 2:
+		mes "[Encarregado]";
+		mes "" + strcharinfo(0) + ",";
+		mes "você tem atualmente";
+		mes "" + tt_point + " Pontos da Turbo Track";
+		mes "e " + arena_point + " Pontos de Arena.";
+		next;
+		mes "[Encarregado]";
+		mes "Por favor escolha entre os seguintes tipos de conversão de Pontos de Arena. Ao converter mais que";
+		mes "10 pontos de arena de uma vez, você";
+		mes "só pode converter Pontos de Arena";
+		mes "em ^4D4DFFmúltiplos de 10^000000.";
+		next;
+		switch(select("2 PA -> 1 PTT:4 PA -> 2 PTT:6 PA -> 3 PTT:8 PA -> 4 PPT:10 PA ou mais:Cancelar")) {
+		case 1:
+			callsub S_ExchangePoints,28999,2,1;
+		case 2:
+			callsub S_ExchangePoints,28998,4,2;
+		case 3:
+			callsub S_ExchangePoints,28997,6,2;
+		case 4:
+			callsub S_ExchangePoints,28996,8,4;
+		case 5:
+			mes "[Encarregado]";
+			mes "Por favor entre com o número de vezes que você deseja converter 10 Pontos de Arena em Pontos da Turbo Track. O máximo que você pode colocar";
+			mes "é 20. Para cancelar, coloque '^3355FF0^000000.'";
+			next;
+			input .@input;
+			if (.@input == 0) {
+				mes "[Encarregado]";
+				mes "Você";
+				mes "cancelou";
+				mes "seu pedido.";
+				close;
+			}
+			else if (.@input > 20) {
+				mes "[Encarregado]";
+				mes "Seu pedido excedeu";
+				mes "o limite máximo. Por favor";
+				mes "coloque um valor não maior que 20.";
+				close;
+			}
+			else {
+				set .@want_point1,10 * .@input;
+				set .@want_point,5 * .@input;
+				set .@my_turbo_all,tt_point+.@want_point;
+				set .@my_arena_all,arena_point-.@want_point1;
+				if (.@my_turbo_all > 28999) {
+					mes "[Encarregado]";
+					mes "Infelizmente, seus Pontos da Turbo Track excederão o limite máximo se nós procedermos com a conversão de pontos. Por favor gaste mais";
+					mes "de seus Pontos da Turbo Track antes de usar este serviço. Obrigado.";
+					close;
+				}
+				if (.@my_arena_all < 0) {
+					mes "[Encarregado]";
+					mes "Eu sinto muito, mas você não";
+					mes "tem Pontos de Arena suficientes";
+					mes "para executar esta conversão de";
+					mes "Pontos da Turbo Track.";
+					close;
+				}
+				else {
+					mes "[Encarregado]";
+					mes "Você converteu";
+					mes "10 Pontos de Arena em";
+					mes "Pontos da Turbo Track " + .@input + " vezes.";
+					mes "Um total de " + .@want_point1 + " Pontos de Arena";
+					mes "foram convertidos em";
+					mes "" + .@want_point +" Pontos da Turbo Track.";
+					set arena_point,.@my_arena_all; //arena_point
+					set tt_point,.@my_turbo_all;
+					next;
+					mes "[Encarregado]";
+					mes "" + strcharinfo(0) + ",";
+					mes "você agora tem";
+					mes "^00688B" + tt_point + "^000000 Pontos da Turbo Track";
+					mes "e ^4682B4" + arena_point + "^000000 Pontos de Arena.";
+					mes "Obrigado pelo seu patrocínio.";
+					close;
+				}
+			}
+		case 6:
+			mes "[Encarregado]";
+			mes "Você";
+			mes "cancelou";
+			mes "seu pedido.";
+			close;
+		}
+	case 3:
+		// There is no dialog for this option.
+		// It's possible it's missing, or maybe
+		// the dialog was never translated. XD
+		close;
+	}
+
+S_ExchangePoints:
+	if (tt_point > getarg(0)) {
+		mes "[Encarregado]";
+		mes "Infelizmente, seus Pontos da Turbo Track excederão o limite máximo se nós procedermos com a conversão de pontos. Por favor gaste mais";
+		mes "de seus Pontos da Turbo Track antes de usar este serviço. Obrigado.";
+		close;
+	}
+	if (arena_point >= getarg(1)) {
+		mes "[Encarregado]";
+		mes "Como pedido,";
+		mes "2 Pontos de Arena";
+		mes "foram convertidos";
+		mes "em 1 Ponto da Turbo Track.";
+		set arena_point,arena_point-getarg(1);
+		set tt_point,tt_point+getarg(2);
+		next;
+		mes "[Encarregado]";
+		mes "" + strcharinfo(0) + ",";
+		mes "você agora tem";
+		mes "^00688B" + tt_point + "^000000 Pontos da Turbo Track";
+		mes "e ^4682B4" + arena_point + "^000000 Pontos de Arena.";
+		mes "Obrigado pelo seu patrocínio.";
+		close;
+	}
+	else {
+		mes "[Encarregado]";
+		mes "Sinto muito, mas você não tem Pontos de Arena suficientes. Você precisa";
+		mes "de pelo menos 2 Pontos de Arena para";
+		mes "poder usar este serviço.";
+		close;
+	}
+}
+
+alde_gld,183,204,0	script	en_turbo	45,1,1,{
+OnTouch:
+	if (checkweight(1201,1) == 0) {
+		mes "^3355FFEspere um segundo!";
+		mes "Agora mesmo, você está carregando";
+		mes "muitos itens com você.";
+		mes "Por favor volte depois que ";
+		mes "colocar algumas de suas coisas no armazém";
+		mes "usando o Serviço Kafra.^000000";
+		close;
+	}
+	set .@now_weight,MaxWeight-Weight;
+	if ((BaseJob == Job_Knight || BaseJob == Job_Crusader) && checkriding()) {
+		if (.@now_weight < 20000) {
+			mes "PecoPecos são proibidos dentro da";
+			mes "Arena de Turbo Track. Mas qualquer";
+			mes "pessoa montando num PecoPeco";
+			mes "receberá um Bilhete para Passeio de";
+			mes "Peco na Entrada da Arena da Turbo";
+			mes "Track e desmontará automaticamente.";
+			close2;
+			warp "alde_gld",183,199;
+			end;
+		}
+		else {
+			setriding 0;
+			getitem 7310,1; //Free_Peco_Ticket
+			warp "turbo_room",100,65;
+		}
+	}
+	else
+		warp "turbo_room",100,65;
+	end;
+}
+
+alde_gld,186,199,3	script	Guia do Turbo Track#Entr	845,{
+	mes "[Guia]";
+	mes "Bem-vindo à";
+	mes "Turbo Track de";
+	mes "Al de Baran!";
+	next;
+	mes "[Guia]";
+	mes "PecoPecos são proibidos dentro da";
+	mes "Arena de Turbo Track. Mas qualquer";
+	mes "pessoa montando num PecoPeco";
+	mes "receberá um Bilhete para Passeio de";
+	mes "Peco na Entrada da Arena da Turbo";
+	mes "Track e desmontará automaticamente.";
+	next;
+	mes "[Guide]";
+	mes "[Guia]";
+	mes "Bem, então,";
+	mes "divirta-se";
+	mes "na Turbo Track!";
+	close;
+}
+
+alde_gld,181,199,5	script	Encarregada do PecoPeco	845,{
+	mes "[Encarregada]";
+	if (BaseJob == Job_Knight || BaseJob == Job_Crusader) {
+		mes "Bem-vindo, você gostaria de";
+		mes "receber seu PecoPeco?";
+		mes "Por favor me mostre seu";
+		mes "Bilhete para Aluguel de PecoPeco. Você";
+		mes "também pode pagar uma taxa de aluguel";
+		mes "de 2,500 zeny.";
+		next;
+		switch(select("Usar:Cancelar")) {
+		case 1:
+			if (getskilllv(63) == 0) {
+				mes "[Encarregada]";
+				mes "Eu sinto muito, mas você não está";
+				mes "elegível para este";
+				mes "serviço. Por favor vá aprender";
+				mes "primeiro a habilidade de Montaria.";
+				close;
+			}
+			else {
+				if (checkriding()) {
+					mes "[Encarregada]";
+					mes "Você já está";
+					mes "montado em um";
+					mes "PecoPeco.";
+					mes "Obrigada.";
+					close;
+				}
+				else {
+					if (countitem(7310) < 1 && Zeny < 2500) {
+						mes "[Encarregada]";
+						mes "Sinto muito, mas você";
+						mes "não tem um Bilhete para";
+						mes "Aluguel de PecoPeco ou 2,500 zeny.";
+						mes "para usar o serviço de aluguel de Peco.";
+						close;
+					}
+					else {
+						if (countitem(7310) > 0)
+							delitem 7310,1; //Free_Peco_Ticket
+						else
+							set zeny,zeny-2500;
+						setriding;
+						mes "[Encarregada]";
+						mes "Obrigada";
+						mes "pelo seu patrocínio!";
+						close;
+					}
+				}
+			}
+		case 2:
+			mes "[Encarregada]";
+			mes "Você vai";
+			mes "voltar para a corrida";
+			mes "na Turbo Track?";
+			mes "Boa Sorte!";
+			close;
+		}
+	}
+	else {
+		mes "Obrigada por";
+		mes "visitar a Turbo Track";
+		mes "de Al De Baran!";
+		close;
+	}
+}
+
+alde_gld,178,180,0	script	Sinal#TBT	837,{
+	mes "[Turbo Track de Al De Baran]";
+	mes "Por aqui...";
+	mes "Arena de Turbo Track";
+	mes "de Al de Baran!";
+	next;
+	mes "[Turbo Track de Al De Baran]";
+	mes "Turbo Track é uma arena onde";
+	mes "participantes competem para serem";
+	mes "os primeiros a atingir a Linha de";
+	mes "Chegada! Não perca a chance de";
+	mes "correr contra seus amigos!";
+	close;
+}

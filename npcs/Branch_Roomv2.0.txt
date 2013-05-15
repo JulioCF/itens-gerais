@@ -1,0 +1,414 @@
+//////////////////////////////////////////
+//  \/==  \|  |/  //==\\ \\==//  \===/	//
+// //     ||  ||  ||  || |/  \| //   \\	//
+// ||	  ||--||  ||--|| ||  || \\___  	//
+// ||     ||--||  ||--|| ||  ||      \\	//
+// \\     ||  ||  ||  || ||  ||      //	//
+//  /\==  /|  |\  /|  |\ \\==// ====//	//
+//////////////////////////////////////////
+//NPC: Branch Room						//
+//////////////////////////////////////////
+//Description: Sala de Galho Seco que	//
+// pode ser alugada por um determinado	//
+// período de tempo.					//
+//////////////////////////////////////////
+////////////Feito em 20/05/09 ////////////
+//////////////////////////////////////////
+//Changelog:	//////////////////////////
+// v1.0 - Script Terminado         		//
+// v2.0 - Adicionado Suporte a Várias	//
+// v2.1 - Corridigo erro de iniciação - JuliOCF //
+//  Salas.								//
+//////////////////////////////////////////
+
+quiz_00,79,36,4	script	Branch Room Guard	65,{
+// == Configs ==
+Set .@Npc$,"[Branch Room Guard]";	// Nome do Npc
+Set @GmLvl,99;				// Level de GM para acessar o Menu GM
+// =============
+if(GetGMLevel()>=@GmLvl)
+	while(1){
+		Mes .@Npc$;
+		Mes "Bom Dia Mestre "+StrCharInfo(0)+"!";
+		Mes "O que deseja?";
+		next;
+		switch(select("Configurar a Branch Room","Ver Alugueis Recorrentes","Cancelar")){
+			case 1:
+				Mes .@Npc$;
+				Mes "Selecione a Configuração a ser alterada:";
+				next;
+				switch(select("Mapas da Branch Room","Preços e Tempos dos Aluguéis","Cancelar")){
+					case 1:
+						Mes .@Npc$;
+						Mes "Mapas Atuais:";
+						for(Set @i,0; @i<=GetArraySize($BranchRoom$)/2; Set @i,@i+2) Mes $BranchRoom$[@i]+" ("+$BranchRoom$[@i+1]+")";
+						Mes "O que deseja fazer?";
+						next;
+						switch(select("Alterar um Mapa","Adicionar um Mapa","Apagar um Mapa","Cancelar")){
+							case 1:
+								Mes .@Npc$;
+								Mes "Escolha o mapa a ser alterado:";
+								next;
+								Set @menu$,"";
+								for(Set @i,0; @i<=GetArraySize($BranchRoom$)/2; Set @i,@i+2)
+									if(@menu$=="") Set @menu$,$BranchRoom$[@i]+" ("+$BranchRoom$[@i+1]+")";
+									else Set @menu$,@menu$+":"+$BranchRoom$[@i]+" ("+$BranchRoom$[@i+1]+")";
+								Set @menu$,@menu$+":Cancelar";
+								Set @sel,select(@menu$)-1;
+								if(@sel==GetArraySize($BranchRoom$)/2) break;
+								Mes .@Npc$;
+								Mes "O que deseja alterar?";
+								next;
+								switch(select("O Nome da Sala Branch Room","O Mapa da Sala Branch Room","Cancelar")){
+									case 1:
+										Mes .@Npc$;
+										Mes "Digite o Novo Nome da Sala Branch Room:";
+										next;
+										input @name$;
+										Mes .@Npc$;
+										Mes @name$+" Está Correto?";
+										next;
+										if(select("Sim:Não")==2) break;
+										Mes .@Npc$;
+										Mes "Nome Definido com Sucesso!";
+										SetArray $BranchRoom$[@sel*2],@name$;
+										next;
+										break;
+									case 2:
+										Mes .@Npc$;
+										Mes "Digite o nome Exato do novo mapa, sem o '.gat':";
+										next;
+										input @new$;
+										Mes .@Npc$;
+										Mes "O Mapa "+@new$+" está correto?";
+										Mes "Confira bem, pois eu não tenho como saber se este mapa existe!";
+										next;
+										if(select("Sim:Não")==2) break;
+										Mes .@Npc$;
+										Mes "Mapa configurado com sucesso!";
+										SetArray $BranchRoom$[@sel*2+1],@new$;
+										next;
+										break;
+									case 3: break;
+								}
+								break;
+							case 2:
+								Mes .@Npc$;
+								Mes "Digite o Nome da Nova Sala:";
+								next;
+								input @name$;
+								Mes .@Npc$;
+								Mes @name$+" Está Correto?";
+								next;
+								if(select("Sim:Não")==2) break;
+								Mes .@Npc$;
+								Mes "Digite o nome Exato do novo mapa, sem o '.gat':";
+								next;
+								input @new$;
+								Mes .@Npc$;
+								Mes "O Mapa "+@new$+" está correto?";
+								Mes "Confira bem, pois eu não tenho como saber se este mapa existe!";
+								next;
+								if(select("Sim:Não")==2) break;
+								Mes .@Npc$;
+								Mes "Novo Mapa adicionado com sucesso!";
+								SetArray $BranchRoom$[GetArraySize($BranchRoom$)],@name$,@new$;
+								next;
+								break;
+							case 3:
+								Mes .@Npc$;
+								Mes "Escolha o mapa a ser apagado:";
+								next;
+								Set @menu$,"";
+								for(Set @i,0; @i<=GetArraySize($BranchRoom$)/2; Set @i,@i+2)
+									if(@menu$=="") Set @menu$,$BranchRoom$[@i]+" ("+$BranchRoom$[@i+1]+")";
+									else Set @menu$,@menu$+":"+$BranchRoom$[@i]+" ("+$BranchRoom$[@i+1]+")";
+								Set @menu$,@menu$+":Cancelar";
+								Set @sel,select(@menu$)-1;
+								if(@sel==GetArraySize($BranchRoom$)/2) break;
+								Mes .@Npc$;
+								Mes "Deseja mesmo apagar a sala "+$BranchRoom$[@sel*2]+" ("+$BranchRoom$[@sel*2+1]+") ?";
+								next;
+								if(select("Sim:Não")==2) break;
+								Mes .@Npc$;
+								Mes "Sala apagada com sucesso!";
+								DeleteArray $BranchRoom$[@sel*2],2;
+								next;
+								break;
+							case 4: break;
+						}
+						break;
+					case 2:
+						Mes .@Npc$;
+						Mes "Preços Atuais:";
+						for(set @i,0; @i<=GetArraySize($BranchTax)-1; set @i,@i+2) Mes (@i/2)+" - "+$BranchTax[@i]+" Zenys por "+$BranchTax[@i+1]+" minutos.";
+						Mes "O que deseja?";
+						next;
+						switch(select("Adicionar uma Taxa","Mudar uma Taxa","Apagar uma Taxa","Cancelar")){
+							case 1:
+								Mes .@Npc$;
+								Mes "Digite o novo Tempo em Minutos:";
+								next;
+								input @time,0;
+								Mes .@Npc$;
+								Mes "Digite o valor em Zenys para alugar a sala por "+@time+" minutos:";
+								next;
+								input @price,0,1000000000;
+								Mes .@Npc$;
+								Mes "Alugar a Sala por "+@time+" minutos ao valor de "+@price+"z está correto?";
+								next;
+								if(select("Sim:Não")==2) break;
+								Mes .@Npc$;
+								Mes "Novo Tempo adicionado com sucesso!";
+								SetArray $BranchTax[GetArraySize($BranchTax)],@price,@time;
+								next;
+								break;
+							case 2:
+								Mes .@Npc$;
+								Mes "Escolha a Taxa a ser alterada:";
+								next;
+								Set @menu$,"";
+								for(Set @i,0; @i<GetArraySize($BranchTax); Set @i,@i+2)
+									if(@menu$=="") Set @menu$,$BranchTax[@i+1]+" min por "+$BranchTax[@i]+"z";
+									else Set @menu$,@menu$+":"+$BranchTax[@i+1]+" min por "+$BranchTax[@i]+"z";
+								Set @menu$,@menu$+":Cancelar";
+								Set @sel,select(@menu$)-1;
+								if(@sel==GetArraySize($BranchTax)) break;
+								Mes .@Npc$;
+								Mes "O que deseja alterar da Taxa "+$BranchTax[@sel*2+1]+" min por "+$BranchTax[@sel*2]+"z ?";
+								next;
+								switch(select("O Tempo","O Preço","Cancelar")){
+									case 1:
+										Mes .@Npc$;
+										Mes "Digite o novo Tempo em Minutos:";
+										next;
+										input @time,0;
+										Mes .@Npc$;
+										Mes "Alugar a Sala por "+@time+" minutos ao valor de "+$BranchTax[@sel*2]+"z está correto?";
+										next;
+										if(select("Sim:Não")==2) break;
+										Mes .@Npc$;
+										Mes "Tempo modificado com sucesso!";
+										SetArray $BranchTax[@sel*2+1],@time;
+										next;
+										break;
+									case 2:
+										Mes .@Npc$;
+										Mes "Digite o novo Preço em Zenys:";
+										next;
+										input @price,0;
+										Mes .@Npc$;
+										Mes "Alugar a Sala por "+$BranchTax[@sel*2+1]+" minutos ao valor de "+@price+"z está correto?";
+										next;
+										if(select("Sim:Não")==2) break;
+										Mes .@Npc$;
+										Mes "Preço modificado com sucesso!";
+										SetArray $BranchTax[@sel*2],@price;
+										next;
+										break;
+									case 3: break;
+								}
+								break;
+							case 3:
+								Mes .@Npc$;
+								Mes "Escolha a Taxa a ser apagada:";
+								next;
+								Set @menu$,"";
+								for(Set @i,0; @i<GetArraySize($BranchTax); Set @i,@i+2)
+									if(@menu$=="") Set @menu$,$BranchTax[@i+1]+" min por "+$BranchTax[@i]+"z";
+									else Set @menu$,@menu$+":"+$BranchTax[@i+1]+" min por "+$BranchTax[@i]+"z";
+								Set @menu$,@menu$+":Cancelar";
+								Set @sel,select(@menu$)-1;
+								if(@sel==GetArraySize($BranchTax)) break;
+								Mes .@Npc$;
+								Mes "Deseja mesmo apagar a Taxa "+$BranchTax[@sel*2+1]+" min por "+$BranchTax[@sel*2]+"z ?";
+								next;
+								if(select("Sim:Não")==2) break;
+								Mes .@Npc$;
+								Mes "Taxa Apagada com Sucesso!";
+								DeleteArray $BranchTax[@sel*2],2;
+								next;
+								break;
+							case 4: break;
+						}
+						break;
+					case 3: break;
+				}
+				break;
+			case 2:
+				Mes .@Npc$;
+				for(Set @i,0; @i<=GetArraySize($BranchRoom$)/2; Set @i,@i+2)
+					if($CurrBranchName$[@i/2]!="") Mes "Atualmente a "+$BranchRoom$[@i]+" está alugada para "+$CurrBranchName$[@i/2]+", por "+$CurrBranch[@i/2]+" minutos ao valor de "+$CurrBranch[@i/2+1]+"z.";
+					else Mes "A "+$BranchRoom$[@i]+" não está alugada para ninguém neste exato momento.";
+				next;
+				break;
+			case 3: close;
+		}
+	}
+else
+	while(1){
+		Mes .@Npc$;
+		Mes "Olá "+StrCharInfo(0)+"!";
+		Mes "O que deseja?";
+		next;
+		switch(select("Alugar uma Branch Room!","Ver quem está nas Branch Rooms","Entrar em uma Branch Room","Cancelar")){
+			case 1:
+				Mes .@Npc$;
+				Mes "Escolha a Sala da Branch Room:";
+				next;
+				Set @menu$,"";
+				for(Set @i,0; @i<=GetArraySize($BranchRoom$)/2; Set @i,@i+2)
+					if(@menu$=="") Set @menu$,$BranchRoom$[@i];
+					else Set @menu$,@menu$+":"+$BranchRoom$[@i];
+				Set @menu$,@menu$+":Cancelar";
+				Set @sel1,select(@menu$)-1;
+				if(@sel1==GetArraySize($BranchRoom$)/2) break;
+				Mes .@Npc$;
+				if($CurrBranchName$[@sel1*2]!=""){
+					Mes "Sinto muito, mas a sala está alugada...";
+					Mes "Aguarde mais "+$CurrBranch[@sel1*3]+" minutos para poder alugá-la.";
+					next;
+					break;
+				}
+				Mes "Escolha o Aluguel:";
+				next;
+				Set @menu$,"";
+				for(set @i,0; @i<=GetArraySize($BranchTax)-1; set @i,@i+2)
+					if(@menu$=="") Set @menu$,$BranchTax[@i+1]+" minutos = "+$BranchTax[@i]+" Zenys";
+					else Set @menu$,@menu$+":"+$BranchTax[@i+1]+" minutos = "+$BranchTax[@i]+" Zenys";
+				Set @sel,select(@menu$)-1;
+				Mes .@Npc$;
+				Mes "Deseja mesmo alugar a "+$BranchRoom$[@sel1*2]+" por "+$BranchTax[@sel*2+1]+" minutos, ao preço de "+$BranchTax[@sel*2]+"z ?";
+				next;
+				if(select("Sim:Não")==2) break;
+				Mes .@Npc$;
+				if(Zeny < $BranchTax[@sel*2]){
+					Mes "Você não possui Zenys suficientes...";
+					next;
+					break;
+				}
+				Mes "Ok, agora defina a senha para seus amigos poderem entrar na "+$BranchRoom$[@sel1*2]+" da Branch Room junto com você:";
+				next;
+				input @pass$;
+				Mes .@Npc$;
+				Mes "A Senha "+@pass$+" está correta?";
+				next;
+				if(select("Sim:Não")==2) break;
+				Mes .@Npc$;
+				Mes "Sala alugada com sucesso!";
+				Mes "Eu o levarei à Branch Room, lembre-se de dizer aos seus amigos a senha!";
+				Set $CurrBranchName$[@sel1*2],StrCharInfo(0);
+				Set $CurrBranchPass$[@sel1*2],@pass$;
+				SetArray $CurrBranch[@sel1*3],$BranchTax[@sel*2+1],$BranchTax[@sel*2],GetTime(2)+$BranchTax[@sel*2+1];
+				Set Zeny,Zeny-$BranchTax[@sel*2];
+				close2;
+				KillMonsterAll $BranchRoom$[@sel1*2+1];
+				warp $BranchRoom$[@sel1*2+1],0,0;
+				AttachNpcTimer $CurrBranchName$[@sel1*2];
+				InitNpcTimer;
+				end;
+			case 2:
+				Mes .@Npc$;
+				for(Set @i,0; @i<=GetArraySize($BranchRoom$)/2; Set @i,@i+2)
+					if($CurrBranchName$[@i/2]!="") Mes "Atualmente a "+$BranchRoom$[@i]+" está alugada para "+$CurrBranchName$[@i/2]+", por "+$CurrBranch[@i/2]+" minutos ao valor de "+$CurrBranch[@i/2+1]+"z.";
+					else Mes "A "+$BranchRoom$[@i]+" não está alugada para ninguém neste exato momento.";
+				next;
+				break;
+			case 3:
+				Mes .@Npc$;
+				Mes "Escolha a Sala da Branch Room:";
+				next;
+				Set @menu$,"";
+				for(Set @i,0; @i<=GetArraySize($BranchRoom$)/2; Set @i,@i+2)
+					if(@menu$=="") Set @menu$,$BranchRoom$[@i];
+					else Set @menu$,@menu$+":"+$BranchRoom$[@i];
+				Set @menu$,@menu$+":Cancelar";
+				Set @sel1,select(@menu$)-1;
+				if(@sel1==GetArraySize($BranchRoom$)/2) break;
+				Mes .@Npc$;
+				if($CurrBranchName$[@sel1*2]==""){
+					Mes "Não há ninguém na "+$BranchRoom$[@sel1*2]+"!";
+					next;
+					break;
+				}
+				Mes "Digite a Senha que seu Amigo deve ter lhe passado:";
+				next;
+				input @pass$;
+				Mes .@Npc$;
+				if(@pass$!=$CurrBranchPass$[@sel1*2]){
+					Mes "Senha Incorreta!";
+					next;
+					break;
+				}
+				Mes "Senha Correta!";
+				Mes "Prepare-se, irei o teleportar para a "+$BranchRoom$[@sel1*2]+"!";
+				close2;
+				warp $BranchRoom$[@sel1*2+1],0,0;
+				end;
+			case 4: close;
+		}
+	}
+OnTimer60000:
+for(Set .@i,0; .@i<=GetArraySize($BranchRoom$)/2; Set .@i,.@i+2)
+	if($CurrBranchName$[.@i/2]!=""){
+		Set $CurrBranch[.@i/2*3],$CurrBranch[.@i/2*3]-1;
+		if($CurrBranch[.@i/2*3]==1)
+			if(GetMapUsers($BranchRoom$[.@i+1])>1) MapAnnounce $BranchRoom$[.@i+1],"Resta 1 minuto de Aluguel, aproveitem bem!",8;
+			else MapAnnounce $BranchRoom$[.@i+1],"Resta 1 minuto de Aluguel, aproveite bem!",8;
+		if($CurrBranch[.@i/2*3]<1){
+			if(GetMapUsers($BranchRoom$[.@i+1])>1){
+				MapAnnounce $BranchRoom$[.@i+1],"Desculpem-me, mas o tempo se esgotou",8;
+				sleep 1000;
+				MapAnnounce $BranchRoom$[.@i+1],"Espero que vocês tenham se divertido!",8;
+			}else{
+				MapAnnounce $BranchRoom$[.@i+1],"Desculpe-me, mas o tempo se esgotou",8;
+				sleep 1000;
+				MapAnnounce $BranchRoom$[.@i+1],"Espero que você tenha se divertido!",8;
+			}
+			sleep 1000;
+			MapWarp $BranchRoom$[.@i+1],"prontera",155,180;
+			Set $CurrBranchName$[.@i/2],"";
+			Set $CurrBranchPass$[.@i/2],"";
+			DeleteArray $CurrBranch[.@i/2*3],3;
+			KillMonsterAll $BranchRoom$[.@i+1];
+			StopNpcTimer;
+			DetachNpcTimer "Branch Room Guard";
+		}
+		AttachNpcTimer $CurrBranchName$[.@i/2];
+		InitNpcTimer;
+	}
+end;
+OnPCDieEvent:
+GetMapXY(@map$,@x,@y,0);
+	for(Set @i,0; @i<=GetArraySize($BranchRoom$)/2; Set @i,@i+2)
+		if(@map$==$BranchRoom$[@i+1] && GetMapUsers($BranchRoom$[@i+1])<1){
+			Set $CurrBranchName$[@i/2],"";
+			Set $CurrBranchPass$[@i/2],"";
+			DeleteArray $CurrBranch[@i/2*3],3;
+			KillMonsterAll $BranchRoom$[@i+1];
+			StopNpcTimer;
+			DetachNpcTimer "Branch Room Guard";
+			break;
+		}
+end;
+OnInit:
+// == Config ==
+if(!GetArraySize($BranchRoom$)){
+SetArray $BranchRoom$[0],"Sala 1","guild_vs2-2","Sala 2","guild_vs2-1";		// Nomes seguidos dos Mapas das Branch Rooms
+SetArray $BranchTax[0],	10000,5,	// Preço para alugar uma Sala,
+			20000,10,	// Seguido do tempo em Minutos
+			40000,30;	// Configurável In-Game
+}
+// ============
+	DeleteArray $CurrBranchName$[0],GetArraySize($CurrBranchName$);
+	DeleteArray $CurrBranchPass$[0],GetArraySize($CurrBranchPass$);
+	DeleteArray $CurrBranch[0],GetArraySize($CurrBranch);
+	for(Set .@i,0; .@i<GetArraySize($BranchRoom$)/2; Set .@i,.@i+2){
+		KillMonsterAll $BranchRoom$[.@i+1];
+		SetMapFlag $BranchRoom$[.@i+1],mf_nomemo;
+		SetMapFlag $BranchRoom$[.@i+1],mf_nowarp;
+		SetMapFlag $BranchRoom$[.@i+1],mf_nowarpto;
+		SetMapFlag $BranchRoom$[.@i+1],mf_noreturn;
+	}
+end;
+}

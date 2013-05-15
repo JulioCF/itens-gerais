@@ -1,0 +1,46 @@
+//===== Cronus Script ========================================
+//= Script de Invasão
+//===== By: ==================================================
+//= Kamper
+//===== Versão Atual: ========================================
+//= 1.2
+//===== Comentarios Adicionais: ==============================
+//= Faz invasões automáticas.
+//===== Changelog: ===========================================
+//= 1.0 Criado o script. [Kamper]
+//= 1.1 Otimizado. [RoM]
+//= 1.2 While removido e substituido por um timer [Keoy]
+//		.gat removidos.
+//============================================================
+
+prontera,0,0,0	script	InvasionScript	-1,{
+end;
+
+OnInit:
+// ================= Configurações ===========================
+set $IS_chance,1;	//Chances de invasão. 1 = 0,01% 1/1000
+// ================= Monstros (ID) ===========================
+setarray $IS_mob[0],1002,1016,1036,1071,1102,1175;
+// ================= Cidades =================================
+// Nome dos Mapas:
+setarray $IS_city$[0],"geffen","izlude","alberta","morocc","prontera","payon";
+// Nomes das Cidades:
+setarray $IS_cityn$[0],"Geffen","Izlude","Alberta","Morroc","Prontera","Payon";
+
+initnpctimer;
+
+// ================= Script ==================================
+
+OnTimer600000:
+	if(rand(1,1000) <= $IS_chance)
+	{
+		set $@m,rand(getarraysize($IS_mob)-1);
+		set $@c,rand(getarraysize($IS_city$)-1); 
+		monster $IS_city$[$@c],0,0,strmobinfo(1,$IS_mob[$@m]),$IS_mob[$@m],200;
+		announce "Venham nos ajudar!",0;
+		sleep2 2000;
+		announce $IS_cityn$[$@c]+" acaba de ser invadida por um grupo de monstros!",0;
+	}
+	initnpctimer;
+	end;
+}

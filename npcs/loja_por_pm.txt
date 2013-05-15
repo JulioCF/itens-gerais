@@ -1,0 +1,21 @@
+﻿// criado por: Maate para um membro do Cronus-Emulator
+//---------------------------------------------------
+
+-	script	buy	-1,{
+
+OnWhisperGlobal:
+callshop "loja",0;
+
+}
+
+// lista de itens de sua loja
+-	shop	loja	-1,607:-1,608:-1,609:-1;
+	
+prontera,150,150,4	script	Informações	700,{
+set .n$, "[Informações]";
+
+mes .n$;
+mes "PM - Função";
+mes "npc:buy - Abre Loja Automaticamente por PM";
+close;
+}

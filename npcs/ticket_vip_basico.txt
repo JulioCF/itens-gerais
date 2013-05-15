@@ -1,0 +1,57 @@
+// script com base( 95% ) do SVRO do Lord
+//
+//antes de rodar o script, execute o comando em seu banco de dados(o do servidor)
+//por lord
+//
+// ALTER TABLE `login` ADD `diasvip` SMALLINT NOT NULL DEFAULT 0;
+//
+// corrigido por oliver
+//
+prontera,150,150,5	script	chosen	47,{
+
+	set .site$,"www.ragnaserver.com.br"; // Site do Servidor!
+		mes "[^339900"+strnpcinfo(1)+"^000000]";
+		mes "Estou aqui para ativar os VIP's, mas para isto, eu necessito de um ticket";
+		mes "este ticket pode ser adquirido em nosso website!";
+		mes .site$;
+		mes "Gostaria de ativar agora?";
+		if(select("- Sim.","- Não.")==2) close;
+		mes "[^339900"+strnpcinfo(1)+"^000000]";
+		mes "Vamos ver se você trouxe o ticket!";
+		next;
+		if(countitem(7711)<1)
+		{
+			mes "[^339900"+strnpcinfo(1)+"^000000]";
+			mes "Você não trouxe o item!";
+			close;
+		}
+	delitem 7711,1;
+	query_sql "UPDATE `login` SET `group_id`='1',`diasvip`=`diasvip`+30 WHERE `account_id`='"+ getcharid(3) +"'";
+	next;
+	mes "[^339900"+strnpcinfo(1)+"^000000]";
+	mes "Seu vip foi ativado, relogue para terminar a operação!";
+	close;
+}
+
+// diminuidor de dias
+-	script	diasvip	-1,{
+
+OnClock0001:
+	query_sql "UPDATE `login` SET `diasvip`=`diasvip`-1 WHERE `group_id`='1'";
+	end;
+OnClock0002:
+	query_sql "UPDATE `login` SET `level`='0' WHERE `diasvip`<='0' AND `group_id`='1'";
+	end;
+}
+
+// aviso de dias restantes
+-	script	avisovip	-1,{
+
+OnPCLoginEvent:
+	query_sql "SELECT `diasvip` FROM `login` WHERE `account_id` = '"+ getcharid(3) +"'", .@diasvip;
+	        if (.@diasvip > 0)
+		{
+			dispbottom "[Controle VIP]: Você ainda tem "+.@diasvip+" dia(s) de VIP.";
+		}
+	end;
+}

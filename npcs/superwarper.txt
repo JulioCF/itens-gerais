@@ -1,0 +1,2860 @@
+//===== eAthena Script ======================================= 
+//= Last Warp Super Twilight Warper NPC
+//===== By: ================================================== 
+//= Kookith
+//===== Description: ========================================= 
+//= This is a Twilight Warper. I am sure that is self explanatory.
+//= Last Warp Feature added!
+//============================================================
+
+prontera,158,182,4	script	Twilight Warper::Twilight Warper	860,{
+	
+mes "[Warp NPC]";
+mes "Hi!, I can warp you to any Town, Field, or Dungeon you would like to go to.";
+next;
+mes "[Warp NPC]";
+mes "Where would you like to be warped to?";
+next;
+menu	"Last Warp",lastmap,"Towns",town,"Dungeons",dungeon,"Fields",field,"Regular WoE",woe;
+
+
+woe:
+	menu "Prontera Guild",-;
+	set lastmap$,"prt_gld.gat";
+	set lastx,160;
+	set lasty,31;
+	warp "prt_gld.gat",160,31;
+	close;
+
+town:
+menu 	"Prontera (City Capital)",wprontera,
+	"Moscovia (Second Capital)",wmoscovia,
+	"Alberta",walberta,
+	"Aldebaran",waldebaran,
+	"Amatsu",wamatsu,
+	"Ayothaya",wayot,
+	"Comodo",wcomodo,
+	"Einbech (Mining Village)",weinbech,
+	"Einbroch",weinbroch,
+	"Geffen",wgeffen,
+	"Gonryun",wgonryun,
+	"Hugel",whugel,
+	"Izlude",wizlude,
+	"Jawaii",wjawaii,
+	"Lighthalzen",wlighthalzen,
+	"Louyang",wlouyang,
+	"Lutie",wxmas,	
+	"Morroc",wmorroc,
+	"Nameless Island",wnameless,
+	"Niflheim",wniflheim,
+	"Payon",wpayon,
+	"Rachel",wafeltz,
+	"Thor Camp",wthorcamp,
+	"Veins",wveins,
+	"Yuno",wyuno,
+	"Umbala",wumbala,
+	"Splendide",wsplendide;
+
+field:
+menu 	"Amatsu Fields",wamafild,
+	"Ayothaya Fields",wayofild,
+	"Comodo Fields",wcmdfild,
+	"Einbroch Fields",weinfild,
+	"Geffen Fields",wgeffild,
+	"Gonryun Fields",wgonfild,
+	"Hugel Fields",whufild,
+	"Lighthalzen Fields",wlhzfild,
+	"Louyang Field",wloufild,
+	"Lutie Field",wxmasfild,
+	"Mjolnir Fields",wmjolnir,
+	"Niflheim Fields",wniffild,
+	"Odin Temple",wodint,
+	"Payon Forests",wpayfor,
+	"Prontera Fields",wprtfild,
+	"Rachel Fields",warunfild,
+	"Sograt Deserts",wmocfild,
+	"Umbala Fields",wumfild,
+	"Veins Fields",wveinsfild,
+	"Yuno Fields",wyunofild,
+	"Splendide Fields",wsplfild,
+	"Dicastes Field",wdicfild,
+	"Brasilis Field",wbrafild,
+	"Manuk Fields",wmanfild;
+
+
+dungeon:
+menu 	"Abbey, Cursed Monastery",wabbey,
+	"Abyss Lakes",wabyss,
+	"Amatsu Dungeon",ama,
+	"Anthell",ant,
+	"Ayothaya Dungeons",wayodun,
+	"Beach Dungeon",beach,
+	"Byalan Dungeon",byalan,
+	"Clock Tower",clock,
+	"Coal Mines",coal,
+	"Culverts",culvert,
+	"Einbroch Dungeons",weindun,
+	"Gefenia",gefenia,
+	"Geffen Dungeon",geffen,
+	"Glast Heim",glast,
+	"Gonryun Dungeon",gon,
+	"Hidden Dungeon",hidden,
+	"Ice Dungeon",iced,
+	"Juperos Dungeons",wjuper,
+	"Kiel Dungeons",wkieldun,
+	"Lighthalzen",wlhzdun,
+	"Louyang Dungeons",wloudun,
+	"Magma Dungeon",magma,
+	"Moscovia Dungeon",wmosk,
+	"Orc Dungeon",orc,
+	"Payon Dungeon",payon,
+	"Pyramids",pyramids,
+	"Rachel Sanctuary",rachels,
+	"Sphinx",sphinx,
+	"Sunken Ship",sunken,
+	"Thanatos Tower",wthat,
+	"Thor Volcano",wthor,
+	"Toy Factory",toy,
+	"Turtle Dungeon",turtle,
+	"Umbala Dungeons",wumdun,
+	"Nydhogg's Cave",wnyd,
+	"Nydhogg's Nest",watnyd,
+	"Underground Nest",wdicdun,
+	"Brasilis Dungeon",wbradun,
+	"Dimensonal Gorge",dimen;
+
+gdungeon:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Baldur Guild Dungeon (Guild Dungeon 1)",dgldun1,
+	"Luina Guild Dungeon (Guild Dungeon 2)",dgldun2,
+	"Valkyrie Guild Dungeon (Guild Dungeon 3)",dgldun3,
+	"Britoniah Guild Dungeon (Guild Dungeon 4)",dgldun4;
+
+	lastmap:
+	if(lastmap$=="") { mes "You have not warped anywhere yet!"; close; }
+	warp lastmap$,lastx,lasty;
+	end;
+
+
+
+//-------------------------------
+//          Fields
+//-------------------------------
+
+warunfild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Rachel Field 1",drunfild1,
+	"Rachel Field 2",drunfild2,
+	"Rachel Field 3",drunfild3,
+	"Rachel Field 4",drunfild4,
+	"Rachel Field 5",drunfild5,
+	"Rachel Field 6",drunfild6,
+	"Rachel Field 7",drunfild7,
+	"Rachel Field 8",drunfild8,
+	"Rachel Field 9",drunfild9,
+	"Rachel Field 10",drunfild10,
+	"Rachel Field 11",drunfild11,
+	"Rachel Field 12",drunfild12,
+	"Rachel Field 13",drunfild13;
+
+wgeffild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Geffen Field 0",dgeffild00,
+	"Geffen Field 1",dgeffild01,
+	"Geffen Field 2",dgeffild02,
+	"Geffen Field 3",dgeffild03,
+	"Geffen Field 4",dgeffild04,
+	"Geffen Field 5",dgeffild05,
+	"Geffen Field 6",dgeffild06,
+	"Geffen Field 7",dgeffild07,
+	"Geffen Field 8",dgeffild08,
+	"Geffen Field 9",dgeffild09,
+	"Geffen Field 10",dgeffild10,
+	"Geffen Field 11",dgeffild11,
+	"Geffen Field 12",dgeffild12,
+	"Geffen Field 13",dgeffild13,
+	"Geffen Field 14",dgeffild14;
+
+wmjolnir:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Mjolnir Field 1",dmjolnir1,
+	"Mjolnir Field 2",dmjolnir2,
+	"Mjolnir Field 3",dmjolnir3,
+	"Mjolnir Field 4",dmjolnir4,
+	"Mjolnir Field 5",dmjolnir5,
+	"Mjolnir Field 6",dmjolnir6,
+	"Mjolnir Field 7",dmjolnir7,
+	"Mjolnir Field 8",dmjolnir8,
+	"Mjolnir Field 9",dmjolnir9,
+	"Mjolnir Field 10",dmjolnir10,
+	"Mjolnir Field 11",dmjolnir11,
+	"Mjolnir Field 12",dmjolnir12;
+
+wmosc:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Moscovia Field 1",dmosc1,
+	"Moscovia Field 2",dmosc2;
+	
+
+wmocfild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Sograt Desert 1",dmocfild1,
+	"Sograt Desert 2",dmocfild2,
+	"Sograt Desert 3",dmocfild3,
+	"Sograt Desert 4",dmocfild4,
+	"Sograt Desert 5",dmocfild5,
+	"Sograt Desert 6",dmocfild6,
+	"Sograt Desert 7",dmocfild7,
+	"Sograt Desert 8",dmocfild8,
+	"Sograt Desert 9",dmocfild9,
+	"Sograt Desert 10",dmocfild10,
+	"Sograt Desert 11",dmocfild11,
+	"Sograt Desert 12",dmocfild12,
+	"Sograt Desert 13",dmocfild13,
+	"Sograt Desert 14",dmocfild14,
+	"Sograt Desert 15",dmocfild15,
+	"Sograt Desert 16",dmocfild16,
+	"Sograt Desert 17",dmocfild17,
+	"Sograt Desert 18",dmocfild18,
+	"Sograt Desert 19",dmocfild19;
+
+wpayfor:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Payon Forest 1",dpayfild1,
+	"Payon Forest 2",dpayfild2,
+	"Payon Forest 3",dpayfild3,
+	"Payon Forest 4",dpayfild4,
+	"Payon Forest 5",dpayfild5,
+	"Payon Forest 6",dpayfild6,
+	"Payon Forest 7",dpayfild7,
+	"Payon Forest 8",dpayfild8,
+	"Payon Forest 9",dpayfild9,
+	"Payon Forest 10",dpayfild10,
+	"Payon Forest 11",dpayfild11;
+
+wprtfild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Prontera Field 1",dprtfild1,
+	"Prontera Field 2",dprtfild2,
+	"Prontera Field 3",dprtfild3,
+	"Prontera Field 4",dprtfild4,
+	"Prontera Field 5",dprtfild5,
+	"Prontera Field 6",dprtfild6,
+	"Prontera Field 7",dprtfild7,
+	"Prontera Field 8",dprtfild8,
+	"Prontera Field 9",dprtfild9,
+	"Prontera Field 10",dprtfild10,
+	"Prontera Field 11",dprtfild11;
+
+wxmasfild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Lutie Field 1",dxmasfild1;
+
+wcmdfild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Comodo Field 1",dcmdfild1,
+	"Comodo Field 2",dcmdfild2,
+	"Comodo Field 3",dcmdfild3,
+	"Comodo Field 4",dcmdfild4,
+	"Comodo Field 5",dcmdfild5,
+	"Comodo Field 6",dcmdfild6,
+	"Comodo Field 7",dcmdfild7,
+	"Comodo Field 8",dcmdfild8,
+	"Comodo Field 9",dcmdfild9;
+
+wyunofild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Yuno Field 1",dyunofild1,
+	"Yuno Field 2",dyunofild2,
+	"Yuno Field 3",dyunofild3,
+	"Yuno Field 4",dyunofild4,
+	"Yuno Field 5",dyunofild5,
+	"Yuno Field 6",dyunofild6,
+	"Yuno Field 7",dyunofild7,
+	"Yuno Field 8",dyunofild8,
+	"Yuno Field 9",dyunofild9,
+	"Yuno Field 10",dyunofild10,
+	"Yuno Field 11",dyunofild11,
+	"Yuno Field 12",dyunofild12;
+
+wamafild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Amatsu Field 1",damafild1;
+
+wgonfild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Gonryun Field 1",dgonfild1;
+
+wumfild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Umbala Field 1",dumfild1,
+	"Umbala Field 2",dumfild2,
+	"Umbala Field 3",dumfild3,
+	"Umbala Field 4",dumfild4;
+
+wniffild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Niflheim Field 1",dniffild1,
+	"Niflheim Field 2",dniffild2;
+
+wodint:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Odin Temple 1",wodtemp1,
+	"Odin Temple 2",wodtemp2,
+	"Odin Temple 3",wodtemp3;
+
+wloufild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Louyang Field 1",dloufild1;
+
+wayofild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Ayothaya Field 1",dayofild1,
+	"Ayothaya Field 2",dayofild2;
+
+weinfild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Einbroch Field 1",deinfild1,
+	"Einbroch Field 2",deinfild2,
+	"Einbroch Field 3",deinfild3,
+	"Einbroch Field 4",deinfild4,
+	"Einbroch Field 5",deinfild5,
+	"Einbroch Field 6",deinfild6,
+	"Einbroch Field 7",deinfild7,
+	"Einbroch Field 8",deinfild8,
+	"Einbroch Field 9",deinfild9,
+	"Einbroch Field 10",deinfild10;
+
+wlhzfild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Lighthalzen Field 1",dlhzfild1,
+	"Lighthalzen Field 2",dlhzfild2,
+	"Lighthalzen Field 3",dlhzfild3;
+
+whufild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu 	"Hugel Field 1",dhufild1,
+	"Hugel Field 2",dhufild2,
+	"Hugel Field 3",dhufild3,
+	"Hugel Field 4",dhufild4,
+	"Hugel Field 5",dhufild5,
+	"Hugel Field 6",dhufild6,
+	"Hugel Field 7",dhufild7;
+
+wveinsfild:
+mes "[Warp NPC]";
+mes "Please select a Field. You will be warped to the center of that map.";
+next;
+menu	"Veins Field 1",dvfild1,
+	"Veins Field 2",dvfild2,
+	"Veins Field 3",dvfild3,
+	"Veins Field 4",dvfild4,
+	"Veins Field 5",dvfild5,
+	"Veins Field 6",dvfild6,
+	"Veins Field 7",dvfild7;
+
+wmanfild:
+mes "[Warp NPC]";
+mes "Please select a field.";
+next;
+menu	"Manuk Field 1",dmanfild1,
+	"Manuk Field 2",dmanfild2,
+	"Manuk Field 3",dmanfild3;
+	
+wdicfild:
+mes "[Warp NPC]";
+mes "Please select a field.";
+next;
+menu	"Dicastes Field 1",dicfild1,
+	"Dicastes Field 2",dicfild2;
+	
+wbrafild:
+mes "[Warp NPC]";
+mes "Please select a field.";
+next;
+menu	"Brasilis Field 1",brafild1;
+
+wsplfild:
+mes "[Warp NPC]";
+mes "Please select a field.";
+next;
+menu	"Splendide Field 1",dsplfild1,
+	"Splendide Field 2",dsplfild2,
+	"Splendide Field 3",dsplfild3;
+
+	
+
+//-------------------------------
+//          Dungeons
+//-------------------------------
+
+wjuper:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",djuperos1,
+	"Level 2",djuperos3,
+	"Core",djuperos2;
+
+wumdun:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Carpenter's Shop in the Tree",dumdun1,
+	"Passage to a Foreign World",dumdun2,
+	"Hvergermil's Fountain",dyggdrasil1;
+
+wloudun:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"The Royal Tomb",dloudun1,
+	"Inside the Royal Tomb",dloudun2,
+	"Suei Long Gon",dloudun3;
+
+wayodun:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Ancient Shrine Maze",dayodun1,
+	"Inside Ancient Shrine",dayodun2;
+
+weindun:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",deindun1,
+	"Level 2",deindun2;
+
+wlhzdun:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dlhzdun1,
+	"Level 2",dlhzdun2,
+	"Level 3",dlhzdun3,
+	"Level 4",dlhzdun4,
+	"Level 5",dlhzdun5;
+
+wabyss:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dabyss1,
+	"Level 2",dabyss2,
+	"Level 3",dabyss3;
+
+wthat:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+menu 	"Level 1",dthat1,
+	"Level 2",dthat2,
+	"Level 3",dthat3,
+	"Level 4",dthat4,
+	"Level 5",dthat5,
+	"Level 6",dthat6,
+	"Level 7",dthat7,
+	"Level 8",dthat8,
+	"Level 9",dthat9,
+	"Level 10",dthat10,
+	"Level 11",dthat11,
+	"Level 12",dthat12;
+
+wkieldun:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dkieldun1,
+	"Level 2",dkieldun2;
+
+ant:
+	mes "[Warp NPC]";
+	mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+	next;
+menu 	"Level 1",danthell1,
+	"Level 2",danthell2;
+
+beach:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dbeach1,
+	"Level 2",dbeach2,
+	"Level 3",dbeach3;
+
+byalan:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dbyalan1,
+	"Level 2",dbyalan2,
+	"Level 3",dbyalan3,
+	"Level 4",dbyalan4,
+	"Level 5",dbyalan5;
+clock:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dclock1,
+	"Level 2",dclock2,
+	"Level 3",dclock3,
+	"Level 4",dclock4,
+	"Basement 1",dalde1,
+	"Basement 2",dalde2,
+	"Basement 3",dalde3,
+	"Basement 4",dalde4;
+
+coal:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dcoal1,
+	"Level 2",dcoal2,
+	"Level 3",dcoal3;
+
+culvert:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dculvert1,
+	"Level 2",dculvert2,
+	"Level 3",dculvert3,
+	"Level 4",dculvert4;
+
+geffen:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dgeffen1,
+	"Level 2",dgeffen2,
+	"Level 3",dgeffen3,
+	"Level 4",dgeffen4;
+
+glast:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Entrance",dglastent,
+	"Castle 1",dglastcast1,
+	"Castle 2",dglastcast2,
+	"Chivalry 1",dglastchiv1,
+	"Chivalry 2",dglastchiv2,
+	"Churchyard",dglastyard,
+	"Culvert 1",dglastcul1,
+	"Culvert 2",dglastcul1,
+	"Culvert 3",dglastcul3,
+	"Culvert 4",dglastcul4,
+	"St.Abbey",dglastchur,
+	"Staircase Dungeon",dglaststep,
+	"Underground Cave 1",dglastcave1,
+	"Underground Cave 2",dglastcave2,
+	"Underground Prison 1",dglastpris1,
+	"Underground Prison 2",dglastpris2;
+
+hidden:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dhidden1,
+	"Level 2",dhidden2,
+	"Level 3",dhidden3;
+
+iced:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",diced1,
+	"Level 2",diced2,
+	"Level 3",diced3,
+	"Level 4",diced4;
+
+magma:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dmagma1,
+	"Level 2",dmagma2;
+
+wmosk:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dmosk1,
+	"Level 2",dmosk2,
+	"Level 3",dmosk3;
+
+orc:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dorc1,
+	"Level 2",dorc2;
+
+payon:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dpayon1,
+	"Level 2",dpayon2,
+	"Level 3",dpayon3,
+	"Level 4",dpayon4,
+	"Level 5",dpayon5;
+
+pyramids:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dpyramids1,
+	"Level 2",dpyramids2,
+	"Level 3",dpyramids3,
+	"Level 4",dpyramids4,
+	"Basement 1",dpyramidsb1,
+	"Basement 2",dpyramidsb2;
+
+sphinx:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dsphinx1,
+	"Level 2",dsphinx2,
+	"Level 3",dsphinx3,
+	"Level 4",dsphinx4,
+	"Level 5",dsphinx5;
+
+sunken:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dsunken1,
+	"Level 2",dsunken2;
+
+toy:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dtoy1,
+	"Level 2",dtoy2;
+
+turtle:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Entrance",dturtleent,
+	"Level 1",dturtle1,
+	"Level 2",dturtle2,
+	"Level 3",dturtle3;
+
+ama:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dama1,
+	"Level 2",dama2,
+	"Level 3",dama3;
+
+gon:
+mes "[BWarp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dgon1,
+	"Level 2",dgon2,
+	"Level 3",dgon3;
+
+gefenia:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dgefenia1,
+	"Level 2",dgefenia2,
+	"Level 3",dgefenia3,
+	"Level 4",dgefenia4;
+
+wthor:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dthor1,
+	"Level 2",dthor2,
+	"Level 3",dthor3;
+
+rachels:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",drachel1,
+	"Level 2",drachel2,
+	"Level 3",drachel3,
+	"Level 4",drachel4,		
+	"Level 5",drachel5;
+
+wabbey:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dabbey1,
+	"Level 2",dabbey2,
+	"Level 3",dabbey3;
+
+
+wnyd:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dnyd1,
+	"Level 2",dnyd2;
+
+watnyd:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",datnyd1,
+	"Level 2",datnyd2;
+	
+
+wdicdun:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",dicdun1,
+	"Level 2",dicdun2;
+
+wbradun:
+mes "[Warp NPC]";
+mes "Please select a Level. Beware that you will be warped directly into the dungeon.";
+next;
+menu 	"Level 1",bradun1,
+	"Level 2",bradun2;
+
+
+dimen:
+mes "[Warp NPC]";
+mes "Please select a level";
+next;
+menu "Level 1",-,"Level 2",-;
+if(@menu == 1) {
+	set lastmap$,"moc_fild21";
+	set lastx,27;
+	set lasty,196;
+	warp "moc_fild21",27,196;
+	end;
+}
+
+if(@menu == 2) {
+	set lastmap$,"moc_fild22";
+	set lastx,37;
+	set lasty,195;
+	warp "moc_fild22",37,195;
+	end;
+}
+
+//-------------------------------
+//          Town Warps
+//-------------------------------
+
+wafeltz: 
+set lastmap$,"rachel"; 
+set lastx,130; 
+set lasty,111; 
+warp "rachel.gat",130,111; 
+end;
+walberta:
+set lastmap$,"alberta"; 
+set lastx,106; 
+set lasty,133; 
+warp "alberta.gat",106,133; 
+end;
+waldebaran:
+set lastmap$,"aldebaran"; 
+set lastx,140; 
+set lasty,115; 
+warp "aldebaran.gat",140,115; 
+end;
+wamatsu:
+set lastmap$,"amatsu"; 
+set lastx,197; 
+set lasty,89; 
+warp "amatsu.gat",197,89; 
+end;
+wayot:
+set lastmap$,"ayothaya"; 
+set lastx,150; 
+set lasty,113; 
+warp "ayothaya.gat",150,113; 
+end;
+wcomodo:
+set lastmap$,"comodo"; 
+set lastx,205; 
+set lasty,69; 
+warp "comodo.gat",205,69; 
+end;
+weinbech:
+set lastmap$,"einbech"; 
+set lastx,190; 
+set lasty,79; 
+warp "einbech.gat",190,79; 
+end;
+weinbroch:
+set lastmap$,"einbroch"; 
+set lastx,178; 
+set lasty,167; 
+warp "einbroch.gat",178,167; 
+end;
+whugel:
+set lastmap$,"hugel"; 
+set lastx,94; 
+set lasty,147; 
+warp "hugel.gat",94,147; 
+end;
+wlighthalzen:
+set lastmap$,"lighthalzen"; 
+set lastx,159; 
+set lasty,90; 
+warp "lighthalzen.gat",159,90; 
+end;
+wgonryun:
+set lastmap$,"gonryun"; 
+set lastx,159; 
+set lasty,117; 
+warp "gonryun.gat",159,117; 
+end;
+wgeffen:
+set lastmap$,"geffen"; 
+set lastx,120; 
+set lasty,64; 
+warp "geffen.gat",120,64; 
+end;
+wizlude:
+set lastmap$,"izlude"; 
+set lastx,128; 
+set lasty,87; 
+warp "izlude.gat",128,87; 
+end;
+wxmas:
+set lastmap$,"xmas"; 
+set lastx,148; 
+set lasty,131; 
+warp "xmas.gat",148,131; 
+end;
+wjawaii:
+set lastmap$,"jawaii"; 
+set lastx,213; 
+set lasty,230; 
+warp "jawaii.gat",213,230; 
+end;
+wmorroc:
+set lastmap$,"morocc"; 
+set lastx,159; 
+set lasty,91; 
+warp "morocc.gat",159,91; 
+end;
+wnameless:
+set lastmap$,"nameless_n"; 
+set lastx,256; 
+set lasty,215; 
+warp "nameless_n.gat",256,215; 
+end;
+wniflheim:
+set lastmap$,"niflheim"; 
+set lastx,85; 
+set lasty,154; 
+warp "niflheim.gat",85,154; 
+end;
+wpayon:
+set lastmap$,"payon"; 
+set lastx,156; 
+set lasty,223; 
+warp "payon.gat",156,223; 
+end;
+wprontera:
+set lastmap$,"prontera"; 
+set lastx,156; 
+set lasty,183; 
+warp "prontera.gat",156,183; 
+end;
+wyuno:
+set lastmap$,"yuno"; 
+set lastx,157; 
+set lasty,165; 
+warp "yuno.gat",157,165; 
+end;
+wumbala:
+set lastmap$,"umbala"; 
+set lastx,100; 
+set lasty,159; 
+warp "umbala.gat",100,159; 
+end;
+wlouyang:
+set lastmap$,"louyang"; 
+set lastx,218; 
+set lasty,115; 
+warp "louyang.gat",218,115; 
+end;
+wthorcamp:
+set lastmap$,"thor_camp"; 
+set lastx,254; 
+set lasty,90; 
+warp "thor_camp.gat",254,90; 
+end;
+wveins:
+set lastmap$,"veins"; 
+set lastx,215; 
+set lasty,122; 
+warp "veins.gat",215,122; 
+end;
+wmoscovia:
+set lastmap$,"moscovia"; 
+set lastx,223; 
+set lasty,192; 
+warp "moscovia.gat",223,192; 
+end;
+wsplendide:
+set lastmap$,"splendide"; 
+set lastx,208; 
+set lasty,158; 
+warp "splendide.gat",208,158; 
+end;
+
+//-------------------------------
+//        Dungeon Warps
+//-------------------------------
+
+
+dkieldun1:
+set lastmap$,"kh_dun01"; 
+set lastx,28; 
+set lasty,226; 
+warp "kh_dun01.gat",28,226; 
+end;
+dkieldun2:
+set lastmap$,"kh_dun02"; 
+set lastx,41; 
+set lasty,198; 
+warp "kh_dun02.gat",41,198; 
+end;
+djuperos1:
+set lastmap$,"juperos_01"; 
+set lastx,53; 
+set lasty,247; 
+warp "juperos_01.gat",53,247; 
+end;
+djuperos3:
+set lastmap$,"juperos_02"; 
+set lastx,37; 
+set lasty,63; 
+warp "juperos_02.gat",37,63; 
+end;
+djuperos2:
+set lastmap$,"jupe_core"; 
+set lastx,150; 
+set lasty,285; 
+warp "jupe_core.gat",150,285; 
+end;
+dumdun1:
+set lastmap$,"um_dun01"; 
+set lastx,42; 
+set lasty,31; 
+warp "um_dun01.gat",42,31; 
+end;
+dumdun2:
+set lastmap$,"um_dun02"; 
+set lastx,51; 
+set lasty,25; 
+warp "um_dun02.gat",51,25; 
+end;
+dloudun1:
+set lastmap$,"lou_dun01"; 
+set lastx,218; 
+set lasty,196; 
+warp "lou_dun01.gat",218,196; 
+end;
+dloudun2:
+set lastmap$,"lou_dun02"; 
+set lastx,282; 
+set lasty,20; 
+warp "lou_dun02.gat",282,20; 
+end;
+dloudun3:
+set lastmap$,"lou_dun03"; 
+set lastx,165; 
+set lasty,38; 
+warp "lou_dun03.gat",165,38; 
+end;
+dayodun1:
+set lastmap$,"ayo_dun01"; 
+set lastx,275; 
+set lasty,19; 
+warp "ayo_dun01.gat",275,19; 
+end;
+dayodun2:
+set lastmap$,"ayo_dun02"; 
+set lastx,24; 
+set lasty,26; 
+warp "ayo_dun02.gat",24,26; 
+end;
+deindun1:
+set lastmap$,"ein_dun01"; 
+set lastx,22; 
+set lasty,14; 
+warp "ein_dun01.gat",22,14; 
+end;
+deindun2:
+set lastmap$,"ein_dun02"; 
+set lastx,292; 
+set lasty,290; 
+warp "ein_dun02.gat",292,290; 
+end;
+dlhzdun1:
+set lastmap$,"lhz_dun01"; 
+set lastx,150; 
+set lasty,228; 
+warp "lhz_dun01.gat",150,228; 
+end;
+dlhzdun2:
+set lastmap$,"lhz_dun02"; 
+set lastx,150; 
+set lasty,18; 
+warp "lhz_dun02.gat",150,18; 
+end;
+dlhzdun3:
+set lastmap$,"lhz_dun03"; 
+set lastx,140; 
+set lasty,133; 
+warp "lhz_dun03.gat",140,133; 
+end;
+dlhzdun4:
+set lastmap$,"lhz_dun04"; 
+set lastx,139; 
+set lasty,139; 
+warp "lhz_dun04.gat",139,139; 
+end;
+dlhzdun5:
+set lastmap$,"lhz_dun05"; 
+set lastx,139; 
+set lasty,139; 
+warp "lhz_dun05.gat",139,139; 
+end;
+dabyss1:
+set lastmap$,"abyss_01"; 
+set lastx,192; 
+set lasty,207; 
+warp "abyss_01.gat",264,272; 
+end;
+dabyss2:
+set lastmap$,"abyss_02"; 
+set lastx,275; 
+set lasty,270; 
+warp "abyss_02.gat",275,270; 
+end;
+dabyss3:
+set lastmap$,"abyss_03"; 
+set lastx,116; 
+set lasty,28; 
+warp "abyss_03.gat",116,28; 
+end;
+dthat1:
+set lastmap$,"tha_t01"; 
+set lastx,150; 
+set lasty,39; 
+warp "tha_t01.gat",150,39; 
+end;
+dthat2:
+set lastmap$,"tha_t02"; 
+set lastx,150; 
+set lasty,136; 
+warp "tha_t02.gat",150,136; 
+end;
+dthat3:
+set lastmap$,"tha_t03"; 
+set lastx,220; 
+set lasty,158; 
+warp "tha_t03.gat",220,158; 
+end;
+dthat4:
+set lastmap$,"tha_t04"; 
+set lastx,59; 
+set lasty,143; 
+warp "tha_t04.gat",59,143; 
+end;
+dthat5:
+set lastmap$,"tha_t05"; 
+set lastx,62; 
+set lasty,11; 
+warp "tha_t05.gat",62,11; 
+end;
+dthat6:
+set lastmap$,"tha_t06"; 
+set lastx,89; 
+set lasty,221; 
+warp "tha_t06.gat",89,221; 
+end;
+dthat7:
+set lastmap$,"tha_t07"; 
+set lastx,35; 
+set lasty,166; 
+warp "tha_t07.gat",35,166; 
+end;
+dthat8:
+set lastmap$,"tha_t08"; 
+set lastx,93; 
+set lasty,148; 
+warp "tha_t08.gat",93,148; 
+end;
+dthat9:
+set lastmap$,"tha_t09"; 
+set lastx,29; 
+set lasty,107; 
+warp "tha_t09.gat",29,107; 
+end;
+dthat10:
+set lastmap$,"tha_t10"; 
+set lastx,159; 
+set lasty,138; 
+warp "tha_t10.gat",159,138; 
+end;
+dthat11:
+set lastmap$,"tha_t11"; 
+set lastx,19; 
+set lasty,20; 
+warp "tha_t11.gat",19,20; 
+end;
+dthat12:
+set lastmap$,"tha_t12"; 
+set lastx,130; 
+set lasty,52; 
+warp "tha_t12.gat",130,52; 
+end;
+danthell1:
+set lastmap$,"anthell01"; 
+set lastx,35; 
+set lasty,262; 
+warp "anthell01.gat",35,262; 
+end;
+danthell2:
+set lastmap$,"anthell02"; 
+set lastx,168; 
+set lasty,170; 
+warp "anthell02.gat",168,170; 
+end;
+dbeach1:
+set lastmap$,"beach_dun"; 
+set lastx,266; 
+set lasty,67; 
+warp "beach_dun.gat",266,67; 
+end;
+dbeach2:
+set lastmap$,"beach_dun2"; 
+set lastx,255; 
+set lasty,244; 
+warp "beach_dun2.gat",255,244; 
+end;
+dbeach3:
+set lastmap$,"beach_dun3"; 
+set lastx,23; 
+set lasty,260; 
+warp "beach_dun3.gat",23,260; 
+end;
+dbyalan1:
+set lastmap$,"iz_dun00"; 
+set lastx,168; 
+set lasty,168; 
+warp "iz_dun00.gat",168,168; 
+end;
+dbyalan2:
+set lastmap$,"iz_dun01"; 
+set lastx,253; 
+set lasty,252; 
+warp "iz_dun01.gat",253,252; 
+end;
+dbyalan3:
+set lastmap$,"iz_dun02"; 
+set lastx,236; 
+set lasty,204; 
+warp "iz_dun02.gat",236,204; 
+end;
+dbyalan4:
+set lastmap$,"iz_dun03"; 
+set lastx,32; 
+set lasty,63; 
+warp "iz_dun03.gat",32,63; 
+end;
+dbyalan5:
+set lastmap$,"iz_dun04"; 
+set lastx,26; 
+set lasty,27; 
+warp "iz_dun04.gat",26,27; 
+end;
+dalde1:
+set lastmap$,"alde_dun01"; 
+set lastx,297; 
+set lasty,25; 
+warp "alde_dun01.gat",297,25; 
+end;
+dalde2:
+set lastmap$,"alde_dun02"; 
+set lastx,127; 
+set lasty,169; 
+warp "alde_dun02.gat",127,169; 
+end;
+dalde3:
+set lastmap$,"alde_dun03"; 
+set lastx,277; 
+set lasty,178; 
+warp "alde_dun03.gat",277,178; 
+end;
+dalde4:
+set lastmap$,"alde_dun04"; 
+set lastx,268; 
+set lasty,74; 
+warp "alde_dun04.gat",268,74; 
+end;
+dclock1:
+set lastmap$,"c_tower1"; 
+set lastx,199; 
+set lasty,159; 
+warp "c_tower1.gat",199,159; 
+end;
+dclock2:
+set lastmap$,"c_tower2"; 
+set lastx,148; 
+set lasty,283; 
+warp "c_tower2.gat",148,283; 
+end;
+dclock3:
+set lastmap$,"c_tower3"; 
+set lastx,65; 
+set lasty,147; 
+warp "c_tower3.gat",65,147; 
+end;
+dclock4:
+set lastmap$,"c_tower4"; 
+set lastx,56; 
+set lasty,155; 
+warp "c_tower4.gat",56,155; 
+end;
+dcoal1:
+set lastmap$,"mjo_dun01"; 
+set lastx,52; 
+set lasty,17; 
+warp "mjo_dun01.gat",52,17; 
+end;
+dcoal2:
+set lastmap$,"mjo_dun02"; 
+set lastx,381; 
+set lasty,343; 
+warp "mjo_dun02.gat",381,343; 
+end;
+dcoal3:
+set lastmap$,"mjo_dun03"; 
+set lastx,302; 
+set lasty,262; 
+warp "mjo_dun03.gat",302,262; 
+end;
+dculvert1:
+set lastmap$,"prt_sewb1"; 
+set lastx,131; 
+set lasty,247; 
+warp "prt_sewb1.gat",131,247; 
+end;
+dculvert2:
+set lastmap$,"prt_sewb2"; 
+set lastx,19; 
+set lasty,19; 
+warp "prt_sewb2.gat",19,19; 
+end;
+dculvert3:
+set lastmap$,"prt_sewb3"; 
+set lastx,180; 
+set lasty,169; 
+warp "prt_sewb3.gat",180,169; 
+end;
+dculvert4:
+set lastmap$,"prt_sewb4"; 
+set lastx,100; 
+set lasty,92; 
+warp "prt_sewb4.gat",100,92; 
+end;
+dgeffen1:
+set lastmap$,"gef_dun00"; 
+set lastx,104; 
+set lasty,99; 
+warp "gef_dun00.gat",104,99; 
+end;
+dgeffen2:
+set lastmap$,"gef_dun01"; 
+set lastx,115; 
+set lasty,236; 
+warp "gef_dun01.gat",115,236; 
+end;
+dgeffen3:
+set lastmap$,"gef_dun02"; 
+set lastx,106; 
+set lasty,132; 
+warp "gef_dun02.gat",106,132; 
+end;
+dgeffen4:
+set lastmap$,"gef_dun03"; 
+set lastx,203; 
+set lasty,200; 
+warp "gef_dun03.gat",203,200; 
+end;
+dglastent:
+set lastmap$,"glast_01"; 
+set lastx,370; 
+set lasty,304; 
+warp "glast_01.gat",370,304; 
+end;
+dglastcast1:
+set lastmap$,"gl_cas01"; 
+set lastx,199; 
+set lasty,29; 
+warp "gl_cas01.gat",199,29; 
+end;
+dglastcast2:
+set lastmap$,"gl_cas02"; 
+set lastx,104; 
+set lasty,25; 
+warp "gl_cas02.gat",104,25; 
+end;
+dglastchiv1:
+set lastmap$,"gl_knt01"; 
+set lastx,150; 
+set lasty,15; 
+warp "gl_knt01.gat",150,15; 
+end;
+dglastchiv2:
+set lastmap$,"gl_knt02"; 
+set lastx,157; 
+set lasty,287; 
+warp "gl_knt02.gat",157,287; 
+end;
+dglastyard:
+set lastmap$,"gl_chyard"; 
+set lastx,147; 
+set lasty,15; 
+warp "gl_chyard.gat",147,15; 
+end;
+dglastcul1:
+set lastmap$,"gl_sew01"; 
+set lastx,258; 
+set lasty,255; 
+warp "gl_sew01.gat",258,255; 
+end;
+dglastcul2:
+set lastmap$,"gl_sew02"; 
+set lastx,108; 
+set lasty,291; 
+warp "gl_sew02.gat",108,291; 
+end;
+dglastcul3:
+set lastmap$,"gl_sew03"; 
+set lastx,171; 
+set lasty,283; 
+warp "gl_sew03.gat",171,283; 
+end;
+dglastcul4:
+set lastmap$,"gl_sew04"; 
+set lastx,68; 
+set lasty,277; 
+warp "gl_sew04.gat",68,277; 
+end;
+dglastchur:
+set lastmap$,"gl_church"; 
+set lastx,156; 
+set lasty,7; 
+warp "gl_church.gat",156,7; 
+end;
+dglaststep:
+set lastmap$,"gl_step"; 
+set lastx,12; 
+set lasty,7; 
+warp "gl_step.gat",12,7; 
+end;
+dglastcave1:
+set lastmap$,"gl_dun01"; 
+set lastx,133; 
+set lasty,271; 
+warp "gl_dun01.gat",133,271; 
+end;
+dglastcave2:
+set lastmap$,"gl_dun02"; 
+set lastx,224; 
+set lasty,274; 
+warp "gl_dun02.gat",224,274; 
+end;
+dglastpris1:
+set lastmap$,"gl_prison"; 
+set lastx,14; 
+set lasty,70; 
+warp "gl_prison.gat",14,70; 
+end;
+dglastpris2:
+set lastmap$,"gl_prison1"; 
+set lastx,150; 
+set lasty,14; 
+warp "gl_prison1.gat",150,14; 
+end;
+dhidden1:
+set lastmap$,"prt_maze01"; 
+set lastx,176; 
+set lasty,7; 
+warp "prt_maze01.gat",176,7; 
+end;
+dhidden2:
+set lastmap$,"prt_maze02"; 
+set lastx,94; 
+set lasty,9; 
+warp "prt_maze02.gat",93,20; 
+end;
+dhidden3:
+set lastmap$,"prt_maze03"; 
+set lastx,23; 
+set lasty,8; 
+warp "prt_maze03.gat",23,8; 
+end;
+diced1:
+set lastmap$,"ice_dun01"; 
+set lastx,157; 
+set lasty,14; 
+warp "ice_dun01.gat",157,14; 
+end;
+diced2:
+set lastmap$,"ice_dun02"; 
+set lastx,151; 
+set lasty,155; 
+warp "ice_dun02.gat",151,155; 
+end;
+diced3:
+set lastmap$,"ice_dun03"; 
+set lastx,149; 
+set lasty,22; 
+warp "ice_dun03.gat",149,22; 
+end;
+diced4:
+set lastmap$,"ice_dun04"; 
+set lastx,33; 
+set lasty,158; 
+warp "ice_dun04.gat",33,158; 
+end;
+dmagma1:
+set lastmap$,"mag_dun01"; 
+set lastx,126; 
+set lasty,68; 
+warp "mag_dun01.gat",126,68; 
+end;
+dmagma2:
+set lastmap$,"mag_dun02"; 
+set lastx,47; 
+set lasty,30; 
+warp "mag_dun02.gat",47,30; 
+end;
+dmosk1:
+set lastmap$,"mosk_dun01"; 
+set lastx,189; 
+set lasty,46; 
+warp "mosk_dun01.gat",189,46; 
+end;
+dmosk2:
+set lastmap$,"mosk_dun02"; 
+set lastx,163; 
+set lasty,33; 
+warp "mosk_dun02.gat",163,33; 
+end;
+dmosk3:
+set lastmap$,"mosk_dun03"; 
+set lastx,33; 
+set lasty,136; 
+warp "mosk_dun03.gat",33,136; 
+end;
+dorc1:
+set lastmap$,"orcsdun01"; 
+set lastx,32; 
+set lasty,170; 
+warp "orcsdun01.gat",32,170; 
+end;
+dorc2:
+set lastmap$,"orcsdun02"; 
+set lastx,21; 
+set lasty,185; 
+warp "orcsdun02.gat",21,185; 
+end;
+dpayon1:
+set lastmap$,"pay_dun00"; 
+set lastx,21; 
+set lasty,183; 
+warp "pay_dun00.gat",21,183; 
+end;
+dpayon2:
+set lastmap$,"pay_dun01"; 
+set lastx,19; 
+set lasty,33; 
+warp "pay_dun01.gat",19,33; 
+end;
+dpayon3:
+set lastmap$,"pay_dun02"; 
+set lastx,19; 
+set lasty,63; 
+warp "pay_dun02.gat",19,63; 
+end;
+dpayon4:
+set lastmap$,"pay_dun03"; 
+set lastx,155; 
+set lasty,159; 
+warp "pay_dun03.gat",155,159; 
+end;
+dpayon5:
+set lastmap$,"pay_dun04"; 
+set lastx,201; 
+set lasty,204; 
+warp "pay_dun04.gat",201,204; 
+end;
+dpyramids1:
+set lastmap$,"moc_pryd01"; 
+set lastx,192; 
+set lasty,9; 
+warp "moc_pryd01.gat",192,9; 
+end;
+dpyramids2:
+set lastmap$,"moc_pryd02"; 
+set lastx,10; 
+set lasty,192; 
+warp "moc_pryd02.gat",10,192; 
+end;
+dpyramids3:
+set lastmap$,"moc_pryd03"; 
+set lastx,100; 
+set lasty,92; 
+warp "moc_pryd03.gat",100,92; 
+end;
+dpyramids4:
+set lastmap$,"moc_pryd04"; 
+set lastx,181; 
+set lasty,11; 
+warp "moc_pryd04.gat",181,11; 
+end;
+dpyramidsb1:
+set lastmap$,"moc_pryd05"; 
+set lastx,94; 
+set lasty,96; 
+warp "moc_pryd05.gat",94,96; 
+end;
+dpyramidsb2:
+set lastmap$,"moc_pryd06"; 
+set lastx,192; 
+set lasty,8; 
+warp "moc_pryd06.gat",192,8; 
+end;
+dsphinx1:
+set lastmap$,"in_sphinx1"; 
+set lastx,288; 
+set lasty,9; 
+warp "in_sphinx1.gat",288,9; 
+end;
+dsphinx2:
+set lastmap$,"in_sphinx2"; 
+set lastx,149; 
+set lasty,81; 
+warp "in_sphinx2.gat",149,81; 
+end;
+dsphinx3:
+set lastmap$,"in_sphinx3"; 
+set lastx,210; 
+set lasty,54; 
+warp "in_sphinx3.gat",210,54; 
+end;
+dsphinx4:
+set lastmap$,"in_sphinx4"; 
+set lastx,10; 
+set lasty,222; 
+warp "in_sphinx4.gat",10,222; 
+end;
+dsphinx5:
+set lastmap$,"in_sphinx5"; 
+set lastx,100; 
+set lasty,99; 
+warp "in_sphinx5.gat",100,99; 
+end;
+dsunken1:
+set lastmap$,"treasure01"; 
+set lastx,69; 
+set lasty,24; 
+warp "treasure01.gat",69,24; 
+end;
+dsunken2:
+set lastmap$,"treasure02"; 
+set lastx,102; 
+set lasty,27; 
+warp "treasure02.gat",102,27; 
+end;
+dtoy1:
+set lastmap$,"xmas_dun01"; 
+set lastx,205; 
+set lasty,15; 
+warp "xmas_dun01.gat",205,15; 
+end;
+dtoy2:
+set lastmap$,"xmas_dun02"; 
+set lastx,129; 
+set lasty,133; 
+warp "xmas_dun02.gat",129,133; 
+end;
+dturtleent:
+set lastmap$,"tur_dun01"; 
+set lastx,154; 
+set lasty,49; 
+warp "tur_dun01.gat",154,49; 
+end;
+dturtle1:
+set lastmap$,"tur_dun02"; 
+set lastx,148; 
+set lasty,261; 
+warp "tur_dun02.gat",148,261; 
+end;
+dturtle2:
+set lastmap$,"tur_dun03"; 
+set lastx,132; 
+set lasty,189; 
+warp "tur_dun03.gat",132,189; 
+end;
+dturtle3:
+set lastmap$,"tur_dun04"; 
+set lastx,100; 
+set lasty,192; 
+warp "tur_dun04.gat",100,192; 
+end;
+dama1:
+set lastmap$,"ama_dun01"; 
+set lastx,228; 
+set lasty,11; 
+warp "ama_dun01.gat",228,11; 
+end;
+dama2:
+set lastmap$,"ama_dun02"; 
+set lastx,34; 
+set lasty,41; 
+warp "ama_dun02.gat",34,41; 
+end;
+dama3:
+set lastmap$,"ama_dun03"; 
+set lastx,119; 
+set lasty,14; 
+warp "ama_dun03.gat",119,14; 
+end;
+dgon1:
+set lastmap$,"gon_dun01"; 
+set lastx,153; 
+set lasty,53; 
+warp "gon_dun01.gat",153,53; 
+end;
+dgon2:
+set lastmap$,"gon_dun02"; 
+set lastx,28; 
+set lasty,113; 
+warp "gon_dun02.gat",28,113; 
+end;
+dgon3:
+set lastmap$,"gon_dun03"; 
+set lastx,68; 
+set lasty,16; 
+warp "gon_dun03.gat",68,16; 
+end;
+dgefenia1:
+set lastmap$,"gefenia01"; 
+set lastx,40; 
+set lasty,103; 
+warp "gefenia01.gat",40,103; 
+end;
+dgefenia2:
+set lastmap$,"gefenia02"; 
+set lastx,203; 
+set lasty,34; 
+warp "gefenia02.gat",203,34; 
+end;
+dgefenia3:
+set lastmap$,"gefenia03"; 
+set lastx,266; 
+set lasty,168; 
+warp "gefenia03.gat",266,168; 
+end;
+dgefenia4:
+set lastmap$,"gefenia04"; 
+set lastx,130; 
+set lasty,272; 
+warp "gefenia04.gat",130,272; 
+end;
+dgldun1:
+set lastmap$,"gld_dun01"; 
+set lastx,119; 
+set lasty,93; 
+warp "gld_dun01.gat",119,93; 
+end;
+dgldun2:
+set lastmap$,"gld_dun02"; 
+set lastx,39; 
+set lasty,161; 
+warp "gld_dun02.gat",39,161; 
+end;
+dgldun3:
+set lastmap$,"gld_dun03"; 
+set lastx,50; 
+set lasty,44; 
+warp "gld_dun03.gat",50,44; 
+end;
+dgldun4:
+set lastmap$,"gld_dun04"; 
+set lastx,116; 
+set lasty,45; 
+warp "gld_dun04.gat",116,45; 
+end;
+casino:
+set lastmap$,"cmd_in02"; 
+set lastx,179; 
+set lasty,129; 
+warp "cmd_in02.gat",179,129; 
+end;
+dthor1:
+set lastmap$,"thor_v01"; 
+set lastx,21; 
+set lasty,228; 
+warp "thor_v01.gat",21,228; 
+end;
+dthor2:
+set lastmap$,"thor_v02"; 
+set lastx,75; 
+set lasty,205; 
+warp "thor_v02.gat",75,205; 
+end;
+dthor3:
+set lastmap$,"thor_v03"; 
+set lastx,34; 
+set lasty,272; 
+warp "thor_v03.gat",34,272; 
+end;
+drachel1:
+set lastmap$,"ra_san01"; 
+set lastx,140; 
+set lasty,11; 
+warp "ra_san01.gat",140,11; 
+end;
+drachel2:
+set lastmap$,"ra_san02"; 
+set lastx,32; 
+set lasty,21; 
+warp "ra_san02.gat",32,21; 
+end;
+drachel3:
+set lastmap$,"ra_san03"; 
+set lastx,10; 
+set lasty,149; 
+warp "ra_san03.gat",10,149; 
+end;
+drachel4:
+set lastmap$,"ra_san04"; 
+set lastx,204; 
+set lasty,218; 
+warp "ra_san04.gat",204,218; 
+end;
+drachel5:
+set lastmap$,"ra_san05"; 
+set lastx,150; 
+set lasty,9; 
+warp "ra_san05.gat",150,9; 
+end;
+dabbey1:
+set lastmap$,"abbey01"; 
+set lastx,51; 
+set lasty,14; 
+warp "abbey01.gat",51,14; 
+end;
+dabbey2:
+set lastmap$,"abbey02"; 
+set lastx,150; 
+set lasty,11; 
+warp "abbey02.gat",150,11; 
+end;
+dabbey3:
+set lastmap$,"abbey03"; 
+set lastx,120; 
+set lasty,10; 
+warp "abbey03.gat",120,10; 
+end;
+dnyd1:
+set lastmap$,"nyd_dun01"; 
+set lastx,81; 
+set lasty,125; 
+warp "nyd_dun01.gat",81,125; 
+end;
+dnyd2:
+set lastmap$,"nyd_dun02"; 
+set lastx,63; 
+set lasty,264; 
+warp "nyd_dun02.gat",63,264; 
+end;
+datnyd1:
+set lastmap$,"1@nyd"; 
+set lastx,32; 
+set lasty,40; 
+warp "1@nyd.gat",32,40; 
+end;
+datnyd2:
+set lastmap$,"2@nyd"; 
+set lastx,199; 
+set lasty,13; 
+warp "2@nyd.gat",199,13; 
+end;
+dicdun1:
+set lastmap$,"dic_dun01"; 
+set lastx,367; 
+set lasty,44; 
+warp "dic_dun01",367,44; 
+end;
+dicdun2:
+set lastmap$,"dic_dun02"; 
+set lastx,102; 
+set lasty,144; 
+warp "dic_dun02",102,144; 
+end;
+bradun1:
+set lastmap$,"bra_dun01"; 
+set lastx,199; 
+set lasty,40; 
+warp "bra_dun01",199,40; 
+end;
+bradun2:
+set lastmap$,"bra_dun02"; 
+set lastx,262; 
+set lasty,260; 
+warp "bra_dun02",262,260; 
+end;
+
+//-------------------------------
+//          Warps
+//-------------------------------
+
+drunfild1:
+set lastmap$,"ra_fild01"; 
+set lastx,192; 
+set lasty,162; 
+warp "ra_fild01.gat",192,162; 
+end;
+drunfild2:
+set lastmap$,"ra_fild02"; 
+set lastx,235; 
+set lasty,166; 
+warp "ra_fild02.gat",235,166; 
+end;
+drunfild3:
+set lastmap$,"ra_fild03"; 
+set lastx,202; 
+set lasty,206; 
+warp "ra_fild03.gat",202,206; 
+end;
+drunfild4:
+set lastmap$,"ra_fild04"; 
+set lastx,202; 
+set lasty,208; 
+warp "ra_fild04.gat",202,208; 
+end;
+drunfild5:
+set lastmap$,"ra_fild05"; 
+set lastx,225; 
+set lasty,202; 
+warp "ra_fild05.gat",225,202; 
+end;
+drunfild6:
+set lastmap$,"ra_fild06"; 
+set lastx,202; 
+set lasty,214; 
+warp "ra_fild06.gat",202,214; 
+end;
+drunfild7:
+set lastmap$,"ra_fild07"; 
+set lastx,263; 
+set lasty,196; 
+warp "ra_fild07.gat",263,196; 
+end;
+drunfild8:
+set lastmap$,"ra_fild08"; 
+set lastx,217; 
+set lasty,201; 
+warp "ra_fild08.gat",217,201; 
+end;
+drunfild9:
+set lastmap$,"ra_fild09"; 
+set lastx,87; 
+set lasty,121; 
+warp "ra_fild09.gat",87,121; 
+end;
+drunfild10:
+set lastmap$,"ra_fild10"; 
+set lastx,277; 
+set lasty,181; 
+warp "ra_fild10.gat",277,181; 
+end;
+drunfild11:
+set lastmap$,"ra_fild11"; 
+set lastx,221; 
+set lasty,185; 
+warp "ra_fild11.gat",221,185; 
+end;
+drunfild12:
+set lastmap$,"ra_fild12"; 
+set lastx,175; 
+set lasty,200; 
+warp "ra_fild12.gat",175,200; 
+end;
+drunfild13:
+set lastmap$,"ra_fild13"; 
+set lastx,174; 
+set lasty,197; 
+warp "ra_fild13.gat",174,197; 
+end;
+dgeffild00:
+set lastmap$,"gef_fild00"; 
+set lastx,46; 
+set lasty,199; 
+warp "gef_fild00.gat",46,199; 
+end;
+dgeffild01:
+set lastmap$,"gef_fild01"; 
+set lastx,213; 
+set lasty,204; 
+warp "gef_fild01.gat",213,204; 
+end;
+dgeffild02:
+set lastmap$,"gef_fild02"; 
+set lastx,195; 
+set lasty,212; 
+warp "gef_fild02.gat",195,212; 
+end;
+dgeffild03:
+set lastmap$,"gef_fild03"; 
+set lastx,257; 
+set lasty,192; 
+warp "gef_fild03.gat",257,192; 
+end;
+dgeffild04:
+set lastmap$,"gef_fild04"; 
+set lastx,188; 
+set lasty,171; 
+warp "gef_fild04.gat",188,171; 
+end;
+dgeffild05:
+set lastmap$,"gef_fild05"; 
+set lastx,166; 
+set lasty,263; 
+warp "gef_fild05.gat",166,263; 
+end;
+dgeffild06:
+set lastmap$,"gef_fild06"; 
+set lastx,248; 
+set lasty,158; 
+warp "gef_fild06.gat",248,158; 
+end;
+dgeffild07:
+set lastmap$,"gef_fild07"; 
+set lastx,195; 
+set lasty,191; 
+warp "gef_fild07.gat",195,191; 
+end;
+dgeffild08:
+set lastmap$,"gef_fild08"; 
+set lastx,186; 
+set lasty,183; 
+warp "gef_fild08.gat",186,183; 
+end;
+dgeffild09:
+set lastmap$,"gef_fild09"; 
+set lastx,221; 
+set lasty,117; 
+warp "gef_fild09.gat",221,117; 
+end;
+dgeffild10:
+set lastmap$,"gef_fild10"; 
+set lastx,178; 
+set lasty,218; 
+warp "gef_fild10.gat",178,218; 
+end;
+dgeffild11:
+set lastmap$,"gef_fild11"; 
+set lastx,136; 
+set lasty,328; 
+warp "gef_fild11.gat",136,328; 
+end;
+dgeffild12:
+set lastmap$,"gef_fild12"; 
+set lastx,240; 
+set lasty,181; 
+warp "gef_fild12.gat",240,181; 
+end;
+dgeffild13:
+set lastmap$,"gef_fild13"; 
+set lastx,235; 
+set lasty,235; 
+warp "gef_fild13.gat",235,235; 
+end;
+dgeffild14:
+set lastmap$,"gef_fild14"; 
+set lastx,211; 
+set lasty,185; 
+warp "gef_fild14.gat",211,185; 
+end;
+dmjolnir1:
+set lastmap$,"mjolnir_01"; 
+set lastx,204; 
+set lasty,120; 
+warp "mjolnir_01.gat",204,120; 
+end;
+dmjolnir2:
+set lastmap$,"mjolnir_02"; 
+set lastx,175; 
+set lasty,193; 
+warp "mjolnir_02.gat",175,193; 
+end;
+dmjolnir3:
+set lastmap$,"mjolnir_03"; 
+set lastx,208; 
+set lasty,213; 
+warp "mjolnir_03.gat",208,213; 
+end;
+dmjolnir4:
+set lastmap$,"mjolnir_04"; 
+set lastx,179; 
+set lasty,180; 
+warp "mjolnir_04.gat",179,180; 
+end;
+dmjolnir5:
+set lastmap$,"mjolnir_05"; 
+set lastx,181; 
+set lasty,240; 
+warp "mjolnir_05.gat",181,240; 
+end;
+dmjolnir6:
+set lastmap$,"mjolnir_06"; 
+set lastx,195; 
+set lasty,270; 
+warp "mjolnir_06.gat",195,270; 
+end;
+dmjolnir7:
+set lastmap$,"mjolnir_07"; 
+set lastx,235; 
+set lasty,202; 
+warp "mjolnir_07.gat",235,202; 
+end;
+dmjolnir8:
+set lastmap$,"mjolnir_08"; 
+set lastx,188; 
+set lasty,215; 
+warp "mjolnir_08.gat",188,215; 
+end;
+dmjolnir9:
+set lastmap$,"mjolnir_09"; 
+set lastx,205; 
+set lasty,144; 
+warp "mjolnir_09.gat",205,144; 
+end;
+dmjolnir10:
+set lastmap$,"mjolnir_10"; 
+set lastx,245; 
+set lasty,223; 
+warp "mjolnir_10.gat",245,223; 
+end;
+dmjolnir11:
+set lastmap$,"mjolnir_11"; 
+set lastx,180; 
+set lasty,206; 
+warp "mjolnir_11.gat",180,206; 
+end;
+dmjolnir12:
+set lastmap$,"mjolnir_12"; 
+set lastx,196; 
+set lasty,208; 
+warp "mjolnir_12.gat",196,208; 
+end;
+dmosc1:
+set lastmap$,"mosk_fild01"; 
+set lastx,99; 
+set lasty,105; 
+warp "mosk_fild01.gat",99,105; 
+end;
+dmosc2:
+set lastmap$,"mosk_fild02"; 
+set lastx,204; 
+set lasty,59; 
+warp "mosk_fild02.gat",204,59; 
+end;
+dmocfild1:
+set lastmap$,"moc_fild01"; 
+set lastx,219; 
+set lasty,205; 
+warp "moc_fild01.gat",219,205; 
+end;
+dmocfild2:
+set lastmap$,"moc_fild02"; 
+set lastx,177; 
+set lasty,206; 
+warp "moc_fild02.gat",177,206; 
+end;
+dmocfild3:
+set lastmap$,"moc_fild03"; 
+set lastx,194; 
+set lasty,182; 
+warp "moc_fild03.gat",194,182; 
+end;
+dmocfild4:
+set lastmap$,"moc_fild04"; 
+set lastx,184; 
+set lasty,217; 
+warp "moc_fild04.gat",184,217; 
+end;
+dmocfild5:
+set lastmap$,"moc_fild05"; 
+set lastx,203; 
+set lasty,213; 
+warp "moc_fild05.gat",203,213; 
+end;
+dmocfild6:
+set lastmap$,"moc_fild06"; 
+set lastx,213; 
+set lasty,208; 
+warp "moc_fild06.gat",213,208; 
+end;
+dmocfild7:
+set lastmap$,"moc_fild07"; 
+set lastx,224; 
+set lasty,170; 
+warp "moc_fild07.gat",224,170; 
+end;
+dmocfild8:
+set lastmap$,"moc_fild08"; 
+set lastx,229; 
+set lasty,177; 
+warp "moc_fild08.gat",229,177; 
+end;
+dmocfild9:
+set lastmap$,"moc_fild09"; 
+set lastx,195; 
+set lasty,198; 
+warp "moc_fild09.gat",195,198; 
+end;
+dmocfild10:
+set lastmap$,"moc_fild10"; 
+set lastx,209; 
+set lasty,168; 
+warp "moc_fild10.gat",209,168; 
+end;
+dmocfild11:
+set lastmap$,"moc_fild11"; 
+set lastx,198; 
+set lasty,216; 
+warp "moc_fild11.gat",198,216; 
+end;
+dmocfild12:
+set lastmap$,"moc_fild12"; 
+set lastx,156; 
+set lasty,187; 
+warp "moc_fild12.gat",156,187; 
+end;
+dmocfild13:
+set lastmap$,"moc_fild13"; 
+set lastx,185; 
+set lasty,263; 
+warp "moc_fild13.gat",185,263; 
+end;
+dmocfild14:
+set lastmap$,"moc_fild14"; 
+set lastx,209; 
+set lasty,219; 
+warp "moc_fild14.gat",209,219; 
+end;
+dmocfild15:
+set lastmap$,"moc_fild15"; 
+set lastx,223; 
+set lasty,188; 
+warp "moc_fild15.gat",223,188; 
+end;
+dmocfild16:
+set lastmap$,"moc_fild16"; 
+set lastx,206; 
+set lasty,228; 
+warp "moc_fild16.gat",206,228; 
+end;
+dmocfild17:
+set lastmap$,"moc_fild17"; 
+set lastx,208; 
+set lasty,238; 
+warp "moc_fild17.gat",208,238; 
+end;
+dmocfild18:
+set lastmap$,"moc_fild18"; 
+set lastx,209; 
+set lasty,223; 
+warp "moc_fild18.gat",209,223; 
+end;
+dmocfild19:
+set lastmap$,"moc_fild19"; 
+set lastx,85; 
+set lasty,97; 
+warp "moc_fild19.gat",85,97; 
+end;
+dpayfild1:
+set lastmap$,"pay_fild01"; 
+set lastx,158; 
+set lasty,206; 
+warp "pay_fild01.gat",158,206; 
+end;
+dpayfild2:
+set lastmap$,"pay_fild02"; 
+set lastx,151; 
+set lasty,219; 
+warp "pay_fild02.gat",151,219; 
+end;
+dpayfild3:
+set lastmap$,"pay_fild03"; 
+set lastx,205; 
+set lasty,148; 
+warp "pay_fild03.gat",205,148; 
+end;
+dpayfild4:
+set lastmap$,"pay_fild04"; 
+set lastx,186; 
+set lasty,247; 
+warp "pay_fild04.gat",186,247; 
+end;
+dpayfild5:
+set lastmap$,"pay_fild05"; 
+set lastx,134; 
+set lasty,204; 
+warp "pay_fild05.gat",134,204; 
+end;
+dpayfild6:
+set lastmap$,"pay_fild06"; 
+set lastx,193; 
+set lasty,235; 
+warp "pay_fild06.gat",193,235; 
+end;
+dpayfild7:
+set lastmap$,"pay_fild07"; 
+set lastx,200; 
+set lasty,177; 
+warp "pay_fild07.gat",200,177; 
+end;
+dpayfild8:
+set lastmap$,"pay_fild08"; 
+set lastx,137; 
+set lasty,189; 
+warp "pay_fild08.gat",137,189; 
+end;
+dpayfild9:
+set lastmap$,"pay_fild09"; 
+set lastx,201; 
+set lasty,224; 
+warp "pay_fild09.gat",201,224; 
+end;
+dpayfild10:
+set lastmap$,"pay_fild10"; 
+set lastx,160; 
+set lasty,205; 
+warp "pay_fild10.gat",160,205; 
+end;
+dpayfild11:
+set lastmap$,"pay_fild11"; 
+set lastx,194; 
+set lasty,150; 
+warp "pay_fild11.gat",194,150; 
+end;
+dprtfild0:
+set lastmap$,"prt_fild00"; 
+set lastx,184; 
+set lasty,235; 
+warp "prt_fild00.gat",184,235; 
+end;
+dprtfild1:
+set lastmap$,"prt_fild01"; 
+set lastx,190; 
+set lasty,206; 
+warp "prt_fild01.gat",190,206; 
+end;
+dprtfild2:
+set lastmap$,"prt_fild02"; 
+set lastx,240; 
+set lasty,206; 
+warp "prt_fild02.gat",240,206; 
+end;
+dprtfild3:
+set lastmap$,"prt_fild03"; 
+set lastx,190; 
+set lasty,143; 
+warp "prt_fild03.gat",190,143; 
+end;
+dprtfild4:
+set lastmap$,"prt_fild04"; 
+set lastx,307; 
+set lasty,252; 
+warp "prt_fild04.gat",307,252; 
+end;
+dprtfild5:
+set lastmap$,"prt_fild05"; 
+set lastx,239; 
+set lasty,213; 
+warp "prt_fild05.gat",239,213; 
+end;
+dprtfild6:
+set lastmap$,"prt_fild06"; 
+set lastx,185; 
+set lasty,188; 
+warp "prt_fild06.gat",185,188; 
+end;
+dprtfild7:
+set lastmap$,"prt_fild07"; 
+set lastx,193; 
+set lasty,194; 
+warp "prt_fild07.gat",193,194; 
+end;
+dprtfild8:
+set lastmap$,"prt_fild08"; 
+set lastx,187; 
+set lasty,218; 
+warp "prt_fild08.gat",187,218; 
+end;
+dprtfild9:
+set lastmap$,"prt_fild09"; 
+set lastx,210; 
+set lasty,183; 
+warp "prt_fild09.gat",210,183; 
+end;
+dprtfild10:
+set lastmap$,"prt_fild10"; 
+set lastx,195; 
+set lasty,149; 
+warp "prt_fild10.gat",195,149; 
+end;
+dprtfild11:
+set lastmap$,"prt_fild11"; 
+set lastx,198; 
+set lasty,164; 
+warp "prt_fild11.gat",198,164; 
+end;
+dxmasfild1:
+set lastmap$,"xmas_fild01"; 
+set lastx,115; 
+set lasty,145; 
+warp "xmas_fild01.gat",115,145; 
+end;
+dcmdfild1:
+set lastmap$,"cmd_fild01"; 
+set lastx,180; 
+set lasty,178; 
+warp "cmd_fild01.gat",180,178; 
+end;
+dcmdfild2:
+set lastmap$,"cmd_fild02"; 
+set lastx,231; 
+set lasty,160; 
+warp "cmd_fild02.gat",231,160; 
+end;
+dcmdfild3:
+set lastmap$,"cmd_fild03"; 
+set lastx,191; 
+set lasty,172; 
+warp "cmd_fild03.gat",191,172; 
+end;
+dcmdfild4:
+set lastmap$,"cmd_fild04"; 
+set lastx,228; 
+set lasty,194; 
+warp "cmd_fild04.gat",228,194; 
+end;
+dcmdfild5:
+set lastmap$,"cmd_fild05"; 
+set lastx,224; 
+set lasty,203; 
+warp "cmd_fild05.gat",224,203; 
+end;
+dcmdfild6:
+set lastmap$,"cmd_fild06"; 
+set lastx,190; 
+set lasty,223; 
+warp "cmd_fild06.gat",190,223; 
+end;
+dcmdfild7:
+set lastmap$,"cmd_fild07"; 
+set lastx,234; 
+set lasty,177; 
+warp "cmd_fild07.gat",234,177; 
+end;
+dcmdfild8:
+set lastmap$,"cmd_fild08"; 
+set lastx,194; 
+set lasty,175; 
+warp "cmd_fild08.gat",194,175; 
+end;
+dcmdfild9:
+set lastmap$,"cmd_fild09"; 
+set lastx,172; 
+set lasty,172; 
+warp "cmd_fild09.gat",172,172; 
+end;
+dyunofild1:
+set lastmap$,"yuno_fild01"; 
+set lastx,189; 
+set lasty,224; 
+warp "yuno_fild01.gat",189,224; 
+end;
+dyunofild2:
+set lastmap$,"yuno_fild02"; 
+set lastx,192; 
+set lasty,207; 
+warp "yuno_fild02.gat",192,207; 
+end;
+dyunofild3:
+set lastmap$,"yuno_fild03"; 
+set lastx,221; 
+set lasty,157; 
+warp "yuno_fild03.gat",221,157; 
+end;
+dyunofild4:
+set lastmap$,"yuno_fild04"; 
+set lastx,226; 
+set lasty,199; 
+warp "yuno_fild04.gat",226,199; 
+end;
+dyunofild5:
+set lastmap$,"yuno_fild05"; 
+set lastx,223; 
+set lasty,177; 
+warp "yuno_fild05.gat",223,177; 
+end;
+dyunofild6:
+set lastmap$,"yuno_fild06"; 
+set lastx,187; 
+set lasty,232; 
+warp "yuno_fild06.gat",187,232; 
+end;
+dyunofild7:
+set lastmap$,"yuno_fild07"; 
+set lastx,231; 
+set lasty,174; 
+warp "yuno_fild07.gat",231,174; 
+end;
+dyunofild8:
+set lastmap$,"yuno_fild08"; 
+set lastx,196; 
+set lasty,203; 
+warp "yuno_fild08.gat",196,203; 
+end;
+dyunofild9:
+set lastmap$,"yuno_fild09"; 
+set lastx,183; 
+set lasty,214; 
+warp "yuno_fild09.gat",183,214; 
+end;
+dyunofild10:
+set lastmap$,"yuno_fild10"; 
+set lastx,200; 
+set lasty,124; 
+warp "yuno_fild10.gat",200,124; 
+end;
+dyunofild11:
+set lastmap$,"yuno_fild11"; 
+set lastx,195; 
+set lasty,226; 
+warp "yuno_fild11.gat",195,226; 
+end;
+dyunofild12:
+set lastmap$,"yuno_fild12"; 
+set lastx,210; 
+set lasty,304; 
+warp "yuno_fild12.gat",210,304; 
+end;
+damafild1:
+set lastmap$,"ama_fild01"; 
+set lastx,190; 
+set lasty,197; 
+warp "ama_fild01.gat",190,197; 
+end;
+dgonfild1:
+set lastmap$,"gon_fild01"; 
+set lastx,220; 
+set lasty,227; 
+warp "gon_fild01.gat",220,227; 
+end;
+dumfild1:
+set lastmap$,"um_fild01"; 
+set lastx,217; 
+set lasty,206; 
+warp "um_fild01.gat",217,206; 
+end;
+dumfild2:
+set lastmap$,"um_fild02"; 
+set lastx,223; 
+set lasty,221; 
+warp "um_fild02.gat",223,221; 
+end;
+dumfild3:
+set lastmap$,"um_fild03"; 
+set lastx,237; 
+set lasty,215; 
+warp "um_fild03.gat",237,215; 
+end;
+dumfild4:
+set lastmap$,"um_fild04"; 
+set lastx,202; 
+set lasty,197; 
+warp "um_fild04.gat",202,197; 
+end;
+dniffild1:
+set lastmap$,"nif_fild01"; 
+set lastx,215; 
+set lasty,229; 
+warp "nif_fild01.gat",215,229; 
+end;
+dniffild2:
+set lastmap$,"nif_fild02"; 
+set lastx,167; 
+set lasty,234; 
+warp "nif_fild02.gat",167,234; 
+end;
+dyggdrasil1:
+set lastmap$,"yggdrasil01"; 
+set lastx,204; 
+set lasty,78; 
+warp "yggdrasil01.gat",204,78; 
+end;
+dloufild1:
+set lastmap$,"lou_fild01"; 
+set lastx,229; 
+set lasty,187; 
+warp "lou_fild01.gat",229,187; 
+end;
+dayofild1:
+set lastmap$,"ayo_fild01"; 
+set lastx,173; 
+set lasty,134; 
+warp "ayo_fild01.gat",173,134; 
+end;
+dayofild2:
+set lastmap$,"ayo_fild02"; 
+set lastx,212; 
+set lasty,150; 
+warp "ayo_fild02.gat",212,150; 
+end;
+deinfild1:
+set lastmap$,"ein_fild01"; 
+set lastx,142; 
+set lasty,225; 
+warp "ein_fild01.gat",142,225; 
+end;
+deinfild2:
+set lastmap$,"ein_fild02"; 
+set lastx,182; 
+set lasty,141; 
+warp "ein_fild02.gat",182,141; 
+end;
+deinfild3:
+set lastmap$,"ein_fild03"; 
+set lastx,187; 
+set lasty,228; 
+warp "ein_fild03.gat",187,228; 
+end;
+deinfild4:
+set lastmap$,"ein_fild04"; 
+set lastx,185; 
+set lasty,173; 
+warp "ein_fild04.gat",185,173; 
+end;
+deinfild5:
+set lastmap$,"ein_fild05"; 
+set lastx,216; 
+set lasty,173; 
+warp "ein_fild05.gat",216,173; 
+end;
+deinfild6:
+set lastmap$,"ein_fild06"; 
+set lastx,195; 
+set lasty,148; 
+warp "ein_fild06.gat",195,148; 
+end;
+deinfild7:
+set lastmap$,"ein_fild07"; 
+set lastx,272; 
+set lasty,220; 
+warp "ein_fild07.gat",272,220; 
+end;
+deinfild8:
+set lastmap$,"ein_fild08"; 
+set lastx,173; 
+set lasty,214; 
+warp "ein_fild08.gat",173,214; 
+end;
+deinfild9:
+set lastmap$,"ein_fild09"; 
+set lastx,207; 
+set lasty,174; 
+warp "ein_fild09.gat",207,174; 
+end;
+deinfild10:
+set lastmap$,"ein_fild10"; 
+set lastx,196; 
+set lasty,200; 
+warp "ein_fild10.gat",196,200; 
+end;
+dlhzfild1:
+set lastmap$,"lhz_fild01"; 
+set lastx,240; 
+set lasty,179; 
+warp "lhz_fild01.gat",240,179; 
+end;
+dlhzfild2:
+set lastmap$,"lhz_fild02"; 
+set lastx,185; 
+set lasty,235; 
+warp "lhz_fild02.gat",185,235; 
+end;
+dlhzfild3:
+set lastmap$,"lhz_fild03"; 
+set lastx,240; 
+set lasty,226; 
+warp "lhz_fild03.gat",240,226; 
+end;
+dhufild1:
+set lastmap$,"hu_fild01"; 
+set lastx,268; 
+set lasty,101; 
+warp "hu_fild01.gat",268,101; 
+end;
+dhufild2:
+set lastmap$,"hu_fild02"; 
+set lastx,222; 
+set lasty,193; 
+warp "hu_fild02.gat",222,193; 
+end;
+dhufild3:
+set lastmap$,"hu_fild03"; 
+set lastx,232; 
+set lasty,185; 
+warp "hu_fild03.gat",232,185; 
+end;
+dhufild4:
+set lastmap$,"hu_fild04"; 
+set lastx,252; 
+set lasty,189; 
+warp "hu_fild04.gat",252,189; 
+end;
+dhufild5:
+set lastmap$,"hu_fild05"; 
+set lastx,196; 
+set lasty,106; 
+warp "hu_fild05.gat",196,106; 
+end;
+dhufild6:
+set lastmap$,"hu_fild06"; 
+set lastx,216; 
+set lasty,220; 
+warp "hu_fild06.gat",216,220; 
+end;
+dhufild7:
+set lastmap$,"hu_fild07"; 
+set lastx,227; 
+set lasty,197; 
+warp "hu_fild07.gat",227,197; 
+end;
+wodtemp1:
+set lastmap$,"odin_tem01"; 
+set lastx,298; 
+set lasty,167; 
+warp "odin_tem01.gat",298,167; 
+end;
+wodtemp2:
+set lastmap$,"odin_tem02"; 
+set lastx,224; 
+set lasty,149; 
+warp "odin_tem02.gat",224,149; 
+end;
+wodtemp3:
+set lastmap$,"odin_tem03"; 
+set lastx,266; 
+set lasty,280; 
+warp "odin_tem03.gat",266,280; 
+end;
+dvfild1:
+set lastmap$,"ve_fild01"; 
+set lastx,186; 
+set lasty,175; 
+warp "ve_fild01.gat",186,175; 
+end;
+dvfild2:
+set lastmap$,"ve_fild02"; 
+set lastx,196; 
+set lasty,370; 
+warp "ve_fild02.gat",196,370; 
+end;
+dvfild3:
+set lastmap$,"ve_fild03"; 
+set lastx,222; 
+set lasty,45; 
+warp "ve_fild03.gat",222,45; 
+end;
+dvfild4:
+set lastmap$,"ve_fild04"; 
+set lastx,51; 
+set lasty,250; 
+warp "ve_fild04.gat",51,250; 
+end;
+dvfild5:
+set lastmap$,"ve_fild05"; 
+set lastx,202; 
+set lasty,324; 
+warp "ve_fild05.gat",202,324; 
+end;
+dvfild6:
+set lastmap$,"ve_fild06"; 
+set lastx,150; 
+set lasty,223; 
+warp "ve_fild06.gat",150,223; 
+end;
+dvfild7:
+set lastmap$,"ve_fild07"; 
+set lastx,149; 
+set lasty,307; 
+warp "ve_fild07.gat",149,307; 
+end;
+dsplfild1:
+set lastmap$,"spl_fild01"; 
+set lastx,29; 
+set lasty,335; 
+warp "spl_fild01.gat",29,335; 
+end;
+dsplfild2:
+set lastmap$,"spl_fild02"; 
+set lastx,290; 
+set lasty,373; 
+warp "spl_fild02.gat",290,373; 
+end;
+dsplfild3:
+set lastmap$,"spl_fild03"; 
+set lastx,105; 
+set lasty,369; 
+warp "spl_fild03.gat",105,369; 
+end;
+dmanfild1:
+set lastmap$,"man_fild01"; 
+set lastx,36; 
+set lasty,238; 
+warp "man_fild01.gat",36,238; 
+end;
+dmanfild2:
+set lastmap$,"man_fild02"; 
+set lastx,133; 
+set lasty,55; 
+warp "man_fild02.gat",133,55; 
+end;
+dmanfild3:
+set lastmap$,"man_fild03"; 
+set lastx,79; 
+set lasty,363; 
+warp "man_fild03.gat",79,363; 
+end;
+dicfild1:
+set lastmap$,"dic_fild01"; 
+set lastx,150; 
+set lasty,277; 
+warp "dic_fild01",150,277; 
+end;
+dicfild2:
+set lastmap$,"dic_fild02"; 
+set lastx,71; 
+set lasty,371; 
+warp "dic_fild02",71,371; 
+end;
+brafild1:
+set lastmap$,"bra_fild01"; 
+set lastx,77; 
+set lasty,33; 
+warp "bra_fild01",77,33; 
+end;
+}
+//---------------------
+//Edit duplicates here!
+//---------------------
+
+rachel.gat,122,148,4	duplicate(Twilight Warper)	Twilight Warper#2-2	721
+alberta,110,137,4	duplicate(Twilight Warper)	Twilight Warper#3-1	721
+aldebaran,147,117,4	duplicate(Twilight Warper)	Twilight Warper#4-1	721
+amatsu,190,86,1	duplicate(Twilight Warper)	Twilight Warper#5-1	721
+ayothaya,147,123,6	duplicate(Twilight Warper)	Twilight Warper#6-1	721
+comodo,206,77,4	duplicate(Twilight Warper)	Twilight Warper#7-1	721
+einbech,196,83,4	duplicate(Twilight Warper)	Twilight Warper#8-1	721
+einbroch,243,189,2	duplicate(Twilight Warper)	Twilight Warper#9-1	721
+hugel,88,151,5	duplicate(Twilight Warper)	Twilight Warper#10-1	721
+lighthalzen,165,94,6	duplicate(Twilight Warper)	Twilight Warper#11-1	721
+geffen,116,59,0	duplicate(Twilight Warper)	Twilight Warper#12-1	721
+izlude,122,94,3	duplicate(Twilight Warper)	Twilight Warper#13-1	721
+xmas,149,136,4	duplicate(Twilight Warper)	Twilight Warper#14-1	721
+morocc,156,95,4	duplicate(Twilight Warper)	Twilight Warper#15-1	721
+payon,148,228,4	duplicate(Twilight Warper)	Twilight Warper#16-1	721
+yuno,160,170,4	duplicate(Twilight Warper)	Twilight Warper#17-1	721
+moc_fild04.gat,207,331,4	duplicate(Twilight Warper)	Twilight Warper#18-1	721
+izlu2dun.gat,104,82,4	duplicate(Twilight Warper)	Twilight Warper#19-1	721
+mjolnir_02.gat,85,363,4	duplicate(Twilight Warper)	Twilight Warper#20-1	721
+prt_fild05.gat,273,215,4	duplicate(Twilight Warper)	Twilight Warper#21-1	721
+glast_01.gat,370,308,4	duplicate(Twilight Warper)	Twilight Warper#22-1	721
+yuno_fild03.gat,37,135,4	duplicate(Twilight Warper)	Twilight Warper#23-1	721
+gef_fild10.gat,71,339,4	duplicate(Twilight Warper)	Twilight Warper#24-1	721
+pay_arche.gat,39,135,4	duplicate(Twilight Warper)	Twilight Warper#25-1	721
+moc_ruins.gat,64,166,4	duplicate(Twilight Warper)	Twilight Warper#26-1	721
+moc_fild19.gat,106,97,4	duplicate(Twilight Warper)	Twilight Warper#27-1	721
+alb2trea.gat,73,101,4	duplicate(Twilight Warper)	Twilight Warper#28-1	721
+tur_dun01.gat,148,239,4	duplicate(Twilight Warper)	Twilight Warper#29-1	721
+gonryun,162,122,4	duplicate(Twilight Warper)	Twilight Warper#30-1	721
+louyang,221,120,4	duplicate(Twilight Warper)	Twilight Warper#31-1	721
+umbala,95,164,4	duplicate(Twilight Warper)	Twilight Warper#32-1	721
+moscovia,220,198,4	duplicate(Twilight Warper)	Twilight Warper#33-1	721
+veins,217,127,4	duplicate(Twilight Warper)	Twilight Warper#34-1	721
+rachel,133,115,4	duplicate(Twilight Warper)	Twilight Warper#35-1	721
+
+
+
+

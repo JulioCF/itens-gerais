@@ -1,0 +1,87 @@
+//===== eAthena Script =======================================
+//= Build Manager +
+//===== By: ==================================================
+//= Euphy
+//===== Current Version: =====================================
+//= 1.7
+//===== Description: =========================================
+//= Stores stat builds into a single character variable.
+//============================================================
+
+prontera,152,192,6	script	Build Manager	930,{
+function Get_Menu; function Save_Build; function Load_Build;
+
+	set .@BuildCount,4;	// Number of builds to use
+	set .@Save,5000;	// Zeny required to save a build
+	set .@Load,10000;	// Zeny required to load a build
+	set .@Rename,1000;	// Zeny required to rename a build
+	set .@MaxLevel,99;	// Maximum base level (to prevent stat overflow)
+
+	if (BaseLevel < .@MaxLevel) { message strcharinfo(0),"You must be level "+.@MaxLevel+" to use this."; end; }
+	switch(select("Save Build...:Load Build...:Rename Build...:Close")) {
+		case 1:
+			if (.@Save) message strcharinfo(0),"It costs "+.@Save+" Zeny to save a build.";
+			set .@build, Get_Menu(.@BuildCount);
+			if (Zeny<.@Save) { message strcharinfo(0),"Not enough Zeny."; close; }
+			if (getd("Build_"+.@build+"$")!="") {
+				message strcharinfo(0),"Overwrite previous build #"+.@build+"?";
+				if(select("Save new build:Cancel")==2) close; }
+			Save_Build(.@build);
+			message strcharinfo(0),"Type a name for your build.";
+			input getd("Build_"+.@build+"n$");
+			message strcharinfo(0),"Build #"+.@build+" ("+getd("Build_"+.@build+"n$")+") saved.";
+			set Zeny, Zeny-.@Save;
+			close;
+		case 2:
+			if (.@Load) message strcharinfo(0),"It costs "+.@Load+" Zeny to load a build.";
+			set .@build, Get_Menu(.@BuildCount);
+			if (getd("Build_"+.@build+"$")=="") {
+				message strcharinfo(0),"No build info found."; close; }
+			if (Zeny<.@Load) { message strcharinfo(0),"Not enough Zeny."; close; }
+			Load_Build(getd("Build_"+.@build+"$"));
+			message strcharinfo(0),"Build #"+.@build+" loaded.";
+			set Zeny, Zeny-.@Load;
+			close;
+		case 3:
+			if (.@Rename) message strcharinfo(0),"It costs "+.@Rename+" Zeny to rename a build.";
+			set .@build, Get_Menu(.@BuildCount);
+			if (getd("Build_"+.@build+"$")=="") {
+				message strcharinfo(0),"No build info found."; close; }
+			if (Zeny<.@Rename) { message strcharinfo(0),"Not enough Zeny."; close; }
+			message strcharinfo(0),"Type a new name for Build #"+.@build+" ("+getd("Build_"+.@build+"n$")+").";
+			input getd("Build_"+.@build+"n$");
+			message strcharinfo(0),"Build #"+.@build+" renamed.";
+			set Zeny, Zeny-.@Rename;
+			close;
+		case 4:
+			close; }
+	function Get_Menu {
+		set .@menu$,"";
+		for(set .@i,1; .@i<=getarg(0); set .@i,.@i+1)
+			set .@menu$, .@menu$+"Slot "+.@i+" ("+((getd("Build_"+.@i+"n$")=="")?"^777777empty":"^0055FF"+getd("Build_"+.@i+"n$"))+"^000000):";
+		return select(.@menu$); }
+	function Save_Build {
+		setarray .@ar$[0],"a","b","c","d","e","f","g";
+		set .@s$,"";
+		for(set .@i,0; .@i<7; set .@i,.@i+1)
+			set .@s$,.@s$+.@ar$[.@i]+((.@i==6)?StatusPoint:readparam(.@i+13))+"|";
+		setd "Build_"+getarg(0)+"$", .@s$;
+		return; }
+	function Load_Build {
+		setarray .@num$[0],"0","1","2","3","4","5","6","7","8","9";
+		setarray .@ar$[0],"a","b","c","d","e","f","g";
+		ResetStatus;
+		for(set .@j,13; .@j<20; set .@j,.@j+1) {
+			set .@var$,"";
+			set .@s$,.@ar$[.@j-13];
+			while(1) {
+				for(set .@i,0; .@i<10; set .@i,.@i+1) {
+					if (compare(getarg(0),.@s$+.@num$[.@i])) {
+						set .@var$,.@var$+.@num$[.@i];
+						set .@s$,.@s$+.@num$[.@i];
+						break; }
+				} if (compare(getarg(0),.@s$+"|")) break; }
+		if (.@j==19) set StatusPoint, atoi(.@var$);
+		else statusup2 .@j, atoi(.@var$)-1; }
+		return; }
+}

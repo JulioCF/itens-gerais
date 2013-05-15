@@ -1,0 +1,737 @@
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/conf/msg_athena.conf
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/conf/msg_athena.conf	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/conf/msg_athena.conf	(revision 296)
+@@ -686,7 +686,6 @@
+ 875: [IRC System] Invalid Command for server's channels.
+ 876: [IRC System] You can¡t chat that fast on this channel (Flood Protection 1 sec)
+ // Autoloot
+-// Autoloot
+ 877: Autoloot per percentage of drop turned off.
+ 878: Autoloot activated to receive all drops.
+ 879: To learn how to use the autoloot command use @aloot help
+@@ -730,6 +729,10 @@
+ // No Storage mapflag
+ 911: You are not allowed to open storage on this map.
+ 912: You are not allowed to open guild storage on this map.
+-
++// Extended Vending System
++913: You will exchange '%s' for your Items.
++914: This Vending exchange '%s' for Items.
++915: You do not have enough '%s' to process the exchange.
++916: Vendor cannot receive more '%s'. Transaction failed.
+ //Custom translations
+ import: conf/import/msg_conf.txt
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/conf/atcommand_athena.conf
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/conf/atcommand_athena.conf	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/conf/atcommand_athena.conf	(revision 296)
+@@ -905,9 +905,6 @@
+ aceptar: 99,99
+ declinar: 99,99
+ 
+-// Creates a Cash Shop vending. Works like normal vending but uses Cash Points, not zeny.
+-cashshop: 99,99
+-
+ // eAthena deleted away/afk commands.
+ away: 99,99
+ afk: 99,99
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/conf/battle/eAmod.conf
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/conf/battle/eAmod.conf	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/conf/battle/eAmod.conf	(revision 296)
+@@ -34,13 +34,23 @@
+ // ASPD Limits for 3rd classes. Default 193.
+ max_aspd_3rd_re: 193
+ 
++// Rates as runes (Renewal - Rune Knight) are produced. Note 2
++rune_produce_rate: 100
++
++// The Max points can be given to a single stat for Renewal jobs.
++max_third_parameter: 120
++max_baby_third_paramater: 108
++
++// Enables Base mATK. Only works with renewal_system_enable: yes. Note 3
++enable_basematk: 3
++
++// Bonus experience increased per attacker. Only works with renewal_system_enable: yes. Note 2
++exp_bonus_attacker_renewal: 5
++
+ // ****************************************
+ // Battle Settings
+ // ****************************************
+ 
+-// Enables Base mATK. Only works with renewal_system_enable: yes. Note 3
+-enable_basematk: 3
+-
+ // Move-delay adjustment after being hit, Boss type only. (Note 2)
+ // Recommended value is 30. Less than a normal monster and a player but not as Endure effect.
+ damage_walk_delay_rate_boss: 30
+@@ -100,6 +110,20 @@
+ pvpevent_cashperkill: 0
+ 
+ // ****************************************
++// Extended Vending System
++// ****************************************
++
++// Reserved Item ID to represent Zeny. Use 0 to disable the Extended Vending System at all.
++// Sample at item_db2.txt with ID 8968. Requires to add the client side modifications to give it a sprite (idnum2itemresnametable.txt), name (idnum2itemdisplaynametable.txt) and description (idnum2itemdesctable.txt)
++vending_zeny_id: 0
++
++// Reserved Item ID to represent Cash. Use 0 to disable the creation of Cash vendings.
++// Sample at item_db2.txt with ID 8969. Requires to add the client side modifications to give it a sprite (idnum2itemresnametable.txt), name (idnum2itemdisplaynametable.txt) and description (idnum2itemdesctable.txt)
++vending_cash_id: 0
++
++// NOTE: Use the file /db/item_vending.txt to add your customized coins (items).
++
++// ****************************************
+ // Experience Settings
+ // ****************************************
+ 
+@@ -113,9 +137,6 @@
+ base_exp_rate_bonus: 0
+ job_exp_rate_bonus: 0
+ 
+-// Bonus experience increased per attacker. Only works with renewal_system_enable: yes. Note 2
+-exp_bonus_attacker_renewal: 5
+-
+ // ****************************************
+ // Guild Settings
+ // ****************************************
+@@ -126,13 +147,6 @@
+ // Maximum oppsitions guilds a Guild Leader can set for it's guild.
+ max_guild_opposition: 3
+ 
+-// Rates as runes (Renewal - Rune Knight) are produced. Note 2
+-rune_produce_rate: 100
+-
+-// The Max points can be given to a single stat for Renewal jobs.
+-max_third_parameter: 120
+-max_baby_third_paramater: 108
+-
+ // Guild Wars Mode. Note 1
+ // If enabled, guilds in opposition both sides can fight everywhere.
+ guild_wars: no
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/db/item_db2_renewal.txt
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/db/item_db2_renewal.txt	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/db/item_db2_renewal.txt	(revision 296)
+@@ -559,6 +559,10 @@
+ 8966,Red_Skull,Red Skull,3,,10,0,,,,,,,,,,,,,{},{},{}
+ 8967,Green_Skull,Green Skull,3,,10,0,,,,,,,,,,,,,{},{},{}
+ 
++// Extended Vending System
++8968,Zeny,Zeny,3,,10,0,,,,,,,,,,,,,{},{},{}
++8969,Cash,Cash,3,,10,0,,,,,,,,,,,,,{},{},{}
++
+ // Items Custom
+ 8996,Mission_Medal,Mission Medal,3,,10,0,,,,,,,,,,,,,{},{},{}
+ 8997,Trofeo_Emperium_Destroyer,Trofeo Emperium Destroyer,3,,0,1,,,,,,,,,,,,,{},{},{}
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/db/item_vending.txt
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/db/item_vending.txt	(revision 0)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/db/item_vending.txt	(revision 296)
+@@ -0,0 +1,10 @@
++// Extended Vending System Coins
++// =====================================================
++// Add your own coins to the Vending System if your server uses any kind of item to exchange.
++// Requires 0 Weight ETC Items only
++// =====================================================
++// Structure:
++// <ItemID>
++// =====================================================
++// Samples
++// 7773 (to allow open a Vending requesting Valor Badges to exchange items)
+\ No newline at end of file
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/db/item_db2.txt
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/db/item_db2.txt	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/db/item_db2.txt	(revision 296)
+@@ -559,6 +559,10 @@
+ 8966,Red_Skull,Red Skull,3,,10,0,,,,,,,,,,,,,{},{},{}
+ 8967,Green_Skull,Green Skull,3,,10,0,,,,,,,,,,,,,{},{},{}
+ 
++// Extended Vending System
++8968,Zeny,Zeny,3,,10,0,,,,,,,,,,,,,{},{},{}
++8969,Cash,Cash,3,,10,0,,,,,,,,,,,,,{},{},{}
++
+ // Items Custom
+ 8996,Mission_Medal,Mission Medal,3,,10,0,,,,,,,,,,,,,{},{},{}
+ 8997,Trofeo_Emperium_Destroyer,Trofeo Emperium Destroyer,3,,0,1,,,,,,,,,,,,,{},{},{}
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/atcommand.c
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/atcommand.c	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/atcommand.c	(revision 296)
+@@ -11171,41 +11171,6 @@
+ }
+ 
+ /*==========================================
+- * CashShop System
+- *------------------------------------------*/
+-ACMD_FUNC(cashshop)
+-{
+-	int skilllv = pc_checkskill(sd,MC_VENDING);
+-
+-	if ( !pc_can_give_items(pc_isGM(sd)) )
+-		clif_displaymessage(fd, "Your GM level don't allow you to give items.");
+-	else if( skilllv <= 0 )
+-		clif_displaymessage(fd, "You need to learn Vending skill first.");
+-	else if( !pc_iscarton(sd) )
+-		clif_displaymessage(fd, "A Cart is required to open a Cash Shop.");
+-	else if( battle_config.super_woe_enable )
+-		clif_displaymessage(fd, "Vending not available on Super WoE / GvG Events.");
+-	else if( map[sd->bl.m].flag.novending )
+-		clif_displaymessage(fd, "You can't open shop on this map");
+-	else if( map[sd->bl.m].flag.vending_cell != map_getcell(sd->bl.m,sd->bl.x,sd->bl.y,CELL_CHKNOBOARDS) )
+-		clif_displaymessage(fd, "You can't open shop on this cell");
+-	else if( sd->state.secure_items )
+-		clif_displaymessage(fd, "You can't open shop. Blocked with @security");
+-	else if( sd->state.vending )
+-		clif_displaymessage(fd, "Please close your current Shop first.");
+-	else
+-	{
+-		sd->state.cashshop = 1; // [CashShop System]
+-		clif_openvendingreq(sd,skilllv + 2);
+-		clif_displaymessage(fd, "You are opening a Cash Shop. Remember, all Zeny amounts will be converted to Cash Points.");
+-
+-		return 0;
+-	}
+-
+-	return -1;
+-}
+-
+-/*==========================================
+  * Ranking Reset
+  *------------------------------------------*/
+ ACMD_FUNC(rankreset)
+@@ -11931,7 +11896,6 @@
+ 	{ "font",               1,1,    1,     atcommand_font },
+ 	{ "packetfilter",       0,1,    0,     atcommand_packetfilter },
+ 	{ "guildskill",         0,60,   0,     atcommand_guildskill },
+-	{ "cashshop",           0,60,   0,     atcommand_cashshop },
+ 	{ "rankreset",         60,60,   0,     atcommand_rankreset },
+ 	{ "itemdestroy",       99,99,   0,     atcommand_item_remove4all },
+ 	{ "viewmobinfo",       60,60,   0,     atcommand_viewmobinfo },
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/battle.c
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/battle.c	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/battle.c	(revision 296)
+@@ -6308,6 +6308,9 @@
+ 	{ "skill_zeny2item",                    &battle_config.skill_zeny2item,                 0,      0,      INT_MAX,        },
+ 
+ 	{ "myinfo_event_vote_points",           &battle_config.myinfo_event_vote_points,        0,      0,      1,              },
++	{ "vending_cash_id",                    &battle_config.vending_cash_id,                 0,      0,      INT_MAX,        },
++	{ "vending_zeny_id",                    &battle_config.vending_zeny_id,                 0,      0,      INT_MAX,        },
++
+ 	{ "premium_bonusexp",                   &battle_config.premium_bonusexp,                0,      0,      INT_MAX,        },
+ 	{ "premium_dropboost",                  &battle_config.premium_dropboost,               0,      0,      INT_MAX,        },
+ 	{ "premium_discount",                   &battle_config.premium_discount,                0,      0,      100,            },
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/skill.c
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/skill.c	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/skill.c	(revision 296)
+@@ -7074,14 +7074,16 @@
+ 		break;
+ 
+ 	case MC_VENDING:
+-		if(sd)
+-		{	//Prevent vending of GMs with unnecessary Level to trade/drop. [Skotlex]
+-			if ( !pc_can_give_items(pc_isGM(sd)) )
+-				clif_skill_fail(sd,skillid,USESKILL_FAIL_LEVEL,0);
++		if( sd )
++		{
++			if( battle_config.vending_zeny_id )
++				clif_vend(sd,skilllv); // Extended Vending System
+ 			else
+ 			{
+-				sd->state.cashshop = 0; // [CashShop System]
+-				clif_openvendingreq(sd,2+skilllv);
++				if ( !pc_can_give_items(pc_isGM(sd)) )
++					clif_skill_fail(sd,skillid,USESKILL_FAIL_LEVEL,0);
++				else
++					clif_openvendingreq(sd,2+skilllv);
+ 			}
+ 		}
+ 		break;
+@@ -18117,6 +18119,35 @@
+ 	return type;
+ }
+ 
++//
++// Extended Vending System
++//
++int skill_vending(struct map_session_data *sd, int nameid)
++{
++	struct item_data *item;
++	char output[256];
++	nullpo_ret(sd);
++
++	if ( !pc_can_give_items(sd) )
++	{
++		clif_skill_fail(sd,MC_VENDING,USESKILL_FAIL_LEVEL,0);
++		return 0;
++	}
++
++	if( (item = itemdb_exists(nameid)) == NULL )
++	{
++		clif_skill_fail(sd,MC_VENDING,USESKILL_FAIL_LEVEL,0);
++		return 0;
++	}
++
++	sd->vend_coin = nameid;
++	clif_openvendingreq(sd,sd->menuskill_val+2);
++	sprintf(output,msg_txt(913),item->jname);
++	clif_displaymessage(sd->fd,output);
++
++	return 0;
++}
++
+ /*==========================================
+  * DB reading.
+  * skill_db.txt
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/battle.h
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/battle.h	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/battle.h	(revision 296)
+@@ -589,6 +589,8 @@
+ 	int skill_zeny2item;
+ 
+ 	int myinfo_event_vote_points;
++	int vending_cash_id;
++	int vending_zeny_id;
+ 
+ 	int premium_bonusexp;
+ 	int premium_dropboost;
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/skill.h
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/skill.h	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/skill.h	(revision 296)
+@@ -376,6 +376,7 @@
+ 
+ int skill_blockpc_clear(struct map_session_data *sd);
+ int skill_blockpc_end(int tid, unsigned int tick, int id, intptr_t data);
++int skill_vending(struct map_session_data *sd, int nameid); // Extended Vending System
+ 
+ int skill_chastle_mob_changetarget(struct block_list *bl,va_list ap);
+ 
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/vending.c
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/vending.c	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/vending.c	(revision 296)
+@@ -38,12 +38,8 @@
+ 
+ 	if( sd->state.vending )
+ 	{
+-		if( sd->state.cashshop )
+-		{
+-			status_change_end(&sd->bl,SC_CASHSHOP,-1);
+-			sd->state.cashshop = 0;
+-		}
+ 		sd->state.vending = false;
++		sd->vend_coin = battle_config.vending_zeny_id;
+ 		clif_closevendingboard(&sd->bl, 0);
+ 
+ 		if( map[sd->bl.m].flag.vending_cell ) // Cell becomes available again.
+@@ -76,6 +72,12 @@
+ 	} 
+ 
+ 	sd->vended_id = vsd->vender_id;  // register vending uid
++	if( battle_config.vending_zeny_id && vsd->vend_coin )
++	{ // Extended Vending System
++		char output[256];
++		sprintf(output,msg_txt(914),itemdb_jname(vsd->vend_coin));
++		clif_displaymessage(sd->fd,output);
++	}
+ 
+ 	clif_vendinglist(sd, id, vsd->vending);
+ }
+@@ -89,6 +91,7 @@
+ 	double z;
+ 	struct s_vending vending[MAX_VENDING]; // against duplicate packets
+ 	struct map_session_data* vsd = map_id2sd(aid);
++	char output[256];
+ 
+ 	nullpo_retv(sd);
+ 	if( vsd == NULL || !vsd->state.vending || vsd->bl.id == sd->bl.id )
+@@ -136,17 +139,35 @@
+ 			vend_list[i] = j;
+ 
+ 		z += ((double)vsd->vending[j].value * (double)amount);
+-		if( z > (double)( vsd->state.cashshop ? sd->cashPoints : sd->status.zeny ) || z < 0. || z > (double)MAX_ZENY )
+-		{
+-			clif_buyvending(sd, idx, amount, 1); // you don't have enough zeny
+-			return;
++		if( !vsd->vend_coin || vsd->vend_coin == battle_config.vending_zeny_id )
++		{ // Normal Vending - Zeny Option
++			if( z > (double)sd->status.zeny || z < 0. || z > (double)MAX_ZENY )
++			{
++				clif_buyvending(sd, idx, amount, 1); // you don't have enough zeny
++				return;
++			}
++			if( z + (double)vsd->status.zeny > (double)MAX_ZENY && !battle_config.vending_over_max )
++			{
++				clif_buyvending(sd, idx, vsd->vending[j].amount, 4); // too much zeny = overflow
++				return;
++			}
+ 		}
+-		if( z + (double)( vsd->state.cashshop ? vsd->cashPoints : vsd->status.zeny ) > (double)MAX_ZENY && !battle_config.vending_over_max )
+-		{
+-			clif_buyvending(sd, idx, vsd->vending[j].amount, 4); // too much zeny = overflow
+-			return;
++		else if( battle_config.vending_cash_id && vsd->vend_coin == battle_config.vending_cash_id )
++		{ // Cash Shop
++			if( z > (double)sd->cashPoints || z < 0. || z > (double)MAX_ZENY )
++			{
++				sprintf(output,msg_txt(915),itemdb_jname(vsd->vend_coin));
++				clif_displaymessage(sd->fd,output);
++				return;
++			}
++			if( z + (double)vsd->cashPoints > (double)MAX_ZENY && !battle_config.vending_over_max )
++			{
++				sprintf(output,msg_txt(916),itemdb_jname(vsd->vend_coin));
++				clif_displaymessage(sd->fd,output);
++				return;
++			}
++		}
+ 
+-		}
+ 		w += itemdb_weight(vsd->status.cart[idx].nameid) * amount;
+ 		if( w + sd->weight > sd->max_weight )
+ 		{
+@@ -182,13 +203,9 @@
+ 		}
+ 	}
+ 
+-	if( vsd->state.cashshop )
++	// Payments
++	if( !vsd->vend_coin || vsd->vend_coin == battle_config.vending_zeny_id )
+ 	{
+-		pc_paycash(sd, (int)z, 0);
+-		pc_getcash(vsd, (int)z, 0);
+-	}
+-	else
+-	{
+ 		log_zeny(vsd, LOG_TYPE_VENDING, sd, (int)z); //Logs (V)ending Zeny [Lupus]
+ 		pc_payzeny(sd, (int)z);
+ 		achievement_validate_zeny(sd,ATZ_USE_VENDING,(int)z);
+@@ -199,7 +216,38 @@
+ 		pc_getzeny(vsd, (int)z);
+ 		achievement_validate_zeny(vsd,ATZ_GET_VENDING,(int)z);
+ 	}
++	else if( battle_config.vending_cash_id && vsd->vend_coin == battle_config.vending_cash_id )
++	{
++		pc_paycash(sd,(int)z,0);
++		pc_getcash(vsd,(int)z,0);
++	}
++	else
++	{
++		if( z < 0. || (i = pc_search_inventory(sd,vsd->vend_coin)) < 0 || z > (double)sd->status.inventory[i].amount )
++		{
++			sprintf(output,msg_txt(915),itemdb_jname(vsd->vend_coin));
++			clif_displaymessage(sd->fd,output);
++			return;
++		}
+ 
++		switch( pc_checkadditem(vsd,vsd->vend_coin,(int)z) )
++		{
++		case ADDITEM_NEW:
++			if( pc_inventoryblank(vsd) > 0 )
++				break;
++		case ADDITEM_OVERAMOUNT:
++			sprintf(output,msg_txt(916),itemdb_jname(vsd->vend_coin));
++			clif_displaymessage(sd->fd,output);
++			return;
++		}
++
++		log_pick(&vsd->bl, LOG_TYPE_VENDING, vsd->vend_coin, (int)z, &sd->status.inventory[i], &sd->status.inventory[i].serial );
++		log_pick( &sd->bl, LOG_TYPE_VENDING, vsd->vend_coin, -(int)z, &sd->status.inventory[i], &sd->status.inventory[i].serial );
++
++		pc_additem(vsd,&sd->status.inventory[i],(int)z);
++		pc_delitem(sd,i,(int)z,0,6);
++	}
++
+ 	for( i = 0; i < count; i++ )
+ 	{
+ 		short amount = *(uint16*)(data + 4*i + 0);
+@@ -338,13 +386,7 @@
+ 
+ 	pc_stop_walking(sd,1);
+ 	clif_openvending(sd,sd->bl.id,sd->vending);
+-	if( sd->state.cashshop )
+-	{
+-		sc_start(&sd->bl,SC_CASHSHOP,100,0,1000);
+-		clif_showvendingboard(&sd->bl,"$$ CASH SHOP $$",0);
+-	}
+-	else
+-		clif_showvendingboard(&sd->bl,message,0);
++	clif_showvendingboard(&sd->bl,message,0);
+ 
+ 	if( battle_config.channel_announces&16 && server_channel[CHN_VENDING] )
+ 	{
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/clif.c
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/clif.c	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/clif.c	(revision 296)
+@@ -4502,12 +4502,7 @@
+ 	}
+ 
+ 	if( dstsd->state.vending )
+-	{
+-		if( !dstsd->state.cashshop )
+-			clif_showvendingboard(&dstsd->bl,dstsd->message,sd->fd);
+-		else
+-			clif_showvendingboard(&dstsd->bl,"$$ CASH SHOP $$",sd->fd);
+-	}
++		clif_showvendingboard(&dstsd->bl,dstsd->message,sd->fd);
+ 
+ 	if( dstsd->state.buyingstore )
+ 		clif_buyingstore_entry_single(sd, dstsd);
+@@ -6791,8 +6786,6 @@
+ 		clif_addcards(WFIFOP(fd,offset+14+i*22), &vsd->status.cart[index]);
+ 	}
+ 	WFIFOSET(fd,WFIFOW(fd,2));
+-	if( vsd->state.cashshop )
+-		clif_displaymessage(fd,"You are visiting a Cash Shop. All Zeny values will be converted to Cash Points.");
+ }
+ 
+ 
+@@ -12291,6 +12284,7 @@
+ 	case WL_READING_SB:
+ 	case GC_POISONINGWEAPON:
+ 	case NC_MAGICDECOY:
++	case MC_VENDING: // Extended Vending System
+ 		break;
+ 	default:
+ 		return;
+@@ -12308,6 +12302,9 @@
+ 	case AC_MAKINGARROW:
+ 		skill_arrow_create(sd,RFIFOW(fd,2));
+ 		break;
++	case MC_VENDING: // Extended Vending System
++		skill_vending(sd,RFIFOW(fd,2));
++		break;
+ 	case WL_READING_SB:
+ 		skill_spellbook(sd,RFIFOW(fd,2));
+ 		break;
+@@ -13023,6 +13020,7 @@
+ 	const char* message = (char*)RFIFOP(fd,4);
+ 	bool flag = (bool)RFIFOB(fd,84);
+ 	const uint8* data = (uint8*)RFIFOP(fd,85);
++	char out_msg[MESSAGE_SIZE];
+ 
+ 	if( sd->sc.data[SC_NOCHAT] && sd->sc.data[SC_NOCHAT]->val1&MANNER_NOROOM )
+ 		return;
+@@ -13047,16 +13045,52 @@
+ 	if( message[0] == '\0' ) // invalid input
+ 		return;
+ 
+-	if( !stricmp(message,"$$ CASH SHOP $$") && !sd->state.cashshop )
++	if( battle_config.vending_zeny_id ) // Extended Vending System
++		snprintf(out_msg,MESSAGE_SIZE,"[%s] %s",itemdb_jname(sd->vend_coin),message);
++	else
++		safestrncpy(out_msg,message,MESSAGE_SIZE);
++
++	vending_openvending(sd, out_msg, flag, data, len/8);
++}
++
++int clif_vend(struct map_session_data *sd, int skill_lv)
++{
++	int c, i;
++	int fd;
++
++	nullpo_ret(sd);
++	fd = sd->fd;
++	c = 0;
++
++	WFIFOHEAD(fd,MAX_COIN_DB*2+4);
++	WFIFOW(fd,0) = 0x1ad;
++
++	// Zeny Reserved ItemID
++	WFIFOW(fd,c*2+4) = battle_config.vending_zeny_id;
++	c++;
++
++	if( battle_config.vending_cash_id )
+ 	{
+-		clif_displaymessage(sd->fd, "The shop name '$$ CASH SHOP $$' is reserved for cash shop only.");
+-		return;
++		WFIFOW(fd,c*2+4) = battle_config.vending_cash_id;
++		c++;
+ 	}
+ 
+-	vending_openvending(sd, message, flag, data, len/8);
++	i = 0;
++	while( i < MAX_COIN_DB && coins_db[i] > 0 )
++	{
++		WFIFOW(fd,c*2+4) = coins_db[i];
++		c++;
++		i++;
++	}
++
++	sd->menuskill_id = MC_VENDING;
++	sd->menuskill_val = skill_lv;
++	WFIFOW(fd,2) = c*2+4;
++	WFIFOSET(fd,WFIFOW(fd,2));
++
++	return 1;
+ }
+ 
+-
+ /// Guild creation request (CZ_REQ_MAKE_GUILD).
+ /// 0165 <char id>.L <guild name>.24B
+ void clif_parse_CreateGuild(int fd,struct map_session_data *sd)
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/clif.h
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/clif.h	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/clif.h	(revision 296)
+@@ -783,4 +783,7 @@
+ void clif_faction_area(struct map_session_data *sd);
+ void clif_faction_single(int fd, struct map_session_data *sd);
+ 
++// Extended Vending
++int clif_vend(struct map_session_data *sd, int skill_lv);
++
+ #endif /* _CLIF_H_ */
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/itemdb.c
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/itemdb.c	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/itemdb.c	(revision 296)
+@@ -24,6 +24,7 @@
+ static DBMap*            itemdb_other;// int nameid -> struct item_data*
+ 
+ static struct item_group itemgroup_db[MAX_ITEMGROUP];
++int coins_db[MAX_COIN_DB]; // Extended Vending System
+ 
+ struct item_data dummy_item; //This is the default dummy item used for non-existant items. [Skotlex]
+ 
+@@ -1223,6 +1224,36 @@
+ 	return 0;
+ }
+ 
++// Extended Vending System
++static bool itemdb_read_vending(char* fields[], int columns, int current)
++{
++	struct item_data* id;
++	int nameid;
++
++	nameid = atoi(fields[0]);
++
++	if( ( id = itemdb_exists(nameid) ) == NULL )
++	{
++		ShowWarning("itemdb_read_vending: Invalid item id %d.\n", nameid);
++		return false;
++	}
++
++	if( !itemdb_isstackable2(id) )
++	{
++		ShowWarning("itemdb_read_vending: Cannot use a non stackable item. ID %d.\n", nameid);
++		return false;
++	}
++
++	if( id->weight > 0 )
++	{
++		ShowWarning("itemdb_read_vending: Coins only can have 0 weight. Cannot use ID %d.\n", nameid);
++		return false;
++	}
++
++	coins_db[current] = nameid;
++	return true;
++}
++
+ /*====================================
+  * read all item-related databases
+  *------------------------------------*/
+@@ -1244,6 +1275,11 @@
+ 	sv_readdb(db_path, "item_trade.txt",   ',', 3, 3, -1,             &itemdb_read_itemtrade);
+ 	sv_readdb(db_path, "item_delay.txt",   ',', 2, 2, MAX_ITEMDELAYS, &itemdb_read_itemdelay);
+ 	sv_readdb(db_path, "item_buyingstore.txt", ',', 1, 1, -1,         &itemdb_read_buyingstore);
++
++	// Extended Vending System
++	memset(coins_db, 0, sizeof(coins_db));
++	sv_readdb(db_path, "item_vending.txt", ',', 1, 1, MAX_COIN_DB,    &itemdb_read_vending);
++
+ 	itemdb_load_serials();
+ }
+ 
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/itemdb.h
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/itemdb.h	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/itemdb.h	(revision 296)
+@@ -7,6 +7,7 @@
+ #include "../common/mmo.h" // ITEM_NAME_LENGTH
+ 
+ #define MAX_RANDITEM	11000
++#define MAX_COIN_DB		10
+ 
+ // The maximum number of item delays
+ #define MAX_ITEMDELAYS	10
+@@ -178,6 +179,7 @@
+ void itemdb_reload(void);
+ void itemdb_save_serials(void);
+ unsigned int itemdb_getserial(struct item_data *id);
++extern int coins_db[MAX_COIN_DB];
+ 
+ void do_final_itemdb(void);
+ int do_init_itemdb(void);
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/status.c
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/status.c	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/status.c	(revision 296)
+@@ -9774,14 +9774,6 @@
+ 		}
+ 		break;
+ 
+-	case SC_CASHSHOP:
+-		if( sd && sd->state.vending && sd->state.cashshop )
+-		{
+-			clif_emotion(bl,8); // Cash
+-			sc_timer_next(3000 + tick,status_change_timer,bl->id,data);
+-		}
+-		break;
+-
+ 	case SC_BLIND:
+ 		if(sc->data[SC_FOGWALL]) 
+ 		{	//Blind lasts forever while you are standing on the fog.
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/status.h
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/status.h	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/status.h	(revision 296)
+@@ -334,7 +334,6 @@
+ 
+ 	// eAmod Custom Stats
+ 	SC_SPREGEN = 340,
+-	SC_CASHSHOP,
+ 	SC_AUTOREFRESH,
+ 	SC_ALL_RIDING,
+ 	SC_RAID,
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/pc.c
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/pc.c	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/pc.c	(revision 296)
+@@ -1572,6 +1572,7 @@
+ 	if(!sd->status.hp) pc_setdead(sd);
+ 	sd->state.connect_new = 1;
+ 	sd->state.size = global_size;
++	sd->vend_coin = battle_config.vending_zeny_id;
+ 
+ 	sd->followtimer = INVALID_TIMER; // [MouseJstr]
+ 	sd->invincible_timer = INVALID_TIMER;
+Index: C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/pc.h
+===================================================================
+--- C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/pc.h	(revision 295)
++++ C:/Users/Usuario/Desktop/eAmod-B/Trunk/src/map/pc.h	(revision 296)
+@@ -157,7 +157,6 @@
+ 		unsigned int improv_flag : 1;
+ 		unsigned int no_gemstone : 1; // If a skill have a partner near, it don't consume gemstone but SP from all (ADORAMUS, COMET)
+ 		unsigned int fearbreeze : 4; // Arrows used on SC_FEARBREEZE
+-		unsigned int cashshop : 1; // [CashShop System]
+ 		unsigned int view_mob_info : 1;
+ 		unsigned int evade_antiwpefilter : 1; // Required sometimes to show the user previous to use the skill
+ 		unsigned int bg_afk : 1; // Moved here to reduce searchs
+@@ -399,6 +398,7 @@
+ 	int vend_num;
+ 	char message[MESSAGE_SIZE];
+ 	struct s_vending vending[MAX_VENDING];
++	int vend_coin;
+ 
+ 	unsigned int buyer_id;  // uid of open buying store
+ 	struct s_buyingstore buyingstore;

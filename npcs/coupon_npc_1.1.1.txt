@@ -1,0 +1,123 @@
+//--- Coupon NPC 1.1.1 -------------------------------------------//
+//----------------------------------------------------------------//
+//    ttt              000000000
+//    ttt              000   000
+// ttttttttt rrrrrrrrr 000   000 nnnnnnnnn
+//    ttt    rrr       000   000 nnn   nnn
+//    ttt    rrr       000   000 nnn   nnn
+//    ttt    rrr       000   000 nnn   nnn
+//    ttttt  rrr       000000000 nnn   nnn
+//----------------------------------------------------------------//
+//--- Changelogs: ------------------------------------------------//
+// 1.0.0 Release
+// 1.1.0 Added code type feature (normal|md5-hash)
+// 1.1.0 Added prevention for typing 0 into Item ID or Amount
+// 1.1.0 Added a feature for gms to see available coupons
+// 1.1.0 Minor bug fixes
+// 1.1.1 Fixed a bug that caused duplicating items
+//----------------------------------------------------------------//
+//--- Main Script ------------------------------------------------//
+prontera,146,173,5	script	Coupon Jack	807,{
+	
+	//Set code type (0 = normal | 1 = MD5-Hash)
+	set .code_type, 0;
+	
+	//Set code length
+	set .code_length, 16;
+	
+	//Set Min. GM Level to add new coupons
+	set .code_gmlvl, 99;
+	
+	setarray .coupon_code$[0],"a","b","c","d","e","f","g","h","i","j","k","l",
+							  "m","n","o","p","q","r","s","t","u","v","w","x",
+							  "y","z","0","1","2","3","4","5","6","7","8","9";
+
+	if(getgmlevel() >= .code_gmlvl)
+	{
+		mes "[^FF7700Coupon Jack^000000]";
+		mes "Welcome " + strcharinfo(0) + ".";
+		next;
+		switch(select("Add Coupon:Show Coupons:Exit"))
+		{
+			case 1:
+				mes "[^FF7700Coupon Jack^000000]";
+				mes "Enter Item ID:";
+				input @coupon_item;
+				next;
+				if(@coupon_item <= 0) goto L_error;
+				mes "[^FF7700Coupon Jack^000000]";
+				mes "Enter Item Amount:";
+				input @coupon_amount;
+				next;
+				if(@coupon_amount <= 0) goto L_error;
+				for(set @i, 0; @i < .code_length; set @i, @i+1)
+				{
+					set @random_char, rand(0,(getarraysize(.coupon_code$)-1));
+					set @new_coupon$, @new_coupon$ + .coupon_code$[@random_char];
+				}
+				if(.code_type==1) { set @new_coupon$, md5(@new_coupon$); }
+				mes "[^FF7700Coupon Jack^000000]";
+				mes "Coupon added.";
+				query_sql "INSERT INTO `coupons` (`code`, `item_id`, `item_amount`) VALUES ('"+@new_coupon$+"', "+@coupon_item+", "+@coupon_amount+")";
+				set @new_coupon$, "";
+				close;
+				
+			case 2:
+				mes "[^FF7700Coupon Jack^000000]";
+				mes "--------------------------------";
+				query_sql "SELECT `code`, `item_id`, `item_amount` FROM `coupons`", .@available_code$, .@available_item, .@available_amount;
+				for(set @i, 0; @i < getarraysize(.@available_code$); set @i, @i+1)
+				{
+					mes "Item: " + getitemname(.@available_item[@i]);
+					mes "Amount: " + .@available_amount[@i];
+					mes "Code: " + .@available_code$[@i];
+					mes "--------------------------------";
+				}
+				close;
+				
+			case 3:
+				mes "[^FF7700Coupon Jack^000000]";
+				mes "Have a nice day.";
+				close;
+		}
+	}
+	mes "[^FF7700Coupon Jack^000000]";
+	mes "Welcome to the Coupon Codes System. How can I help you?";
+	next;
+	switch(Select("Submit Coupon:Exit"))
+	{
+		case 1:
+			mes "[^FF7700Coupon Jack^000000]";
+			mes "Please enter your Coupon Code:";
+			input @my_code$;
+			next;
+			query_sql "SELECT `code`, `item_id`, `item_amount` FROM `coupons`", .@available_code$, .@available_item, .@available_amount;
+			for (set @i, 0; @i < getarraysize(.@available_code$); set @i, @i+1)
+			{
+				if(@my_code$==.@available_code$[@i])
+				{
+					mes "[^FF7700Coupon Jack^000000]";
+					mes "You get ^0000FF" + getitemname(.@available_item[@i]) + " - " + .@available_amount[@i] + " ea.^000000";
+					query_sql "DELETE FROM `coupons` WHERE `code`='"+@my_code$+"'";
+					getitem .@available_item[@i],.@available_amount[@i];
+					close;
+				}
+			}
+			mes "[^FF7700Coupon Jack^000000]";
+			mes "This Coupon Code doesn't exist.";
+			close;
+		
+		case 2:
+			mes "[^FF7700Coupon Jack^000000]";
+			mes "Have a nice day.";
+			close;
+	}
+	
+L_error:
+	mes "[^FF7700Coupon Jack^000000]";
+	mes "Invalid Number";
+	close;
+	
+OnInit:
+	query_sql "CREATE TABLE IF NOT EXISTS `coupons` (`code` TINYTEXT NOT NULL, `item_id` INT NOT NULL, `item_amount` INT NOT NULL, INDEX `code` (`code`(32)) ) ENGINE=MyISAM";
+}

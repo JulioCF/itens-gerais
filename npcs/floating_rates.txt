@@ -1,0 +1,51 @@
+//===== rAthena Script =======================================
+//= Floating Server Rates
+//===== By: ==================================================
+//= Lupus
+//===== Current Version: =====================================
+//= 2.0
+//===== Compatible With: =====================================
+//= Todos emuladores até o momento(11/05/2012)
+//===== Description: =========================================
+//= It's a simply example of setbattleflag
+//= This script will change your server rates from 1x to 1.5x every 6 hours
+//= Note: It doesn't affect Card granted drops, MVP & Treasure Chests drops ^_-
+//=       It also doesn't affect CARD drops, because they are just 0.01%
+//===== Descrição em PT-BR ===================================
+//= Sistema simples de mudança de rates
+//= Configure de acordo as rates oficiais de seu servidor, defalt 100 = 1x, duração de 6 horas
+//= Nora: O sistema não muda as chances de drops raros e não muda o drops de itens provenientes de cartas
+//===== Additional Comments: =================================
+//= You can make incredible scripts with 'setbattleflag'!
+//= Traduzido e comentado por JulioCF
+//============================================================
+
+-	script	FloatingRates	-1,{
+
+//Adicione aqui os horários de inicio e termino, duração defalt, 6horas
+
+OnHour00:	//inicio
+OnHour06:	//termino
+OnHour12:	//inicio
+OnHour18:	//termino
+
+//-------------------
+	set $@brate,rand(100,150);	// Rates defalt; 100 = 1x, 150 = 1.5x configure de acordo as rates oficiais de seu servidor
+	set $@jrate,rand(100,150);
+	set $@drate,rand(100,150);
+	//Base exp
+	setbattleflag("base_exp_rate",$@brate);
+	//Job exp
+	setbattleflag("job_exp_rate",$@jrate);
+	//Drops
+	setbattleflag("item_rate_common",$@drate);
+	setbattleflag("item_rate_heal",$@drate);
+	setbattleflag("item_rate_use",$@drate);
+	setbattleflag("item_rate_equip",$@drate);
+	//Configurações atuais não mudam chances de drops raros
+	atcommand "@reloadmobdb";
+	
+	announce "[Sitema]Rates flutuantes ativadas, rates atuais: 1."+($@brate-100)+"x 1."+($@jrate-100)+"x 1."+($@drate-100)+"x",bc_all,0xFF6060;
+	announce "Digite @rates e confira as rates atuais, duração de seis horas após iniciado",bc_all,0xFF6060;
+	end;
+}

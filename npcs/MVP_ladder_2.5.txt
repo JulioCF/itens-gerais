@@ -1,0 +1,483 @@
+//	....... if your server has { Overwriting user function [int__] } don't blame me ..........
+function	script	int__	{
+	set .@num, atoi(getarg(0));
+	if ( .@num == 0 || .@num >= 2147483647 ) return getarg(0);
+	set .@l, getstrlen(.@num);
+	for ( set .@i,0; .@i < .@l; set .@i, .@i + 1 ) {
+		set .@num$, .@num % pow(10,.@i+1) / pow(10,.@i) + .@num$;
+		if ( (.@i+1) % 3 == 0 && .@i+1 != .@l ) set .@num$, ","+ .@num$;
+	}
+	return .@num$;
+}
+
+//===== eAthena Script ======================================
+//= MvP Ladder Game Script
+//===== By: ===============================================
+//= by aftermath (1.0)
+//= by ~AnnieRuru~ (2.0)
+//===== Current Version: ======================================
+//= 2.5
+//===== Compatible With: ===================================== 
+//= eAthena 13405 Trunk
+//===== Description: ========================================= 
+//= This script warps you to an arena where you have to kill all MvP bosses in
+//= accending or more like from weakest to strongest. 
+//===== Topic =================================================
+//= http://www.eathena.ws/board/index.php?showtopic=178049
+//===== Additional Comments: ================================== 
+//= 1.0 & 1.1 by aftermath
+//= 2.0 ~by AnnieRuru~ rewrite everything with new MVPs
+//= 2.1
+//= ---- now announce rounds
+//= ---- fix the misleading .totalround variable
+//= ---- just noticed the original script enabled noteleport mapflag, so I uncommented it
+//= ---- optimize the script a bit
+//= ---- the map name is store in a variable now, easier to change the map location
+//= ---- fix a bug if 2nd player manage to come in the map to ks the 1st player, (eg : guild recall skill for example ) the game will still continue on and zeny still reward to the mvp killer
+//= ---- fix a bug if the player manage to kill all mvps and didn't turn on @autoloot, he will not collect the loot from final mvp
+//= ---- eliminate the error show on map-server if the player disconnect while loading the mvp ladder map
+//= 2.2
+//= ---- add item reward on complete each round and final round ( idea thx to Qasther )
+//= ---- added noloot mapflag, commented because some of you like it
+//= ---- added config delay time
+//= ---- added config on displaying announcements
+//= 2.2a
+//= ---- TODO is done. now whoever wants to change npc location just have to change the npc header. script handle the rest
+//= 2.3
+//= ---- move the config to the top of the file, easier to config I think
+//= ---- zeny reward no longer use for-loop, because I noticed nobody know how to configure zeny reward properly
+//= ---- eliminate all global variables ... into npc variables. I prefer npc variables
+//= ---- added entrance fee configuration, can choose between item cost or zeny cost
+//= ---- added waiting room feature to show the count down timer since the player went in
+//= ---- added time attack feature to prevent player @at'ing inside the map because 1st round is a passive monster
+//= ---- added best record to encourage your players beat the best score
+//= ---- added 2 more checks to prevent 2 players inside the map, except GMs - loadevent with 20 seconds delay
+//= ---- oh and, move the map from guild_vs2 to guild_vs2-1
+//= 2.3a
+//= ---- added GM level configuration to reset the best record
+//= ---- change the misleading "time left" announcement
+//= ---- added prize reward if beaten the best record
+//= ---- fix a typo that nobody can beat the best record ...
+//= 2.4
+//= ---- added deny usage ( suggested by llama123 )
+//= ---- added GM can reset other players deny usage
+//= ---- change a bit the way it announce minutes and seconds
+//= ---- FIX a CRITICAL TYPO the script doesn't deduct zeny after register ( wah nobody report this )
+//= 2.4a
+//= ---- added an announcement when the player failed to finish the ladder
+//= ---- gm menu don't have a reset deny option if in the config doesn't has a value set
+//= 2.5
+//= ---- int__ function into main script
+//= ---- GM not suppose to beat player's best record ...
+//= ---- rewrite waitingroom system
+//= ---- fix a minor bug if the player already warp out within 10 seconds, now no longer warp again
+//= ---- added a feature if the player completed within a set amount of time, a bonus item is given
+//= ---- player will receive a message if the deny usage is reset by a GM
+//= ---- if account deny usage is equal or more than player's deny usage, player deny usage is deleted to save space
+//========================================================
+
+// Configure Mapflags ------------------------
+//guild_vs2-1	mapflag	nobranch
+guild_vs2-1	mapflag	nomemo
+//guild_vs2-1	mapflag	nopenalty	// disable exp loss
+//guild_vs2-1	mapflag	noreturn
+guild_vs2-1	mapflag	nosave	SavePoint
+guild_vs2-1	mapflag	noteleport
+guild_vs2-1	mapflag	nowarp
+guild_vs2-1	mapflag	nowarpto
+//guild_vs2-1	mapflag	nomobloot	// disable monster drop loots,
+//guild_vs2-1 	mapflag	nomvploot	// 2 of these
+guild_vs2-1	mapflag	loadevent
+
+guild_vs2-1,0,0,0	script	ev_Mvp	-1,{
+OnInit:
+//	Configurations -----------------------------------------------------
+
+//	set entrance fee. Note: Only choose zeny OR item. If item amount if specify, the script will use item
+	set .entryitemid, 674; // 674 - mithril coin
+	set .entryitemamount, 0; // by default is using zeny
+	set .entryzeny, 100000;
+
+//	id of each mvp. you can add more
+	setarray .mvpid[1],
+		1086,//	Golden Thief Bug	64
+		1115,//	Eddga				65
+		1150,//	Moonlight Flower	67
+		1159,//	Phreeoni			69
+		1112,//	Drake				70
+		1583,//	Tao Gunka			70
+		1492,//	Incantation Samurai	71
+		1046,//	Doppelgangger		72
+		1252,//	Garm				73
+		1418,//	Evil Snake Lord		73
+		1059,//	Mistress			74
+		1190,//	Orc Lord			74
+		1087,//	Orc Hero			77
+		1251,//	Knight of Windstorm	77
+		1038,//	Osiris				78
+		1658,//	Ygnizem				79
+		1272,//	Dark Lord			80
+		1871,//	Fallen Bishop		80
+		1039,//	Baphomet			81
+		1147,//	Maya				81
+		1785,//	Atroce				82
+		1389,//	Dracula				85
+		1630,//	Bacsojin			85
+		1885,//	Gorynych			85
+		1623,//	RSX 0806			86
+		1511,//	Amon Ra				88
+		1688,//	Lady Tanee			89
+		1768,//	Gloom Under Night	89
+		1719,//	Datale				90
+		1734,//	Kiel D-01			90
+		1157,//	Pharaoh				93
+		1373,//	Lord of Death		94
+		1312,//	Turtle General		97
+		1779,//	Ktullanux			98
+		1874,//	Beelzebub			98
+		rand(1646,1651),//	Lord Knight Seyren 99 || Assassin Cross Eremes 99 || Whitesmith Harword 99 || High Priest Magaleta 99 || Sniper Shecil 99 || High Wizard Katrinn 99
+		1708,//	Thanatos			99
+		1751,//	Valkyrie Randgris	99
+		1832;//	Ifrit				99
+
+//	total rounds - Default has 39 rounds
+	set .totalround, getarraysize(.mvpid) -1;
+
+//	set the zeny reward
+	set .reward[1], 10000;
+	set .reward[2], 20000;
+	set .reward[3], 30000;
+	set .reward[4], 40000;
+	set .reward[5], 50000;
+	set .reward[6], 60000;
+	set .reward[7], 70000;
+	set .reward[8], 80000;
+	set .reward[9], 90000;
+	set .reward[10], 100000;
+	set .reward[11], 110000;
+	set .reward[12], 120000;
+	set .reward[13], 130000;
+	set .reward[14], 140000;
+	set .reward[15], 150000;
+	set .reward[16], 160000;
+	set .reward[17], 170000;
+	set .reward[18], 180000;
+	set .reward[19], 190000;
+	set .reward[20], 200000;
+	set .reward[21], 210000;
+	set .reward[22], 220000;
+	set .reward[23], 230000;
+	set .reward[24], 240000;
+	set .reward[25], 250000;
+	set .reward[26], 260000;
+	set .reward[27], 270000;
+	set .reward[28], 280000;
+	set .reward[29], 290000;
+	set .reward[30], 300000;
+	set .reward[31], 310000;
+	set .reward[32], 320000;
+	set .reward[33], 330000;
+	set .reward[34], 340000;
+	set .reward[35], 350000;
+	set .reward[36], 360000;
+	set .reward[37], 370000;
+	set .reward[38], 380000;
+	set .reward[39], 390000;
+
+//	Time attack. The player has to beat all MVPs within # minutes. When the time is up, will warp to respawn point. Do Not set this as 0
+	set .timeout, 60;
+
+//	set item reward on completing each round. STACK with zeny reward
+	set .itemid, 608; // 608 - Yggdrasil Seed
+	set .itemamount, 0;
+
+//	item reward on completion whole ladder
+	set .lastitemid, 607; // 607 - Yggdrasil Berry
+	set .lastitemamount, 10;
+
+//	item reward when beaten the best record
+	set .topitemid, 607;
+	set .topitemamount, 10;
+	set .gmnotop, 20; // GM not suppose to beat player's record ...
+
+//	If the player completed the ladder within this amount of time in minutes, they will get extra items for trying their best
+	set .hightime, 45; // if complete within 45 minutes, the reward is given
+	set .highitemid, 607;
+	set .highitemamount, 10;
+
+//	time delay for next round, in seconds. Default is 3
+	set .delay, 5;
+
+//	set respawn point after finished the mvp ladder game
+	set .respawnmap$, "SavePoint";
+	set .respawnx, 0;
+	set .respawny, 0;
+
+//	set this to disallow player use the room for # MINUTES after registering, prevent same player go in again and again
+	set .usagedeny_player, 3; // deny that character each time register
+	set .usagedeny_account, 5; // deny whole account each time register
+
+//	make announcement when player join MVP ladder
+	set .joinann, 2; // 0 - disable announcement, 1- announce to server, 2- announce to town where mvp ladder warper located
+//	make announcement when player finished MVP ladder
+	set .quitann, 2; // 0 - disable announcement, 1- announce to server, 2- announce to town where mvp ladder warper located
+
+//	minimum GM level in your server consider as Support GM, to allow these GMs get into this map
+//	in the case player complain this script bug again ...
+//	please tell them to use @jumpto or @warp
+	set .mingmlvl, 20;
+
+//	minimum gm level can reset the deny usage, to allow that player can play this game for 1 more time without waiting
+//	this setting also allow the GM himself can play this ladder without the deny usage
+	set .gmcandeny, 70;
+
+//	minimum gm level can reset the best record.
+	set .gmlvlreset, 99;
+
+//	Config Ends --------------------------------------------------------------
+
+	getmapxy .eventmap$, .@x, .@y, 1;
+	if ( .joinann < 0 || .joinann > 2 ) set .joinann, 0;
+	set .usagedeny_player, .usagedeny_player * 60;
+	set .usagedeny_account, .usagedeny_account * 60;
+	if ( .usagedeny_account >= .usagedeny_player ) set .usagedeny_player, 0;
+	if ( .gmnotop == 0 ) set .gmnotop, 20;
+	mapannounce .eventmap$, "Admin has refresh the server, please register again. Sorry for inconvenience.", 1;
+	mapwarp .eventmap$, "prontera", 156, 191;
+	end;
+
+OnEvent:
+	set .round, 0;
+	killmonsterall .eventmap$;
+	announce "You have "+ .timeout +" minutes to complete total "+ .totalround +" Rounds.", 1;
+OnMvpDead:
+	set .round, .round + 1;
+	if ( .round >= 2 ) {
+		if ( .reward[.round-1] ) {
+			message strcharinfo(0), "You have rewarded "+ callfunc("int__", .reward[.round-1]) +" zeny.";
+			set zeny, zeny + .reward[.round-1];
+		}
+		if ( .itemamount && .round != .totalround +1 )
+			getitem .itemid, .itemamount;
+	}
+	if ( .round == .totalround +1 ) {
+		announce "Amazing ... You able to beat all the MVPs !", 1;
+		getitem .lastitemid, .lastitemamount;
+		set .@timeused, .timeout * 60 - .remaintime;
+		if ( .highitemamount && .@timeused < .hightime * 60 ) {
+			announce "A bonus item has rewarded for completion within "+ .hightime +" minutes.", 1;
+			getitem .highitemid, .highitemamount;
+		}
+		if ( ( $mvplads_time == 0 || .@timeused < $mvplads_time ) && getgmlevel() < .gmnotop ) {
+			announce "And you beat the RECORD !!! [ "+( .@timeused / 60 )+" min "+( .@timeused % 60 )+" sec ]", 1;
+			getitem .topitemid, .topitemamount;
+			set $mvplads_name$, strcharinfo(0);
+			set $mvplads_time, .@timeused;
+		}
+		else
+			announce "Time used [ "+( .@timeused / 60 )+" min "+( .@timeused % 60 )+" sec ]", 1;
+		sleep2 10000;
+		if ( !playerattached() ) end;
+		getmapxy .@map$, .@x, .@y, 0;
+		if ( .@map$ == .eventmap$ )
+			warp .respawnmap$, .respawnx, .respawny;
+		if ( .quitann == 1 )
+			announce strcharinfo(0) +" has finished the MvP ladder !", 0;
+		else if ( .quitann == 2 )
+			mapannounce .npcmap$, strcharinfo(0) +" has finished the MvP ladder !", 0;
+		end;
+	}
+	else if ( .round == .totalround )
+		announce "Final Round will begin in "+ .delay +" sec.", 1;
+	else
+		announce "Round "+ .round +" will begin in "+ .delay +" sec.", 1;
+	sleep .delay * 1000;
+	if ( .mvpid[.round] >= 1646 && .mvpid[.round] <= 1651 )
+		monster .eventmap$,0,0,"--ja--",rand(1646,1651),1,"ev_Mvp::OnMvpDead";
+	else
+		monster .eventmap$,0,0,"--ja--",.mvpid[.round],1,"ev_Mvp::OnMvpDead";
+	end;
+}
+
+prontera,164,171,3	script	MvP Ladder Warper	56,{
+	mes "[^FF0000MvP Ladder Warper^000000]";
+	mes "Welcome to MvP ladder game.";
+	mes "In this game, you have to kill every single MvP monster in accending order, starting from weakest to the strongest.";
+	mes "Everytime you beaten a MVP, you will reward with zeny.";
+	if ( getvariableofnpc(.lastitemamount,"ev_Mvp") )
+		mes "If you can finish the MVP ladder, you will earn "+ getvariableofnpc(.lastitemamount,"ev_Mvp") +" "+ getitemname(getvariableofnpc(.lastitemid,"ev_Mvp")) +".";
+	if ( getvariableofnpc(.entryitemamount,"ev_Mvp") )
+		mes "But the entrance fee is "+ getvariableofnpc(.entryitemamount,"ev_Mvp") +" "+ getitemname(getvariableofnpc(.entryitemid,"ev_Mvp")) +".";
+	else if ( getvariableofnpc(.entryzeny,"ev_Mvp") )
+		mes "But the entrance fee is "+ callfunc("int__", getvariableofnpc(.entryzeny,"ev_Mvp") ) +" zeny";
+	next;
+	mes "[^FF0000MvP Ladder Warper^000000]";
+	mes "So... do you want to play the game?";
+	next;
+	if ( select("Yes, lets get it on.","Show me the best record.","No.",( getgmlevel() >= getvariableofnpc(.gmcandeny,"ev_Mvp") && ( getvariableofnpc(.usagedeny_player,"ev_Mvp") || getvariableofnpc(.usagedeny_account,"ev_Mvp") ) )?"Reset a player deny usage":"") == 3 ) {
+		mes "[^FF0000MvP Ladder Warper^000000]";
+		mes "When you are strong enough to complete the game, please come back.";
+		close;
+	}
+	else if ( @menu == 2 ) {
+		mes "[^FF0000MvP Ladder Warper^000000]";
+		if ( $mvplads_time == 0 ) {
+			mes "Nobody finish this game before.";
+			close;
+		}
+		else {
+			mes "The best record is";
+			mes "[ "+( $mvplads_time / 60 )+" min "+( $mvplads_time % 60 )+" sec ]";
+			mes "By the player ^0000FF"+ $mvplads_name$ +"^000000.";
+			if ( getgmlevel() < getvariableofnpc(.gmlvlreset,"ev_Mvp") ) close;
+			next;
+			if ( select("Close.", "Reset it.") == 1 ) close;
+			if ( select("Nevermind.", "I really want to reset it.") == 1 ) close;
+			mes "[^FF0000MvP Ladder Warper^000000]";
+			mes "Record reset successfully.";
+			set $mvplads_name$, "";
+			set $mvplads_time, 0;
+			close;
+		}
+	}
+	else if ( @menu == 4 ) {
+		if ( getgmlevel() < getvariableofnpc(.gmcandeny,"ev_Mvp") ) end;
+		mes "[^FF0000MvP Ladder Warper^000000]";
+		mes "Enter the player name";
+		next;
+		input .@name$;
+		set .@aid, getcharid(3, .@name$);
+		mes "[^FF0000MvP Ladder Warper^000000]";
+		if ( .@aid == 0 ) {
+			mes "That player is not online or not exist.";
+			close;
+		}
+		set .@origin, getcharid(3);
+		attachrid .@aid;
+		set mvplads_deny, 0;
+		set #mvplads_deny, 0;
+		message strcharinfo(0), "GM has allow you to play MVP Ladder right now.";
+		attachrid .@origin;
+		mes rid2name(.@aid) +" can play this game now.";
+		close;
+	}
+	if ( gettimetick(2) < mvplads_deny + getvariableofnpc(.usagedeny_player,"ev_Mvp") ) {
+		mes "[^FF0000MvP Ladder Warper^000000]";
+		mes "I'm sorry, please wait for another";
+		set .@left, mvplads_deny + getvariableofnpc(.usagedeny_player,"ev_Mvp") - gettimetick(2);
+		set .@day,  .@left / (24*60*60);
+		set .@hour, .@left % (24*60*60) / (60*60);
+		set .@min,  .@left % (24*60*60) % (60*60) / (60);
+		set .@sec,  .@left % (24*60*60) % (60*60) % (60);
+		mes ( (.@day)?(.@day +" day "):"" )+( (.@hour||.@day)?(.@hour +" hour "):"" )+( (.@min||.@hour||.@day)?(.@min +" min "):"")+ .@sec +" sec";
+		mes "for you to play again.";
+		close;
+	}
+	else if ( gettimetick(2) < #mvplads_deny + getvariableofnpc(.usagedeny_account,"ev_Mvp") ) {
+		mes "[^FF0000MvP Ladder Warper^000000]";
+		mes "I'm sorry, please wait for another";
+		set .@left, #mvplads_deny + getvariableofnpc(.usagedeny_account,"ev_Mvp") - gettimetick(2);
+		set .@day,  .@left / (24*60*60);
+		set .@hour, .@left % (24*60*60) / (60*60);
+		set .@min,  .@left % (24*60*60) % (60*60) / (60);
+		set .@sec,  .@left % (24*60*60) % (60*60) % (60);
+		mes ( (.@day)?(.@day +" day "):"" )+( (.@hour||.@day)?(.@hour +" hour "):"" )+( (.@min||.@hour||.@day)?(.@min +" min "):"")+ .@sec +" sec.";
+		mes "for your account to play again.";
+		close;
+	}
+	else if ( countitem( getvariableofnpc(.entryitemid,"ev_Mvp") ) < getvariableofnpc(.entryitemamount,"ev_Mvp") ) {
+		mes "[^FF0000MvP Ladder Warper^000000]";
+		mes "You don't have enough "+ getitemname(getvariableofnpc(.entryitemid,"ev_Mvp")) +", please come back when you do.";
+		close;
+	}
+	else if ( getvariableofnpc(.entryitemamount,"ev_Mvp") == 0 && zeny < getvariableofnpc(.entryzeny,"ev_Mvp") ) {
+		mes "[^FF0000MvP Ladder Warper^000000]";
+		mes "You don't have enough zeny, please come back when you do.";
+		close;
+	}
+	else if ( .inuse || getmapusers( getvariableofnpc(.eventmap$,"ev_Mvp") ) >= 1 ) {
+		mes "[^FF0000MvP Ladder Warper^000000]";
+		mes "I'm sorry but a player is currently playing the game. Please standby until the player finishes the game or gets killed.";
+		mes "Thank You.";
+		close;
+	}
+	if ( getvariableofnpc(.joinann,"ev_Mvp") )
+		announce strcharinfo(0) +" has started the MvP ladder game.",(getvariableofnpc(.joinann,"ev_Mvp") -1);
+	if ( getgmlevel() < getvariableofnpc(.gmcandeny,"ev_Mvp") && getvariableofnpc(.usagedeny_player,"ev_Mvp") )
+		set mvplads_deny, gettimetick(2);
+	if ( getgmlevel() < getvariableofnpc(.gmcandeny,"ev_Mvp") && getvariableofnpc(.usagedeny_account,"ev_Mvp") )
+		set #mvplads_deny, gettimetick(2);
+	percentheal 100,100;
+	warp getvariableofnpc( .eventmap$, "ev_Mvp" ), 0, 0;
+	set .inuse, 1;
+	set .inuseid, getcharid(3);
+	set .inusename$, strcharinfo(0);
+	if ( getvariableofnpc(.entryitemamount,"ev_Mvp") )
+		delitem getvariableofnpc(.entryitemid,"ev_Mvp"), getvariableofnpc(.entryitemamount,"ev_Mvp");
+	else 
+		set zeny, zeny - getvariableofnpc(.entryzeny,"ev_Mvp");
+	initnpctimer;
+	doevent "ev_Mvp::OnEvent";
+	end;
+
+OnTimer20:
+	set getvariableofnpc(.starttime,"ev_Mvp"), gettimetick(2);
+	do {
+		set getvariableofnpc(.remaintime,"ev_Mvp"), getvariableofnpc(.timeout,"ev_Mvp") * 60 + getvariableofnpc(.starttime,"ev_Mvp") - gettimetick(2);
+		set .@hour, getvariableofnpc(.remaintime,"ev_Mvp") / 3600 ;
+		set .@min, getvariableofnpc(.remaintime,"ev_Mvp") % 3600 / 60 ;
+		set .@sec, getvariableofnpc(.remaintime,"ev_Mvp") % 3600 % 60 ;
+		delwaitingroom strnpcinfo(0);
+		waitingroom "Time Left = "+( ( .@hour )?( .@hour +":"):"" )+( ( .@min < 10 )?"0"+ .@min: .@min )+":"+( ( .@sec < 10 )?"0"+ .@sec: .@sec ), 0;
+		if ( getmapusers( getvariableofnpc(.eventmap$,"ev_Mvp") ) == 0 && .inuse == 0 ) break;
+		else if ( .@sec ) {
+			switch ( .@min ) {
+				case 30:
+				case 20:
+				case 10:
+				case 5:
+				case 3:
+				case 2:
+				case 1:
+					mapannounce getvariableofnpc(.eventmap$,"ev_Mvp"), "You have "+ .@min +" min left to complete MVP ladder game.", 0;
+				default:
+			}
+		}
+		sleep 995;
+	} while ( getvariableofnpc(.remaintime,"ev_Mvp") > 1 );
+	if ( getvariableofnpc(.round,"ev_Mvp") != getvariableofnpc(.totalround,"ev_Mvp") +1 ) {
+		killmonsterall getvariableofnpc(.eventmap$,"ev_Mvp");
+		mapannounce getvariableofnpc(.eventmap$,"ev_Mvp"), "You failed to kill all MVPs in time.", 0;
+		if ( getvariableofnpc(.quitann,"ev_Mvp") == 1 )
+			announce .inusename$ +" failed to finish the MvP ladder !", 0;
+		else if ( getvariableofnpc(.quitann,"ev_Mvp") == 2 )
+			mapannounce getvariableofnpc(.npcmap$,"ev_Mvp"), .inusename$ +" failed to finish the MvP ladder !", 0;
+		if ( attachrid(.inuseid) ) {
+			getmapxy .@map$, .@x, .@y, 0;
+			if ( .@map$ == getvariableofnpc(.eventmap$,"ev_Mvp") )
+				warp getvariableofnpc(.respawnmap$,"ev_Mvp"), getvariableofnpc(.respawnx,"ev_Mvp"), getvariableofnpc(.respawny,"ev_Mvp");
+		}
+	}
+	set getvariableofnpc(.remaintime,"ev_Mvp"), 0;
+	delwaitingroom strnpcinfo(0);
+	end;
+
+OnTimer20000:
+	set .inuse, 0;
+	end;
+
+OnInit:
+	sleep 1;
+	getmapxy .@map$, .@x, .@y, 1;
+	set getvariableofnpc(.npcmap$,"ev_Mvp"), .@map$;
+	end;
+
+OnPCLoadMapEvent:
+	sleep2 1;
+	getmapxy .@map$, .@x, .@y, 0;
+	if ( .@map$ != getvariableofnpc(.eventmap$,"ev_Mvp") ) end;
+	if ( getcharid(3) == .inuseid || getgmlevel() >= getvariableofnpc(.mingmlvl,"ev_Mvp") ) end;
+	warp getvariableofnpc(.respawnmap$,"ev_Mvp"), getvariableofnpc(.respawnx,"ev_Mvp"), getvariableofnpc(.respawny,"ev_Mvp");
+	announce "You are forbidden to enter MVP ladder game without registration.", 3, 0xFF0000;
+	end;
+}

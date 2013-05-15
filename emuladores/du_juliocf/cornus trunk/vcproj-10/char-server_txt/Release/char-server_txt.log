@@ -1,0 +1,57 @@
+﻿Build started 19/07/2012 01:12:28.
+     1>Project "C:\Users\ZangaoInfo\Downloads\cornus trunk\vcproj-10\char-server_txt.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "char-server_txt\Release\char-server_txt.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\3rdparty\msinttypes\include /I..\3rdparty\mt19937ar /Zi /nologo /W3 /WX- /O2 /Ob2 /Oi /Ot /Oy /GT /GL /D WIN32 /D _WIN32 /D __WIN32 /D NDEBUG /D TXT_ONLY /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D FD_SETSIZE=4096 /D DB_MANUAL_CAST_TO_UNION /D _VC80_UPGRADE=0x0710 /D _MBCS /GF /Gm- /EHsc /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"char-server_txt\Release\\" /Fd"char-server_txt\Release\vc100.pdb" /Gd /TC /wd4800 /analyze- /errorReport:prompt ..\src\char\char.c ..\src\char\int_guild.c ..\src\char\int_homun.c ..\src\char\int_party.c ..\src\char\int_pet.c ..\src\char\int_status.c ..\src\char\int_storage.c ..\src\char\inter.c ..\src\common\core.c ..\src\common\db.c ..\src\common\mapindex.c ..\src\common\plugins.c ..\src\common\socket.c ..\src\common\utils.c
+         char.c
+         int_guild.c
+         int_homun.c
+         int_party.c
+         int_pet.c
+         int_status.c
+         int_storage.c
+         inter.c
+         core.c
+         db.c
+         mapindex.c
+         plugins.c
+         socket.c
+         utils.c
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\char-server.exe" /INCREMENTAL:NO /NOLOGO libcmt.lib oldnames.lib ws2_32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB /MANIFEST /ManifestFile:"char-server_txt\Release\char-server.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"..\char-server.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"..\char-server.lib" /MACHINE:X86 "char-server_txt\Release\char.obj"
+         "char-server_txt\Release\int_guild.obj"
+         "char-server_txt\Release\int_homun.obj"
+         "char-server_txt\Release\int_party.obj"
+         "char-server_txt\Release\int_pet.obj"
+         "char-server_txt\Release\int_status.obj"
+         "char-server_txt\Release\int_storage.obj"
+         "char-server_txt\Release\inter.obj"
+         "char-server_txt\Release\core.obj"
+         "char-server_txt\Release\db.obj"
+         "char-server_txt\Release\ers.obj"
+         "char-server_txt\Release\lock.obj"
+         "char-server_txt\Release\malloc.obj"
+         "char-server_txt\Release\mapindex.obj"
+         "char-server_txt\Release\nullpo.obj"
+         "char-server_txt\Release\plugins.obj"
+         "char-server_txt\Release\random.obj"
+         "char-server_txt\Release\showmsg.obj"
+         "char-server_txt\Release\socket.obj"
+         "char-server_txt\Release\strlib.obj"
+         "char-server_txt\Release\timer.obj"
+         "char-server_txt\Release\utils.obj"
+         "char-server_txt\Release\mt19937ar.obj"
+         Generating code
+         Finished generating code
+         char-server_txt.vcxproj -> C:\Users\ZangaoInfo\Downloads\cornus trunk\vcproj-10\..\char-server.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"..\char-server.exe;#1" /manifest "char-server_txt\Release\char-server.exe.intermediate.manifest"
+       FinalizeBuildStatus:
+         Deleting file "char-server_txt\Release\char-server_txt.unsuccessfulbuild".
+         Touching "char-server_txt\Release\char-server_txt.lastbuildstate".
+     1>Done Building Project "C:\Users\ZangaoInfo\Downloads\cornus trunk\vcproj-10\char-server_txt.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.39

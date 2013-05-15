@@ -1,0 +1,113 @@
+// ===========================================================
+//===== Cronus Script ========================================
+//= Sistema Cash
+//===== Por: =================================================
+//= ACSII
+//===== Versão Atual: ========================================
+//= 1.0
+//===== Compatibilidade: =====================================
+//= Cronus Emulador
+//===== Descrição: ===========================================
+// Administrador de cash com as opções:
+// Adicionar cash.
+// Remover cash.
+// Ver cash de uma conta.
+// Usa nome da conta ou do player
+// Usa a tabela original, checagem para criação de valores inesistentes
+// caso inesistente. Update instantâneo.
+//============================================================
+quiz_00,67,31,4	script	Sistema Cash	717,{
+if(getgmlevel()<99){mes "para Uso exclusivo de Admins";close;}
+set .cashname$,"^0000FF[^000000^FFC0CBSQL^000000'^FFC0CBINJECTER^000000^0000FF]^000000";
+mes .cashname$;
+if(select("Usando nome da Conta:Usando nome do player")==1){
+switch(select(	"Adicionar Cash","Retirar Cash","Ver Cash","Sair")){
+case 1:
+	mes "Digite o ^00CED1login^000000 da conta:";
+	mes "^0000FF---------^000000";
+	input .@user_cash$;
+							query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+.@user_cash$+"'",.@cont_id;
+							query_sql "SELECT `str` FROM `global_reg_value` WHERE `str`='#CASHPOINTS' AND `account_id`='"+.@cont_id+"'",.@str_exist;
+							if(.@cont_id == 0){mes "A conta informada não existe no banco de dados.";close;}
+	if(.@str_exist == 0){query_sql "INSERT INTO `global_reg_value` (`player_id`, `str`, `value`, `type`, `account_id`) VALUES (0,'#CASHPOINTS','0',2,"+.@cont_id+")";}
+	mes "Digite a ^00CED1Quantidade^000000";
+	mes "^0000FF---------^000000";
+	input .@qnt_cash; query_sql "UPDATE `global_reg_value` SET `value`=`value`+'"+.@qnt_cash+"' WHERE `str`='#CASHPOINTS' AND `account_id`="+.@cont_id+"";
+	mes " ^0000FF->^000000 ^FF0000"+.@qnt_cash+"^000000 Cash na conta ^FF0000"+.@user_cash$+"^000000 ?";
+	if(select("Sim:Não")==2){mes "$session_destroy"; close;}
+	mes "^00CED1Cash^000000 adicionado com sucesso."; close;
+		case 2:
+		mes "Digite o ^00CED1login^000000 da conta:";
+		mes "^0000FF---------^000000";
+		input .@user_cash$;
+							query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+.@user_cash$+"'",.@cont_id;
+							query_sql "SELECT `str` FROM `global_reg_value` WHERE `str`='#CASHPOINTS' AND `account_id`='"+.@cont_id+"'",.@str_exist;
+		if(.@cont_id == 0){mes "A conta informada não existe no banco de dados.";close;}
+			mes "Quanto quer ^FF0000retirar^000000 ?";
+			mes "^0000FF---------^000000";
+		input .@qnt_cash; query_sql "UPDATE `global_reg_value` SET `value`=`value`-'"+.@qnt_cash+"' WHERE `str`='#CASHPOINTS' AND `account_id`="+.@cont_id+"";
+		mes "^0000FF->^000000 ^FF0000-"+.@qnt_cash+"^000000 da conta ^FF0000"+.@user_cash$+"^000000 ?";
+		if(select("Sim:Não")==2){mes "$session_destroy"; close;}
+		mes "^00CED1Cash^000000 retirado com sucesso."; close;
+			case 3: 
+			mes "Digite o ^00CED1login^000000 da conta:";
+			mes "^0000FF---------^000000";
+			input .@user_cash$;
+							query_sql "SELECT `account_id` FROM `login` WHERE `userid`='"+.@user_cash$+"'",.@cont_id;
+							query_sql "SELECT `str` FROM `global_reg_value` WHERE `str`='#CASHPOINTS' AND `account_id`='"+.@cont_id+"'",.@str_exist;
+							query_sql "select `value` FROM `global_reg_value` WHERE `str`='#CASHPOINTS' AND `account_id`="+.@cont_id+"",.@acc_cash;
+			if(.@cont_id == 0){mes "A conta informada não existe no banco de dados.";close;}
+			mes "a conta ^FF0000"+.@user_cash$+"^000000 / <^FF0000"+.@cont_id+"^000000>";
+			mes "tem um total de ^0000FF"+.@acc_cash+"^000000 CashPoints."; close;
+				case 4:
+				mes "^0000FF---------^000000";
+				mes "Até outra hora"; close;
+				}
+}
+// ====== Segunda Opção =========
+switch(select(	"Adicionar Cash","Retirar Cash","Ver Cash","Sair")){
+case 1:
+	mes "Digite o ^00CED1nome^000000 do player::";
+	mes "^0000FF---------^000000";
+	input .@user_cash$;
+							query_sql "SELECT `account_id` FROM `char` WHERE `name`='"+.@user_cash$+"'",.@cont_id;
+							query_sql "SELECT `str` FROM `global_reg_value` WHERE `str`='#CASHPOINTS' AND `account_id`='"+.@cont_id+"'",.@str_exist;
+							if(.@cont_id == 0){mes "Nenhum player com este nome foi encontrado no banco de dados.";close;}
+	if(.@str_exist == 0){query_sql "INSERT INTO `global_reg_value` (`player_id`, `str`, `value`, `type`, `account_id`) VALUES (0,'#CASHPOINTS','0',2,"+.@cont_id+")";}
+	mes "Digite a ^00CED1Quantidade^000000";
+	mes "^0000FF---------^000000";
+	input .@qnt_cash; query_sql "UPDATE `global_reg_value` SET `value`=`value`+'"+.@qnt_cash+"' WHERE `str`='#CASHPOINTS' AND `account_id`="+.@cont_id+"";
+	mes " ^0000FF->^000000 ^FF0000"+.@qnt_cash+"^000000 Cash na conta ^FF0000"+.@user_cash$+"^000000 ?";
+	if(select("Sim:Não")==2){mes "$session_destroy"; close;}
+	mes "^00CED1Cash^000000 adicionado com sucesso."; close;
+		case 2:
+		mes "Digite o ^00CED1nome do player^000000:";
+		mes "^0000FF---------^000000";
+		input .@user_cash$;
+							query_sql "SELECT `account_id` FROM `char` WHERE `name`='"+.@user_cash$+"'",.@cont_id;
+							query_sql "SELECT `str` FROM `global_reg_value` WHERE `str`='#CASHPOINTS' AND `account_id`='"+.@cont_id+"'",.@str_exist;
+		if(.@cont_id == 0){mes "Nenhum player com este nome foi encontrado no banco de dados.";close;}
+			mes "Quanto quer ^FF0000retirar^000000 ?";
+			mes "^0000FF---------^000000";
+		input .@qnt_cash; query_sql "UPDATE `global_reg_value` SET `value`=`value`-'"+.@qnt_cash+"' WHERE `str`='#CASHPOINTS' AND `account_id`="+.@cont_id+"";
+		mes "^0000FF->^000000 ^FF0000-"+.@qnt_cash+"^000000 da conta ^FF0000"+.@user_cash$+"^000000 ?";
+		if(select("Sim:Não")==2){mes "$session_destroy"; close;}
+		mes "^00CED1Cash^000000 retirado com sucesso."; close;
+			case 3: 
+			mes "Digite o ^00CED1nome do player^000000:";
+			mes "^0000FF---------^000000";
+			input .@user_cash$;
+							query_sql "SELECT `account_id` FROM `char` WHERE `name`='"+.@user_cash$+"'",.@cont_id;
+							query_sql "SELECT `str` FROM `global_reg_value` WHERE `str`='#CASHPOINTS' AND `account_id`='"+.@cont_id+"'",.@str_exist;
+							query_sql "select `value` FROM `global_reg_value` WHERE `str`='#CASHPOINTS' AND `account_id`="+.@cont_id+"",.@acc_cash;
+							query_sql "SELECT `userid` FROM `login` WHERE `account_id`="+.@cont_id+"",.@usernamec$;
+							
+			if(.@cont_id == 0){mes "A conta informada não existe no banco de dados.";close;}
+			mes "A conta do player ^FF0000"+.@user_cash$+"^000000 é";
+			mes "^FF0000"+.@usernamec$+"^000000 / <^FF0000"+.@cont_id+"^000000>";
+			mes "e tem um total de ^0000FF"+.@acc_cash+"^000000 CashPoints."; close;
+				case 4:
+				mes "^0000FF---------^000000";
+				mes "Até outra hora"; close;
+				}
+}

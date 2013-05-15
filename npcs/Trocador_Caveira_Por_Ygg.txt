@@ -1,0 +1,60 @@
+//=============================================
+//== Cronus Tools :: Gerador de Quest's =======
+//== Versão: ==================================
+//== 1.0
+//== Autor: ===================================
+//== RoM
+//=============================================
+prontera,164,151,1	script	Caveira por YGG	719,{
+	mes "[Caveira por YGG]";
+	mes "Olá "+StrCharInfo(0)+"!";
+	mes "Eu tenho alguns itens interessantes aqui, deseja dar uma olhada?";
+	next;
+	if( select("Claro!:Talvez mais tarde...") == 2 )
+	{
+		mes "[Caveira por YGG]";
+		mes "Tudo bem, estarei aqui se você mudar de idéia.";
+		close;
+	}
+	mes "[Caveira por YGG]";
+	mes "Bem, estes são os itens que eu tenho...";
+	mes "Sobre qual deles vai querer saber mais?";
+	next;
+	switch(select("Trocar Caveira por Ygg:Nenhum"))
+	{
+	case 1:
+		mes "[Trocar Caveira por Ygg]";
+		mes "Recompensa:";
+		mes "10x "+getitemname(607);
+		mes " ";
+		mes "Requerimento:";
+		mes "1x "+getitemname(7420);
+		next;
+		mes "[Caveira por YGG]";
+		mes "Deseja fazer esta quest?";
+		next;
+		if( select("Sim!:Agora não...") == 2 )
+		{
+			mes "[Caveira por YGG]";
+			mes "Tudo bem... Até mais!";
+			close;
+		}
+		if(countitem(7420) >= 1 && )
+		{
+			delitem 7420,1;
+			getitem 607,10;
+			mes "[Caveira por YGG]";
+			mes "Parabéns! Aqui está!";
+			close;
+		}
+		break;
+	case 2:
+		mes "[Caveira por YGG]";
+		mes "Tudo bem, estarei aqui se você mudar de idéia.";
+		close;
+	}
+	mes "[Caveira por YGG]";
+	mes "Me desculpe, mas você não tem todos os itens necessários para esta quest.";
+	mes "Volte quando você tiver todos os itens!";
+	close;
+}

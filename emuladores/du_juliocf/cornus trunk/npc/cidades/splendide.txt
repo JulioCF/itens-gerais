@@ -1,0 +1,345 @@
+//===== Cronus Script ========================================
+//= Splendide Town
+//===== Por: =================================================
+//= L0ne_W0lf
+//===== Versão Atual: ========================================
+//= 1.0a
+//===== Changelog: ===========================================
+//= 1.0 First Version.
+//= 1.0a Traduzido. [RoM]
+//============================================================
+
+spl_in01,172,225,3	script	Poeta Andarilho#ep13	51,{
+	cutin "god_nelluad02",2;
+	mes "[Poet Nell]";
+	mes "Oi~~ Você ouve a música bonita vindo de longe~?";
+	next;
+	select("Quem é você?");
+	cutin "god_nelluad01",2;
+	mes "[Poeta Nell]";
+	mes "Quem, eu...?";
+	mes "Eu sou apenas um poeta apreciando o ambiente...";
+	next;
+	mes "[Poeta Nell]";
+	mes "Eu vim aqui no outro dia, pedindo para tomar nota deste novo mundo e eles me permitiram seguir os aventureiros aqui.";
+	next;
+	mes "[Poeta Nell]";
+	mes "Tornei-me familliar com os Lapine.";
+	mes "Foi muito difícil no início... Desde que eu não sabia a língua deles.";
+	mes "Mas, comecei a tocar meus instrumentos... eles adoraram.";
+	next;
+	mes "[Poeta Nell]";
+	mes "Eles são fadas que sabem aproveitar a vida..";
+	mes "Como eles estão felizes...";
+	mes "Eles são muito curiosos... Estou honrado em conhecê-los...";
+	next;
+	mes "[Poeta Nell]";
+	mes "Então você quer me ouvir tocando?";
+	next;
+	switch(select("Claro.:Na verdade não.")) {
+	case 1:
+		mes "[Poeta Nell]";
+		mes "Que música você quer?";
+		next;
+		switch(select("Poema de Bragi:Ritmo Caótico:Crepúsculo Sangrento:Anel dos Nibelungos")) {
+		case 1:
+			cutin "god_nelluad02",2;
+			mes "[Poeta Nell]";
+			mes "Poema de Bragi!";
+			mes "Você deve ter um ouvido apurado.";
+			soundeffect "bragis_poem.wav",0;
+			break;
+		case 2:
+			cutin "god_nelluad02",2;
+			mes "[Poeta Nell]";
+			mes "Ritmo Caótico...";
+			mes "Esta é uma ótima obra, mas eu não recomendo ela em um jantar...";
+			soundeffect "chaos_of_eternity.wav",0;
+			break;
+		case 3:
+			cutin "god_nelluad02",2;
+			mes "[Poeta Nell]";
+			mes "Crepúsculo Sangrento!";
+			mes "Gosta de Mercenários?";
+			mes "Esta canção fala de um lendário Algoz que viveu no deserto.";
+			soundeffect "assassin_of_sunset.wav",0;
+			break;
+		case 4:
+			cutin "god_nelluad02",2;
+			mes "[Poeta Nell]";
+			mes "Anel dos Nibelungos...";
+			mes "Esta canção tem uma história bastante interessante~";
+			next;
+			soundeffect "ring_of_nibelungen.wav",0;
+			mes "^4d4dff Havia um selvagem chamado Rhein que";
+			mes "que brilhava como se fosse feito de ouro.";
+			mes "Seu segredo era escondido de todos";
+			mes "antes que esta história foi contada...^000000";
+			next;
+			mes "^4d4dff Valhalla nasceu da deusa Freya.";
+			mes "O invejoso Rocky destruiu a deusa da beleza.^000000";
+			mes "^4d4dff Das profundidades nasceu um anel feito de fogo.";
+			mes "Um anel tão forte que carrega o desejo dos deuses~^000000";
+			next;
+			mes "^4d4dff O tesouro de Alberich agora detém o poder.";
+			mes "O poder do anel que realizou todos os desejos dos deuses^000000";
+			next;
+			mes "^4d4dff O tesouro foi usado para comprar a alma do mundo.";
+			mes "Uma alma comprado com o peso de ouro.^000000";
+			next;
+			mes "^4d4dff Rocky temendo perder o controle, transforma o pobre Alberich em forma de sapo.";
+			next;
+			mes "^4d4dff Alberich jura com o seu último suspiro, que o seu anel amaldiçoará o seu usuário até a morte.";
+			next;
+			mes "^4d4dff Forever will the bearer be, cursed with Rocky's jealousy."				;
+			break;
+		}
+		break;
+	case 2:
+		cutin "god_nelluad03",2;
+		mes "[Poeta Nell]";
+		mes "Por que não?";
+		mes "Por que você olha para mim como que se você não quisesse me ouvir tocando?";
+		next;
+		select("Você parece alguém que eu conheço.");
+		cutin "god_nelluad04",2;
+		mes "[Poeta Nell]";
+		mes "Eh?";
+		mes "De jeito nenhum!";
+		mes "Talvez você esteja confuso..!";
+		next;
+		mes "[Poeta Nell]";
+		mes "Sim, eu pareço muito comum...";
+		mes "But I doubt we've ever met before.";
+		next;
+		cutin "god_nelluad01",255;
+		mes "- Nell parece constrangido, em seguida, começa a tocar músicas muito complicadas -";
+		break;
+	}
+	close2;
+	cutin "god_nelluad01",255;
+	end;
+}
+
+spl_in01,182,213,1	script	Fada Descansando#ep13_1	438,{
+	if ((isequipped(2782) > 0) && (ep13_2_rhea > 99)) {
+		mes "[Fada Descansando]";
+		mes "O poeta no stagie é misterioso.";
+		mes "O momento que você veio aqui...";
+		mes "Ele chegou e começou a tocar música.";
+		next;
+		mes "[Fada Descansando]";
+		mes "Esta é a música do seu país não é?";
+		mes "Acho que soa bem.";
+		close;
+	}
+	else {
+		mes "[Fada Descansando]";
+		mes "IyazLarsSe ou um arquivo.";
+		mes "marLoOsa Yee NeiBur";
+		mes "Rinisehrnea Mu ...?";
+		close;
+	}
+}
+
+spl_in01,181,218,5	script	Fada Descansando#ep13_2	446,{
+	if ((isequipped(2782) > 0) && (ep13_2_rhea > 99)) {
+		mes "- Ele está balançando a cabeça ao som da música -";
+		next;
+		mes "[Fada Descansando]";
+		mes "Você sabe como tocar um som semelhante?";
+		mes "Esse tom é inacreditável.";
+		close;
+	}
+	else {
+		mes "- Ele está balançando a cabeça ao som da música -";
+		next;
+		mes "[Fada Descansando]";
+		mes "GothTingNoth Di~nar..";
+		mes "DiebIyazNud Yu Faran";
+		mes "nesFarDor U ~";
+		close;
+	}
+}
+
+spl_in01,161,213,7	script	Fada Jantando#ep13	447,{
+	if ((isequipped(2782) > 0) && (ep13_2_rhea > 99)) {
+		mes "[Fada Jantando]";
+		mes "Estou canso de comer comida caseira.";
+		mes "A única coisa que me traz aqui é a sopa de frutos...";
+		next;
+		mes "[Fada Jantando]";
+		mes "Ei você!";
+		mes "Por que você está me olhando comer o jantar?";
+		close;
+	}
+	else {
+		mes "[Fada Jantando]";
+		mes "NothFarLu Ra...?";
+		mes "RuffYur..!";
+		next;
+		mes "- Ele está me dando um olhar estranho enquanto ele come o seu jantar -";
+		close;
+	}
+}
+
+spl_in01,162,202,5	script	Fada tomando notas#1	436,{
+	if ((isequipped(2782) > 0) && (ep13_2_rhea > 99)) {
+		mes "[Fada tomando notas]";
+		mes "Estamos muito impressionados com o poeta.";
+		mes "Nós Fadas amamos música também.";
+		mes "Eu nunca imaginei que iria ouvir esta música exótica.";
+		next;
+		mes "[Fada tomando notas]";
+		mes "Eu quero estudar música um dia.";
+		mes "Eu pretendo escrever muito sobre o estudo dos instrumentos e da música";
+		next;
+		mes "[Fada tomando notas]";
+		mes "Algum dia você deveria ouvir música do meu povo.";
+		close;
+	}
+	else {
+		mes "[Fada tomando notas]";
+		mes "TiTalLars Ur tasThorNoth O AnImanWha.";
+		mes "FusLuRuff..... Mu TingLuAla Yee AnmanAndu";
+		next;
+		mes "- Ele parece frustrado por não entendê-lo -";
+		close;
+	}
+}
+
+spl_in01,167,207,7	script	Fada Silenciosa#ep13	445,{
+	mes "- Ele está quase dormindo, mas ele ainda está conseguindo segurar um copo com uma bebida. Ele deve estar muito cansado";
+	close;
+}
+
+spl_in01,180,201,3	script	Fada Soldado#ep13_1	461,{
+	if ((isequipped(2782) > 0) && (ep13_2_rhea > 99)) {
+		mes "[Fada Soldado]";
+		mes "Você é um estranho aqui, não é?";
+		mes "Estou vigiando ele para evitar que algo ruim aconteça.";
+		next;
+		mes "[Fada Soldado]";
+		mes "Definitivamente você está envolvido.";
+		mes "O povo do lado superior permitem que você passe por aqui...";
+		mes "Mas ninguém sabe o que vai acontecer nesta batalha.";
+		next;
+		mes "[Fada Soldado]";
+		mes "Enfim, o que é esse instrumento lá?";
+		mes "Temos um semelhante...";
+		mes "Mas soa totalmente diferente.";
+		close;
+	}
+	else {
+		mes "[Fada Soldado]";
+		mes "FusVohlAnu Ur Lon.";
+		mes "LoUdenFar Ha Dormaur?";
+		mes "...marAmanYur Mu.";
+		next;
+		mes "- O Soldado Fada quer lhe dizer algo, mas simplesmente pára de falar como você quando você dá um olhar vazio -";
+		close;
+	}
+}
+
+spl_in01,189,207,3	script	Equipe Fada#ep13_1	439,{
+	if ((isequipped(2782) > 0) && (ep13_2_rhea > 99)) {
+		mes "[Equipe Fada]";
+		mes "Hm, o que foi?";
+		mes "Sinto muito, mas nós não vendemos comida a estranhos.";
+		next;
+		mes "[Equipe Fada]";
+		mes "Vocês também precisam ter cuidado com comida aqui.";
+		mes "A comida é escassa aqui.";
+		next;
+		mes "[Equipe Fada]";
+		mes "Você vai ter que encontrar alimento em outro lugar.";
+		close;
+	}
+	else {
+		mes "[Equipe Fada]";
+		mes "Ou VeldAnoWeh";
+		mes "TurWos";
+		mes "......ah...";
+		next;
+		mes "- Você só sorri. É frustrante não ser capaz de entender sua linguagem. -";
+		close;
+	}
+}
+
+spl_in01,154,207,5	script	Equipe Fada#ep13_2	440,{
+	if ((isequipped(2782) > 0) && (ep13_2_rhea > 99)) {
+		mes "[Equipe Fada]";
+		mes "Seu acampamento tem uma finalidade militar. Mas também temos a necessidade de barras.";
+		next;
+		mes "[Equipe Fada]";
+		mes "Como mais pode um soldado liberar o estresse se não for através de beber...";
+		next;
+		mes "[Equipe Fada]";
+		mes "Estamos aqui para apoiar as fadas soldados dando boas bebidas e entretenimento.";
+		close;
+	}
+	else {
+		mes "[Equipe Fada]";
+		mes "NorVerNuff Ee Re!";
+		mes "remuDurOdes Mu AshFus ~!";
+		mes "OdesTalWeh Ur??";
+		close;
+	}
+}
+
+spl_in01,122,314,5	script	Soldado de Alta Patente	461,{
+	if ((isequipped(2782) > 0) && (ep13_2_rhea > 99)) {
+		mes "[Soldado de Alta Patente]";
+		mes "Há algum material novo?";
+		next;
+		mes "[Fada Soldado]";
+		mes "Esta espada acabou de chegar...";
+		mes "Esta é inspirada pelas estrelas, e nós testamos cortando o fio flutuate da água.";
+		next;
+		mes "[Soldado de Alta Patente]";
+		mes "Hmm, raramente usamos espadas. Mas fica ótimas como decoração.";
+		next;
+		mes "- Parecem que estão ocupados falando sobre as armas -";
+		close;
+	}
+	else {
+		mes "[Soldado de Alta Patente]";
+		mes "NorVerNuff Ee Re....";
+		next;
+		mes "[Fada Soldado]";
+		mes "FusVerAlah Di";
+		mes "ModNorNor U DimVohlWeh O DimAmannea Um WosAnoNoh Um AnduMeOdes Assim talador.";
+		next;
+		mes "[Soldado de Alta Patente]";
+		mes "DurNohHir Ha UorVaThus Di AshNuffLon U mahNuffThus U RuAmanAgol Ir NohHir...?";
+		close;
+	}
+}
+
+spl_in01,122,311,1	script	Fada Soldado#ep13_2	447,{
+	if ((isequipped(2782) > 0) && (ep13_2_rhea > 99)) {
+		mes "[Fada Soldado]";
+		mes "Você é um estranho?";
+		mes "Você veio aqui para ver o armazenamento militar das Fadas?";
+		next;
+		mes "[Soldado de Alta Patente]";
+		mes "Esqueça. Estes são inúteis para eles...";
+		mes "Como pode essa espada delicada ser usada por aqueles brutos...?";
+		next;
+		mes "[Fada Soldado]";
+		mes "O";
+		close;
+	}
+	else {
+		mes "[Soldado de Alta Patente]";
+		mes "NorVerNuff Ee Re....";
+		next;
+		mes "[Fada Soldado]";
+		mes "FusVerAlah Di";
+		mes "ModNorNor U DimVohlWeh O DimAmannea Um WosAnoNoh Um AnduMeOdes Assim talador.";
+		next;
+		mes "[Soldado de Alta Patente]";
+		mes "DurNohHir Ha UorVaThus Di AshNuffLon U mahNuffThus U RuAmanAgol Ir NohHir...?";
+		close;
+	}
+}

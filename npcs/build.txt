@@ -1,0 +1,83 @@
+//===== RagnaWay Script's ====================================
+//= Salvador de Build
+//===== Por: =================================================
+//= Zell
+//===== Descrição: ===========================================
+//= Salva sua Build dã
+//===== Comentários Adicionais: ==============================
+// www.ragnawayro.com
+//============================================================
+sec_in02,135,176,5	script	Salvadora de Build	915,{
+
+
+if ( memory == 1 ) goto build;
+
+mes "[ Sony ]";
+mes "Salvando a ATRIBUTOS, Por favor Aguarde...";
+next;
+mes "Salvando Todas As Informações";
+next;
+mes "Por favor não desligue o console ou Remova o Memory Card PsRag (8MB)";
+sleep2 9000;
+close2;
+query_sql "SELECT `str` FROM `char` WHERE `name` = '"+strcharinfo(0)+"'",STR$;
+query_sql "SELECT `agi` FROM `char` WHERE `name` = '"+strcharinfo(0)+"'",AGI$;
+query_sql "SELECT `vit` FROM `char` WHERE `name` = '"+strcharinfo(0)+"'",VIT$;
+query_sql "SELECT `int` FROM `char` WHERE `name` = '"+strcharinfo(0)+"'",INT$;
+query_sql "SELECT `dex` FROM `char` WHERE `name` = '"+strcharinfo(0)+"'",DEX$;
+query_sql "SELECT `luk` FROM `char` WHERE `name` = '"+strcharinfo(0)+"'",LUK$;
+dispbottom "Sua Build de ATRIBUTOS Foi Salva com Sucesso no Memory Card (8 MB) SeuRO";
+set memory,1;
+end;
+
+build:
+mes "[Sony]";
+mes "Acessando Memory Card (8MB) rOrigem...";
+sleep2 6000;
+mes "[Sony]";
+mes "Seus ATRIBUTOS salvos são:";
+next;
+mes "Força:"+STR$;
+mes "Agilidade:"+AGI$;
+mes "Vitalidade:"+VIT$;
+mes "Inteligência:"+INT$;
+mes "Dextreza:"+DEX$;
+mes "Sorte:"+LUK$;
+next;
+mes "[Sony]";
+mes "O que deseja fazer?";
+
+switch(select("Desligar Console","Deletar Build")){
+
+	case 1:
+		mes "[Sony]";
+		mes "Baixando Atualizações...";
+		sleep2 3000;
+		next;
+		mes "1 de 13";
+		sleep2 4000;
+		next;
+		mes "4 de 13";
+		sleep2 2000;
+		next;
+		mes "5 de 13";
+		sleep2 3000;
+		next;
+		mes "Baixando Atualizações....";
+		sleep2 6000;
+		next;
+		mes "10 de 13";
+		sleep2 2000;
+		next;
+		mes "Atualizações Instaladas com sucesso";
+		close;
+
+	case 2:
+		mes "Now Loading...";
+		sleep2 9000;
+		mes "Build Deletada com Sucesso !";	
+		close2;
+		set memory,0;
+		end;
+	}
+}

@@ -1,0 +1,125 @@
+
+05-07-2012 20:55:20: The char-server starting...
+05-07-2012 20:55:20: mmo_char_init: No character found in save/athena.txt.
+05-07-2012 20:55:20: Id for the next created character: 150000.
+05-07-2012 20:55:20: The char-server is ready (Server is listening on the port 6121).
+05-07-2012 20:55:21: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+
+05-07-2012 21:49:39: The char-server starting...
+05-07-2012 21:49:39: mmo_char_init: No character found in save/athena.txt.
+05-07-2012 21:49:39: Id for the next created character: 150000.
+05-07-2012 21:49:39: The char-server is ready (Server is listening on the port 6121).
+05-07-2012 21:49:41: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+
+05-07-2012 23:35:45: The char-server starting...
+05-07-2012 23:35:45: mmo_char_init: No character found in save/athena.txt.
+05-07-2012 23:35:45: Id for the next created character: 150000.
+05-07-2012 23:35:45: The char-server is ready (Server is listening on the port 6121).
+05-07-2012 23:35:46: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+
+19-07-2012 00:55:09: The char-server starting...
+19-07-2012 00:55:09: mmo_char_init: No character found in save/athena.txt.
+19-07-2012 00:55:09: Id for the next created character: 150000.
+19-07-2012 00:55:09: The char-server is ready (Server is listening on the port 6121).
+
+19-07-2012 01:01:02: The char-server starting...
+19-07-2012 01:01:02: mmo_char_init: No character found in save/athena.txt.
+19-07-2012 01:01:02: Id for the next created character: 150000.
+19-07-2012 01:01:02: The char-server is ready (Server is listening on the port 6121).
+19-07-2012 01:01:19: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+
+19-07-2012 01:14:29: The char-server starting...
+19-07-2012 01:14:29: mmo_char_init: No character found in save/athena.txt.
+19-07-2012 01:14:29: Id for the next created character: 150000.
+19-07-2012 01:14:29: The char-server is ready (Server is listening on the port 6121).
+19-07-2012 01:14:31: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+19-07-2012 01:14:59: make new char: account: 2000002, slot 0, name: aloc !11, stats: 5/5/5/5/5/5, hair: 1, hair color: 0.
+19-07-2012 01:15:00: Character Selected, Account ID: 2000002, Character Slot: 0, Character Name: aloc !11.
+
+19-07-2012 01:42:00: The char-server starting...
+19-07-2012 01:42:00: mmo_char_init: 1 character read in save/athena.txt.
+19-07-2012 01:42:00: Id for the next created character: 150001.
+19-07-2012 01:42:00: The char-server is ready (Server is listening on the port 6121).
+19-07-2012 01:42:01: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+19-07-2012 01:42:15: make new char: account: 2000003, slot 0, name: LIGERA EM, stats: 5/5/5/5/5/5, hair: 1, hair color: 0.
+19-07-2012 01:42:16: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+
+19-07-2012 01:42:47: The char-server starting...
+19-07-2012 01:42:47: mmo_char_init: 2 characters read in save/athena.txt.
+19-07-2012 01:42:47: Id for the next created character: 150002.
+19-07-2012 01:42:47: The char-server is ready (Server is listening on the port 6121).
+19-07-2012 01:42:48: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+19-07-2012 01:42:57: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+
+19-07-2012 01:45:56: The char-server starting...
+19-07-2012 01:45:56: mmo_char_init: 2 characters read in save/athena.txt.
+19-07-2012 01:45:56: Id for the next created character: 150002.
+19-07-2012 01:45:56: The char-server is ready (Server is listening on the port 6121).
+19-07-2012 01:45:58: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+19-07-2012 01:46:04: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+
+19-07-2012 01:48:41: The char-server starting...
+19-07-2012 01:48:41: mmo_char_init: 2 characters read in save/athena.txt.
+19-07-2012 01:48:41: Id for the next created character: 150002.
+
+19-07-2012 01:48:46: The char-server starting...
+19-07-2012 01:48:46: mmo_char_init: 2 characters read in save/athena.txt.
+19-07-2012 01:48:46: Id for the next created character: 150002.
+19-07-2012 01:48:46: The char-server is ready (Server is listening on the port 6121).
+19-07-2012 01:48:48: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+19-07-2012 01:48:54: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 01:49:42: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 01:54:03: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 01:54:59: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 01:57:07: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+
+19-07-2012 02:13:48: The char-server starting...
+19-07-2012 02:13:48: mmo_char_init: 2 characters read in save/athena.txt.
+19-07-2012 02:13:48: Id for the next created character: 150002.
+19-07-2012 02:13:48: The char-server is ready (Server is listening on the port 6121).
+19-07-2012 02:13:49: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+19-07-2012 02:14:00: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 02:18:50: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+
+19-07-2012 20:31:23: The char-server starting...
+19-07-2012 20:31:23: mmo_char_init: 2 characters read in save/athena.txt.
+19-07-2012 20:31:23: Id for the next created character: 150002.
+19-07-2012 20:31:23: The char-server is ready (Server is listening on the port 6121).
+19-07-2012 20:31:29: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+
+19-07-2012 20:33:31: The char-server starting...
+19-07-2012 20:33:31: mmo_char_init: 2 characters read in save/athena.txt.
+19-07-2012 20:33:31: Id for the next created character: 150002.
+19-07-2012 20:33:31: The char-server is ready (Server is listening on the port 6121).
+19-07-2012 20:33:32: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+
+19-07-2012 20:34:28: The char-server starting...
+19-07-2012 20:34:28: mmo_char_init: 2 characters read in save/athena.txt.
+19-07-2012 20:34:28: Id for the next created character: 150002.
+19-07-2012 20:34:28: The char-server is ready (Server is listening on the port 6121).
+19-07-2012 20:34:29: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+19-07-2012 20:41:31: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 20:43:22: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+
+19-07-2012 20:45:37: The char-server starting...
+19-07-2012 20:45:37: mmo_char_init: 2 characters read in save/athena.txt.
+19-07-2012 20:45:37: Id for the next created character: 150002.
+19-07-2012 20:45:37: The char-server is ready (Server is listening on the port 6121).
+19-07-2012 20:45:39: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+19-07-2012 20:45:51: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 20:53:35: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 20:54:33: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 20:55:11: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 21:03:16: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 21:23:40: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 21:24:40: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 21:27:09: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 21:27:59: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 21:28:42: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+19-07-2012 21:29:10: Character Selected, Account ID: 2000003, Character Slot: 0, Character Name: LIGERA EM.
+
+16-10-2012 22:14:44: The char-server starting...
+16-10-2012 22:14:44: mmo_char_init: 2 characters read in save/athena.txt.
+16-10-2012 22:14:44: Id for the next created character: 150002.
+16-10-2012 22:14:44: The char-server is ready (Server is listening on the port 6121).
+16-10-2012 22:14:50: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.

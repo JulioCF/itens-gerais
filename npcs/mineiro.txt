@@ -1,0 +1,56 @@
+sec_in02,133,172,4	script	Mineirador	850,{
+
+set .@n$,"[Mineirador]";
+
+
+	mes .@n$;
+	mes "Olá deseja Fazer Elunium/Oridecon?";
+		if(select("Sim:Não")==2) {
+close;
+}
+	mes "Oridecon ou Elunium?";
+next;
+		if(select("Elunium:Oridecon")==1){
+	mes .@n$;
+	mes "Certo, digite um número, de Elunium que Deseja";
+	mes "Sendo que Para Cada Elunium Irei Presisar de 5 Minerios.";
+	next;
+		input .@nm;
+		if(.@nm == 0){
+	mes .@n$;
+	mes "A Quantidade Não Pode Ser 0";
+close;
+}
+
+	mes "Vou verificar se você possue "+5*.@nm+" de minérios de Elinum.";
+next;
+		if(countitem(757) < 5*.@nm){
+	mes "Você não possui este número de minérios.";
+	close;
+}
+	mes "Ok aqui estão seus Eluniuns.";
+	getitem 985,.@nm;
+	delitem 757,5*.@nm;
+	close;
+}
+	mes .@n$;
+	mes "Certo, digite um número, de Elunium que Deseja";
+	mes "Sendo que Para Cada Oridecon Irei Presisar de 5 Minerios.";
+	next;
+		input .@nm;
+		if(.@nm == 0){
+	mes .@n$;
+	mes "A Quantidade Não Pode Ser 0";
+close;
+}
+	mes "Vou verificar se você possue "+5*.@nm+" de minérios de Oridecon.";
+next;
+		if(countitem(756) <5*.@nm){
+	mes "Você não possui este número de minérios.";
+	close;
+}
+	mes "Ok aqui estão seus Eluniuns.";
+	getitem 984,.@nm;
+	delitem 756,5*.@nm;
+	close;
+}

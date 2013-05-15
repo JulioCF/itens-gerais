@@ -1,0 +1,48 @@
+﻿Build started 19/07/2012 01:12:32.
+     1>Project "C:\Users\ZangaoInfo\Downloads\cornus trunk\vcproj-10\login-server_txt.vcxproj" on node 3 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "login-server_txt\Release\login-server_txt.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\3rdparty\msinttypes\include /I..\3rdparty\mt19937ar /Zi /nologo /W3 /WX- /O2 /Ob2 /Oi /Ot /Oy /GT /GL /D WIN32 /D _WIN32 /D __WIN32 /D NDEBUG /D _CRT_SECURE_NO_DEPRECATE /D _CRT_NONSTDC_NO_DEPRECATE /D FD_SETSIZE=4096 /D DB_MANUAL_CAST_TO_UNION /D WITH_TXT /D _MBCS /GF /Gm- /EHsc /MT /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"login-server_txt\Release\\" /Fd"login-server_txt\Release\vc100.pdb" /Gd /TC /wd4100 /wd4800 /analyze- /errorReport:prompt ..\src\common\core.c ..\src\common\db.c ..\src\common\plugins.c ..\src\common\socket.c ..\src\common\utils.c ..\src\login\account_txt.c ..\src\login\ipban_txt.c ..\src\login\login.c ..\src\login\loginlog_txt.c
+         core.c
+         db.c
+         plugins.c
+         socket.c
+         utils.c
+         account_txt.c
+         ipban_txt.c
+         login.c
+         loginlog_txt.c
+       Link:
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"..\login-server.exe" /INCREMENTAL:NO /NOLOGO libcmt.lib oldnames.lib ws2_32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB /MANIFEST /ManifestFile:"login-server_txt\Release\login-server.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"..\login-server.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"..\login-server.lib" /MACHINE:X86 "login-server_txt\Release\account_txt.obj"
+         "login-server_txt\Release\ipban_txt.obj"
+         "login-server_txt\Release\login.obj"
+         "login-server_txt\Release\loginlog_txt.obj"
+         "login-server_txt\Release\core.obj"
+         "login-server_txt\Release\db.obj"
+         "login-server_txt\Release\ers.obj"
+         "login-server_txt\Release\lock.obj"
+         "login-server_txt\Release\malloc.obj"
+         "login-server_txt\Release\md5calc.obj"
+         "login-server_txt\Release\nullpo.obj"
+         "login-server_txt\Release\plugins.obj"
+         "login-server_txt\Release\random.obj"
+         "login-server_txt\Release\showmsg.obj"
+         "login-server_txt\Release\socket.obj"
+         "login-server_txt\Release\strlib.obj"
+         "login-server_txt\Release\timer.obj"
+         "login-server_txt\Release\utils.obj"
+         "login-server_txt\Release\mt19937ar.obj"
+         Generating code
+         Finished generating code
+         login-server_txt.vcxproj -> C:\Users\ZangaoInfo\Downloads\cornus trunk\vcproj-10\..\login-server.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"..\login-server.exe;#1" /manifest "login-server_txt\Release\login-server.exe.intermediate.manifest"
+       FinalizeBuildStatus:
+         Deleting file "login-server_txt\Release\login-server_txt.unsuccessfulbuild".
+         Touching "login-server_txt\Release\login-server_txt.lastbuildstate".
+     1>Done Building Project "C:\Users\ZangaoInfo\Downloads\cornus trunk\vcproj-10\login-server_txt.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.37

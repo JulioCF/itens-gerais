@@ -1,0 +1,132 @@
+prontera,168,192,5	script	Sortudo	106,{
+
+	mes "[Sortudo]";
+	mes "Olá ^0000CD"+StrCharInfo(0)+"^000000 !";
+	mes "O que deseja ?";
+	next;
+	switch (select ("Entrar:"+(getgmlevel() > 98 ? ":Configurar Prêmios":"")))
+	{
+		mes "[Sortudo]";
+		
+		case 1:
+			if (!$portao_sortudo)
+			{
+				mes "O Evento está fechado !";
+				close;
+			}
+			mes "Boa sorte durante o evento !";
+			close2;
+			set .@rand_sortudo, rand(1,8);
+			if(.@rand_sortudo == 1) warp "quiz_02", 318, 34;
+			if(.@rand_sortudo == 2) warp "quiz_02", 37, 52;
+			if(.@rand_sortudo == 3) warp "quiz_02", 73, 52;
+			if(.@rand_sortudo == 4) warp "quiz_02", 330, 34;
+			if(.@rand_sortudo == 5) warp "quiz_02", 49, 52;
+			if(.@rand_sortudo == 6) warp "quiz_02", 342, 34;
+			if(.@rand_sortudo == 7) warp "quiz_02", 354, 34;
+			if(.@rand_sortudo == 8) warp "quiz_02", 61, 52;
+			end;
+
+		case 2:
+			next;
+			mes "[Sortudo]";
+			mes "Digite o ID do item que poderá ser dropado !";
+			input .@id_sortudo;
+			next;
+			mes "[Sortudo]";
+			mes "Digite outro ID de item que poderá ser dropado !";
+			input .@id_sortudo_t;
+			next;
+			mes "[Sortudo]";
+			mes "Digite a quantia em Zeny que poderá ser ganha !";
+			input .@zeny_sortudo;
+			next;
+			mes "[Sortudo]";
+			mes "Você escolheu como prêmios:";
+			mes "1 "+getitemname(.@id_sortudo);
+			mes "1 "+getitemname(.@id_sortudo_t);
+			show .@zeny_sortudo+" Zenys";
+			close2;
+			set $item_sortudo, .@id_sortudo;
+			set $item_sortudo_t, .@id_sortudo_t;
+			set $zeny_sortudo, .@zeny_sortudo;
+			end;
+	}
+}
+
+quiz_02,0,0,0	script	Sortudo_Clock	-1,{
+
+	OnClock0100:
+		atcommand "@killmonster2";
+		set $portao_sortudo,1;
+		announce "O Evento 'Sortudo' irá começar, vocês só tem 5 minutos !",bc_yellow;
+		end;
+		
+	OnClock0105:
+		atcommand "@pvpon";
+		set $portao_sortudo, 0;
+		announce "Os portões para o evento foram fechados !",bc_yellow;
+		end;
+
+	OnClock0110:
+		atcommand "@pvpoff";
+		monster	"quiz_02",77,52,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",77,53,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",77,64,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",314,34,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",314,45,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",314,57,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",33,52,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",33,62,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",33,73,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",331,34,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",331,45,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",331,57,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",49,52,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",49,62,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",49,73,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",342,34,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",342,48,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",342,57,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",354,34,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",354,45,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",354,57,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",61,52,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",61,62,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		monster	"quiz_02",61,73,"Tesouro",1732,1,"Sortudo_Clock::OnMyMobDead";
+		end;
+		
+	OnMyMobDead:
+		switch (set (.@premio_sortudo, rand(1,4)))
+		{
+			case 1:
+				getitem $item_sortudo, 1;
+				announce "[Sortudo]: "+strcharinfo(0)+" abriu um Baú. Prêmio: "+getitemname($item_sortudo)+" !",bc_yellow;
+				break;
+			
+			case 2:
+				set Zeny, Zeny + $zeny_sortudo;
+				announce "[Sortudo]: "+strcharinfo(0)+" abriu um Baú. Prêmio: "+$zeny_sortudo+" Zenys !", bc_yellow;
+				break;
+		
+			case 3:
+				atcommand "@die";
+				announce "[Sortudo]: "+strcharinfo(0)+" abriu um Baú. Não ganhou nada, e ainda morreu !",bc_yellow;
+				break;
+			
+			case 4:
+				getitem $item_sortudo_t, 1;
+				announce "[Sortudo]: "+strcharinfo(0)+" abriu um Baú. Prêmio: "+getitemname($item_sortudo_t)+" !",bc_yellow;
+				break;
+		}
+		warp "prontera", 155, 185;
+		end;
+}
+
+quiz_02	mapflag	nomemo
+quiz_02	mapflag	nowarp
+quiz_02	mapflag	nowarpto
+quiz_02	mapflag	noicewall
+quiz_02	mapflag	nosave
+quiz_02	mapflag	noreturn
+quiz_02	mapflag	noteleport

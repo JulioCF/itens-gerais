@@ -1,0 +1,26 @@
+// warper pra sala vip
+
+prontera,170,206,5	script	Sala VIP	61,{
+
+		if(getgmlevel() < 1){
+		mes "Você não é vip...";
+		next;
+		mes "Torne-se um membro VIP você também!.";
+		mes "Faça uma doação para o servidor; site: ^FF0000http://ragnarokorigem.com^000000";
+		mes "aproveite e ajude o servidor.";
+		close;
+
+		} else {
+
+	mes "Bem vindo sr. ^FF0000"+strcharinfo(0)+"^000000, deseja ir agora para seu mapa Particular?";
+	next;
+	if(select("Sim, Por favor:Não, obrigado") == 2){close;}
+
+		mes "Ok, bom proveito e obrigado por ajudar o servidor!";
+		next;
+		warp "sec_in02",133,161;
+		percentheal 100,100;
+
+		close;
+	}
+}

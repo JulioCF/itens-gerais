@@ -1,0 +1,7 @@
+// Database de Regulagem de Dano baseado no Tamanho do oponente
+
+// Colunas: Dano por Tipo de Arma, Linhas: Tamanho do Oponente
+// Soco, Faca, Espada (1M), Espada (2M), Lança (1M), Lança (2M), Machado (1M), Machado (2M), Maça (1M), Maça (2M), Cajado (1M), Arco, Soqueira, Instrumento, Chicote, Livro, Katar, Revólver, Rifle, Espingarda, Metralhadora Gatling, Lança-Granadas, Shuriken Huuma, Cajado (2M)
+100,	100,	75,	75,	75,	75,	50,	50,	75,	100,	100,	100,	100,	75,	75,	100,	75,	100,	100,	100,	100,	100,	100,	100	// Tamanho: Pequeno
+100,	75,	100,	75,	75,	75,	75,	75,	100,	100,	100,	100,	75,	100,	100,	100,	100,	100,	100,	100,	100,	100,	100,	100	// Tamanho: Médio
+100,	50,	75,	100,	100,	100,	100,	100,	100,	100,	100,	75,	50,	75,	50,	50,	75,	100,	100,	100,	100,	100,	100,	100	// Tamanho: Grande

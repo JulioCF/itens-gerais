@@ -1,0 +1,68 @@
+//===== Cronus Script ========================================
+//= WoE Setter - Configuração dos horários da WoE SE
+//===== Por: =================================================
+//= Reply.(WoE 1.0) e editado por Heaven para WoE SE
+//===== Versão Atual: ========================================
+//= 1.3
+//===== Compatível com: ======================================
+//= Cronus SVN; Episódio RO 4+
+//===== Descrição: ===========================================
+//= Configura horário da WoE SE
+//===== Comentários Adicionais: ==============================
+//= 1.0 Iniciado [Reply.]
+//= 1.1 Trocado o nome das variáveis de acordo com o agit_controller. [RoM]
+//= 1.2 Corrigido o erro de iniciar/terminar a WoE a meia-noite. [RoM]
+//= 1.3 Editado para atender à WoE SE [Heaven]
+//============================================================
+
+-	script	WoE Setter SE	-1,{
+	end;
+	
+	OnInit:
+//= Horário de início da GdE (Guerra do Emperium) em HORAS
+//= --- Configure o número anterior ao 'ponto-e-vírgula ( ; ) ' com o horário para iniciar a GdE em formato 24 horas.
+//= --- Caso não haja guerra no dia, o valor a ser setado deve ser '-1'.
+	set $agit_hora_start_se[0],-1;	// Domingo
+	set $agit_hora_start_se[1],-1;	// Segunda
+	set $agit_hora_start_se[2],-1;	// Terça
+	set $agit_hora_start_se[3],-1;	// Quarta
+	set $agit_hora_start_se[4],-1;	// Quinta
+	set $agit_hora_start_se[5],-1;	// Sexta
+	set $agit_hora_start_se[6],-1;	// Sábado
+	
+	
+//= Horário de finalização da GdE (Guerra do Emperium) em HORAS
+//= --- Configure o número anterior ao 'ponto-e-vírgula ( ; ) ' com o horário para finalizar a GdE em formato 24 horas.	
+//= --- Caso não haja guerra no dia, o valor a ser setado deve ser '-1'.
+	set $agit_hora_end_se[0],-1;	// Domingo
+	set $agit_hora_end_se[1],-1;	// Segunda
+	set $agit_hora_end_se[2],-1;	// Terça
+	set $agit_hora_end_se[3],-1;	// Quarta
+	set $agit_hora_end_se[4],-1;	// Quinta
+	set $agit_hora_end_se[5],-1;	// Sexta
+	set $agit_hora_end_se[6],-1;	// Sábado
+	
+	
+//= Horário de início da GdE (Guerra do Emperium) em MINUTOS
+//= --- Configure o número anterior ao 'ponto-e-vírgula ( ; ) ' com o horário para iniciar a GdE, iniciando em 0 e terminando em 59.
+	set $agit_min_start_se[0],0;	// Domingo
+	set $agit_min_start_se[1],0;	// Segunda
+	set $agit_min_start_se[2],0;	// Terça
+	set $agit_min_start_se[3],0;	// Quarta
+	set $agit_min_start_se[4],0;	// Quinta
+	set $agit_min_start_se[5],0;	// Sexta
+	set $agit_min_start_se[6],0;	// Sábado
+	
+	
+//= Horário de finalização da GdE (Guerra do Emperium) em MINUTOS
+//= --- Configure o número anterior ao 'ponto-e-vírgula ( ; ) ' com o horário em minutos para finalizar a GdE, iniciando em 0 e terminando em 59,
+	set $agit_min_end_se[0],0;	// Domingo
+	set $agit_min_end_se[1],0;	// Segunda
+	set $agit_min_end_se[2],0;	// Terça
+	set $agit_min_end_se[3],0;	// Quarta
+	set $agit_min_end_se[4],0;	// Quinta
+	set $agit_min_end_se[5],0;	// Sexta
+	set $agit_min_end_se[6],0;	// Sábado
+
+	end;
+}

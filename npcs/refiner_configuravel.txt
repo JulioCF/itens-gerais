@@ -1,0 +1,155 @@
+//////////////////////////////////////////////////////////////////////
+//  ______     _  _          _____              _         _         //
+// |  ____|   | |(_)        / ____|            (_)       | |        //
+// | |__    __| | _   ___  | (___    ___  _ __  _  _ __  | |_  ___  //
+// |  __|  / _` || | / _ \  \___ \  / __|| '__|| || '_ \ | __|/ __| //
+// | |____| (_| || ||  __/  ____) || (__ | |   | || |_) || |_ \__ \ //
+// |______|\__,_||_| \___| |_____/  \___||_|   |_|| .__/  \__||___/ //
+//                                                | |               //
+//     Não remover os créditos.                   |_|               //
+//                                                                  //
+//////////////////////////////////////////////////////////////////////
+//====== brAthena/eAthena ============================================
+//=Refinador Especial
+//===== Por: =========================================================
+//=Edie Johnny
+//===== Versão Atual: ================================================
+//=1.0
+//===== Descrição: ===================================================
+//=Refinador configurável ao seu gosto.
+//===== Changelog: ===================================================
+//=Script iniciado
+//====================================================================
+prontera,155,188,4	script	Refinador#especial	404,{
+
+// Capacidade de Refine dos equipamentos. Padrão é até +10.
+set $REF_Max,10;
+
+// Array de chances para Equipamentos:
+setarray $REF_Equip[0],100,100,100,100, 90, 80, 70, 60, 50, 40;
+
+// Array de chances para Armas Lv. 1:
+setarray $REF_Weap1[0],100,100,100,100,100,100,100, 90, 80, 70;
+
+// Array de chances para Armas Lv. 2:
+setarray $REF_Weap2[0],100,100,100,100,100,100, 90, 80, 70, 60;
+
+// Array de chances para Armas Lv. 3:
+setarray $REF_Weap3[0],100,100,100,100,100, 90, 80, 70, 60, 50;
+
+// Array de chances para Armas Lv. 4:
+setarray $REF_Weap4[0],100,100,100,100, 90, 80, 70, 60, 50, 40;
+
+// Array dos IDs dos itens necessários para cada nível.
+// Modelo: Armadura, Armas Lvl 1, Lvl 2, Lvl 3, Lvl 4, Zenys.
+setarray $REF_Itens[0],985,1010,1011,984,984,2000;
+
+// Nível de GM para usar.
+set $REF_GM,1;
+
+// Nome do NPC.
+set @n$,"^FF0000[ ^FFC500Refinador^FF0000 ]^000000";
+
+mes @n$;
+mes "Olá jovem aventureir" + ((Sex)?"o":"a") + "!";
+
+callfunc "Refine_Check";
+
+mes "Eu posso refinar seus";
+mes "equipamentos:";
+mes "^FF0000Armaduras: " + (($REF_Itens[0]) ? "1 " + getitemname($REF_Itens[0]) : "^0000FFNada^000000");
+mes "^FF0000Armas Lv. 1: " + (($REF_Itens[1]) ? "1 " + getitemname($REF_Itens[1]) : "^0000FFNada^000000");
+mes "^FF0000Armas Lv. 2: " + (($REF_Itens[2]) ? "1 " + getitemname($REF_Itens[2]) : "^0000FFNada^000000");
+mes "^FF0000Armas Lv. 3: " + (($REF_Itens[3]) ? "1 " + getitemname($REF_Itens[3]) : "^0000FFNada^000000");
+mes "^FF0000Armas Lv. 4: " + (($REF_Itens[4]) ? "1 " + getitemname($REF_Itens[4]) : "^0000FFNada^000000");
+mes (($REF_Itens[5]) ? "^0000FF" + $REF_Itens[5] + " Zenys.^000000" : "^000000");
+RefineMenu:
+set .@eq,select(callfunc("Refine_Check"));
+next;
+mes @n$;
+
+	while(1) {
+	if(!getequipisequiped(.@eq)) callfunc "Refine_Error",1;
+	if(!getequipisenableref(.@eq)) callfunc "Refine_Error",2;
+	if(!getequipisidentify(.@eq)) callfunc "Refine_Error",3;
+	if(getequiprefinerycnt(.@eq) >= $REF_Max) callfunc "Refine_Error",4;
+	if(!countitem($REF_Itens[getequipweaponlv(.@eq)]) || Zeny < $REF_Itens[5]) callfunc "Refine_Error",5;
+	mes "Muito bem, o que";
+	mes "deseja fazer?";
+	set .@cont,callfunc ("Refine_While",select(((.@cont)?((getequippercentrefinery(.@eq) == 100)?"":"Continuar refinando..."):((getequippercentrefinery(.@eq) == 100)?"":"Refinar!")),((getequippercentrefinery(.@eq) == 100)?"Refinar até nível seguro!":""),"Cancelar."),getequipweaponlv(.@eq),.@eq);
+		if(.@count) CallSub "RefineMenu";
+    }
+
+close;
+
+}
+
+function	script	Refine_Check	{
+	if(getgmlevel() < $REF_GM) {
+		mes "Desculpe mas não posso ajudá-l" + ((Sex)?"o":"a") + ".";
+    	close;
+    }
+
+	for(set .@n,1; .@n < 10; set .@n,.@n + 1) {
+		if(getequipisequiped(.@n) && getequipisenableref(.@n))
+		set .@menu$,.@menu$ + ">> " + getequipname(.@n);
+        set .@menu$,.@menu$ + ":";
+	}
+
+	if(.@menu$ == ":::::::::") {
+		mes "Você não tem nada equipado que eu possa refinar.";
+        close;
+	}
+return .@menu$;
+}
+
+function	script	Refine_Error	{
+	switch(getarg(0)) {
+	case 1:	mes ("O equipamento escolhido não está mais equipado."); close;
+	case 2: mes ("Não posso trabalhar com o equipamento escolhido."); close;
+	case 3: mes ("O equipamento escolhido não está identificado."); close;
+	case 4: mes ("O equipamento escolhido já está refinado ao máximo."); close;
+	case 5: mes ("Você não possui os materiais necessários para refinar."); close;
+	}
+}
+	
+function	script	Refine_While	{
+
+	switch(getarg(0)) {
+	case 1:
+	delitem ($REF_Itens[getequipweaponlv(getarg(2))]),1;
+    set Zeny, Zeny - $REF_Itens[5];
+		if(rand(100) <= getd("$REF_"+((getarg(1) > 0)?"Weap"+getarg(1):"Equip")+"[ " + getequiprefinerycnt(getarg(2)) + "]")) {
+		successrefitem(getarg(2));
+		mes "Perfeito! Estou feliz em saber que minhas habilidades ainda não enferrujaram!";
+		} else {
+		failedrefitem(getarg(2));
+		mes "Oh não! O procedimento falhou... Sabia que não devia ter martelado com tanta força. Droga!";
+        return 1;
+		}
+	break;
+
+	case 2:
+		while(getd("$REF_"+((getarg(1) > 0)?"Weap"+getarg(1):"Equip")+"[ " + getequiprefinerycnt(getarg(2)) + "]") == 100) {
+		delitem ($REF_Itens[getequipweaponlv(getarg(2))]),1;
+        set Zeny, Zeny - $REF_Itens[5];
+		successrefitem(getarg(2));	
+            if(!countitem($REF_Itens[getequipweaponlv(getarg(2))]) || Zeny < $REF_Itens[5]) {
+				mes "Hehe.. Parece que os seus";
+				mes "materiais acabaram...";
+				return;
+			}
+		}
+		mes "Tudo certo! Seu equipamento";
+		mes "foi refinado até o nível de";
+		mes "segurança!";
+		break;
+
+	case 3:
+	close;
+	}
+
+next;
+mes @n$;
+return 1;
+}

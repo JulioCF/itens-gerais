@@ -1,0 +1,212 @@
+//===== Cronus Script =========================================
+//= Deviruchi Divorciador
+//===== Por: ==================================================
+//= Perkka, Scriptor, LightFighter
+//= L0ne_W0lf
+//===== Versão Atual: =========================================
+//= 1.5
+//===== Comentários adicionais: ===============================
+//= Ambos os Jogadores deve estar Online para se divorciar.
+//= Fixed menu [Lupus]
+//= 1.1 Acrescentado check se o companheiro está on-line, adicionado efeitos [Lupus]
+//= 1.2 Atualizado para Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.2a Comentado teste de 'wedding_sign' para deixar
+//=             os jogadores casado se divorciar, aperfeiçoado, estabelecido bug [Lupus]	
+//= 1.3 Variável se casando 'wedding_sign' é agora não colocado em divórcio. [L0ne_W0lf]
+//= 1.3a Traduzido. [Poringao]
+//= 1.4 Revisado e corrigido [Cardoso]
+//= 1.5 Trocado efeitos numéricos por nomes. [Lord]
+//= 1.5a Revisado. [RoM]
+//=============================================================
+
+nif_in,190,112,5	script	Deviruchi#divorce	738,{
+	mes "[Deviruchi]";
+//	if (wedding_sign == 0) {
+//		mes "Heh heh...";
+//		mes "Olha que rosto deprimido. Você";
+//		mes "deve estar se sentindo muito só.";
+//		mes "Mas isso é algo que todo mundo";
+//		mes "tem a negociar.";
+//		next;
+//		mes "[Deviruchi]";
+//		mes "Se você se sente tão só,";
+//		mes "que tal um animal de estimação?";
+//		mes "Eu ouço que meu tipo é muito";
+//		mes "popular hoje em dia, hehehe~";
+//		close;
+//	}
+//	else 
+  	if (!getpartnerid()) {
+		mes "Bwahahahahah!";
+		mes "Esses aspectos em seus olhos!";
+		if (sex) {
+			mes "Esses definitivamente são os";
+			mes "olhos de um homem solteiro";
+			mes "solitário. Eu estou quase 100";
+			mes "por cento certo que você quis escapar do altar.";
+		}
+		else {
+			mes "Eles só estão cheios com a";
+			mes "dor de uma criada velha!";
+			mes "Não pôde laçar algum pobre";
+			mes "sujeito para o matrimônio, huh?";
+		}
+		next;
+		mes "[Deviruchi]";
+		mes "HHAHAHAHA~!";
+		mes "Oooooh...Hee hee~";
+		mes "Eu seria mais simpatizante";
+		mes "se, você sabe, eu não sou";
+		mes "uma criatura da escuridão.";
+		close;
+	}
+	mes "Você parece muito deprimido...";
+	mes "Felicidade pra você, eu poderia";
+	mes "me preocupar menos com pessoas";
+	mes "felizes... É os humanos em";
+	mes "desespero que eu levo um interesse";
+	mes "interno. Hahahahahahah~!";
+	next;
+	mes "[Deviruchi]";
+	mes "Eu sinto que você leva";
+	mes "um fardo cansativo... Se";
+	mes "eu não estiver errado, você é...";
+	if (sex)
+		mes "um homem casado, não é?";
+	else
+		mes "uma mulher casada, não é?";
+	next;
+	mes "[Deviruchi]";
+	mes "Deixe-me perguntar uma coisa.";
+	mes "Você é feliz por ser casado?";
+	mes "Esqueça as responsabilidades,";
+	mes "romance e todos esses outros";
+	mes "lixos por enquanto.";
+	next;
+	mes "[Deviruchi]";
+	mes "Eu quero dizer, só há uma única";
+	mes "pessoa que realmente pode lhe";
+	mes "trazer toda aquela felicidade?";
+	mes "Eu sei em toda parte como são";
+	mes "supostas casamentos especiais e a magia do amor para ser, mas...";
+	next;
+	mes "[Deviruchi]";
+	mes "No final do dia, você e seu";
+	mes "companheiro brigam, e você sente";
+	mes "totalmente totalmente miserável.";
+	if (sex)
+		mes "... tudo por causa DELA.";
+	else
+		mes "... tudo por causa DELE.";
+	next;
+	mes "[Deviruchi]";
+	mes "Sim, é seu destino me encontrar";
+	mes "aqui. Todos nós cometemos erros...";
+	mes "Até mesmo se você prometesse amor";
+	mes "perpétuo, até mesmo se você";
+	mes "fizesse uma promessa... Eu";
+	mes "posso livrar você dessa prisão do matrimônio.";
+	next;
+	mes "[Deviruchi]";
+	mes "É simples se você olhar para o";
+	mes "matrimônio como um contrato...";
+	mes "Um contrato que termina com 'até";
+	mes "que a morte nos separe.' Aqui em";
+	mes "Nifleheim, é fácil de usar aquela";
+	mes "pequena falha...";
+	next;
+	mes "[Deviruchi]";
+	mes "*sussurros*";
+	mes "^555555Não é como se você estivesse violando^000000";
+	if (sex) {
+		mes "^555555qualquer promessa, e não é como";
+		mes "sua esposa se preocuparia se ela";
+		mes "não souber... Você não quer ser";
+		mes "livrar dela?^000000";
+	}
+	else {
+		mes "^555555qualquer promessa. Infernos, seu";
+		mes "marido nem mesmo tem que saber";
+		mes "sobre isto... Você merece uma";
+		mes "felicidade real, certo?^000000";
+	}
+	next;
+	mes "[Deviruchi]";
+	mes "Você pode ter um novo amor";
+	mes "com uma pessoa melhor...";
+	mes "Isso não seria ótimo...?";
+	mes "Eu posso ajudar você se quiser...";
+	mes "Eu posso fazer tudo isso acontecer!";
+	next;
+	if (select("Não, Eu sou feliz.:Sim, faça por favor.") == 1) {
+		mes "[Deviruchi]";
+		mes "Hmpf~! Você ainda deve ser";
+		mes "fascinado com a tola noção";
+		mes "do amor eterno. Bem se você,";
+		mes "pensa que está feliz, então";
+		mes "eu não tenho nada a fazer por";
+		mes "você!";
+		close2;
+		warp "niflheim",169,162;
+		end;
+	}
+	mes "[Deviruchi]";
+	mes "Bom, bom...";
+	mes "Agora tudo que você tem de fazer é";
+	mes "me dar o que quero em troca...";
+	mes "Apenas 2,500,000 zeny e... *cofff!*";
+	mes "^666666Um pedaço de sua alma.^000000";
+	next;
+	mes "[Deviruchi]";
+	mes "Depois disso, é seguir a vida";
+	mes "despreocupada. Tudo você tem";
+	mes "que fazer é dizer a palavra...";
+	next;
+	if (select("...Me dê algum tempo para pensar.:Qualquer preço resolverá, me dê agora mesmo um divórcio!") == 1) {
+		mes "[Deviruchi]";
+		mes "Eu entendo. Mas se você pensar";
+		mes "em algo, pense sobre";
+		if (sex) {
+			mes "sua esposa estar importunando,";
+			mes "e como seria ótimo se livrar ";
+			mes "finalmente da bola velha e";
+			mes "algema.";
+		}
+		else {
+			mes "como é horrível seu marido,";
+			mes "isso que seria um alívio";
+			mes "ser libertada daquele tolo.";
+		}
+		close;
+	}
+	mes "[Deviruchi]";
+	if (Zeny > 2499999) {
+		mes "Excelente escolha!";
+		mes "Deixe-me começar certo sem";
+		mes "parar! Isto deve levar algum";
+		mes "tempo, mas é melhor que ser";
+		mes "^FF0000casado e infeliz para o";
+		mes "resto da sua vida.^000000";
+		next;
+		specialeffect EF_MAGICROD;
+		specialeffect2 EF_DEVIL;
+		set wedding_sign,0;
+		set zeny,zeny-2500000;
+		percentheal -100,-100;
+		divorce;
+		mes "[Deviruchi]";
+		mes "Bwahhahahaha!";
+		mes "agora você está livre!";
+		mes "Não se sente bem melhor";
+		mes "agora como um solteiro?";
+		mes "Ah, celibato...";
+		close;
+	}
+	mes "Hmmm...Eu lhe disse que trouxesse";
+	mes "2,500,000 zeny, certo? Ninguém";
+	mes "mais neste mundo pode oferecer";
+	mes "este tipo de liberdade... Você";
+	mes "não pode pôr preço em paz de";
+	mes "mente, você pode?";
+	close;
+}

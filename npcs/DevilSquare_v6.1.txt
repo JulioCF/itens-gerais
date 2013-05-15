@@ -1,0 +1,723 @@
+//////////////////////////////////////////
+//  \/==  \|  |/  //==\\ \\==//  \===/	//
+// //     ||  ||  ||  || |/  \| //   \\	//
+// ||	  ||--||  ||--|| ||  || \\___  	//
+// ||     ||--||  ||--|| ||  ||      \\	//
+// \\     ||  ||  ||  || ||  ||      //	//
+//  /\==  /|  |\  /|  |\ \\==// ====//	//
+//////////////////////////////////////////
+//NPC: Devil Square Rev.	   			//	
+//////////////////////////////////////////
+//Description: Evento Devil Square		//
+// parecido com o MU Online, reformulado//
+// para a adição de "níveis" e novo		//
+// sistema de premiação					//
+//////////////////////////////////////////
+//Changelog:							//
+// V4.2 - Script Original por Nepster e	//
+//	Rafael (Re-avaliada por Atum)		//
+// V5.0 - Script Reformulado [Chaoseiro]//
+// v6.0 - Script Reescrito				//
+// v6.1 - Modificação no modo de Spawn	//
+//  dos monstros. Veja linha 369.		//
+// v6.2 - Correção por JulioCF			//
+//////////////////////////////////////////
+quiz_00,74,36,3	script	Devil Square	705,{
+// == Configurações ==
+Set @ServerName$,"braRAG";	//Nome do seu Server
+// == Funções ==
+function DSInfo;
+// =============
+if(GetGMLevel() >= 99)	// Coloque aqui no lugar do 99 o nível mínimo de GM para configurar o npc
+	while(1){
+		Set @finished,0;
+		Mes "[Guarda Devil Square]";
+		Mes "Olá Mestre! Bem-Vindo ao portal do ^FF0000Devil Square^000000";
+		Mes "O que deseja hoje?";
+		next;
+		switch(select("- Entrar no DS","- Informações","- Configurar Prêmios","- Configurar DevilSquare","- Nada")){
+			case 1:
+				close2;
+				percentheal 100,100;
+				warp "ordeal_1-1",150,150;
+				end;
+			case 2: DSInfo(); break;
+			case 3:
+				while(!@finished){
+					Set @cancel,0;
+					Mes "[Guarda Devil Square]";
+					Mes "O que deseja fazer em relação aos Prêmios?";
+					next;
+					switch(select("- Adicionar um Item","- Modificar um Item","- Apagar um Item","- Mudar Entrega dos Itens","- Cancelar")){
+						case 1:
+							while(1){
+								Mes "[Guarda Devil Square]";
+								Mes "Selecione o Nível do DS aonde o Item será dado:";
+								next;
+								Set @nivel,select("1 - "+$DSLvL1Name$,"2 - "+$DSLvL2Name$,"3 - "+$DSLvL3Name$,"Cancelar");
+								if(@nivel==4){
+									Set @cancel,1;
+									break;
+								}
+								Mes "[Guarda Devil Square]";
+								Mes "O nível "+@nivel+" - "+GetD("$DSLvL"+@nivel+"Name$")+" está correto?";
+								next;
+								Set @s,select("Sim","Não","Cancelar");
+								if(@s==3) Set @cancel,1;
+								if(@s==1 || @s==3) break;
+							}
+							if(@cancel) break;
+							while(1){
+								Mes "[Guarda Devil Square]";
+								Mes "Digite a ID do novo Item:";
+								next;
+								input @newid;
+								Mes "[Guarda Devil Square]";
+								Mes GetItemName(@newid)+" (ID: "+@newid+") está correto?";
+								next;
+								Set @s,select("Sim","Não","Cancelar");
+								if(@s==3) Set @cancel,1;
+								if(@s==1 || @s==3) break;
+							}
+							if(@cancel) break;
+							while(1){
+								Mes "[Guarda Devil Square]";
+								Mes "Digite a Quantidade a ser dada do Item "+GetItemName(@newid)+":";
+								next;
+								input @newqnt;
+								Mes "[Guarda Devil Square]";
+								Mes @newqnt+"x "+GetItemName(@newid)+" está correto?";
+								next;
+								Set @s,select("Sim","Não","Cancelar");
+								if(@s==3) Set @cancel,1;
+								if(@s==1 || @s==3) break;
+							}
+							if(@cancel) break;
+							Mes "[Guarda Devil Square]";
+							Mes "Item Adicionado com Sucesso!";
+							SetArray GetD("$DSPrizeLvL"+@nivel+"IDs["+GetArraySize(GetD("$DSPrizeLvL"+@nivel))+"]"),@newid;
+							SetArray GetD("$DSPrizeLvL"+@nivel+"Qnt["+GetArraySize(GetD("$DSPrizeLvL"+@nivel))+"]"),@newqnt;
+							next;
+							break;
+						case 2:
+							Set @tudo,0;
+							Mes "[Guarda Devil Square]";
+							Mes "De qual nível deseja modificar um Item?";
+							next;
+							Set @nivel,select("1 - "+$DSLvL1Name$,"2 - "+$DSLvL2Name$,"3 - "+$DSLvL3Name$,"Cancelar");
+							if(@nivel==4) break;
+							Mes "[Guarda Devil Square]";
+							Mes "Escolha o Item a ser Alterado:";
+							next;
+							Set @menu$,"";
+							for(Set @i,0; @i<GetArraySize(GetD("$DSPrizeLvL"+@nivel+"IDs")); Set @i,@i+1)
+								if(@menu$=="") Set @menu$,GetD("$DSPrizeLvL"+@nivel+"Qnt["+@i+"]")+"x "+GetItemName(GetD("$DSPrizeLvL"+@nivel+"IDs["+@i+"]"));
+								else Set @menu$,@menu$+":"+GetD("$DSPrizeLvL"+@nivel+"Qnt["+@i+"]")+"x "+GetItemName(GetD("$DSPrizeLvL"+@nivel+"IDs["+@i+"]"));
+							Set @menu$,@menu$+":Cancelar";
+							Set @s,select(@menu$)-1;
+							if(@s==GetArraySize(GetD("$DSPrizeLvL"+@nivel+"IDs"))) break;
+							Mes "[Guarda Devil Square]";
+							Mes "O que deseja alterar do Item "+GetD("$DSPrizeLvL"+@nivel+"Qnt["+@s+"]")+"x "+GetItemName(GetD("$DSPrizeLvL"+@nivel+"IDs["+@s+"]"))+" ?";
+							next;
+							switch(select("- Tudo","- ID do Item","- Quantidade do Item","- Nível aonde o Item é dado","- Cancelar")){
+								case 1: Set @tudo,1;
+								case 2:
+									while(1){
+										Mes "[Guarda Devil Square]";
+										Mes "Digite a nova ID do Item:";
+										next;
+										input @newid;
+										Mes "[Guarda Devil Square]";
+										Mes GetItemName(@newid)+" (ID: "+@newid+") está correto?";
+										next;
+										Set @s,select("Sim","Não","Cancelar");
+										if(@s==3) Set @cancel,1;
+										if(@s==1 || @s==3) break;
+									}
+									if(@cancel) break;
+									Mes "[Guarda Devil Square]";
+									Mes "ID definida com Sucesso!";
+									SetD("$DSPrizeLvL"+@nivel+"IDs["+@s+"]"),@newid;
+									next;
+									if(!@tudo) break;
+								case 3:
+									while(1){
+										Mes "[Guarda Devil Square]";
+										Mes "Digite a nova Quantidade a ser dada do Item "+GetItemName(GetD("$DSPrizeLvL"+@nivel+"IDs["+@s+"]"))+":";
+										next;
+										input @newqnt;
+										Mes "[Guarda Devil Square]";
+										Mes @newqnt+"x "+GetItemName(@newid)+" está correto?";
+										next;
+										Set @s,select("Sim","Não","Cancelar");
+										if(@s==3) Set @cancel,1;
+										if(@s==1 || @s==3) break;
+									}
+									if(@cancel) break;
+									Mes "[Guarda Devil Square]";
+									Mes "Quantidade definida com Sucesso!";
+									SetD("$DSPrizeLvL"+@nivel+"Qnt["+@s+"]"),@newqnt;
+									next;
+									if(!@tudo) break;
+								case 4:
+									while(1){
+										Mes "[Guarda Devil Square]";
+										Mes "Selecione o Nível do DS aonde o Item será dado:";
+										next;
+										Set @n,select("1 - "+$DSLvL1Name$,"2 - "+$DSLvL2Name$,"3 - "+$DSLvL3Name$,"Cancelar");
+										if(@n==4){
+											Set @cancel,1;
+											break;
+										}
+										Mes "[Guarda Devil Square]";
+										Mes "O nível "+@n+" - "+GetD("$DSLvL"+@n+"Name$")+" está correto?";
+										next;
+										Set @s,select("Sim","Não","Cancelar");
+										if(@s==3) Set @cancel,1;
+										if(@s==1 || @s==3) break;
+									}
+									if(@cancel) break;
+									Mes "[Guarda Devil Square]";
+									Mes "Nível definido com Sucesso!";
+									SetArray GetD("$DSPrizeLvL"+@n+"IDs["+GetArraySize("$DSPrizeLvL"+@n+"IDs")+"]"),GetD("$DSPrizeLvL"+@nivel+"IDs["+@s+"]");
+									SetArray GetD("$DSPrizeLvL"+@n+"Qnt["+GetArraySize("$DSPrizeLvL"+@n+"IDs")+"]"),GetD("$DSPrizeLvL"+@nivel+"Qnt["+@s+"]");
+									DeleteArray GetD("$DSPrizeLvL"+@nivel+"IDs["+@s+"]"),1;
+									DeleteArray GetD("$DSPrizeLvL"+@nivel+"Qnt["+@s+"]"),1;
+									next;
+								case 5: break;
+							}
+							break;
+						case 3:
+							Mes "[Guarda Devil Square]";
+							Mes "De qual nível deseja apagar um Item?";
+							next;
+							Set @nivel,select("1 - "+$DSLvL1Name$,"2 - "+$DSLvL2Name$,"3 - "+$DSLvL3Name$,"Cancelar");
+							if(@nivel==4) break;
+							Mes "[Guarda Devil Square]";
+							Mes "Escolha o Item a ser Apagado:";
+							next;
+							Set @menu$,"";
+							for(Set @i,0; @i<GetArraySize(GetD("$DSPrizeLvL"+@nivel+"IDs")); Set @i,@i+1)
+								if(@menu$=="") Set @menu$,GetD("$DSPrizeLvL"+@nivel+"Qnt["+@i+"]")+"x "+GetItemName(GetD("$DSPrizeLvL"+@nivel+"IDs["+@i+"]"));
+								else Set @menu$,@menu$+":"+GetD("$DSPrizeLvL"+@nivel+"Qnt["+@i+"]")+"x "+GetItemName(GetD("$DSPrizeLvL"+@nivel+"IDs["+@i+"]"));
+							Set @menu$,@menu$+":Cancelar";
+							Set @s,select(@menu$)-1;
+							if(@s==GetArraySize(GetD("$DSPrizeLvL"+@nivel+"IDs"))) break;
+							Mes "[Guarda Devil Square]";
+							Mes "Deseja mesmo Apagar o Item "+GetD("$DSPrizeLvL"+@nivel+"Qnt["+@s+"]")+"x "+GetItemName(GetD("$DSPrizeLvL"+@nivel+"IDs["+@s+"]"))+" ?";
+							next;
+							if(select("Sim","Não")==2) break;
+							Mes "[Guarda Devil Square]";
+							Mes "Item Apagado!";
+							DeleteArray GetD("$DSPrizeLvL"+@nivel+"IDs["+@s+"]"),1;
+							DeleteArray GetD("$DSPrizeLvL"+@nivel+"Qnt["+@s+"]"),1;
+							next;
+							break;
+						case 4:
+							Mes "[Guarda Devil Square]";
+							Mes "Método de Entrega dos Itens Atual:";
+							Mes ($DSPrizeMethod ? "Itens Cairão de Baús" : "Itens são Entregados pelo NPC Saída");
+							Mes "Deseja Alterar?";
+							next;
+							if(select("Sim","Não")==2) break;
+							Set $DSPrizeMethod, ($DSPrizeMethod ? 0 : 1);
+							Mes "[Guarda Devil Square]";
+							Mes "Método de Entrega dos Itens mudado para:";
+							Mes ($DSPrizeMethod ? "Itens Cairão de Baús" : "Itens são Entregados pelo NPC Saída");
+							next;
+						case 5: break;
+					}
+				}
+				break;
+			case 4:
+				while(!@finished){
+					Mes "[Guarda Devil Square]";
+					Mes "Qual Configuração deseja Alterar?";
+					next;
+					switch(select("- Nome dos Níveis","- Nível Requerido","- Quantidade Máxima de Jogadores","- Modo PvP/GvG do DS","- Cancelar")){
+						case 1:
+							Mes "[Guarda Devil Square]";
+							Mes "De qual Nível deseja Alterar o Nome?";
+							next;
+							Set @nivel,select("1 - "+$DSLvL1Name$,"2 - "+$DSLvL2Name$,"3 - "+$DSLvL3Name$,"Cancelar");
+							if(@nivel==4) break;
+							Mes "[Guarda Devil Square]";
+							Mes "Digite o Novo Nome do Nível "+@nivel+":";
+							next;
+							input @name$;
+							Mes "[Guarda Devil Square]";
+							Mes @nivel+" - "+@name$+" está correto?";
+							next;
+							if(select("Sim","Não")==2) break;
+							Mes "[Guarda Devil Square]";
+							Mes "Nome Alterado com Sucesso!";
+							SetD("$DSLvL"+@nivel+"Name$"),@name$;
+							next;
+							break;
+						case 2:
+							Mes "[Guarda Devil Square]";
+							Mes "De qual Nível deseja Alterar o Nível Requerido para entrar no DS?";
+							next;
+							Set @nivel,select("1 - "+$DSLvL1Name$,"2 - "+$DSLvL2Name$,"3 - "+$DSLvL3Name$,"Cancelar");
+							if(@nivel==4) break;
+							Mes "[Guarda Devil Square]";
+							Mes "Digite o Nível Requerido para entrar no Nível "+@nivel+" - "+GetD("$DSLvL"+@nivel+"Name$")+":";
+							next;
+							input @lv;
+							Mes "[Guarda Devil Square]";
+							Mes "Nível "+@lv+" está correto?";
+							next;
+							if(select("Sim","Não")==2) break;
+							Mes "[Guarda Devil Square]";
+							Mes "Nível Requerido Alterado com Sucesso!";
+							SetD("$ReqLvL"+@nivel+"DS"),@lv;
+							next;
+							break;
+						case 3:
+							Mes "[Guarda Devil Square]";
+							Mes "De qual Nível deseja Alterar a Quantidade Máxima de Jogadores no DS?";
+							next;
+							Set @nivel,select("1 - "+$DSLvL1Name$,"2 - "+$DSLvL2Name$,"3 - "+$DSLvL3Name$,"Cancelar");
+							if(@nivel==4) break;
+							Mes "[Guarda Devil Square]";
+							Mes "Digite a Quantidade Máxima de Jogadores no Nível "+@nivel+" - "+GetD("$DSLvL"+@nivel+"Name$")+":";
+							next;
+							input @qnt,1;
+							Mes "[Guarda Devil Square]";
+							Mes @qnt+" jogadores está correto?";
+							next;
+							if(select("Sim","Não")==2) break;
+							Mes "[Guarda Devil Square]";
+							Mes "Quantidade Máxima de Jogadores Alterada com Sucesso!";
+							SetD("$MaxPlLvL"+@nivel+"DS"),@qnt;
+							next;
+							break;
+						case 4:
+							Mes "[Guarda Devil Square]";
+							Mes "Atualmente o DS está no modo:";
+							Mes (GetMapFlag("ordeal_1-1",mf_gvg)?"GvG":"PvP");
+							Mes "Deseja Alterar?";
+							next;
+							if(select("Sim","Não")==2) break;
+							if(GetMapFlag("ordeal_1-1",mf_gvg)){
+								RemoveMapFlag "ordeal_1-1",mf_gvg;
+								RemoveMapFlag "ordeal_1-1",mf_gvg_noparty;
+								SetMapFlag "ordeal_1-1",mf_pvp;
+								SetMapFlag "ordeal_1-1",mf_pvp_noparty;
+								SetMapFlag "ordeal_1-1",mf_pvp_noguild;
+							}else{
+								RemoveMapFlag "ordeal_1-1",mf_pvp;
+								RemoveMapFlag "ordeal_1-1",mf_pvp_noparty;
+								RemoveMapFlag "ordeal_1-1",mf_pvp_noguild;
+								SetMapFlag "ordeal_1-1",mf_gvg;
+								SetMapFlag "ordeal_1-1",mf_gvg_noparty;
+							}
+							Mes "[Guarda Devil Square]";
+							Mes "DS Alterado para o modo:";
+							Mes (GetMapFlag("ordeal_1-1",mf_gvg)?"GvG":"PvP");
+							next;
+							break;
+						case 5: Set @finished,1;
+					}
+				}
+				break;
+			case 5:
+				Mes "[Guarda Devil Square]";
+				Mes "Até mais!";
+				close;
+		}
+	}
+while(1){
+	Mes "[Guarda Devil Square]";
+	Mes "Bem-Vindo ao portal do ^FF0000Devil Square^000000";
+	Mes "O que deseja?";
+	next;
+	switch(select("- Entrar no DS","- Informações","- Nada")){
+		case 1:
+			if($@DSStarted != 1){
+				Mes "[Guarda Devil Square]";
+				Mes "O Devil Square está fechado agora.";
+				Mes "Ele abrirá de 2 em 2 horas.";	// Coloque aqui os horários de abertuda do DS caso deseje
+				next;
+				break;
+			}
+			if(GetMapUsers("ordeal_1-1") == GetD("$MaxPlLvL"+$DSLevel+"DS")){
+				Mes "[Guarda Devil Square]";
+				Mes "Desculpe-me, o Devil Square está cheio";
+				next;
+				break;
+			}
+			if(Baselevel < GetD("$ReqLvL"+$DSLevel+"DS")){
+				Mes "[Guarda Devil Square]";
+				Mes "O nível mínimo para entrar no nível "+GetD("$DSLvL"+$DSLevel+"Name$")+" é "+GetD("$ReqLvL"+$DSLevel+"DS");
+				next;
+				break;
+			}
+			close2;
+			Announce StrCharInfo(0)+" entrou no Devil Square!",8;
+			percentheal 100,100;
+			warp "ordeal_1-1",150,150;
+			end;
+		case 2: DSInfo(); break;
+		case 3:
+			Mes "[Guarda Devil Square]";
+			Mes "Até mais!";
+			close;
+	}
+}
+// == Configurações Iniciais, mude In-Game ==
+OnInit:
+	// == Monstros da DS ==
+	// Coloque a ID do monstro e abaixo a quantidade do mesmo, seguido das coordenadas da área de spawn do mesmo: x1,y1 - x2,y2
+	// == Nível 1 ==
+	// = Round 1 =
+	SetArray $DSMonsters_Lvl1_Round1_IDs[0],1028,1189,1165,1016,1149,1164;
+	SetArray $DSMonsters_Lvl1_Round1_Qnt[0],  10,  15,  10,  15,  15,  10;
+	SetArray $DSMonsters_Lvl1_Round1_AX1[0], 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl1_Round1_AY1[0], 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl1_Round1_AX2[0], 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl1_Round1_AY2[0], 133, 133, 133, 133, 133, 133;
+	// = Round 2 =
+	SetArray $DSMonsters_Lvl1_Round2_IDs[0],1253,1193,1257,1191,1192;
+	SetArray $DSMonsters_Lvl1_Round2_Qnt[0],  15,  10,  10,  15,  10;
+	SetArray $DSMonsters_Lvl1_Round2_AX1[0], 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl1_Round2_AY1[0], 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl1_Round2_AX2[0], 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl1_Round2_AY2[0], 133, 133, 133, 133, 133;
+	// = Round 3 =
+	SetArray $DSMonsters_Lvl1_Round3_IDs[0],1206,1208,1109,1131,1302,1190,1272,1511;
+	SetArray $DSMonsters_Lvl1_Round3_Qnt[0],  15,  15,  11,  10,   1,   1,   1,   1;
+	SetArray $DSMonsters_Lvl1_Round3_AX1[0], 132, 132, 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl1_Round3_AY1[0], 166, 166, 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl1_Round3_AX2[0], 165, 165, 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl1_Round3_AY2[0], 133, 133, 133, 133, 133, 133, 133, 133;
+	// = Round 4 =
+	SetArray $DSMonsters_Lvl1_Round4_IDs[0],1388,1268,1408,1456,1120,1296,1262,1259,1308;
+	SetArray $DSMonsters_Lvl1_Round4_Qnt[0],   3,   5,   6,   4,   3,   2,   6,   3,   3;
+	SetArray $DSMonsters_Lvl1_Round4_AX1[0], 132, 132, 132, 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl1_Round4_AY1[0], 166, 166, 166, 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl1_Round4_AX2[0], 165, 165, 165, 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl1_Round4_AY2[0], 133, 133, 133, 133, 133, 133, 133, 133, 133;
+	// = Round 5 =
+	SetArray $DSMonsters_Lvl1_Round5_IDs[0],1399,1373,1389,1157,1038,1418,1312,1087,1190,1272;
+	SetArray $DSMonsters_Lvl1_Round5_Qnt[0],   1,   2,   1,   1,   1,   1,   2,   2,   2,   2;
+	SetArray $DSMonsters_Lvl1_Round5_AX1[0], 132, 132, 132, 132, 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl1_Round5_AY1[0], 166, 166, 166, 166, 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl1_Round5_AX2[0], 165, 165, 165, 165, 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl1_Round5_AY2[0], 133, 133, 133, 133, 133, 133, 133, 133, 133, 133;
+	// = Round 6 =
+	SetArray $DSMonsters_Lvl1_Round6_IDs[0],1511,1511,1511,1511,1511,1038,1038,1038,1373;
+	SetArray $DSMonsters_Lvl1_Round6_Qnt[0],   2,   2,   2,   2,   2,   2,   2,   2,   2;
+	SetArray $DSMonsters_Lvl1_Round6_AX1[0], 149, 245, 273, 245, 150,  54,  26,  54, 132;
+	SetArray $DSMonsters_Lvl1_Round6_AY1[0], 273, 245, 149,  52,  26,  54, 149, 245, 166;
+	SetArray $DSMonsters_Lvl1_Round6_AX2[0], 149, 245, 273, 245, 150,  54,  26,  54, 132;
+	SetArray $DSMonsters_Lvl1_Round6_AY2[0], 272, 244, 148,  51,  25,  53, 148, 244, 165;
+	// == Nível 2 ==
+	// = Round 1 =
+	SetArray $DSMonsters_Lvl2_Round1_IDs[0],1253,1193,1257,1191,1192;
+	SetArray $DSMonsters_Lvl2_Round1_Qnt[0],  15,  15,  15,  15,  15;
+	SetArray $DSMonsters_Lvl2_Round1_AX1[0], 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl2_Round1_AY1[0], 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl2_Round1_AX2[0], 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl2_Round1_AY2[0], 133, 133, 133, 133, 133;
+	// = Round 2 =
+	SetArray $DSMonsters_Lvl2_Round2_IDs[0],1206,1208,1109,1131,1302,1190,1272,1511;
+	SetArray $DSMonsters_Lvl2_Round2_Qnt[0],  15,  15,  10,  15,   2,   1,   1,   1;
+	SetArray $DSMonsters_Lvl2_Round2_AX1[0], 132, 132, 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl2_Round2_AY1[0], 166, 166, 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl2_Round2_AX2[0], 165, 165, 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl2_Round2_AY2[0], 133, 133, 133, 133, 133, 133, 133, 133;
+	// = Round 3 =
+	SetArray $DSMonsters_Lvl2_Round3_IDs[0],1388,1268,1408,1456,1120,1296,1262,1259,1308;
+	SetArray $DSMonsters_Lvl2_Round3_Qnt[0],   5,   5,   5,   5,   5,   5,  10,   5,  10;
+	SetArray $DSMonsters_Lvl2_Round3_AX1[0], 132, 132, 132, 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl2_Round3_AY1[0], 166, 166, 166, 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl2_Round3_AX2[0], 165, 165, 165, 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl2_Round3_AY2[0], 133, 133, 133, 133, 133, 133, 133, 133, 133;
+	// = Round 4 =
+	SetArray $DSMonsters_Lvl2_Round4_IDs[0],1399,1373,1389,1157,1038,1418,1312,1087,1190,1272;
+	SetArray $DSMonsters_Lvl2_Round4_Qnt[0],   3,   4,   3,   3,   3,   3,   4,   4,   4,   4;
+	SetArray $DSMonsters_Lvl2_Round4_AX1[0], 132, 132, 132, 132, 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl2_Round4_AY1[0], 166, 166, 166, 166, 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl2_Round4_AX2[0], 165, 165, 165, 165, 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl2_Round4_AY2[0], 133, 133, 133, 133, 133, 133, 133, 133, 133, 133;
+	// = Round 5 =
+	SetArray $DSMonsters_Lvl2_Round5_IDs[0],1511,1373,1389,1157,1038,1418;
+	SetArray $DSMonsters_Lvl2_Round5_Qnt[0],   2,   2,   2,   2,   2,   2;
+	SetArray $DSMonsters_Lvl2_Round5_AX1[0], 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl2_Round5_AY1[0], 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl2_Round5_AX2[0], 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl2_Round5_AY2[0], 133, 133, 133, 133, 133, 133;
+	// = Round 6 =
+	SetArray $DSMonsters_Lvl2_Round6_IDs[0],3028,3032,3036,1511,1511,3101,3025,1038,3014;
+	SetArray $DSMonsters_Lvl2_Round6_Qnt[0],   2,   2,   2,   2,   2,   2,   2,   2,   2;
+	SetArray $DSMonsters_Lvl2_Round6_AX1[0], 149, 245, 273, 245, 150,  54,  26,  54, 132;
+	SetArray $DSMonsters_Lvl2_Round6_AY1[0], 273, 245, 149,  52,  26,  54, 149, 245, 166;
+	SetArray $DSMonsters_Lvl2_Round6_AX2[0], 149, 245, 273, 245, 150,  54,  26,  54, 132;
+	SetArray $DSMonsters_Lvl2_Round6_AY2[0], 272, 244, 148,  51,  25,  53, 148, 244, 165;
+	// == Nível 3 ==
+	// = Round 1 =
+	SetArray $DSMonsters_Lvl3_Round1_IDs[0],1206,1208,1109,1131,1302,1190,1272,1511;
+	SetArray $DSMonsters_Lvl3_Round1_Qnt[0],  20,  20,  15,  15,   2,   1,   1,   1;
+	SetArray $DSMonsters_Lvl3_Round1_AX1[0], 132, 132, 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl3_Round1_AY1[0], 166, 166, 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl3_Round1_AX2[0], 165, 165, 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl3_Round1_AY2[0], 133, 133, 133, 133, 133, 133, 133, 133;
+	// = Round 2 =
+	SetArray $DSMonsters_Lvl3_Round2_IDs[0],1388,1268,1408,1456,1120,1296,1262,1259,1308;
+	SetArray $DSMonsters_Lvl3_Round2_Qnt[0],   5,   5,  10,   5,   5,   5,  10,   5,  10;
+	SetArray $DSMonsters_Lvl3_Round2_AX1[0], 132, 132, 132, 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl3_Round2_AY1[0], 166, 166, 166, 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl3_Round2_AX2[0], 165, 165, 165, 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl3_Round2_AY2[0], 133, 133, 133, 133, 133, 133, 133, 133, 133;
+	// = Round 3 =
+	SetArray $DSMonsters_Lvl3_Round3_IDs[0],1399,1373,1389,1157,1038,1418,1312,1087,1190,1272;
+	SetArray $DSMonsters_Lvl3_Round3_Qnt[0],   5,   6,   5,   5,   5,   5,   6,   6,   6,   6;
+	SetArray $DSMonsters_Lvl3_Round3_AX1[0], 132, 132, 132, 132, 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl3_Round3_AY1[0], 166, 166, 166, 166, 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl3_Round3_AX2[0], 165, 165, 165, 165, 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl3_Round3_AY2[0], 133, 133, 133, 133, 133, 133, 133, 133, 133, 133;
+	// = Round 4 =
+	SetArray $DSMonsters_Lvl3_Round4_IDs[0],1511,1373,1389,1157,1038,1418;
+	SetArray $DSMonsters_Lvl3_Round4_Qnt[0],   5,   6,   6,   6,   6,   6;
+	SetArray $DSMonsters_Lvl3_Round4_AX1[0], 132, 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl3_Round4_AY1[0], 166, 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl3_Round4_AX2[0], 165, 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl3_Round4_AY2[0], 133, 133, 133, 133, 133, 133;
+	// = Round 5 =
+	SetArray $DSMonsters_Lvl3_Round5_IDs[0],3028,3032,3036,3101,3025;
+	SetArray $DSMonsters_Lvl3_Round5_Qnt[0],   4,   4,   4,   4,   4;
+	SetArray $DSMonsters_Lvl3_Round5_AX1[0], 132, 132, 132, 132, 132;
+	SetArray $DSMonsters_Lvl3_Round5_AY1[0], 166, 166, 166, 166, 166;
+	SetArray $DSMonsters_Lvl3_Round5_AX2[0], 165, 165, 165, 165, 165;
+	SetArray $DSMonsters_Lvl3_Round5_AY2[0], 133, 133, 133, 133, 133;
+	// = Round 6 =
+	SetArray $DSMonsters_Lvl3_Round6_IDs[0],1751,3028,3032,3036,3014,3025,1768,1799,1832;
+	SetArray $DSMonsters_Lvl3_Round6_Qnt[0],   2,   2,   2,   2,   2,   2,   2,   2,   2;
+	SetArray $DSMonsters_Lvl3_Round6_AX1[0], 149, 245, 273, 245, 150,  54,  26,  54, 132;
+	SetArray $DSMonsters_Lvl3_Round6_AY1[0], 273, 245, 149,  52,  26,  54, 149, 245, 166;
+	SetArray $DSMonsters_Lvl3_Round6_AX2[0], 149, 245, 273, 245, 150,  54,  26,  54, 132;
+	SetArray $DSMonsters_Lvl3_Round6_AY2[0], 272, 244, 148,  51,  25,  53, 148, 244, 165;
+if($DSPrizeLvL1IDs[0]) end;
+	// == Configurações de Nomes ==
+	set $DSLvL1Name$,"Easy";	//Nome do Nível 1 (Mais Fácil)
+	set $DSLvL2Name$,"Medium";	//Nome do Nível 2 (Médio)
+	set $DSLvL3Name$,"Insane";	//Nome do Nível 3 (Mais Difícil)
+	// == Configurações diversas= =
+	set $ReqLvL1DS,40;	//Nível Mínimo necessário para entrar no Nível 1
+	set $ReqLvL2DS,60;	//Nível Mínimo necessário para entrar no Nível 2
+	set $ReqLvL3DS,80;	//Nível Mínimo necessário para entrar no Nível 3
+	set $MaxPlLvL1DS,10;	//Número Máximo de jogadores possíveis para o Nível 1
+	set $MaxPlLvL2DS,30;	//Número Máximo de jogadores possíveis para o Nível 2
+	set $MaxPlLvL3DS,60;	//Número Máximo de jogadores possíveis para o Nível 3
+	// == Items de Prêmio ==
+	SetArray $DSPrizeLvL1IDs[0],20000;
+	SetArray $DSPrizeLvL1Qnt[0],5;
+	SetArray $DSPrizeLvL2IDs[0],20000;
+	SetArray $DSPrizeLvL2Qnt[0],10;
+	SetArray $DSPrizeLvL3IDs[0],20000;
+	SetArray $DSPrizeLvL3Qnt[0],25;
+	//======================
+	SetMapFlag "ordeal_1-1",mf_gvg;
+	SetMapFlag "ordeal_1-1",mf_gvg_noparty;
+end;
+// == Funções ==
+function	DSInfo	{
+	Mes "[Guarda Devil Square]";
+	Mes "No Devil Square há 3 níveis de intensidade: "+$DSLvL1Name$+", "+$DSLvL2Name$+", "+$DSLvL3Name$;
+	Mes "Dentro destes níveis há 6 'rounds' de dificuldade";
+	Mes "Cada 'round' ultrapassado, a dificuldade fica maior";
+	Mes "Lembrando que não é fácil. Por isso, prepare-se com poções, itens e cartas.";
+	Mes "Caso você termine o DS, fale com o NPC 'Saída' para ganhar equipamentos, cartas e itens raros definidos pelos GMs do "+@ServerName$+"!";
+	next;
+}
+}
+
+//Final do Devil Square
+
+ordeal_1-1,182,183,5	script	Cek	-1,{
+
+OnTimer30000:
+if(!$@DSStarted)
+{
+	stopnpctimer;
+	end;
+}
+if(!getmapusers("ordeal_1-1")){
+	Announce "Todos os jogadores foram mortos no Devil Square",8;
+	killmonsterall "ordeal_1-1";
+	Set $@DSStarted,0;
+	StopNpcTimer;
+	end;
+}
+Announce GetMapUsers("ordeal_1-1") + " "+(GetMapUsers("ordeal_1-1")>1?"jogadores":"jogador")+" "+(GetMapUsers("ordeal_1-1")>1?"estão":"está")+" sobrevivendo no Devil Square",8;
+initnpctimer;
+end;
+
+}
+
+ordeal_1-1,182,183,5	script	HiddenNpc	-1,{
+/* == Horários ==
+	Configure Aqui os Horários, baseando-se nos exemplos:
+	OnHour01:
+		Iniciará o Evento às 01:00
+	OnHour20:
+		Iniciará o Evento às 20:00 (8 da noite)
+	OnClock0815:
+		Iniciará o Evento às 08:15
+	OnClock1945:
+		Iniciará o Evento às 19:45 (7:45 da noite)
+	OnMinute05:
+		Iniciará o Evento aos 5 minutos de Toda Hora
+	OnMinute36:
+		Iniciará o Evento aos 36 minutos de Toda Hora
+   =============== */
+OnHour01:
+OnHour14:
+OnHour18:
+OnHour22:
+OnHour00:
+OnHour02:
+OnHour06:
+// == Fim das Configurações de Horário ==
+// ======================================
+	Set $DSLevel,Rand(1,3);
+	Announce "O portal para o Devil Square está aberto, e em 5 minutos ele começará! O Nível Será: "+GetD("$DSLvL"+$DSLevel+"Name$"),8;
+	disablenpc "Saída";
+	initnpctimer;
+	Set $@DSStarted,1;
+	killmonsterall "ordeal_1-1";
+end;
+
+OnTimer60000:
+Announce "O portal para o Devil Square está aberto, e em 4 minutos ele começará! (Nível: "+GetD("$DSLvL"+$DSLevel+"Name$")+")",8;
+end;
+
+OnTimer120000:
+Announce "O portal para o Devil Square está aberto, e em 3 minutos ele começará! (Nível: "+GetD("$DSLvL"+$DSLevel+"Name$")+")",8;
+end;
+
+OnTimer180000:
+Announce "O portal para o Devil Square está aberto, e em 2 minutos ele começará! (Nível: "+GetD("$DSLvL"+$DSLevel+"Name$")+")",8;
+end;
+
+OnTimer240000:
+Announce "O portal para o Devil Square está aberto, e em 1 minuto ele começará! (Nível: "+GetD("$DSLvL"+$DSLevel+"Name$")+")",8;
+end;
+
+OnTimer300000:
+	StopNpcTimer;
+	if (getmapusers("ordeal_1-1") == 0){
+		Announce "O Devil Square não pode ser iniciado devido à Falta de Participantes...",8;
+		Set $@DSStarted,0;
+		end;
+	}
+	Announce "O Devil Square COMEÇOU!",8;
+	InitNpcTimer "Cek";
+	set $@DSStarted,2;
+	Set $@DSRound,1;
+	
+OnSpawnDSMobs:
+	for(Set .@i,0; .@i < GetArraySize(GetD("$DSMonsters_Lvl"+$DSLevel+"_Round"+$@DSRound+"_IDs")); Set .@i,.@i + 1)
+	{
+		areamonster "ordeal_1-1",GetD("$DSMonsters_Lvl"+$DSLevel+"_Round"+$@DSRound+"_AX1["+.@i+"]"),GetD("$DSMonsters_Lvl"+$DSLevel+"_Round"+$@DSRound+"_AY1["+.@i+"]"),GetD("$DSMonsters_Lvl"+$DSLevel+"_Round"+$@DSRound+"_AX2["+.@i+"]"),GetD("$DSMonsters_Lvl"+$DSLevel+"_Round"+$@DSRound+"_AY2["+.@i+"]"),"[DS] "+GetMonsterInfo(GetD("$DSMonsters_Lvl"+$DSLevel+"_Round"+$@DSRound+"_IDs["+.@i+"]"),0),GetD("$DSMonsters_Lvl"+$DSLevel+"_Round"+$@DSRound+"_IDs["+.@i+"]"),GetD("$DSMonsters_Lvl"+$DSLevel+"_Round"+$@DSRound+"_Qnt["+.@i+"]"),"HiddenNpc::OnDevilDead";
+		Set $@DSMobQnt,$@DSMobQnt + GetD("$DSMonsters_Lvl"+$DSLevel+"_Round"+$@DSRound+"_Qnt["+.@i+"]");
+	}
+end;
+
+OnDevilDead:
+	if(!$@DSStarted) end;
+	set $@DSMobQnt,$@DSMobQnt - 1;
+	if($@DSMobQnt == 25) MapAnnounce "ordeal_1-1","Devil Square: 25 monstros para "+($@DSRound < 6 ? "começar o "+($@DSRound + 1)+"º round" : "a vitória!"),8;
+	if($@DSMobQnt == 5) MapAnnounce "ordeal_1-1","Devil Square: 5 monstros para "+($@DSRound < 6 ? "começar o "+($@DSRound + 1)+"º round" : "a vitória!"),8;
+	if(!$@DSMobQnt)
+	{
+		if($@DSRound < 6)
+		{
+			Set $@DSRound,$@DSRound + 1;
+			MapAnnounce "ordeal_1-1","Devil Square: começou o "+$@DSRound+"º round",8;
+			DoNpcEvent "HiddenNpc::OnSpawnDSMobs";
+		}
+		else
+		{
+			MapAnnounce "ordeal_1-1","Devil Square: Parabéns! "+(getmapusers("ordeal_1-1") == 1?"Você Sobreviveu":"Vocês Sobreviveram")+" ao Devil Square Nível "+GetD("$DSLvL"+$DSLevel+"Name$")+"! "+($DSPrizeMethod?"10 Baús do Tesouro para "+(getmapusers("ordeal_1-1") == 1?"Você":"Vocês")+"!":(getmapusers("ordeal_1-1") == 1?"Retire":"Retirem")+" seu Prêmio com o NPC 'Saída'!"),8;
+			if(!$DSPrizeMethod)
+				enablenpc "Saída";
+			else
+			{
+				set $@DSMobQnt,10;
+				monster "ordeal_1-1",231,250,"Caixa do Tesouro",1324,1,"HiddenNpc::Onboxdead";
+				monster "ordeal_1-1",234,247,"Caixa do Tesouro",1328,1,"HiddenNpc::Onboxdead";
+				monster "ordeal_1-1",237,244,"Caixa do Tesouro",1332,1,"HiddenNpc::Onboxdead";
+				monster "ordeal_1-1",240,241,"Caixa do Tesouro",1336,1,"HiddenNpc::Onboxdead";
+				monster "ordeal_1-1",243,238,"Caixa do Tesouro",1340,1,"HiddenNpc::Onboxdead";
+				monster "ordeal_1-1",246,235,"Caixa do Tesouro",1344,1,"HiddenNpc::Onboxdead";
+				monster "ordeal_1-1",249,232,"Caixa do Tesouro",1348,1,"HiddenNpc::Onboxdead";
+				monster "ordeal_1-1",252,229,"Caixa do Tesouro",1352,1,"HiddenNpc::Onboxdead";
+				monster "ordeal_1-1",249,241,"Caixa do Tesouro",1356,1,"HiddenNpc::Onboxdead";
+				monster "ordeal_1-1",240,249,"Caixa do Tesouro",1360,1,"HiddenNpc::Onboxdead";
+			}
+		}
+	}
+end;
+
+Onboxdead:
+	if(!$@DSStarted) end;
+	set $@DSMobQnt,$@DSMobQnt - 1;
+	Announce "Devil Square : " + strcharinfo(0) +" abriu uma caixa do tesouro.",8;
+	if(!$@DSMobQnt)
+	{
+		enablenpc "Saída";
+		Set $@DSStarted,0;
+	}
+end;
+
+}
+
+ordeal_1-1,150,150,7	script	Saída	51,{
+Mes "[Saída]";
+if($@DSStarted){
+	Mes "Parabéns por ter sobrevivido!";
+	if(!$DSPrizeMethod){
+		Mes "Pegue seu Prêmio!";
+		Set @n,Rand(GetArraySize(GetD("$DSPrizeLvL"+$DSLevel+"IDs"))-1);
+		GetItem GetD("$DSPrizeLvL"+$DSLevel+"IDs["+@n+"]"),GetD("$DSPrizeLvL"+$DSLevel+"Qnt["+@n+"]");
+		next;
+		Mes "[Saída]";
+	}
+}
+Mes "Até mais ^^";
+close2;
+warp "prontera", 155, 171;
+if(!GetMapUsers("ordeal_1-1"))
+	Set $@DSStarted,0;
+end;
+}
+
+// -- Portais
+/*ordeal_1-1.gat,149,197,0	warp	ds11	1,1,ordeal_1-1.gat,149,170
+ordeal_1-1.gat,149,178,0	warp	ds12	1,1,ordeal_1-1.gat,149,200
+ordeal_1-1.gat,182,182,0	warp	ds21	1,1,ordeal_1-1.gat,165,165
+ordeal_1-1.gat,170,170,0	warp	ds22	1,1,ordeal_1-1.gat,185,185
+ordeal_1-1.gat,197,149,0	warp	ds31	1,1,ordeal_1-1.gat,175,149
+ordeal_1-1.gat,178,149,0	warp	ds32	1,1,ordeal_1-1.gat,200,149
+ordeal_1-1.gat,182,118,0	warp	ds41	1,1,ordeal_1-1.gat,166,133
+ordeal_1-1.gat,169,130,0	warp	ds42	1,1,ordeal_1-1.gat,185,115
+ordeal_1-1.gat,150,101,0	warp	ds51	1,1,ordeal_1-1.gat,150,125
+ordeal_1-1.gat,150,121,0	warp	ds52	1,1,ordeal_1-1.gat,150,97
+ordeal_1-1.gat,118,118,0	warp	ds61	1,1,ordeal_1-1.gat,132,132
+ordeal_1-1.gat,129,129,0	warp	ds62	1,1,ordeal_1-1.gat,115,115
+ordeal_1-1.gat,102,149,0	warp	ds71	1,1,ordeal_1-1.gat,124,149
+ordeal_1-1.gat,121,149,0	warp	ds72	1,1,ordeal_1-1.gat,99,149
+ordeal_1-1.gat,116,181,0	warp	ds81	1,1,ordeal_1-1.gat,131,167
+ordeal_1-1.gat,128,170,0	warp	ds82	1,1,ordeal_1-1.gat,113,184*/
+
+// -- Mapflags de "ordeal_1-1" (Mapa do DS)
+ordeal_1-1	mapflag	nowarpto
+ordeal_1-1	mapflag	noteleport
+ordeal_1-1	mapflag	nosave	SavePoint
+ordeal_1-1	mapflag	nomemo
+ordeal_1-1	mapflag	nobranch
+ordeal_1-1	mapflag	nopenalty
+ordeal_1-1	mapflag	monster_noteleport
+// -- Fim dos Mapflags

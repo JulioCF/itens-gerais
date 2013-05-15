@@ -1,0 +1,68 @@
+//===== Cronus Script ======================================== 
+//= Status dos Selos Divinos
+//===== Por: ================================================= 
+//= L0ne_W0lf
+//===== Versão Atual: ======================================== 
+//= 1.1a
+//===== Compatível Com: ====================================== 
+//= Cronus SVN
+//===== Changelog: =========================================== 
+//= 1.0 First version. [L0ne_W0lf]
+//= 1.1 Now checks proper char vars. [L0ne_W0lf]
+//= 1.1a Traduzido e Otimizado. [RoM]
+//============================================================ 
+
+prontera,113,294,3	script	Quadro de Informações	837,{
+	mes "===== Status dos Selos Divinos =====";
+	if ($god1 == 0)
+		mes "Selo de Sleipnir: Fechado";
+	else if ($god1 < 50)
+		mes "Selo de Sleipnir: Disponível";
+	else if ($god1 < 100)
+		mes "Selo de Sleipnir: Apareceu";
+	else
+		mes "Selo de Sleipnir: Liberado";
+	if ($god2 == 0)
+		mes "Selo de Megingjard: Fechado";
+	else if ($god2 < 50)
+		mes "Selo de Megingjard: Disponível";
+	else if ($god2 < 100)
+		mes "Selo de Megingjard: Apareceu";
+	else
+		mes "Selo de Megingjard: Liberado";
+	if ($god3 == 0)
+		mes "Selo de Brisingamen: Fechado";
+	else if ($god3 < 50)
+		mes "Selo de Brisingamen: Disponível";
+	else if ($god3 < 100)
+		mes "Selo de Brisingamen: Apareceu";
+	else
+		mes "Selo de Brisingamen: Liberado";
+	if ($god4 == 0)
+		mes "Selo de Mjolnir: Fechado";
+	else if ($god4 < 50)
+		mes "Selo de Mjolnir: Disponível";
+	else if ($god4 < 100)
+		mes "Selo de Mjolnir: Apareceu";
+	else
+		mes "Selo de Mjolnir: Liberado";
+	mes " ";
+	mes "===== Seu Status dos Selos ======";
+	if (god_sl_1 < 51)
+		mes "^ff0000Selo de Sleipnir: Incompleto^000000";
+	else
+		mes "^00ff00Selo de Sleipnir: Completo^000000";
+	if (god_eremes < 28)
+		mes "^ff0000Selo de Megingjard: Incompleto^000000";
+	else
+		mes "^00ff00Selo de Megingjard: Completo^000000";
+	if (god_brising < 50)
+		mes "^ff0000Selo de Brisingamen: Incompleto^000000";
+	else
+		mes "^00ff00Selo de Brisingamen: Completo^000000";
+	if (god_mjo_0 < 11)
+		mes "^ff0000Selo de Mjolnir: Incompleto^000000";
+	else
+		mes "^00ff00Selo de Mjolnir: Completo^000000";
+	close;
+}

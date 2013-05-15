@@ -1,0 +1,71 @@
+//===== Cronus Script ========================================
+//= Kafras de Alberta
+//===== Por: =================================================
+//= eAthena Dev Team
+//===== Versão Atual: ========================================
+//= 2.4b
+//===== Compatibilidade: =====================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= Kafras da cidade de Alberta
+//===== Comentários Adicionais: ==============================
+//= v1.1 Now using functions :)
+//= v2.1b Minor changes to function calls. Using arguments.
+//= This version uses arrays .[kobra_k88]
+//= 2.2 New Teleport list and prices [Lupus]
+//= 2.3 Can't save outside city anymore [Evera]
+//= 2.4 Updated function calls with new arguments. [L0ne_W0lf]
+//=	Added unique Kafra Welcome message.
+//= 2.4a Traduzido. [Puncker]
+//= 2.4b Revisado. [RoM]
+//============================================================
+
+// Noroeste -----------------------------------------------------------------
+alberta,28,229,0	script	Funcionária Kafra::kaf_alberta	116,{
+	cutin "kafra_02",2;
+	callfunc "F_KafSetAlb";
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra.";
+	mes "As Funcionárias Kafra estão";
+	mes "sempre prontas para servi-lo.";
+	mes "Como posso ajudá-lo hoje?";
+	callfunc "F_Kafra",5,0,0,50,850;
+
+	M_Save:
+		savepoint "alberta",31,231;
+		callfunc "F_KafEnd",0,1,"na cidade de Alberta";
+}
+
+// Sul ----------------------------------------------------------------------
+alberta,113,60,6	script	Funcionária Kafra::kaf_alberta2	112,{
+	cutin "kafra_06",2;
+	callfunc "F_KafSetAlb";
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra~";
+	mes "Os Serviços Kafra estão";
+	mes "sempre aqui para ajudá-lo.";
+	mes "Então, como posso";
+	mes "ajudá-lo hoje?";
+	callfunc "F_Kafra",5,0,0,50,850;
+
+	M_Save:
+		savepoint "alberta",117,57;
+		callfunc "F_KafEnd",0,1,"na cidade de Alberta";
+}
+
+
+// Função: Seta as variáveis ------------------------------------------------
+function	script	F_KafSetAlb	{
+	cleararray @wrpC$[0],"",getarraysize(@wrpC$);
+	setarray @wrpP[0], 1200, 1800, 1800;
+	setarray @wrpD$[0], "Payon", "Morroc", "Prontera";
+	set @wrpC$[0], @wrpD$[0]+" -> "+@wrpP[0];
+	set @wrpC$[1], @wrpD$[1]+" -> "+@wrpP[1];
+	set @wrpC$[2], @wrpD$[2]+" -> "+@wrpP[2];
+	set @wrpC$[3], "Cancelar";
+	setarray @viewpX[0], 28, 113, 0, 0;
+	setarray @viewpY[0], 229, 60, 0, 0;
+	return;
+}

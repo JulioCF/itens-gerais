@@ -1,0 +1,2265 @@
+//JobNo,Skill-ID,MaxLV{,JobLV},Prerequisite Skill-ID-1,Prerequisite Skill-ID-1-Lv,PrereqSkill-ID-2,PrereqSkill-ID-2-Lv,PrereqSkill-ID-3,PrereqSkill-ID-3-Lv,PrereqSkill-ID-4,PrereqSkill-ID-4-Lv,PrereqSkill-ID-5,PrereqSkill-ID-5-Lv//CLASS_SKILLNAME#Skill Name#
+//Novice
+0,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+0,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+0,143,1,0,0,0,0,0,0,0,0,0,0 //NV_TRICKDEAD#Fingir de Morto #
+0,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+0,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Swordman
+1,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+1,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+1,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+1,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+1,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+1,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+1,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+1,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+1,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+1,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+1,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+1,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+1,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+1,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Magician
+2,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+2,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+2,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+2,10,1,0,0,0,0,0,0,0,0,0,0 //MG_SIGHT#Chama Reveladora #
+2,11,10,0,0,0,0,0,0,0,0,0,0 //MG_NAPALMBEAT#Ataque Espiritual #
+2,12,10,11,7,13,5,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+2,13,10,11,4,0,0,0,0,0,0,0,0 //MG_SOULSTRIKE#Espíritos Anciões #
+2,14,10,0,0,0,0,0,0,0,0,0,0 //MG_COLDBOLT#Lanças de Gelo #
+2,15,10,14,5,0,0,0,0,0,0,0,0 //MG_FROSTDIVER#Rajada Congelante #
+2,16,10,0,0,0,0,0,0,0,0,0,0 //MG_STONECURSE#Petrificar #
+2,17,10,19,4,0,0,0,0,0,0,0,0 //MG_FIREBALL#Bolas de Fogo #
+2,18,10,17,5,10,1,0,0,0,0,0,0 //MG_FIREWALL#Barreira de Fogo #
+2,19,10,0,0,0,0,0,0,0,0,0,0 //MG_FIREBOLT#Lanças de Fogo #
+2,20,10,0,0,0,0,0,0,0,0,0,0 //MG_LIGHTNINGBOLT#Relâmpago #
+2,21,10,20,4,0,0,0,0,0,0,0,0 //MG_THUNDERSTORM#Tempestade de Raios #
+2,157,1,0,0,0,0,0,0,0,0,0,0 //MG_ENERGYCOAT#Proteção Arcana #
+2,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+2,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Archer
+3,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+3,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+3,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+3,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+3,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+3,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+3,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+3,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+3,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+3,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+3,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Acolyte
+4,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4,22,10,0,0,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4,24,1,0,0,0,0,0,0,0,0,0,0 //AL_RUWACH#Revelação #
+4,25,1,27,4,0,0,0,0,0,0,0,0 //AL_PNEUMA#Escudo Sagrado #
+4,26,2,24,1,0,0,0,0,0,0,0,0 //AL_TELEPORT#Teleporte #
+4,27,4,26,2,0,0,0,0,0,0,0,0 //AL_WARP#Portal #
+4,28,10,0,0,0,0,0,0,0,0,0,0 //AL_HEAL#Curar #
+4,29,10,28,3,0,0,0,0,0,0,0,0 //AL_INCAGI#Aumentar Agilidade #
+4,30,10,29,1,0,0,0,0,0,0,0,0 //AL_DECAGI#Diminuir Agilidade #
+4,31,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYWATER#Aqua Benedicta #
+4,32,10,23,3,0,0,0,0,0,0,0,0 //AL_CRUCIS#Signum Crusis #
+4,33,10,22,3,0,0,0,0,0,0,0,0 //AL_ANGELUS#Angelus #
+4,34,10,22,5,0,0,0,0,0,0,0,0 //AL_BLESSING#Bênção #
+4,35,1,28,2,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4,156,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYLIGHT#Luz Divina #
+4,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Merchant
+5,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+5,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+5,36,10,0,0,0,0,0,0,0,0,0,0 //MC_INCCARRY#Aumentar Capacidade de Carga #
+5,37,10,36,3,0,0,0,0,0,0,0,0 //MC_DISCOUNT#Desconto #
+5,38,10,37,3,0,0,0,0,0,0,0,0 //MC_OVERCHARGE#Superfaturar #
+5,39,10,36,5,0,0,0,0,0,0,0,0 //MC_PUSHCART#Usar Carrinho #
+5,40,1,0,0,0,0,0,0,0,0,0,0 //MC_IDENTIFY#Identificar Item #
+5,41,10,39,3,0,0,0,0,0,0,0,0 //MC_VENDING#Comércio #
+5,42,10,0,0,0,0,0,0,0,0,0,0 //MC_MAMMONITE#Mammonita #
+5,153,1,0,0,0,0,0,0,0,0,0,0 //MC_CARTREVOLUTION#Cavalo-de-Pau #
+5,154,1,0,0,0,0,0,0,0,0,0,0 //MC_CHANGECART#Personalizar Carrinho #
+5,155,1,0,0,0,0,0,0,0,0,0,0 //MC_LOUD#Grito de Guerra #
+5,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+5,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+5,2535,1,41,1,0,0,0,0,0,0,0,0 //ALL_BUYING_STORE#Open Buying Store#
+//Thief
+6,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+6,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+6,48,10,0,0,0,0,0,0,0,0,0,0 //TF_DOUBLE#Ataque Duplo #
+6,49,10,0,0,0,0,0,0,0,0,0,0 //TF_MISS#Perícia em Esquiva #
+6,50,10,0,0,0,0,0,0,0,0,0,0 //TF_STEAL#Furto #
+6,51,10,50,5,0,0,0,0,0,0,0,0 //TF_HIDING#Esconderijo #
+6,52,10,0,0,0,0,0,0,0,0,0,0 //TF_POISON#Envenenar #
+6,53,1,52,3,0,0,0,0,0,0,0,0 //TF_DETOXIFY#Desintoxicar #
+6,149,1,0,0,0,0,0,0,0,0,0,0 //TF_SPRINKLESAND#Chutar Areia #
+6,150,1,0,0,0,0,0,0,0,0,0,0 //TF_BACKSLIDING#Recuar #
+6,151,1,0,0,0,0,0,0,0,0,0,0 //TF_PICKSTONE#Procurar Pedras #
+6,152,1,0,0,0,0,0,0,0,0,0,0 //TF_THROWSTONE#Arremessar Pedra #
+6,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+6,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Knight
+7,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+7,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+7,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+7,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+7,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+7,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+7,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+7,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+7,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+7,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+7,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+7,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+7,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+7,56,10,55,1,0,0,0,0,0,0,0,0 //KN_PIERCE#Perfurar #
+7,57,10,63,1,58,3,0,0,0,0,0,0 //KN_BRANDISHSPEAR#Brandir Lança #
+7,58,10,56,5,0,0,0,0,0,0,0,0 //KN_SPEARSTAB#Estocada #
+7,59,5,56,3,0,0,0,0,0,0,0,0 //KN_SPEARBOOMERANG#Lança Bumerangue #
+7,60,10,3,1,0,0,0,0,0,0,0,0 //KN_TWOHANDQUICKEN#Rapidez com Duas Mãos #
+7,61,5,3,1,0,0,0,0,0,0,0,0 //KN_AUTOCOUNTER#Contra-Ataque #
+7,62,10,5,10,7,3,3,5,60,10,61,5//KN_BOWLINGBASH#Impacto de Tyr #
+7,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+7,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+7,1001,1,0,0,0,0,0,0,0,0,0,0 //KN_CHARGEATK#Avanço Ofensivo #
+7,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+7,495,1,60,10,0,0,0,0,0,0,0,0 //KN_ONEHAND#Rapidez com Uma Mão #
+7,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Priest
+8,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+8,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+8,22,10,0,0,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+8,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+8,24,1,0,0,0,0,0,0,0,0,0,0 //AL_RUWACH#Revelação #
+8,25,1,27,4,0,0,0,0,0,0,0,0 //AL_PNEUMA#Escudo Sagrado #
+8,26,2,24,1,0,0,0,0,0,0,0,0 //AL_TELEPORT#Teleporte #
+8,27,4,26,2,0,0,0,0,0,0,0,0 //AL_WARP#Portal #
+8,28,10,0,0,0,0,0,0,0,0,0,0 //AL_HEAL#Curar #
+8,29,10,28,3,0,0,0,0,0,0,0,0 //AL_INCAGI#Aumentar Agilidade #
+8,30,10,29,1,0,0,0,0,0,0,0,0 //AL_DECAGI#Diminuir Agilidade #
+8,31,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYWATER#Aqua Benedicta #
+8,32,10,23,3,0,0,0,0,0,0,0,0 //AL_CRUCIS#Signum Crusis #
+8,33,10,22,3,0,0,0,0,0,0,0,0 //AL_ANGELUS#Angelus #
+8,34,10,22,5,0,0,0,0,0,0,0,0 //AL_BLESSING#Bênção #
+8,35,1,28,2,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+8,156,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYLIGHT#Luz Divina #
+8,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+8,12,10,68,4,70,3,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+8,54,4,72,1,9,4,0,0,0,0,0,0 //ALL_RESURRECTION#Ressuscitar #
+8,65,10,0,0,0,0,0,0,0,0,0,0 //PR_MACEMASTERY#Perícia com Maça #
+8,66,5,0,0,0,0,0,0,0,0,0,0 //PR_IMPOSITIO#Impositio Manus #
+8,67,3,66,2,0,0,0,0,0,0,0,0 //PR_SUFFRAGIUM#Suffragium #
+8,68,5,31,1,66,3,0,0,0,0,0,0 //PR_ASPERSIO#Aspersio #
+8,69,5,75,3,68,5,0,0,0,0,0,0 //PR_BENEDICTIO#B.S. Sacramenti #
+8,70,10,28,1,0,0,0,0,0,0,0,0 //PR_SANCTUARY#Santuário #
+8,71,4,0,0,0,0,0,0,0,0,0,0 //PR_SLOWPOISON#Retardar Veneno #
+8,72,1,0,0,0,0,0,0,0,0,0,0 //PR_STRECOVERY#Graça Divina #
+8,73,10,33,2,0,0,0,0,0,0,0,0 //PR_KYRIE#Kyrie Eleison #
+8,74,5,0,0,0,0,0,0,0,0,0,0 //PR_MAGNIFICAT#Magnificat #
+8,75,5,73,4,74,3,0,0,0,0,0,0 //PR_GLORIA#Glória #
+8,76,10,24,1,0,0,0,0,0,0,0,0 //PR_LEXDIVINA#Lex Divina #
+8,77,10,54,1,76,3,0,0,0,0,0,0 //PR_TURNUNDEAD#Esconjurar #
+8,78,1,76,5,0,0,0,0,0,0,0,0 //PR_LEXAETERNA#Lex Aeterna #
+8,79,10,12,1,78,1,77,3,0,0,0,0 //PR_MAGNUS#Magnus Exorcismus #
+8,1014,1,0,0,0,0,0,0,0,0,0,0 //PR_REDEMPTIO#Martírio #
+8,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+8,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Wizard
+9,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+9,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+9,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+9,10,1,0,0,0,0,0,0,0,0,0,0 //MG_SIGHT#Chama Reveladora #
+9,11,10,0,0,0,0,0,0,0,0,0,0 //MG_NAPALMBEAT#Ataque Espiritual #
+9,12,10,11,7,13,5,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+9,13,10,11,4,0,0,0,0,0,0,0,0 //MG_SOULSTRIKE#Espíritos Anciões #
+9,14,10,0,0,0,0,0,0,0,0,0,0 //MG_COLDBOLT#Lanças de Gelo #
+9,15,10,14,5,0,0,0,0,0,0,0,0 //MG_FROSTDIVER#Rajada Congelante #
+9,16,10,0,0,0,0,0,0,0,0,0,0 //MG_STONECURSE#Petrificar #
+9,17,10,19,4,0,0,0,0,0,0,0,0 //MG_FIREBALL#Bolas de Fogo #
+9,18,10,17,5,10,1,0,0,0,0,0,0 //MG_FIREWALL#Barreira de Fogo #
+9,19,10,0,0,0,0,0,0,0,0,0,0 //MG_FIREBOLT#Lanças de Fogo #
+9,20,10,0,0,0,0,0,0,0,0,0,0 //MG_LIGHTNINGBOLT#Relâmpago #
+9,21,10,20,4,0,0,0,0,0,0,0,0 //MG_THUNDERSTORM#Tempestade de Raios #
+9,157,1,0,0,0,0,0,0,0,0,0,0 //MG_ENERGYCOAT#Proteção Arcana #
+9,80,10,18,1,0,0,0,0,0,0,0,0 //WZ_FIREPILLAR#Coluna de Fogo #
+9,81,10,20,1,10,1,0,0,0,0,0,0 //WZ_SIGHTRASHER#Supernova #
+//9,82,10,0,0,0,0,0,0,0,0,0,0 //WZ_FIREIVY#Fire Ivy#
+9,83,10,81,2,21,1,0,0,0,0,0,0 //WZ_METEOR#Chuva de Meteoros #
+9,84,10,11,1,20,1,0,0,0,0,0,0 //WZ_JUPITEL#Trovão e Júpiter #
+9,85,10,21,1,84,5,0,0,0,0,0,0 //WZ_VERMILION#Ira de Thor #
+9,86,5,14,1,20,1,0,0,0,0,0,0 //WZ_WATERBALL#Esfera d'Água #
+9,87,10,16,1,15,1,0,0,0,0,0,0 //WZ_ICEWALL#Barreira de Gelo #
+9,88,10,87,1,0,0,0,0,0,0,0,0 //WZ_FROSTNOVA#Congelar #
+9,89,10,15,1,84,3,0,0,0,0,0,0 //WZ_STORMGUST#Nevasca #
+9,90,5,16,1,0,0,0,0,0,0,0,0 //WZ_EARTHSPIKE#Coluna de Pedra #
+9,91,5,90,3,0,0,0,0,0,0,0,0 //WZ_HEAVENDRIVE#Fúria da Terra #
+9,92,5,91,1,0,0,0,0,0,0,0,0 //WZ_QUAGMIRE#Pântano dos Mortos #
+9,93,1,0,0,0,0,0,0,0,0,0,0 //WZ_ESTIMATION#Sentido Sobrenatural #
+9,1006,1,0,0,0,0,0,0,0,0,0,0 //WZ_SIGHTBLASTER#Explosão Protetora #
+9,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+9,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Blacksmith
+10,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+10,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+10,36,10,0,0,0,0,0,0,0,0,0,0 //MC_INCCARRY#Aumentar Capacidade de Carga #
+10,37,10,36,3,0,0,0,0,0,0,0,0 //MC_DISCOUNT#Desconto #
+10,38,10,37,3,0,0,0,0,0,0,0,0 //MC_OVERCHARGE#Superfaturar #
+10,39,10,36,5,0,0,0,0,0,0,0,0 //MC_PUSHCART#Usar Carrinho #
+10,40,1,0,0,0,0,0,0,0,0,0,0 //MC_IDENTIFY#Identificar Item #
+10,41,10,39,3,0,0,0,0,0,0,0,0 //MC_VENDING#Comércio #
+10,42,10,0,0,0,0,0,0,0,0,0,0 //MC_MAMMONITE#Mammonita #
+10,153,1,0,0,0,0,0,0,0,0,0,0 //MC_CARTREVOLUTION#Cavalo-de-Pau #
+10,154,1,0,0,0,0,0,0,0,0,0,0 //MC_CHANGECART#Personalizar Carrinho #
+10,155,1,0,0,0,0,0,0,0,0,0,0 //MC_LOUD#Grito de Guerra #
+10,94,5,0,0,0,0,0,0,0,0,0,0 //BS_IRON#Trabalhar Ferro #
+10,95,5,94,1,0,0,0,0,0,0,0,0 //BS_STEEL#Trabalhar Aço #
+10,96,5,94,1,0,0,0,0,0,0,0,0 //BS_ENCHANTEDSTONE#Produzir Pedra Fundamental #
+10,97,5,96,1,0,0,0,0,0,0,0,0 //BS_ORIDEOCON#Perícia com Oridecon #
+10,98,3,0,0,0,0,0,0,0,0,0,0 //BS_DAGGER#Forjar Adaga #
+10,99,3,98,1,0,0,0,0,0,0,0,0 //BS_SWORD#Forjar Espada #
+10,100,3,99,1,0,0,0,0,0,0,0,0 //BS_TWOHANDSWORD#Forjar Espada de Duas Mãos #
+10,101,3,99,2,0,0,0,0,0,0,0,0 //BS_AXE#Forjar Machado #
+10,102,3,103,1,0,0,0,0,0,0,0,0 //BS_MACE#Forjar Maça #
+10,103,3,98,1,0,0,0,0,0,0,0,0 //BS_KNUCKLE#Forjar Soqueira #
+10,104,3,98,2,0,0,0,0,0,0,0,0 //BS_SPEAR#Forjar Lança #
+10,105,1,0,0,0,0,0,0,0,0,0,0 //BS_HILTBINDING#Punho Firme #
+10,106,1,95,1,105,1,0,0,0,0,0,0 //BS_FINDINGORE#Encontrar Minério #
+10,107,10,105,1,0,0,0,0,0,0,0,0 //BS_WEAPONRESEARCH#Perícia em Armamento #
+10,108,1,107,1,0,0,0,0,0,0,0,0 //BS_REPAIRWEAPON#Consertar Armas #
+10,109,5,0,0,0,0,0,0,0,0,0,0 //BS_SKINTEMPER#Resistência ao Fogo #
+10,110,5,0,0,0,0,0,0,0,0,0,0 //BS_HAMMERFALL#Martelo de Thor #
+10,111,5,110,2,0,0,0,0,0,0,0,0 //BS_ADRENALINE#Adrenalina Pura #
+10,112,5,107,2,111,2,0,0,0,0,0,0 //BS_WEAPONPERFECT#Manejo Perfeito #
+10,113,5,111,3,0,0,0,0,0,0,0,0 //BS_OVERTHRUST#Força Violenta #
+10,114,5,112,3,113,2,0,0,0,0,0,0 //BS_MAXIMIZE#Amplificar Poder #
+10,1012,1,0,0,0,0,0,0,0,0,0,0 //BS_UNFAIRLYTRICK#Venda Duvidosa #
+10,1013,1,0,0,0,0,0,0,0,0,0,0 //BS_GREED#Ganância #
+10,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+10,459,1,111,5,0,0,0,0,0,0,0,0 //BS_ADRENALINE2#Adrenalina Concentrada #
+10,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+10,2535,1,41,1,0,0,0,0,0,0,0,0 //ALL_BUYING_STORE#Open Buying Store#
+//Hunter
+11,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+11,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+11,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+11,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+11,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+11,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+11,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+11,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+11,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+11,115,5,0,0,0,0,0,0,0,0,0,0 //HT_SKIDTRAP#Armadilha Escorregadia #
+11,116,5,0,0,0,0,0,0,0,0,0,0 //HT_LANDMINE#Armadilha Atordoante #
+11,117,5,115,1,0,0,0,0,0,0,0,0 //HT_ANKLESNARE#Instalar Armadilha #
+11,118,5,117,1,0,0,0,0,0,0,0,0 //HT_SHOCKWAVE#Armadilha Extenuante #
+11,119,5,120,1,0,0,0,0,0,0,0,0 //HT_SANDMAN#Armadilha Sonífera #
+11,120,5,115,1,0,0,0,0,0,0,0,0 //HT_FLASHER#Armadilha Luminosa #
+11,121,5,120,1,0,0,0,0,0,0,0,0 //HT_FREEZINGTRAP#Armadilha Congelante #
+11,122,5,116,1,119,1,121,1,0,0,0,0 //HT_BLASTMINE#Instalar Mina #
+11,123,5,118,1,122,1,0,0,0,0,0,0 //HT_CLAYMORETRAP#Armadilha Explosiva #
+11,124,1,116,1,0,0,0,0,0,0,0,0 //HT_REMOVETRAP#Remover Armadilha #
+11,125,1,118,1,124,1,0,0,0,0,0,0 //HT_TALKIEBOX#Mensagem Secreta #
+11,126,10,0,0,0,0,0,0,0,0,0,0 //HT_BEASTBANE#Flagelo das Feras #
+11,127,1,126,1,0,0,0,0,0,0,0,0 //HT_FALCON#Adestrar Falcão #
+11,128,10,129,5,0,0,0,0,0,0,0,0 //HT_STEELCROW#Garras de Aço #
+11,129,5,127,1,0,0,0,0,0,0,0,0 //HT_BLITZBEAT#Ataque Aéreo #
+11,130,4,45,1,127,1,0,0,0,0,0,0 //HT_DETECTING#Detectar #
+11,131,5,124,1,127,1,0,0,0,0,0,0 //HT_SPRINGTRAP#Desativar Armadilha #
+11,1009,1,0,0,0,0,0,0,0,0,0,0 //HT_PHANTASMIC#Flecha Fantasma #
+11,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+11,499,1,46,10,0,0,0,0,0,0,0,0 //HT_POWER#Ataque da Fera #
+11,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Assassin
+12,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+12,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+12,48,10,0,0,0,0,0,0,0,0,0,0 //TF_DOUBLE#Ataque Duplo #
+12,49,10,0,0,0,0,0,0,0,0,0,0 //TF_MISS#Perícia em Esquiva #
+12,50,10,0,0,0,0,0,0,0,0,0,0 //TF_STEAL#Furto #
+12,51,10,50,5,0,0,0,0,0,0,0,0 //TF_HIDING#Esconderijo #
+12,52,10,0,0,0,0,0,0,0,0,0,0 //TF_POISON#Envenenar #
+12,53,1,52,3,0,0,0,0,0,0,0,0 //TF_DETOXIFY#Desintoxicar #
+12,149,1,0,0,0,0,0,0,0,0,0,0 //TF_SPRINKLESAND#Chutar Areia #
+12,150,1,0,0,0,0,0,0,0,0,0,0 //TF_BACKSLIDING#Recuar #
+12,151,1,0,0,0,0,0,0,0,0,0,0 //TF_PICKSTONE#Procurar Pedras #
+12,152,1,0,0,0,0,0,0,0,0,0,0 //TF_THROWSTONE#Arremessar Pedra #
+12,132,5,0,0,0,0,0,0,0,0,0,0 //AS_RIGHT#Perícia com Mão Direita #
+12,133,5,132,2,0,0,0,0,0,0,0,0 //AS_LEFT#Perícia com Mão Esquerda #
+12,134,10,0,0,0,0,0,0,0,0,0,0 //AS_KATAR#Perícia com Katar #
+12,135,10,51,2,0,0,0,0,0,0,0,0 //AS_CLOAKING#Furtividade #
+12,136,10,134,4,0,0,0,0,0,0,0,0 //AS_SONICBLOW#Lâminas Destruidoras #
+12,137,5,135,2,136,5,0,0,0,0,0,0 //AS_GRIMTOOTH##
+12,138,10,52,1,0,0,0,0,0,0,0,0 //AS_ENCHANTPOISON#Envenenar Arma #
+12,139,10,138,3,0,0,0,0,0,0,0,0 //AS_POISONREACT#Refletir Veneno #
+12,140,10,138,5,0,0,0,0,0,0,0,0 //AS_VENOMDUST#Névoa Tóxica #
+12,141,10,139,5,140,5,0,0,0,0,0,0 //AS_SPLASHER#Explosão Tóxica #
+12,1003,1,0,0,0,0,0,0,0,0,0,0 //AS_SONICACCEL#Lâminas Aceleradas #
+12,1004,1,0,0,0,0,0,0,0,0,0,0 //AS_VENOMKNIFE#Faca Envenenada #
+12,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+12,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Knight(Peco)
+13,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+13,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+13,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+13,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+13,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+13,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+13,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+13,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+13,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+13,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+13,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+13,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+13,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+13,56,10,55,1,0,0,0,0,0,0,0,0 //KN_PIERCE#Perfurar #
+13,57,10,63,1,58,3,0,0,0,0,0,0 //KN_BRANDISHSPEAR#Brandir Lança #
+13,58,10,56,5,0,0,0,0,0,0,0,0 //KN_SPEARSTAB#Estocada #
+13,59,5,56,3,0,0,0,0,0,0,0,0 //KN_SPEARBOOMERANG#Lança Bumerangue #
+13,60,10,3,1,0,0,0,0,0,0,0,0 //KN_TWOHANDQUICKEN#Rapidez com Duas Mãos #
+13,61,5,3,1,0,0,0,0,0,0,0,0 //KN_AUTOCOUNTER#Contra-Ataque #
+13,62,10,5,10,7,3,3,5,60,10,61,5//KN_BOWLINGBASH#Impacto de Tyr #
+13,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+13,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+13,1001,1,0,0,0,0,0,0,0,0,0,0 //KN_CHARGEATK#Avanço Ofensivo #
+13,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+13,495,1,60,10,0,0,0,0,0,0,0,0 //KN_ONEHAND#Rapidez com Uma Mão #
+13,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Crusader
+14,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+14,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+14,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+14,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+14,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+14,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+14,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+14,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+14,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+14,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+14,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+14,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+14,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+14,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+14,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+14,35,1,248,5,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+14,22,10,35,1,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+14,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+14,28,10,23,5,248,10,0,0,0,0,0,0 //AL_HEAL#Curar #
+14,248,10,0,0,0,0,0,0,0,0,0,0 //CR_TRUST#Fé #
+14,249,10,0,0,0,0,0,0,0,0,0,0 //CR_AUTOGUARD#Bloqueio #
+14,250,5,249,5,0,0,0,0,0,0,0,0 //CR_SHIELDCHARGE#Punição Divina #
+14,251,5,250,3,0,0,0,0,0,0,0,0 //CR_SHIELDBOOMERANG#Escudo Bumerangue #
+14,252,10,251,3,0,0,0,0,0,0,0,0 //CR_REFLECTSHIELD#Escudo Refletor #
+14,253,10,248,7,0,0,0,0,0,0,0,0 //CR_HOLYCROSS#Crux Divinum #
+14,254,10,253,6,248,10,0,0,0,0,0,0 //CR_GRANDCROSS#Crux Magnun #
+14,255,5,252,5,254,4,0,0,0,0,0,0 //CR_DEVOTION#Redenção #
+14,256,5,22,5,28,5,0,0,0,0,0,0 //CR_PROVIDENCE#Divina Providência #
+14,257,5,251,1,0,0,0,0,0,0,0,0 //CR_DEFENDER#Aura Sagrada #
+14,258,10,55,10,0,0,0,0,0,0,0,0 //CR_SPEARQUICKEN#Rapidez com Lança #
+14,1002,1,0,0,0,0,0,0,0,0,0,0 //CR_SHRINK#Submissão #
+14,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+14,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Monk
+15,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+15,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+15,22,10,0,0,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+15,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+15,24,1,0,0,0,0,0,0,0,0,0,0 //AL_RUWACH#Revelação #
+15,25,1,27,4,0,0,0,0,0,0,0,0 //AL_PNEUMA#Escudo Sagrado #
+15,26,2,24,1,0,0,0,0,0,0,0,0 //AL_TELEPORT#Teleporte #
+15,27,4,26,2,0,0,0,0,0,0,0,0 //AL_WARP#Portal #
+15,28,10,0,0,0,0,0,0,0,0,0,0 //AL_HEAL#Curar #
+15,29,10,28,3,0,0,0,0,0,0,0,0 //AL_INCAGI#Aumentar Agilidade #
+15,30,10,29,1,0,0,0,0,0,0,0,0 //AL_DECAGI#Diminuir Agilidade #
+15,31,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYWATER#Aqua Benedicta #
+15,32,10,23,3,0,0,0,0,0,0,0,0 //AL_CRUCIS#Signum Crusis #
+15,33,10,22,3,0,0,0,0,0,0,0,0 //AL_ANGELUS#Angelus #
+15,34,10,22,5,0,0,0,0,0,0,0,0 //AL_BLESSING#Bênção #
+15,35,1,28,2,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+15,156,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYLIGHT#Luz Divina #
+15,259,10,23,10,22,10,0,0,0,0,0,0 //MO_IRONHAND#Punhos de Ferro #
+15,260,5,269,2,0,0,0,0,0,0,0,0 //MO_SPIRITSRECOVERY#Meditação #
+15,261,5,259,2,0,0,0,0,0,0,0,0 //MO_CALLSPIRITS#Invocar Esfera Espiritual #
+15,262,1,261,5,0,0,0,0,0,0,0,0 //MO_ABSORBSPIRITS#Absorver Esferas Espirituais #
+15,263,10,265,5,0,0,0,0,0,0,0,0 //MO_TRIPLEATTACK#Combo Triplo #
+15,264,1,271,3,260,2,268,3,0,0,0,0 //MO_BODYRELOCATION#Passo Etéreo #
+15,265,10,259,5,261,5,0,0,0,0,0,0 //MO_DODGE#Cair das Pétalas #
+15,266,5,261,5,0,0,0,0,0,0,0,0 //MO_INVESTIGATE#Impacto Psíquico #
+15,267,5,266,3,0,0,0,0,0,0,0,0 //MO_FINGEROFFENSIVE#Disparo de Esferas Espirituais #
+15,268,5,273,3,0,0,0,0,0,0,0,0 //MO_STEELBODY#Corpo Fechado #
+15,269,5,265,5,0,0,0,0,0,0,0,0 //MO_BLADESTOP#Dilema #
+15,270,5,262,1,0,0,0,0,0,0,0,0 //MO_EXPLOSIONSPIRITS#Fúria Interior #
+15,271,5,270,3,267,3,0,0,0,0,0,0 //MO_EXTREMITYFIST#Punho Supremo de Asura #
+15,272,5,263,5,0,0,0,0,0,0,0,0 //MO_CHAINCOMBO#Combo Quádruplo #
+15,273,5,272,3,0,0,0,0,0,0,0,0 //MO_COMBOFINISH#O Último Dragão #
+15,1015,1,0,0,0,0,0,0,0,0,0,0 //MO_KITRANSLATION#Concessão Espiritual #
+15,1016,1,0,0,0,0,0,0,0,0,0,0 //MO_BALKYOUNG#Punhos Intensos #
+15,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+15,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Sage
+16,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+16,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+16,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+16,10,1,0,0,0,0,0,0,0,0,0,0 //MG_SIGHT#Chama Reveladora #
+16,11,10,0,0,0,0,0,0,0,0,0,0 //MG_NAPALMBEAT#Ataque Espiritual #
+16,12,10,11,7,13,5,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+16,13,10,11,4,0,0,0,0,0,0,0,0 //MG_SOULSTRIKE#Espíritos Anciões #
+16,14,10,0,0,0,0,0,0,0,0,0,0 //MG_COLDBOLT#Lanças de Gelo #
+16,15,10,14,5,0,0,0,0,0,0,0,0 //MG_FROSTDIVER#Rajada Congelante #
+16,16,10,0,0,0,0,0,0,0,0,0,0 //MG_STONECURSE#Petrificar #
+16,17,10,19,4,0,0,0,0,0,0,0,0 //MG_FIREBALL#Bolas de Fogo #
+16,18,10,17,5,10,1,0,0,0,0,0,0 //MG_FIREWALL#Barreira de Fogo #
+16,19,10,0,0,0,0,0,0,0,0,0,0 //MG_FIREBOLT#Lanças de Fogo #
+16,20,10,0,0,0,0,0,0,0,0,0,0 //MG_LIGHTNINGBOLT#Relâmpago #
+16,21,10,20,4,0,0,0,0,0,0,0,0 //MG_THUNDERSTORM#Tempestade de Raios #
+16,157,1,0,0,0,0,0,0,0,0,0,0 //MG_ENERGYCOAT#Proteção Arcana #
+16,93,1,0,0,0,0,0,0,0,0,0,0 //WZ_ESTIMATION#Sentido Sobrenatural #
+16,90,5,283,1,0,0,0,0,0,0,0,0 //WZ_EARTHSPIKE#Coluna de Pedra #
+16,91,5,90,1,0,0,0,0,0,0,0,0 //WZ_HEAVENDRIVE#Fúria da Terra #
+16,274,10,0,0,0,0,0,0,0,0,0,0 //SA_ADVANCEDBOOK#Estudo de Livros #
+16,275,5,274,2,0,0,0,0,0,0,0,0 //SA_CASTCANCEL#Cancelar magia #
+16,276,5,274,4,0,0,0,0,0,0,0,0 //SA_MAGICROD#Espelho Mágico #
+16,277,5,276,1,0,0,0,0,0,0,0,0 //SA_SPELLBREAKER#Desconcentrar #
+16,278,10,275,1,0,0,0,0,0,0,0,0 //SA_FREECAST#Conjuração Livre #
+16,279,10,278,4,0,0,0,0,0,0,0,0 //SA_AUTOSPELL#Desejo Arcano #
+16,280,5,19,1,274,5,0,0,0,0,0,0 //SA_FLAMELAUNCHER#Encantar com Chama #
+16,281,5,14,1,274,5,0,0,0,0,0,0 //SA_FROSTWEAPON#Encantar com Geada #
+16,282,5,20,1,274,5,0,0,0,0,0,0 //SA_LIGHTNINGLOADER#Encantar com Ventania #
+16,283,5,16,1,274,5,0,0,0,0,0,0 //SA_SEISMICWEAPON#Encantar com Terremoto #
+16,284,5,274,9,0,0,0,0,0,0,0,0 //SA_DRAGONOLOGY#Dragonologia #
+16,285,5,280,2,0,0,0,0,0,0,0,0 //SA_VOLCANO#Vulcão #
+16,286,5,281,2,0,0,0,0,0,0,0,0 //SA_DELUGE#Dilúvio #
+16,287,5,282,2,0,0,0,0,0,0,0,0 //SA_VIOLENTGALE#Furacão #
+16,288,5,285,3,286,3,287,3,0,0,0,0 //SA_LANDPROTECTOR#Proteger Terreno #
+16,289,5,277,3,0,0,0,0,0,0,0,0 //SA_DISPELL#Desencantar #
+16,290,10,279,5,289,1,288,1,0,0,0,0 //SA_ABRACADABRA#Abracadabra #
+16,1007,1,0,0,0,0,0,0,0,0,0,0 //SA_CREATECON#Criar Conversor Elemental #
+16,1008,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTWATER#Mudança Elemental - Água #
+16,1017,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTGROUND#Mudança Elemental - Terra #
+16,1018,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTFIRE#Mudança Elemental - Fogo #
+16,1019,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTWIND#Mudança Elemental - Vento #
+16,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+16,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Rogue
+17,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+17,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+17,48,10,0,0,0,0,0,0,0,0,0,0 //TF_DOUBLE#Ataque Duplo #
+17,49,10,0,0,0,0,0,0,0,0,0,0 //TF_MISS#Perícia em Esquiva #
+17,50,10,0,0,0,0,0,0,0,0,0,0 //TF_STEAL#Furto #
+17,51,10,50,5,0,0,0,0,0,0,0,0 //TF_HIDING#Esconderijo #
+17,52,10,0,0,0,0,0,0,0,0,0,0 //TF_POISON#Envenenar #
+17,53,1,52,3,0,0,0,0,0,0,0,0 //TF_DETOXIFY#Desintoxicar #
+17,149,1,0,0,0,0,0,0,0,0,0,0 //TF_SPRINKLESAND#Chutar Areia #
+17,150,1,0,0,0,0,0,0,0,0,0,0 //TF_BACKSLIDING#Recuar #
+17,151,1,0,0,0,0,0,0,0,0,0,0 //TF_PICKSTONE#Procurar Pedras #
+17,152,1,0,0,0,0,0,0,0,0,0,0 //TF_THROWSTONE#Arremessar Pedra #
+17,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+17,44,10,0,0,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+17,46,10,44,10,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+17,124,1,46,5,0,0,0,0,0,0,0,0 //HT_REMOVETRAP#Remover Armadilha #
+17,210,10,50,1,0,0,0,0,0,0,0,0 //RG_SNATCHER#Mãos Leves #
+17,211,10,210,4,0,0,0,0,0,0,0,0 //RG_STEALCOIN#Afanar #
+17,212,10,211,4,0,0,0,0,0,0,0,0 //RG_BACKSTAP#Apunhalar #
+17,213,5,51,1,0,0,0,0,0,0,0,0 //RG_TUNNELDRIVE#Túnel de Fuga #
+17,214,5,212,2,213,2,0,0,0,0,0,0 //RG_RAID#Ataque Surpresa #
+17,215,5,217,5,0,0,0,0,0,0,0,0 //RG_STRIPWEAPON#Remover Arma #
+17,216,5,218,5,0,0,0,0,0,0,0,0 //RG_STRIPSHIELD#Remover Escudo #
+17,217,5,216,5,0,0,0,0,0,0,0,0 //RG_STRIPARMOR#Remover Armadura #
+17,218,5,211,2,0,0,0,0,0,0,0,0 //RG_STRIPHELM#Remover Capacete #
+17,219,5,212,4,214,5,0,0,0,0,0,0 //RG_INTIMIDATE#Rapto #
+17,220,1,221,5,0,0,0,0,0,0,0,0 //RG_GRAFFITI#Grafitti #
+17,221,5,222,1,0,0,0,0,0,0,0,0 //RG_FLAGGRAFFITI#Pichar #
+17,222,1,223,1,0,0,0,0,0,0,0,0 //RG_CLEANER#Faxina #
+17,223,1,216,3,0,0,0,0,0,0,0,0 //RG_GANGSTER#Malandragem #
+17,224,5,223,1,0,0,0,0,0,0,0,0 //RG_COMPULSION#Extorquir #
+17,225,10,219,5,0,0,0,0,0,0,0,0 //RG_PLAGIARISM#Plágio #
+17,1005,1,0,0,0,0,0,0,0,0,0,0 //RG_CLOSECONFINE#Confinamento #
+17,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+17,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Alchemist
+18,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+18,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+18,36,10,0,0,0,0,0,0,0,0,0,0 //MC_INCCARRY#Aumentar Capacidade de Carga #
+18,37,10,36,3,0,0,0,0,0,0,0,0 //MC_DISCOUNT#Desconto #
+18,38,10,37,3,0,0,0,0,0,0,0,0 //MC_OVERCHARGE#Superfaturar #
+18,39,10,36,5,0,0,0,0,0,0,0,0 //MC_PUSHCART#Usar Carrinho #
+18,40,1,0,0,0,0,0,0,0,0,0,0 //MC_IDENTIFY#Identificar Item #
+18,41,10,39,3,0,0,0,0,0,0,0,0 //MC_VENDING#Comércio #
+18,42,10,0,0,0,0,0,0,0,0,0,0 //MC_MAMMONITE#Mammonita #
+18,153,1,0,0,0,0,0,0,0,0,0,0 //MC_CARTREVOLUTION#Cavalo-de-Pau #
+18,154,1,0,0,0,0,0,0,0,0,0,0 //MC_CHANGECART#Personalizar Carrinho #
+18,155,1,0,0,0,0,0,0,0,0,0,0 //MC_LOUD#Grito de Guerra #
+18,226,10,0,0,0,0,0,0,0,0,0,0 //AM_AXEMASTERY#Perícia com Machado #
+18,227,10,0,0,0,0,0,0,0,0,0,0 //AM_LEARNINGPOTION#Pesquisa de Poções #
+18,228,10,227,5,0,0,0,0,0,0,0,0 //AM_PHARMACY#Preparar Poção #
+18,229,5,228,4,0,0,0,0,0,0,0,0 //AM_DEMONSTRATION#Fogo Grego #
+18,230,5,228,5,0,0,0,0,0,0,0,0 //AM_ACIDTERROR#Terror Ácido #
+18,231,5,228,3,0,0,0,0,0,0,0,0 //AM_POTIONPITCHER#Arremessar Poção #
+18,232,5,228,6,0,0,0,0,0,0,0,0 //AM_CANNIBALIZE#Criar Monstro Planta #
+18,233,5,228,2,0,0,0,0,0,0,0,0 //AM_SPHEREMINE#Criar Esfera Marinha #
+18,234,5,236,3,0,0,0,0,0,0,0,0 //AM_CP_WEAPON#Revestir Arma #
+18,235,5,237,3,0,0,0,0,0,0,0,0 //AM_CP_SHIELD#Revestir Escudo #
+18,236,5,235,3,0,0,0,0,0,0,0,0 //AM_CP_ARMOR#Revestir Armadura #
+18,237,5,228,2,0,0,0,0,0,0,0,0 //AM_CP_HELM#Revestir Capacete #
+18,238,1,0,0,0,0,0,0,0,0,0,0 //AM_BIOETHICS#Bioética #
+18,243,1,244,1,0,0,0,0,0,0,0,0 //AM_CALLHOMUN#Criar Homunculus #
+18,244,1,238,1,0,0,0,0,0,0,0,0 //AM_REST#Vaporizar #
+18,247,5,243,1,0,0,0,0,0,0,0,0 //AM_RESURRECTHOMUN#Ressuscitar Homunculu #
+18,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+18,446,1,0,0,0,0,0,0,0,0,0,0 //AM_BERSERKPITCHER#Arremessar Poção da Fúria Selvagem #
+18,496,1,228,10,0,0,0,0,0,0,0,0 //AM_TWILIGHT1#Criação Espiritual de Poções #
+18,497,1,228,10,0,0,0,0,0,0,0,0 //AM_TWILIGHT2#Criação Espiritual de Poções #
+18,498,1,228,10,0,0,0,0,0,0,0,0 //AM_TWILIGHT3#Criação Espiritual de Poções #
+18,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+18,2535,1,41,1,0,0,0,0,0,0,0,0 //ALL_BUYING_STORE#Open Buying Store#
+//Bard
+19,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+19,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+19,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+19,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+19,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+19,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+19,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+19,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+19,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+19,315,10,0,0,0,0,0,0,0,0,0,0 //BA_MUSICALLESSON#Lições de Música #
+19,316,5,315,3,0,0,0,0,0,0,0,0 //BA_MUSICALSTRIKE#Flecha Melódica #
+19,317,5,315,1,304,1,0,0,0,0,0,0 //BA_DISSONANCE#Dissonância #
+19,318,5,305,1,0,0,0,0,0,0,0,0 //BA_FROSTJOKE#Piada Infame #
+19,319,10,317,3,0,0,0,0,0,0,0,0 //BA_WHISTLE#Assovio #
+19,320,10,317,3,0,0,0,0,0,0,0,0 //BA_ASSASSINCROSS#Crepúsculo Sangrento #
+19,321,10,317,3,0,0,0,0,0,0,0,0 //BA_POEMBRAGI#Poema de Bragi #
+19,322,10,317,3,0,0,0,0,0,0,0,0 //BA_APPLEIDUN#Maçãs de Idun #
+19,304,1,0,0,0,0,0,0,0,0,0,0 //BD_ADAPTATION#Encerramento #
+19,305,1,304,1,0,0,0,0,0,0,0,0 //BD_ENCORE#Bis #
+19,306,1,319,10,0,0,0,0,0,0,0,0 //BD_LULLABY#Cantiga de Nina #
+19,307,5,313,3,0,0,0,0,0,0,0,0 //BD_RICHMANKIM#Banquete de Njord #
+19,308,1,311,1,0,0,0,0,0,0,0,0 //BD_ETERNALCHAOS#Ritmo Caótico #
+19,309,5,322,10,0,0,0,0,0,0,0,0 //BD_DRUMBATTLEFIELD#Rufar dos Tambores #
+19,310,5,309,3,0,0,0,0,0,0,0,0 //BD_RINGNIBELUNGEN#Anel dos Nibelungos #
+19,311,1,320,10,0,0,0,0,0,0,0,0 //BD_ROKISWEIL#Lamento de Loki #
+19,312,1,306,1,0,0,0,0,0,0,0,0 //BD_INTOABYSS#Canção Preciosa #
+19,313,5,321,10,0,0,0,0,0,0,0,0 //BD_SIEGFRIED#Ode a Siegfried #
+19,1010,1,0,0,0,0,0,0,0,0,0,0 //BA_PANGVOICE#Voz Dolorosa #
+19,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+19,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Dancer
+20,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+20,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+20,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+20,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+20,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+20,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+20,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+20,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+20,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+20,323,10,0,0,0,0,0,0,0,0,0,0 //DC_DANCINGLESSON#Lições de Dança #
+20,324,5,323,3,0,0,0,0,0,0,0,0 //DC_THROWARROW#Estilingue #
+20,325,5,323,1,304,1,0,0,0,0,0,0 //DC_UGLYDANCE#Dança do Ventre #
+20,326,5,305,1,0,0,0,0,0,0,0,0 //DC_SCREAM#Escândalo #
+20,327,10,325,3,0,0,0,0,0,0,0,0 //DC_HUMMING#Sibilo #
+20,328,10,325,3,0,0,0,0,0,0,0,0 //DC_DONTFORGETME#Não Me Abandones #
+20,329,10,325,3,0,0,0,0,0,0,0,0 //DC_FORTUNEKISS#Beijo da Sorte #
+20,330,10,325,3,0,0,0,0,0,0,0,0 //DC_SERVICEFORYOU#Dança Cigana #
+20,304,1,0,0,0,0,0,0,0,0,0,0 //BD_ADAPTATION#Encerramento #
+20,305,1,304,1,0,0,0,0,0,0,0,0 //BD_ENCORE#Bis #
+20,306,1,327,10,0,0,0,0,0,0,0,0 //BD_LULLABY#Cantiga de Nina #
+20,307,5,313,3,0,0,0,0,0,0,0,0 //BD_RICHMANKIM#Banquete de Njord #
+20,308,1,311,1,0,0,0,0,0,0,0,0 //BD_ETERNALCHAOS#Ritmo Caótico #
+20,309,5,330,10,0,0,0,0,0,0,0,0 //BD_DRUMBATTLEFIELD#Rufar dos Tambores #
+20,310,5,309,3,0,0,0,0,0,0,0,0 //BD_RINGNIBELUNGEN#Anel dos Nibelungos #
+20,311,1,328,10,0,0,0,0,0,0,0,0 //BD_ROKISWEIL#Lamento de Loki #
+20,312,1,306,1,0,0,0,0,0,0,0,0 //BD_INTOABYSS#Canção Preciosa #
+20,313,5,329,10,0,0,0,0,0,0,0,0 //BD_SIEGFRIED#Ode a Siegfried #
+20,1011,1,0,0,0,0,0,0,0,0,0,0 //DC_WINKCHARM#Piscadela #
+20,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+20,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Crusader(Peco)
+21,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+21,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+21,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+21,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+21,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+21,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+21,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+21,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+21,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+21,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+21,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+21,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+21,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+21,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+21,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+21,35,1,248,5,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+21,22,10,35,1,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+21,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+21,28,10,23,5,248,10,0,0,0,0,0,0 //AL_HEAL#Curar #
+21,248,10,0,0,0,0,0,0,0,0,0,0 //CR_TRUST#Fé #
+21,249,10,0,0,0,0,0,0,0,0,0,0 //CR_AUTOGUARD#Bloqueio #
+21,250,5,249,5,0,0,0,0,0,0,0,0 //CR_SHIELDCHARGE#Punição Divina #
+21,251,5,250,3,0,0,0,0,0,0,0,0 //CR_SHIELDBOOMERANG#Escudo Bumerangue #
+21,252,10,251,3,0,0,0,0,0,0,0,0 //CR_REFLECTSHIELD#Escudo Refletor #
+21,253,10,248,7,0,0,0,0,0,0,0,0 //CR_HOLYCROSS#Crux Divinum #
+21,254,10,253,6,248,10,0,0,0,0,0,0 //CR_GRANDCROSS#Crux Magnun #
+21,255,5,252,5,254,4,0,0,0,0,0,0 //CR_DEVOTION#Redenção #
+21,256,5,22,5,28,5,0,0,0,0,0,0 //CR_PROVIDENCE#Divina Providência #
+21,257,5,251,1,0,0,0,0,0,0,0,0 //CR_DEFENDER#Aura Sagrada #
+21,258,10,55,10,0,0,0,0,0,0,0,0 //CR_SPEARQUICKEN#Rapidez com Lança #
+21,1002,1,0,0,0,0,0,0,0,0,0,0 //CR_SHRINK#Submissão #
+21,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+21,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//WeddingClass
+22,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+22,334,1,0,0,0,0,0,0,0,0,0,0 //WE_MALE#Amor Verdadeiro #
+22,335,5,0,0,0,0,0,0,0,0,0,0 //WE_FEMALE#Amor Eterno #
+22,336,5,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARTNER#Saudades de Você #
+22,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+22,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//SuperNovice
+23,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+23,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+23,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+23,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+23,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+23,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+23,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+23,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+23,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+23,10,1,0,0,0,0,0,0,0,0,0,0 //MG_SIGHT#Chama Reveladora #
+23,11,10,0,0,0,0,0,0,0,0,0,0 //MG_NAPALMBEAT#Ataque Espiritual #
+23,12,10,11,7,13,5,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+23,13,10,11,4,0,0,0,0,0,0,0,0 //MG_SOULSTRIKE#Espíritos Anciões #
+23,14,10,0,0,0,0,0,0,0,0,0,0 //MG_COLDBOLT#Lanças de Gelo #
+23,15,10,14,5,0,0,0,0,0,0,0,0 //MG_FROSTDIVER#Rajada Congelante #
+23,16,10,0,0,0,0,0,0,0,0,0,0 //MG_STONECURSE#Petrificar #
+23,17,10,19,4,0,0,0,0,0,0,0,0 //MG_FIREBALL#Bolas de Fogo #
+23,18,10,17,5,10,1,0,0,0,0,0,0 //MG_FIREWALL#Barreira de Fogo #
+23,19,10,0,0,0,0,0,0,0,0,0,0 //MG_FIREBOLT#Lanças de Fogo #
+23,20,10,0,0,0,0,0,0,0,0,0,0 //MG_LIGHTNINGBOLT#Relâmpago #
+23,21,10,20,4,0,0,0,0,0,0,0,0 //MG_THUNDERSTORM#Tempestade de Raios #
+23,22,10,0,0,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+23,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+23,24,1,0,0,0,0,0,0,0,0,0,0 //AL_RUWACH#Revelação #
+23,25,1,27,4,0,0,0,0,0,0,0,0 //AL_PNEUMA#Escudo Sagrado #
+23,26,2,24,1,0,0,0,0,0,0,0,0 //AL_TELEPORT#Teleporte #
+23,27,4,26,2,0,0,0,0,0,0,0,0 //AL_WARP#Portal #
+23,28,10,0,0,0,0,0,0,0,0,0,0 //AL_HEAL#Curar #
+23,29,10,28,3,0,0,0,0,0,0,0,0 //AL_INCAGI#Aumentar Agilidade #
+23,30,10,29,1,0,0,0,0,0,0,0,0 //AL_DECAGI#Diminuir Agilidade #
+23,31,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYWATER#Aqua Benedicta #
+23,32,10,23,3,0,0,0,0,0,0,0,0 //AL_CRUCIS#Signum Crusis #
+23,33,10,22,3,0,0,0,0,0,0,0,0 //AL_ANGELUS#Angelus #
+23,34,10,22,5,0,0,0,0,0,0,0,0 //AL_BLESSING#Bênção #
+23,35,1,28,2,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+23,36,10,0,0,0,0,0,0,0,0,0,0 //MC_INCCARRY#Aumentar Capacidade de Carga #
+23,37,10,36,3,0,0,0,0,0,0,0,0 //MC_DISCOUNT#Desconto #
+23,38,10,37,3,0,0,0,0,0,0,0,0 //MC_OVERCHARGE#Superfaturar #
+23,39,10,36,5,0,0,0,0,0,0,0,0 //MC_PUSHCART#Usar Carrinho #
+23,40,1,0,0,0,0,0,0,0,0,0,0 //MC_IDENTIFY#Identificar Item #
+23,41,10,39,3,0,0,0,0,0,0,0,0 //MC_VENDING#Comércio #
+23,42,10,0,0,0,0,0,0,0,0,0,0 //MC_MAMMONITE#Mammonita #
+23,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+23,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+23,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+23,48,10,0,0,0,0,0,0,0,0,0,0 //TF_DOUBLE#Ataque Duplo #
+23,49,10,0,0,0,0,0,0,0,0,0,0 //TF_MISS#Perícia em Esquiva #
+23,50,10,0,0,0,0,0,0,0,0,0,0 //TF_STEAL#Furto #
+23,51,10,50,5,0,0,0,0,0,0,0,0 //TF_HIDING#Esconderijo #
+23,52,10,0,0,0,0,0,0,0,0,0,0 //TF_POISON#Envenenar #
+23,53,1,52,3,0,0,0,0,0,0,0,0 //TF_DETOXIFY#Desintoxicar #
+23,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+23,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+23,2535,1,41,1,0,0,0,0,0,0,0,0 //ALL_BUYING_STORE#Open Buying Store#
+//Gunslinger
+24,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+24,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+24,500,5,0,0,0,0,0,0,0,0,0,0 //GS_GLITTERING#Cara ou Coroa #
+24,501,1,500,1,0,0,0,0,0,0,0,0 //GS_FLING#Atirar Moedas #
+24,502,1,500,1,511,10,0,0,0,0,0,0 //GS_TRIPLEACTION#Ataque Triplo #
+24,503,1,500,5,512,10,0,0,0,0,0,0 //GS_BULLSEYE#Ataque Certeiro #
+24,504,1,500,4,517,10,0,0,0,0,0,0 //GS_MADNESSCANCEL#Resistência Final #
+24,505,1,500,4,513,5,0,0,0,0,0,0 //GS_ADJUSTMENT#Pânico do Justiceiro #
+24,506,1,500,2,510,10,0,0,0,0,0,0 //GS_INCREASING#Aumentar Precisão #
+24,507,1,500,1,0,0,0,0,0,0,0,0 //GS_MAGICALBULLET#Bala Mágica #
+24,508,1,500,1,0,0,0,0,0,0,0,0 //GS_CRACKER#Tiro Bombinha #
+24,509,10,0,0,0,0,0,0,0,0,0,0 //GS_SINGLEACTION#Ataque Concentrado #
+24,510,10,0,0,0,0,0,0,0,0,0,0 //GS_SNAKEEYE#Olhos de Serpente #
+24,511,10,509,1,0,0,0,0,0,0,0,0 //GS_CHAINACTION#Reação em Cadeia #
+24,512,10,509,5,0,0,0,0,0,0,0,0 //GS_TRACKING#Rastrear o Alvo #
+24,513,5,512,7,0,0,0,0,0,0,0,0 //GS_DISARM#Desarmar #
+24,514,5,512,5,0,0,0,0,0,0,0,0 //GS_PIERCINGSHOT#Ferir Alvo #
+24,515,10,511,3,0,0,0,0,0,0,0,0 //GS_RAPIDSHOWER#Rajada Certeira #
+24,516,10,515,5,0,0,0,0,0,0,0,0 //GS_DESPERADO#Desperado #
+24,517,10,515,7,516,5,0,0,0,0,0,0 //GS_GATLINGFEVER#Ataque Gatling #
+24,518,10,509,5,0,0,0,0,0,0,0,0 //GS_DUST#Controle de Multidão #
+24,519,10,518,3,0,0,0,0,0,0,0,0 //GS_FULLBUSTER#Ataque Total #
+24,520,10,519,5,0,0,0,0,0,0,0,0 //GS_SPREADATTACK#Disparo Espalhado #
+24,521,10,520,7,0,0,0,0,0,0,0,0 //GS_GROUNDDRIFT#Mina do Justiceiro #
+24,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+24,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Ninja
+25,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+25,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+25,522,10,0,0,0,0,0,0,0,0,0,0 //NJ_TOBIDOUGU#Prática de Arremesso de Shuriken #
+25,523,10,522,1,0,0,0,0,0,0,0,0 //NJ_SYURIKEN#Arremessar Shuriken #
+25,524,5,523,5,0,0,0,0,0,0,0,0 //NJ_KUNAI#Arremessar Kunai #
+25,525,5,522,5,524,5,0,0,0,0,0,0 //NJ_HUUMA#Arremessar Shuriken Huuma #
+25,526,10,522,10,525,5,0,0,0,0,0,0 //NJ_ZENYNAGE#Chuva de Moedas #
+25,527,5,0,0,0,0,0,0,0,0,0,0 //NJ_TATAMIGAESHI#Virar Tatami #
+25,528,10,529,1,0,0,0,0,0,0,0,0 //NJ_KASUMIKIRI#Corte da Névoa #
+25,529,5,527,1,0,0,0,0,0,0,0,0 //NJ_SHADOWJUMP#Salto das Sombras #
+25,530,5,528,5,0,0,0,0,0,0,0,0 //NJ_KIRIKAGE#Corte das Sombras #
+25,531,5,529,5,0,0,0,0,0,0,0,0 //NJ_UTSUSEMI#Troca de Pele #
+25,532,10,531,4,530,3,543,1,0,0,0,0 //NJ_BUNSINJYUTSU#Imagem Falsa #
+25,533,10,0,0,0,0,0,0,0,0,0,0 //NJ_NINPOU#Perícia Ninja #
+25,534,10,533,1,0,0,0,0,0,0,0,0 //NJ_KOUENKA#Pétalas Flamejantes #
+25,535,10,534,5,0,0,0,0,0,0,0,0 //NJ_KAENSIN#Escudo de Chamas #
+25,536,5,533,10,535,7,0,0,0,0,0,0 //NJ_BAKUENRYU#Dragão Explosivo #
+25,537,10,533,1,0,0,0,0,0,0,0,0 //NJ_HYOUSENSOU#Lança Congelante #
+25,538,10,537,5,0,0,0,0,0,0,0,0 //NJ_SUITON#Evasão Aquática #
+25,539,5,533,10,538,7,0,0,0,0,0,0 //NJ_HYOUSYOURAKU#Grande Floco de Neve #
+25,540,10,533,1,0,0,0,0,0,0,0,0 //NJ_HUUJIN#Lâmina de Vento #
+25,541,5,540,5,0,0,0,0,0,0,0,0 //NJ_RAIGEKISAI#Descarga Elétrica #
+25,542,5,533,10,541,5,0,0,0,0,0,0 //NJ_KAMAITACHI#Brisa Cortante #
+25,543,5,533,5,0,0,0,0,0,0,0,0 //NJ_NEN#Aura Ninja #
+25,544,10,522,7,530,5,543,1,0,0,0,0 //NJ_ISSEN#Ataque Mortal #
+25,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+25,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//NoviceHigh
+4001,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4001,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4001,143,1,0,0,0,0,0,0,0,0,0,0 //NV_TRICKDEAD#Fingir de Morto #
+4001,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4001,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//SwordmanHigh
+4002,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4002,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4002,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4002,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+4002,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+4002,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+4002,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+4002,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+4002,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+4002,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+4002,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+4002,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+4002,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4002,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//MageHigh
+4003,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4003,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4003,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+4003,10,1,0,0,0,0,0,0,0,0,0,0 //MG_SIGHT#Chama Reveladora #
+4003,11,10,0,0,0,0,0,0,0,0,0,0 //MG_NAPALMBEAT#Ataque Espiritual #
+4003,12,10,11,7,13,5,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+4003,13,10,11,4,0,0,0,0,0,0,0,0 //MG_SOULSTRIKE#Espíritos Anciões #
+4003,14,10,0,0,0,0,0,0,0,0,0,0 //MG_COLDBOLT#Lanças de Gelo #
+4003,15,10,14,5,0,0,0,0,0,0,0,0 //MG_FROSTDIVER#Rajada Congelante #
+4003,16,10,0,0,0,0,0,0,0,0,0,0 //MG_STONECURSE#Petrificar #
+4003,17,10,19,4,0,0,0,0,0,0,0,0 //MG_FIREBALL#Bolas de Fogo #
+4003,18,10,17,5,10,1,0,0,0,0,0,0 //MG_FIREWALL#Barreira de Fogo #
+4003,19,10,0,0,0,0,0,0,0,0,0,0 //MG_FIREBOLT#Lanças de Fogo #
+4003,20,10,0,0,0,0,0,0,0,0,0,0 //MG_LIGHTNINGBOLT#Relâmpago #
+4003,21,10,20,4,0,0,0,0,0,0,0,0 //MG_THUNDERSTORM#Tempestade de Raios #
+4003,157,1,0,0,0,0,0,0,0,0,0,0 //MG_ENERGYCOAT#Proteção Arcana #
+4003,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4003,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//ArcherHigh
+4004,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4004,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4004,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+4004,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+4004,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+4004,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+4004,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+4004,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+4004,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+4004,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4004,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//AcolyteHigh
+4005,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4005,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4005,22,10,0,0,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4005,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4005,24,1,0,0,0,0,0,0,0,0,0,0 //AL_RUWACH#Revelação #
+4005,25,1,27,4,0,0,0,0,0,0,0,0 //AL_PNEUMA#Escudo Sagrado #
+4005,26,2,24,1,0,0,0,0,0,0,0,0 //AL_TELEPORT#Teleporte #
+4005,27,4,26,2,0,0,0,0,0,0,0,0 //AL_WARP#Portal #
+4005,28,10,0,0,0,0,0,0,0,0,0,0 //AL_HEAL#Curar #
+4005,29,10,28,3,0,0,0,0,0,0,0,0 //AL_INCAGI#Aumentar Agilidade #
+4005,30,10,29,1,0,0,0,0,0,0,0,0 //AL_DECAGI#Diminuir Agilidade #
+4005,31,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYWATER#Aqua Benedicta #
+4005,32,10,23,3,0,0,0,0,0,0,0,0 //AL_CRUCIS#Signum Crusis #
+4005,33,10,22,3,0,0,0,0,0,0,0,0 //AL_ANGELUS#Angelus #
+4005,34,10,22,5,0,0,0,0,0,0,0,0 //AL_BLESSING#Bênção #
+4005,35,1,28,2,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4005,156,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYLIGHT#Luz Divina #
+4005,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4005,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//MerchantHigh
+4006,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4006,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4006,36,10,0,0,0,0,0,0,0,0,0,0 //MC_INCCARRY#Aumentar Capacidade de Carga #
+4006,37,10,36,3,0,0,0,0,0,0,0,0 //MC_DISCOUNT#Desconto #
+4006,38,10,37,3,0,0,0,0,0,0,0,0 //MC_OVERCHARGE#Superfaturar #
+4006,39,10,36,5,0,0,0,0,0,0,0,0 //MC_PUSHCART#Usar Carrinho #
+4006,40,1,0,0,0,0,0,0,0,0,0,0 //MC_IDENTIFY#Identificar Item #
+4006,41,10,39,3,0,0,0,0,0,0,0,0 //MC_VENDING#Comércio #
+4006,42,10,0,0,0,0,0,0,0,0,0,0 //MC_MAMMONITE#Mammonita #
+4006,153,1,0,0,0,0,0,0,0,0,0,0 //MC_CARTREVOLUTION#Cavalo-de-Pau #
+4006,154,1,0,0,0,0,0,0,0,0,0,0 //MC_CHANGECART#Personalizar Carrinho #
+4006,155,1,0,0,0,0,0,0,0,0,0,0 //MC_LOUD#Grito de Guerra #
+4006,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4006,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+4006,2535,1,41,1,0,0,0,0,0,0,0,0 //ALL_BUYING_STORE#Open Buying Store#
+//ThiefHigh
+4007,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4007,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4007,48,10,0,0,0,0,0,0,0,0,0,0 //TF_DOUBLE#Ataque Duplo #
+4007,49,10,0,0,0,0,0,0,0,0,0,0 //TF_MISS#Perícia em Esquiva #
+4007,50,10,0,0,0,0,0,0,0,0,0,0 //TF_STEAL#Furto #
+4007,51,10,50,5,0,0,0,0,0,0,0,0 //TF_HIDING#Esconderijo #
+4007,52,10,0,0,0,0,0,0,0,0,0,0 //TF_POISON#Envenenar #
+4007,53,1,52,3,0,0,0,0,0,0,0,0 //TF_DETOXIFY#Desintoxicar #
+4007,149,1,0,0,0,0,0,0,0,0,0,0 //TF_SPRINKLESAND#Chutar Areia #
+4007,150,1,0,0,0,0,0,0,0,0,0,0 //TF_BACKSLIDING#Recuar #
+4007,151,1,0,0,0,0,0,0,0,0,0,0 //TF_PICKSTONE#Procurar Pedras #
+4007,152,1,0,0,0,0,0,0,0,0,0,0 //TF_THROWSTONE#Arremessar Pedra #
+4007,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4007,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//LordKnight
+4008,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4008,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4008,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4008,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+4008,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+4008,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+4008,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+4008,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+4008,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+4008,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+4008,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+4008,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+4008,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+4008,56,10,55,1,0,0,0,0,0,0,0,0 //KN_PIERCE#Perfurar #
+4008,57,10,63,1,58,3,0,0,0,0,0,0 //KN_BRANDISHSPEAR#Brandir Lança #
+4008,58,10,56,5,0,0,0,0,0,0,0,0 //KN_SPEARSTAB#Estocada #
+4008,59,5,56,3,0,0,0,0,0,0,0,0 //KN_SPEARBOOMERANG#Lança Bumerangue #
+4008,60,10,3,1,0,0,0,0,0,0,0,0 //KN_TWOHANDQUICKEN#Rapidez com Duas Mãos #
+4008,61,5,3,1,0,0,0,0,0,0,0,0 //KN_AUTOCOUNTER#Contra-Ataque #
+4008,62,10,5,10,7,3,3,5,60,10,61,5//KN_BOWLINGBASH#Impacto de Tyr #
+4008,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+4008,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+4008,1001,1,0,0,0,0,0,0,0,0,0,0 //KN_CHARGEATK#Avanço Ofensivo #
+4008,355,5,5,5,7,5,3,5,0,0,0,0 //LK_AURABLADE#Lâmina de Aura #
+4008,356,10,3,10,6,5,60,3,0,0,0,0 //LK_PARRYING#Aparar Golpe #
+4008,357,5,4,1,55,5,63,1,0,0,0,0 //LK_CONCENTRATION#Dedicação #
+4008,358,1,4,10,6,5,8,3,0,0,0,0 //LK_TENSIONRELAX#Relaxar #
+4008,359,1,50,0,0,0,0,0,0,0,0,0,0 //LK_BERSERK#Frenesi # //It has an extra column after "MaxLevel" for Job Level 50 requirement
+4008,397,5,55,10,56,5,58,5,63,1,0,0 //LK_SPIRALPIERCE#Perfurar em Espiral #
+4008,398,5,55,9,63,1,0,0,0,0,0,0 //LK_HEADCRUSH#Golpe Traumático #
+4008,399,10,55,9,64,3,398,3,0,0,0,0 //LK_JOINTBEAT#Ataque Vital #
+4008,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4008,495,1,60,10,0,0,0,0,0,0,0,0 //KN_ONEHAND#Rapidez com Uma Mão #
+4008,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//HighPriest
+4009,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4009,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4009,22,10,0,0,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4009,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4009,24,1,0,0,0,0,0,0,0,0,0,0 //AL_RUWACH#Revelação #
+4009,25,1,27,4,0,0,0,0,0,0,0,0 //AL_PNEUMA#Escudo Sagrado #
+4009,26,2,24,1,0,0,0,0,0,0,0,0 //AL_TELEPORT#Teleporte #
+4009,27,4,26,2,0,0,0,0,0,0,0,0 //AL_WARP#Portal #
+4009,28,10,0,0,0,0,0,0,0,0,0,0 //AL_HEAL#Curar #
+4009,29,10,28,3,0,0,0,0,0,0,0,0 //AL_INCAGI#Aumentar Agilidade #
+4009,30,10,29,1,0,0,0,0,0,0,0,0 //AL_DECAGI#Diminuir Agilidade #
+4009,31,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYWATER#Aqua Benedicta #
+4009,32,10,23,3,0,0,0,0,0,0,0,0 //AL_CRUCIS#Signum Crusis #
+4009,33,10,22,3,0,0,0,0,0,0,0,0 //AL_ANGELUS#Angelus #
+4009,34,10,22,5,0,0,0,0,0,0,0,0 //AL_BLESSING#Bênção #
+4009,35,1,28,2,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4009,156,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYLIGHT#Luz Divina #
+4009,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+4009,12,10,68,4,70,3,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+4009,54,4,72,1,9,4,0,0,0,0,0,0 //ALL_RESURRECTION#Ressuscitar #
+4009,65,10,0,0,0,0,0,0,0,0,0,0 //PR_MACEMASTERY#Perícia com Maça #
+4009,66,5,0,0,0,0,0,0,0,0,0,0 //PR_IMPOSITIO#Impositio Manus #
+4009,67,3,66,2,0,0,0,0,0,0,0,0 //PR_SUFFRAGIUM#Suffragium #
+4009,68,5,31,1,66,3,0,0,0,0,0,0 //PR_ASPERSIO#Aspersio #
+4009,69,5,75,3,68,5,0,0,0,0,0,0 //PR_BENEDICTIO#B.S. Sacramenti #
+4009,70,10,28,1,0,0,0,0,0,0,0,0 //PR_SANCTUARY#Santuário #
+4009,71,4,72,1,0,0,0,0,0,0,0,0 //PR_SLOWPOISON#Retardar Veneno #
+4009,72,1,0,0,0,0,0,0,0,0,0,0 //PR_STRECOVERY#Graça Divina #
+4009,73,10,33,2,0,0,0,0,0,0,0,0 //PR_KYRIE#Kyrie Eleison #
+4009,74,5,0,0,0,0,0,0,0,0,0,0 //PR_MAGNIFICAT#Magnificat #
+4009,75,5,73,4,74,3,0,0,0,0,0,0 //PR_GLORIA#Glória #
+4009,76,10,24,1,0,0,0,0,0,0,0,0 //PR_LEXDIVINA#Lex Divina #
+4009,77,10,54,1,76,3,0,0,0,0,0,0 //PR_TURNUNDEAD#Esconjurar #
+4009,78,1,76,5,0,0,0,0,0,0,0,0 //PR_LEXAETERNA#Lex Aeterna #
+4009,79,10,12,1,78,1,77,3,0,0,0,0 //PR_MAGNUS#Magnus Exorcismus #
+4009,1014,1,0,0,0,0,0,0,0,0,0,0 //PR_REDEMPTIO#Martírio #
+4009,361,5,33,1,9,3,66,3,0,0,0,0 //HP_ASSUMPTIO#Assumptio #
+4009,362,5,75,2,9,1,73,3,0,0,0,0 //HP_BASILICA#Basílica #
+4009,363,10,68,3,9,5,76,5,0,0,0,0 //HP_MEDITATIO#Meditação #
+4009,481,5,65,10,23,10,0,0,0,0,0,0 //HP_MANARECHARGE#Riqueza Espírito #
+4009,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4009,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//HighWizard
+4010,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4010,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4010,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+4010,10,1,0,0,0,0,0,0,0,0,0,0 //MG_SIGHT#Chama Reveladora #
+4010,11,10,0,0,0,0,0,0,0,0,0,0 //MG_NAPALMBEAT#Ataque Espiritual #
+4010,12,10,11,7,13,5,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+4010,13,10,11,4,0,0,0,0,0,0,0,0 //MG_SOULSTRIKE#Espíritos Anciões #
+4010,14,10,0,0,0,0,0,0,0,0,0,0 //MG_COLDBOLT#Lanças de Gelo #
+4010,15,10,14,5,0,0,0,0,0,0,0,0 //MG_FROSTDIVER#Rajada Congelante #
+4010,16,10,0,0,0,0,0,0,0,0,0,0 //MG_STONECURSE#Petrificar #
+4010,17,10,19,4,0,0,0,0,0,0,0,0 //MG_FIREBALL#Bolas de Fogo #
+4010,18,10,17,5,10,1,0,0,0,0,0,0 //MG_FIREWALL#Barreira de Fogo #
+4010,19,10,0,0,0,0,0,0,0,0,0,0 //MG_FIREBOLT#Lanças de Fogo #
+4010,20,10,0,0,0,0,0,0,0,0,0,0 //MG_LIGHTNINGBOLT#Relâmpago #
+4010,21,10,20,4,0,0,0,0,0,0,0,0 //MG_THUNDERSTORM#Tempestade de Raios #
+4010,157,1,0,0,0,0,0,0,0,0,0,0 //MG_ENERGYCOAT#Proteção Arcana #
+4010,80,10,18,1,0,0,0,0,0,0,0,0 //WZ_FIREPILLAR#Coluna de Fogo #
+4010,81,10,20,1,10,1,0,0,0,0,0,0 //WZ_SIGHTRASHER#Supernova #
+4010,83,10,81,2,21,1,0,0,0,0,0,0 //WZ_METEOR#Chuva de Meteoros #
+4010,84,10,11,1,20,1,0,0,0,0,0,0 //WZ_JUPITEL#Trovão e Júpiter #
+4010,85,10,21,1,84,5,0,0,0,0,0,0 //WZ_VERMILION#Ira de Thor #
+4010,86,5,14,1,20,1,0,0,0,0,0,0 //WZ_WATERBALL#Esfera d'Água #
+4010,87,10,16,1,15,1,0,0,0,0,0,0 //WZ_ICEWALL#Barreira de Gelo #
+4010,88,10,87,1,0,0,0,0,0,0,0,0 //WZ_FROSTNOVA#Congelar #
+4010,89,10,15,1,84,3,0,0,0,0,0,0 //WZ_STORMGUST#Nevasca #
+4010,90,5,16,1,0,0,0,0,0,0,0,0 //WZ_EARTHSPIKE#Coluna de Pedra #
+4010,91,5,90,3,0,0,0,0,0,0,0,0 //WZ_HEAVENDRIVE#Fúria da Terra #
+4010,92,5,91,1,0,0,0,0,0,0,0,0 //WZ_QUAGMIRE#Pântano dos Mortos #
+4010,93,1,0,0,0,0,0,0,0,0,0,0 //WZ_ESTIMATION#Sentido Sobrenatural #
+4010,1006,1,0,0,0,0,0,0,0,0,0,0 //WZ_SIGHTBLASTER#Explosão Protetora #
+4010,364,10,9,5,13,7,0,0,0,0,0,0 //HW_SOULDRAIN#Dreno de Alma #
+4010,365,1,9,1,0,0,0,0,0,0,0,0 //HW_MAGICCRASHER#Esmagamento Mágico #
+4010,366,10,0,0,0,0,0,0,0,0,0,0 //HW_MAGICPOWER#Amplificação Mística #
+4010,400,5,11,5,0,0,0,0,0,0,0,0 //HW_NAPALMVULCAN#Vulcão Napalm #
+4010,483,1,93,1,87,1,0,0,0,0,0,0 //HW_GANBANTEIN#Ganbantein #
+4010,484,5,365,1,366,10,92,1,0,0,0,0 //HW_GRAVITATION#Campo Gravitacional #
+4010,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4010,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Whitesmith
+4011,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4011,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4011,36,10,0,0,0,0,0,0,0,0,0,0 //MC_INCCARRY#Aumentar Capacidade de Carga #
+4011,37,10,36,3,0,0,0,0,0,0,0,0 //MC_DISCOUNT#Desconto #
+4011,38,10,37,3,0,0,0,0,0,0,0,0 //MC_OVERCHARGE#Superfaturar #
+4011,39,10,36,5,0,0,0,0,0,0,0,0 //MC_PUSHCART#Usar Carrinho #
+4011,40,1,0,0,0,0,0,0,0,0,0,0 //MC_IDENTIFY#Identificar Item #
+4011,41,10,39,3,0,0,0,0,0,0,0,0 //MC_VENDING#Comércio #
+4011,42,10,0,0,0,0,0,0,0,0,0,0 //MC_MAMMONITE#Mammonita #
+4011,153,1,0,0,0,0,0,0,0,0,0,0 //MC_CARTREVOLUTION#Cavalo-de-Pau #
+4011,154,1,0,0,0,0,0,0,0,0,0,0 //MC_CHANGECART#Personalizar Carrinho #
+4011,155,1,0,0,0,0,0,0,0,0,0,0 //MC_LOUD#Grito de Guerra #
+4011,94,5,0,0,0,0,0,0,0,0,0,0 //BS_IRON#Trabalhar Ferro #
+4011,95,5,94,1,0,0,0,0,0,0,0,0 //BS_STEEL#Trabalhar Aço #
+4011,96,5,94,1,0,0,0,0,0,0,0,0 //BS_ENCHANTEDSTONE#Produzir Pedra Fundamental #
+4011,97,5,96,1,0,0,0,0,0,0,0,0 //BS_ORIDEOCON#Perícia com Oridecon #
+4011,98,3,0,0,0,0,0,0,0,0,0,0 //BS_DAGGER#Forjar Adaga #
+4011,99,3,98,1,0,0,0,0,0,0,0,0 //BS_SWORD#Forjar Espada #
+4011,100,3,99,1,0,0,0,0,0,0,0,0 //BS_TWOHANDSWORD#Forjar Espada de Duas Mãos #
+4011,101,3,99,2,0,0,0,0,0,0,0,0 //BS_AXE#Forjar Machado #
+4011,102,3,103,1,0,0,0,0,0,0,0,0 //BS_MACE#Forjar Maça #
+4011,103,3,98,1,0,0,0,0,0,0,0,0 //BS_KNUCKLE#Forjar Soqueira #
+4011,104,3,98,2,0,0,0,0,0,0,0,0 //BS_SPEAR#Forjar Lança #
+4011,105,1,0,0,0,0,0,0,0,0,0,0 //BS_HILTBINDING#Punho Firme #
+4011,106,1,95,1,105,1,0,0,0,0,0,0 //BS_FINDINGORE#Encontrar Minério #
+4011,107,10,105,1,0,0,0,0,0,0,0,0 //BS_WEAPONRESEARCH#Perícia em Armamento #
+4011,108,1,107,1,0,0,0,0,0,0,0,0 //BS_REPAIRWEAPON#Consertar Armas #
+4011,109,5,0,0,0,0,0,0,0,0,0,0 //BS_SKINTEMPER#Resistência ao Fogo #
+4011,110,5,0,0,0,0,0,0,0,0,0,0 //BS_HAMMERFALL#Martelo de Thor #
+4011,111,5,110,2,0,0,0,0,0,0,0,0 //BS_ADRENALINE#Adrenalina Pura #
+4011,112,5,107,2,111,2,0,0,0,0,0,0 //BS_WEAPONPERFECT#Manejo Perfeito #
+4011,113,5,111,3,0,0,0,0,0,0,0,0 //BS_OVERTHRUST#Força Violenta #
+4011,114,5,112,3,113,2,0,0,0,0,0,0 //BS_MAXIMIZE#Amplificar Poder #
+4011,1012,1,0,0,0,0,0,0,0,0,0,0 //BS_UNFAIRLYTRICK#Venda Duvidosa #
+4011,1013,1,0,0,0,0,0,0,0,0,0,0 //BS_GREED#Ganância #
+4011,384,10,109,3,105,1,107,5,113,3,0,0 //WS_MELTDOWN#Golpe Estilhaçante #
+//4011,385,3,109,5,94,5,96,3,97,2,0,0 //WS_CREATECOIN#Create Coins#
+//4011,386,3,97,3,106,1,107,5,0,0,0,0 //WS_CREATENUGGET#Create Nuggets#
+4011,387,1,39,5,153,1,154,1,105,1,0,0 //WS_CARTBOOST#Impulso no Carrinho #
+//4011,388,1,107,10,112,3,0,0,0,0,0,0 //WS_SYSTEMCREATE#Auto Attack System#
+4011,477,10,107,10,0,0,0,0,0,0,0,0 //WS_WEAPONREFINE#Aprimorar Armamento #
+4011,485,10,42,10,110,5,387,1,0,0,0,0 //WS_CARTTERMINATION#Choque de Carrinho #
+4011,486,5,113,5,0,0,0,0,0,0,0,0 //WS_OVERTHRUSTMAX#Força Violentíssima #
+4011,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4011,459,1,111,5,0,0,0,0,0,0,0,0 //BS_ADRENALINE2#Adrenalina Concentrada #
+4011,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+4011,2535,1,41,1,0,0,0,0,0,0,0,0 //ALL_BUYING_STORE#Open Buying Store#
+//Sniper
+4012,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4012,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4012,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+4012,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+4012,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+4012,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+4012,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+4012,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+4012,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+4012,115,5,0,0,0,0,0,0,0,0,0,0 //HT_SKIDTRAP#Armadilha Escorregadia #
+4012,116,5,0,0,0,0,0,0,0,0,0,0 //HT_LANDMINE#Armadilha Atordoante #
+4012,117,5,115,1,0,0,0,0,0,0,0,0 //HT_ANKLESNARE#Instalar Armadilha #
+4012,118,5,117,1,0,0,0,0,0,0,0,0 //HT_SHOCKWAVE#Armadilha Extenuante #
+4012,119,5,120,1,0,0,0,0,0,0,0,0 //HT_SANDMAN#Armadilha Sonífera #
+4012,120,5,115,1,0,0,0,0,0,0,0,0 //HT_FLASHER#Armadilha Luminosa #
+4012,121,5,120,1,0,0,0,0,0,0,0,0 //HT_FREEZINGTRAP#Armadilha Congelante #
+4012,122,5,116,1,119,1,121,1,0,0,0,0 //HT_BLASTMINE#Instalar Mina #
+4012,123,5,118,1,122,1,0,0,0,0,0,0 //HT_CLAYMORETRAP#Armadilha Explosiva #
+4012,124,1,116,1,0,0,0,0,0,0,0,0 //HT_REMOVETRAP#Remover Armadilha #
+4012,125,1,118,1,124,1,0,0,0,0,0,0 //HT_TALKIEBOX#Mensagem Secreta #
+4012,126,10,0,0,0,0,0,0,0,0,0,0 //HT_BEASTBANE#Flagelo das Feras #
+4012,127,1,126,1,0,0,0,0,0,0,0,0 //HT_FALCON#Adestrar Falcão #
+4012,128,10,129,5,0,0,0,0,0,0,0,0 //HT_STEELCROW#Garras de Aço #
+4012,129,5,127,1,0,0,0,0,0,0,0,0 //HT_BLITZBEAT#Ataque Aéreo #
+4012,130,4,45,1,127,1,0,0,0,0,0,0 //HT_DETECTING#Detectar #
+4012,131,5,124,1,127,1,0,0,0,0,0,0 //HT_SPRINGTRAP#Desativar Armadilha #
+4012,1009,1,0,0,0,0,0,0,0,0,0,0 //HT_PHANTASMIC#Flecha Fantasma #
+4012,380,10,43,10,44,10,45,10,127,1,0,0 //SN_SIGHT#Visão Real #
+4012,381,5,128,3,44,5,129,5,127,1,0,0 //SN_FALCONASSAULT#Assalto do Falcão #
+4012,382,5,45,10,46,5,0,0,0,0,0,0 //SN_SHARPSHOOTING#Tiro Preciso #
+4012,383,10,45,9,0,0,0,0,0,0,0,0 //SN_WINDWALK#Caminho do Vento #
+4012,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4012,499,1,46,10,0,0,0,0,0,0,0,0 //HT_POWER#Ataque da Fera #
+4012,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//AssassinCross
+4013,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4013,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4013,48,10,0,0,0,0,0,0,0,0,0,0 //TF_DOUBLE#Ataque Duplo #
+4013,49,10,0,0,0,0,0,0,0,0,0,0 //TF_MISS#Perícia em Esquiva #
+4013,50,10,0,0,0,0,0,0,0,0,0,0 //TF_STEAL#Furto #
+4013,51,10,50,5,0,0,0,0,0,0,0,0 //TF_HIDING#Esconderijo #
+4013,52,10,0,0,0,0,0,0,0,0,0,0 //TF_POISON#Envenenar #
+4013,53,1,52,3,0,0,0,0,0,0,0,0 //TF_DETOXIFY#Desintoxicar #
+4013,149,1,0,0,0,0,0,0,0,0,0,0 //TF_SPRINKLESAND#Chutar Areia #
+4013,150,1,0,0,0,0,0,0,0,0,0,0 //TF_BACKSLIDING#Recuar #
+4013,151,1,0,0,0,0,0,0,0,0,0,0 //TF_PICKSTONE#Procurar Pedras #
+4013,152,1,0,0,0,0,0,0,0,0,0,0 //TF_THROWSTONE#Arremessar Pedra #
+4013,132,5,0,0,0,0,0,0,0,0,0,0 //AS_RIGHT#Perícia com Mão Direita #
+4013,133,5,132,2,0,0,0,0,0,0,0,0 //AS_LEFT#Perícia com Mão Esquerda #
+4013,134,10,0,0,0,0,0,0,0,0,0,0 //AS_KATAR#Perícia com Katar #
+4013,135,10,51,2,0,0,0,0,0,0,0,0 //AS_CLOAKING#Furtividade #
+4013,136,10,134,4,0,0,0,0,0,0,0,0 //AS_SONICBLOW#Lâminas Destruidoras #
+4013,137,5,135,2,136,5,0,0,0,0,0,0 //AS_GRIMTOOTH##
+4013,138,10,52,1,0,0,0,0,0,0,0,0 //AS_ENCHANTPOISON#Envenenar Arma #
+4013,139,10,138,3,0,0,0,0,0,0,0,0 //AS_POISONREACT#Refletir Veneno #
+4013,140,10,138,5,0,0,0,0,0,0,0,0 //AS_VENOMDUST#Névoa Tóxica #
+4013,141,10,139,5,140,5,0,0,0,0,0,0 //AS_SPLASHER#Explosão Tóxica #
+4013,1003,1,0,0,0,0,0,0,0,0,0,0 //AS_SONICACCEL#Lâminas Aceleradas #
+4013,1004,1,0,0,0,0,0,0,0,0,0,0 //AS_VENOMKNIFE#Faca Envenenada #
+4013,376,5,48,5,134,7,0,0,0,0,0,0 //ASC_KATAR#Perícia com Katar Avançada #
+4013,378,5,407,1,0,0,0,0,0,0,0,0 //ASC_EDP#Encantar com Veneno Mortal #
+4013,379,10,48,5,135,3,138,6,52,5,0,0 //ASC_BREAKER#Destruidor de Almas #
+4013,406,10,132,3,134,5,136,5,379,1,0,0 //ASC_METEORASSAULT#Impacto Meteoro #
+4013,407,1,52,10,53,1,138,5,0,0,0,0 //ASC_CDP#Criar Veneno Mortal #
+4013,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4013,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//LordKnight(Peco)
+4014,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4014,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4014,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4014,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+4014,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+4014,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+4014,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+4014,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+4014,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+4014,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+4014,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+4014,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+4014,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+4014,56,10,55,1,0,0,0,0,0,0,0,0 //KN_PIERCE#Perfurar #
+4014,57,10,63,1,58,3,0,0,0,0,0,0 //KN_BRANDISHSPEAR#Brandir Lança #
+4014,58,10,56,5,0,0,0,0,0,0,0,0 //KN_SPEARSTAB#Estocada #
+4014,59,5,56,3,0,0,0,0,0,0,0,0 //KN_SPEARBOOMERANG#Lança Bumerangue #
+4014,60,10,3,1,0,0,0,0,0,0,0,0 //KN_TWOHANDQUICKEN#Rapidez com Duas Mãos #
+4014,61,5,3,1,0,0,0,0,0,0,0,0 //KN_AUTOCOUNTER#Contra-Ataque #
+4014,62,10,5,10,7,3,3,5,60,10,61,5//KN_BOWLINGBASH#Impacto de Tyr #
+4014,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+4014,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+4014,1001,1,0,0,0,0,0,0,0,0,0,0 //KN_CHARGEATK#Avanço Ofensivo #
+4014,355,5,5,5,7,5,3,5,0,0,0,0 //LK_AURABLADE#Lâmina de Aura #
+4014,356,10,3,10,6,5,60,3,0,0,0,0 //LK_PARRYING#Aparar Golpe #
+4014,357,5,4,1,55,5,63,1,0,0,0,0 //LK_CONCENTRATION#Dedicação #
+4014,358,1,4,10,6,5,8,3,0,0,0,0 //LK_TENSIONRELAX#Relaxar #
+4014,359,1,50,0,0,0,0,0,0,0,0,0,0 //LK_BERSERK#Frenesi # //It has an extra column after "MaxLevel" for Job Level 50 requirement
+4014,397,5,55,10,56,5,58,5,63,1,0,0 //LK_SPIRALPIERCE#Perfurar em Espiral #
+4014,398,5,55,9,63,1,0,0,0,0,0,0 //LK_HEADCRUSH#Golpe Traumático #
+4014,399,10,55,9,64,3,398,3,0,0,0,0 //LK_JOINTBEAT#Ataque Vital #
+4014,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4014,495,1,60,10,0,0,0,0,0,0,0,0 //KN_ONEHAND#Rapidez com Uma Mão #
+4014,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Paladin
+4015,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4015,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4015,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4015,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+4015,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+4015,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+4015,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+4015,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+4015,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+4015,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+4015,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+4015,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+4015,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+4015,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+4015,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+4015,35,1,248,5,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4015,22,10,35,1,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4015,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4015,28,10,23,5,248,10,0,0,0,0,0,0 //AL_HEAL#Curar #
+4015,248,10,0,0,0,0,0,0,0,0,0,0 //CR_TRUST#Fé #
+4015,249,10,0,0,0,0,0,0,0,0,0,0 //CR_AUTOGUARD#Bloqueio #
+4015,250,5,249,5,0,0,0,0,0,0,0,0 //CR_SHIELDCHARGE#Punição Divina #
+4015,251,5,250,3,0,0,0,0,0,0,0,0 //CR_SHIELDBOOMERANG#Escudo Bumerangue #
+4015,252,10,251,3,0,0,0,0,0,0,0,0 //CR_REFLECTSHIELD#Escudo Refletor #
+4015,253,10,248,7,0,0,0,0,0,0,0,0 //CR_HOLYCROSS#Crux Divinum #
+4015,254,10,253,6,248,10,0,0,0,0,0,0 //CR_GRANDCROSS#Crux Magnun #
+4015,255,5,252,5,254,4,0,0,0,0,0,0 //CR_DEVOTION#Redenção #
+4015,256,5,22,5,28,5,0,0,0,0,0,0 //CR_PROVIDENCE#Divina Providência #
+4015,257,5,251,1,0,0,0,0,0,0,0,0 //CR_DEFENDER#Aura Sagrada #
+4015,258,10,55,10,0,0,0,0,0,0,0,0 //CR_SPEARQUICKEN#Rapidez com Lança #
+4015,1002,1,0,0,0,0,0,0,0,0,0,0 //CR_SHRINK#Submissão #
+4015,367,5,8,5,248,5,250,2,0,0,0,0 //PA_PRESSURE#Gloria Domini #
+4015,368,5,8,1,248,5,255,3,0,0,0,0 //PA_SACRIFICE#Sacrifício do Mártir #
+4015,369,10,248,8,22,3,23,5,0,0,0,0 //PA_GOSPEL#Canto de Batalha #
+4015,480,5,251,5,0,0,0,0,0,0,0,0 //PA_SHIELDCHAIN#Choque Rápido #
+4015,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4015,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Champion
+4016,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4016,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4016,22,10,0,0,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4016,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4016,24,1,0,0,0,0,0,0,0,0,0,0 //AL_RUWACH#Revelação #
+4016,25,1,27,4,0,0,0,0,0,0,0,0 //AL_PNEUMA#Escudo Sagrado #
+4016,26,2,24,1,0,0,0,0,0,0,0,0 //AL_TELEPORT#Teleporte #
+4016,27,4,26,2,0,0,0,0,0,0,0,0 //AL_WARP#Portal #
+4016,28,10,0,0,0,0,0,0,0,0,0,0 //AL_HEAL#Curar #
+4016,29,10,28,3,0,0,0,0,0,0,0,0 //AL_INCAGI#Aumentar Agilidade #
+4016,30,10,29,1,0,0,0,0,0,0,0,0 //AL_DECAGI#Diminuir Agilidade #
+4016,31,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYWATER#Aqua Benedicta #
+4016,32,10,23,3,0,0,0,0,0,0,0,0 //AL_CRUCIS#Signum Crusis #
+4016,33,10,22,3,0,0,0,0,0,0,0,0 //AL_ANGELUS#Angelus #
+4016,34,10,22,5,0,0,0,0,0,0,0,0 //AL_BLESSING#Bênção #
+4016,35,1,28,2,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4016,156,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYLIGHT#Luz Divina #
+4016,259,10,23,10,22,10,0,0,0,0,0,0 //MO_IRONHAND#Punhos de Ferro #
+4016,260,5,269,2,0,0,0,0,0,0,0,0 //MO_SPIRITSRECOVERY#Meditação #
+4016,261,5,259,2,0,0,0,0,0,0,0,0 //MO_CALLSPIRITS#Invocar Esfera Espiritual #
+4016,262,1,261,5,0,0,0,0,0,0,0,0 //MO_ABSORBSPIRITS#Absorver Esferas Espirituais #
+4016,263,10,265,5,0,0,0,0,0,0,0,0 //MO_TRIPLEATTACK#Combo Triplo #
+4016,264,1,271,3,260,2,268,3,0,0,0,0 //MO_BODYRELOCATION#Passo Etéreo #
+4016,265,10,259,5,261,5,0,0,0,0,0,0 //MO_DODGE#Cair das Pétalas #
+4016,266,5,261,5,0,0,0,0,0,0,0,0 //MO_FINGEROFFENSIVE#Impacto Psíquico #
+4016,267,5,266,3,0,0,0,0,0,0,0,0 //MO_INVESTIGATE#Disparo de Esferas Espirituais #
+4016,268,5,273,3,0,0,0,0,0,0,0,0 //MO_STEELBODY#Corpo Fechado #
+4016,269,5,265,5,0,0,0,0,0,0,0,0 //MO_BLADESTOP#Dilema #
+4016,270,5,262,1,0,0,0,0,0,0,0,0 //MO_EXPLOSIONSPIRITS#Fúria Interior #
+4016,271,5,270,3,267,3,0,0,0,0,0,0 //MO_EXTREMITYFIST#Punho Supremo de Asura #
+4016,272,5,263,5,0,0,0,0,0,0,0,0 //MO_CHAINCOMBO#Combo Quádruplo #
+4016,273,5,272,3,0,0,0,0,0,0,0,0 //MO_COMBOFINISH#O Último Dragão #
+4016,1015,1,0,0,0,0,0,0,0,0,0,0 //MO_KITRANSLATION#Concessão Espiritual #
+4016,1016,1,0,0,0,0,0,0,0,0,0,0 //MO_BALKYOUNG#Punhos Intensos #
+4016,370,5,259,7,261,5,0,0,0,0,0,0 //CH_PALMSTRIKE#Golpe da Palma em Fúria #
+4016,371,5,259,5,263,5,261,5,273,3,0,0 //CH_TIGERFIST#Punho do Tigre #
+4016,372,10,259,5,261,5,371,2,0,0,0,0 //CH_CHAINCRUSH#Combo Esmagador #
+4016,401,1,261,5,262,1,270,5,0,0,0,0 //CH_SOULCOLLECT#Zen #
+4016,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4016,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Professor
+4017,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4017,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4017,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+4017,10,1,0,0,0,0,0,0,0,0,0,0 //MG_SIGHT#Chama Reveladora #
+4017,11,10,0,0,0,0,0,0,0,0,0,0 //MG_NAPALMBEAT#Ataque Espiritual #
+4017,12,10,11,7,13,5,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+4017,13,10,11,4,0,0,0,0,0,0,0,0 //MG_SOULSTRIKE#Espíritos Anciões #
+4017,14,10,0,0,0,0,0,0,0,0,0,0 //MG_COLDBOLT#Lanças de Gelo #
+4017,15,10,14,5,0,0,0,0,0,0,0,0 //MG_FROSTDIVER#Rajada Congelante #
+4017,16,10,0,0,0,0,0,0,0,0,0,0 //MG_STONECURSE#Petrificar #
+4017,17,10,19,4,0,0,0,0,0,0,0,0 //MG_FIREBALL#Bolas de Fogo #
+4017,18,10,10,1,17,5,0,0,0,0,0,0 //MG_FIREWALL#Barreira de Fogo #
+4017,19,10,0,0,0,0,0,0,0,0,0,0 //MG_FIREBOLT#Lanças de Fogo #
+4017,20,10,0,0,0,0,0,0,0,0,0,0 //MG_LIGHTNINGBOLT#Relâmpago #
+4017,21,10,20,4,0,0,0,0,0,0,0,0 //MG_THUNDERSTORM#Tempestade de Raios #
+4017,90,5,283,1,0,0,0,0,0,0,0,0 //WZ_EARTHSPIKE#Coluna de Pedra #
+4017,91,5,90,1,0,0,0,0,0,0,0,0 //WZ_HEAVENDRIVE#Fúria da Terra #
+4017,93,1,0,0,0,0,0,0,0,0,0,0 //WZ_ESTIMATION#Sentido Sobrenatural #
+4017,157,1,0,0,0,0,0,0,0,0,0,0 //MG_ENERGYCOAT#Proteção Arcana #
+4017,274,10,0,0,0,0,0,0,0,0,0,0 //SA_ADVANCEDBOOK#Estudo de Livros #
+4017,275,5,274,2,0,0,0,0,0,0,0,0 //SA_CASTCANCEL#Cancelar magia #
+4017,276,5,274,4,0,0,0,0,0,0,0,0 //SA_MAGICROD#Espelho Mágico #
+4017,277,5,276,1,0,0,0,0,0,0,0,0 //SA_SPELLBREAKER#Desconcentrar #
+4017,278,10,275,1,0,0,0,0,0,0,0,0 //SA_FREECAST#Conjuração Livre #
+4017,279,10,278,4,0,0,0,0,0,0,0,0 //SA_AUTOSPELL#Desejo Arcano #
+4017,280,5,19,1,274,5,0,0,0,0,0,0 //SA_FLAMELAUNCHER#Encantar com Chama #
+4017,281,5,14,1,274,5,0,0,0,0,0,0 //SA_FROSTWEAPON#Encantar com Geada #
+4017,282,5,20,1,274,5,0,0,0,0,0,0 //SA_LIGHTNINGLOADER#Encantar com Ventania #
+4017,283,5,16,1,274,5,0,0,0,0,0,0 //SA_SEISMICWEAPON#Encantar com Terremoto #
+4017,284,5,274,9,0,0,0,0,0,0,0,0 //SA_DRAGONOLOGY#Dragonologia #
+4017,285,5,280,2,0,0,0,0,0,0,0,0 //SA_VOLCANO#Vulcão #
+4017,286,5,281,2,0,0,0,0,0,0,0,0 //SA_DELUGE#Dilúvio #
+4017,287,5,282,2,0,0,0,0,0,0,0,0 //SA_VIOLENTGALE#Furacão #
+4017,288,5,285,3,286,3,287,3,0,0,0,0 //SA_LANDPROTECTOR#Proteger Terreno #
+4017,289,5,277,3,0,0,0,0,0,0,0,0 //SA_DISPELL#Desencantar #
+4017,290,10,279,5,288,1,289,1,0,0,0,0 //SA_ABRACADABRA#Abracadabra #
+4017,1007,1,0,0,0,0,0,0,0,0,0,0 //SA_CREATECON#Criar Conversor Elemental #
+4017,1008,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTWATER#Mudança Elemental - Água #
+4017,1017,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTGROUND#Mudança Elemental - Terra #
+4017,1018,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTFIRE#Mudança Elemental - Fogo #
+4017,1019,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTWIND#Mudança Elemental - Vento #
+4017,373,5,9,1,276,1,0,0,0,0,0,0 //PF_HPCONVERSION#Indulgir #
+4017,374,1,276,3,277,2,0,0,0,0,0,0 //PF_SOULCHANGE#Exalar Alma #
+4017,375,5,275,5,276,3,289,3,0,0,0,0 //PF_SOULBURN#Sifão de Alma #
+4017,402,5,9,3,375,1,0,0,0,0,0,0 //PF_MINDBREAKER#Enlouquecedor #
+4017,403,1,274,5,278,5,279,1,0,0,0,0 //PF_MEMORIZE#Presciência #
+4017,404,1,286,2,287,2,0,0,0,0,0,0 //PF_FOGWALL#Bruma Ofuscante #
+4017,405,1,284,4,0,0,0,0,0,0,0,0 //PF_SPIDERWEB#Prisão da Teia #
+4017,482,5,279,1,0,0,0,0,0,0,0,0 //PF_DOUBLECASTING#Lanças Duplas #
+4017,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4017,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Stalker
+4018,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4018,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4018,48,10,0,0,0,0,0,0,0,0,0,0 //TF_DOUBLE#Ataque Duplo #
+4018,49,10,0,0,0,0,0,0,0,0,0,0 //TF_MISS#Perícia em Esquiva #
+4018,50,10,0,0,0,0,0,0,0,0,0,0 //TF_STEAL#Furto #
+4018,51,10,50,5,0,0,0,0,0,0,0,0 //TF_HIDING#Esconderijo #
+4018,52,10,0,0,0,0,0,0,0,0,0,0 //TF_POISON#Envenenar #
+4018,53,1,52,3,0,0,0,0,0,0,0,0 //TF_DETOXIFY#Desintoxicar #
+4018,149,1,0,0,0,0,0,0,0,0,0,0 //TF_SPRINKLESAND#Chutar Areia #
+4018,150,1,0,0,0,0,0,0,0,0,0,0 //TF_BACKSLIDING#Recuar #
+4018,151,1,0,0,0,0,0,0,0,0,0,0 //TF_PICKSTONE#Procurar Pedras #
+4018,152,1,0,0,0,0,0,0,0,0,0,0 //TF_THROWSTONE#Arremessar Pedra #
+4018,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4018,44,10,0,0,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+4018,46,10,44,10,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+4018,124,1,46,5,0,0,0,0,0,0,0,0 //HT_REMOVETRAP#Remover Armadilha #
+4018,210,10,50,1,0,0,0,0,0,0,0,0 //RG_SNATCHER#Mãos Leves #
+4018,211,10,210,4,0,0,0,0,0,0,0,0 //RG_STEALCOIN#Afanar #
+4018,212,10,211,4,0,0,0,0,0,0,0,0 //RG_BACKSTAP#Apunhalar #
+4018,213,5,51,1,0,0,0,0,0,0,0,0 //RG_TUNNELDRIVE#Túnel de Fuga #
+4018,214,5,212,2,213,2,0,0,0,0,0,0 //RG_RAID#Ataque Surpresa #
+4018,215,5,217,5,0,0,0,0,0,0,0,0 //RG_STRIPWEAPON#Remover Arma #
+4018,216,5,218,5,0,0,0,0,0,0,0,0 //RG_STRIPSHIELD#Remover Escudo #
+4018,217,5,216,5,0,0,0,0,0,0,0,0 //RG_STRIPARMOR#Remover Armadura #
+4018,218,5,211,2,0,0,0,0,0,0,0,0 //RG_STRIPHELM#Remover Capacete #
+4018,219,5,212,4,214,5,0,0,0,0,0,0 //RG_INTIMIDATE#Rapto #
+4018,220,1,221,5,0,0,0,0,0,0,0,0 //RG_GRAFFITI#Grafitti #
+4018,221,5,222,1,0,0,0,0,0,0,0,0 //RG_FLAGGRAFFITI#Pichar #
+4018,222,1,223,1,0,0,0,0,0,0,0,0 //RG_CLEANER#Faxina #
+4018,223,1,216,3,0,0,0,0,0,0,0,0 //RG_GANGSTER#Malandragem #
+4018,224,5,223,1,0,0,0,0,0,0,0,0 //RG_COMPULSION#Extorquir #
+4018,225,10,219,5,0,0,0,0,0,0,0,0 //RG_PLAGIARISM#Plágio #
+4018,1005,1,0,0,0,0,0,0,0,0,0,0 //RG_CLOSECONFINE#Confinamento #
+4018,389,5,51,5,213,3,0,0,0,0,0,0 //ST_CHASEWALK#Espreitar #
+4018,390,5,215,1,0,0,0,0,0,0,0,0 //ST_REJECTSWORD#Instinto de Defesa #
+4018,475,1,225,10,0,0,0,0,0,0,0,0 //ST_PRESERVE#Preservar #
+4018,476,5,215,5,216,5,217,5,218,5,0,0 //ST_FULLSTRIP#Remoção Total #
+4018,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4018,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Creator
+4019,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4019,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4019,36,10,0,0,0,0,0,0,0,0,0,0 //MC_INCCARRY#Aumentar Capacidade de Carga #
+4019,37,10,36,3,0,0,0,0,0,0,0,0 //MC_DISCOUNT#Desconto #
+4019,38,10,37,3,0,0,0,0,0,0,0,0 //MC_OVERCHARGE#Superfaturar #
+4019,39,10,36,5,0,0,0,0,0,0,0,0 //MC_PUSHCART#Usar Carrinho #
+4019,40,1,0,0,0,0,0,0,0,0,0,0 //MC_IDENTIFY#Identificar Item #
+4019,41,10,39,3,0,0,0,0,0,0,0,0 //MC_VENDING#Comércio #
+4019,42,10,0,0,0,0,0,0,0,0,0,0 //MC_MAMMONITE#Mammonita #
+4019,153,1,0,0,0,0,0,0,0,0,0,0 //MC_CARTREVOLUTION#Cavalo-de-Pau #
+4019,154,1,0,0,0,0,0,0,0,0,0,0 //MC_CHANGECART#Personalizar Carrinho #
+4019,155,1,0,0,0,0,0,0,0,0,0,0 //MC_LOUD#Grito de Guerra #
+4019,226,10,0,0,0,0,0,0,0,0,0,0 //AM_AXEMASTERY#Perícia com Machado #
+4019,227,10,0,0,0,0,0,0,0,0,0,0 //AM_LEARNINGPOTION#Pesquisa de Poções #
+4019,228,10,227,5,0,0,0,0,0,0,0,0 //AM_PHARMACY#Preparar Poção #
+4019,229,5,228,4,0,0,0,0,0,0,0,0 //AM_DEMONSTRATION#Fogo Grego #
+4019,230,5,228,5,0,0,0,0,0,0,0,0 //AM_ACIDTERROR#Terror Ácido #
+4019,231,5,228,3,0,0,0,0,0,0,0,0 //AM_POTIONPITCHER#Arremessar Poção #
+4019,232,5,228,6,0,0,0,0,0,0,0,0 //AM_CANNIBALIZE#Criar Monstro Planta #
+4019,233,5,228,2,0,0,0,0,0,0,0,0 //AM_SPHEREMINE#Criar Esfera Marinha #
+4019,234,5,236,3,0,0,0,0,0,0,0,0 //AM_CP_WEAPON#Revestir Arma #
+4019,235,5,237,3,0,0,0,0,0,0,0,0 //AM_CP_SHIELD#Revestir Escudo #
+4019,236,5,235,3,0,0,0,0,0,0,0,0 //AM_CP_ARMOR#Revestir Armadura #
+4019,237,5,228,2,0,0,0,0,0,0,0,0 //AM_CP_HELM#Revestir Capacete #
+4019,238,1,0,0,0,0,0,0,0,0,0,0 //AM_BIOETHICS#Bioética #
+4019,243,1,244,1,0,0,0,0,0,0,0,0 //AM_CALLHOMUN#Criar Homunculus #
+4019,244,1,238,1,0,0,0,0,0,0,0,0 //AM_REST#Vaporizar #
+4019,247,5,243,1,0,0,0,0,0,0,0,0 //AM_RESURRECTHOMUN#Ressuscitar Homunculu #
+//4019,392,5,228,5,0,0,0,0,0,0,0,0 //CR_ALCHEMY#Alchemy#
+//4019,393,5,228,6,390,2,0,0,0,0,0,0 //CR_SYNTHESISPOTION#Potion Synthesis#
+4019,478,10,231,5,0,0,0,0,0,0,0,0 //CR_SLIMPITCHER#Arremessar Poção Compacta #
+4019,479,5,234,5,235,5,236,5,237,5,0,0 //CR_FULLPROTECTION#Proteção Química Total #
+4019,490,10,229,5,230,5,0,0,0,0,0,0 //CR_ACIDDEMONSTRATION#Bomba Ácida #
+4019,491,2,0,0,0,0,0,0,0,0,0,0 //CR_CULTIVATION#Cultivar Planta #
+4019,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4019,446,1,0,0,0,0,0,0,0,0,0,0 //AM_BERSERKPITCHER#Arremessar Poção da Fúria Selvagem #
+4019,496,1,228,10,0,0,0,0,0,0,0,0 //AM_TWILIGHT1#Criação Espiritual de Poções #
+4019,497,1,228,10,0,0,0,0,0,0,0,0 //AM_TWILIGHT2#Criação Espiritual de Poções #
+4019,498,1,228,10,0,0,0,0,0,0,0,0 //AM_TWILIGHT3#Criação Espiritual de Poções #
+4019,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+4019,2535,1,41,1,0,0,0,0,0,0,0,0 //ALL_BUYING_STORE#Open Buying Store#
+//Clown
+4020,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4020,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4020,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+4020,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+4020,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+4020,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+4020,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+4020,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+4020,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+4020,315,10,0,0,0,0,0,0,0,0,0,0 //BA_MUSICALLESSON#Lições de Música #
+4020,316,5,315,3,0,0,0,0,0,0,0,0 //BA_MUSICALSTRIKE#Flecha Melódica #
+4020,317,5,315,1,304,1,0,0,0,0,0,0 //BA_DISSONANCE#Dissonância #
+4020,318,5,305,1,0,0,0,0,0,0,0,0 //BA_FROSTJOKE#Piada Infame #
+4020,319,10,317,3,0,0,0,0,0,0,0,0 //BA_WHISTLE#Assovio #
+4020,320,10,317,3,0,0,0,0,0,0,0,0 //BA_ASSASSINCROSS#Crepúsculo Sangrento #
+4020,321,10,317,3,0,0,0,0,0,0,0,0 //BA_POEMBRAGI#Poema de Bragi #
+4020,322,10,317,3,0,0,0,0,0,0,0,0 //BA_APPLEIDUN#Maçãs de Idun #
+4020,304,1,0,0,0,0,0,0,0,0,0,0 //BD_ADAPTATION#Encerramento #
+4020,305,1,304,1,0,0,0,0,0,0,0,0 //BD_ENCORE#Bis #
+4020,306,1,319,10,0,0,0,0,0,0,0,0 //BD_LULLABY#Cantiga de Nina #
+4020,307,5,313,3,0,0,0,0,0,0,0,0 //BD_RICHMANKIM#Banquete de Njord #
+4020,308,1,311,1,0,0,0,0,0,0,0,0 //BD_ETERNALCHAOS#Ritmo Caótico #
+4020,309,5,322,10,0,0,0,0,0,0,0,0 //BD_DRUMBATTLEFIELD#Rufar dos Tambores #
+4020,310,5,309,3,0,0,0,0,0,0,0,0 //BD_RINGNIBELUNGEN#Anel dos Nibelungos #
+4020,311,1,320,10,0,0,0,0,0,0,0,0 //BD_ROKISWEIL#Lamento de Loki #
+4020,312,1,306,1,0,0,0,0,0,0,0,0 //BD_INTOABYSS#Canção Preciosa #
+4020,313,5,321,10,0,0,0,0,0,0,0,0 //BD_SIEGFRIED#Ode a Siegfried #
+4020,1010,1,0,0,0,0,0,0,0,0,0,0 //BA_PANGVOICE#Voz Dolorosa #
+4020,394,10,47,5,316,1,0,0,0,0,0,0 //CG_ARROWVULCAN#Vulcão de Flechas #
+4020,395,5,45,5,315,7,0,0,0,0,0,0 //CG_MOONLIT#Bênção Protetora #
+4020,396,1,45,5,315,5,0,0,0,0,0,0 //CG_MARIONETTE#Controle de Marionete #
+4020,487,5,315,10,396,1,0,0,0,0,0,0 //CG_LONGINGFREEDOM#Grito de Liberdade #
+4020,488,5,45,10,315,10,0,0,0,0,0,0 //CG_HERMODE#Bastão de Hermod #
+4020,489,5,45,10,317,3,0,0,0,0,0,0 //CG_TAROTCARD#Destino nas Cartas #
+4020,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4020,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Gypsy
+4021,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4021,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4021,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+4021,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+4021,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+4021,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+4021,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+4021,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+4021,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+4021,323,10,0,0,0,0,0,0,0,0,0,0 //DC_DANCINGLESSON#Lições de Dança #
+4021,324,5,323,3,0,0,0,0,0,0,0,0 //DC_THROWARROW#Estilingue #
+4021,325,5,323,1,304,1,0,0,0,0,0,0 //DC_UGLYDANCE#Dança do Ventre #
+4021,326,5,305,1,0,0,0,0,0,0,0,0 //DC_SCREAM#Escândalo #
+4021,327,10,325,3,0,0,0,0,0,0,0,0 //DC_HUMMING#Sibilo #
+4021,328,10,325,3,0,0,0,0,0,0,0,0 //DC_DONTFORGETME#Não Me Abandones #
+4021,329,10,325,3,0,0,0,0,0,0,0,0 //DC_FORTUNEKISS#Beijo da Sorte #
+4021,330,10,325,3,0,0,0,0,0,0,0,0 //DC_SERVICEFORYOU#Dança Cigana #
+4021,304,1,0,0,0,0,0,0,0,0,0,0 //BD_ADAPTATION#Encerramento #
+4021,305,1,304,1,0,0,0,0,0,0,0,0 //BD_ENCORE#Bis #
+4021,306,1,327,10,0,0,0,0,0,0,0,0 //BD_LULLABY#Cantiga de Nina #
+4021,307,5,313,3,0,0,0,0,0,0,0,0 //BD_RICHMANKIM#Banquete de Njord #
+4021,308,1,311,1,0,0,0,0,0,0,0,0 //BD_ETERNALCHAOS#Ritmo Caótico #
+4021,309,5,330,10,0,0,0,0,0,0,0,0 //BD_DRUMBATTLEFIELD#Rufar dos Tambores #
+4021,310,5,309,3,0,0,0,0,0,0,0,0 //BD_RINGNIBELUNGEN#Anel dos Nibelungos #
+4021,311,1,328,10,0,0,0,0,0,0,0,0 //BD_ROKISWEIL#Lamento de Loki #
+4021,312,1,306,1,0,0,0,0,0,0,0,0 //BD_INTOABYSS#Canção Preciosa #
+4021,313,5,329,10,0,0,0,0,0,0,0,0 //BD_SIEGFRIED#Ode a Siegfried #
+4021,1011,1,0,0,0,0,0,0,0,0,0,0 //DC_WINKCHARM#Piscadela #
+4021,394,10,47,5,324,1,0,0,0,0,0,0 //CG_ARROWVULCAN#Vulcão de Flechas #
+4021,395,5,45,5,323,7,0,0,0,0,0,0 //CG_MOONLIT#Bênção Protetora #
+4021,396,1,45,5,323,5,0,0,0,0,0,0 //CG_MARIONETTE#Controle de Marionete #
+4021,487,5,323,10,396,1,0,0,0,0,0,0 //CG_LONGINGFREEDOM#Grito de Liberdade #
+4021,488,5,45,10,323,10,0,0,0,0,0,0 //CG_HERMODE#Bastão de Hermod #
+4021,489,5,45,10,325,3,0,0,0,0,0,0 //CG_TAROTCARD#Destino nas Cartas #
+4021,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4021,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Paladin(Peco)
+4022,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4022,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4022,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4022,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+4022,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+4022,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+4022,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+4022,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+4022,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+4022,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+4022,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+4022,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+4022,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+4022,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+4022,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+4022,35,1,248,5,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4022,22,10,35,1,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4022,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4022,28,10,23,5,248,10,0,0,0,0,0,0 //AL_HEAL#Curar #
+4022,248,10,0,0,0,0,0,0,0,0,0,0 //CR_TRUST#Fé #
+4022,249,10,0,0,0,0,0,0,0,0,0,0 //CR_AUTOGUARD#Bloqueio #
+4022,250,5,249,5,0,0,0,0,0,0,0,0 //CR_SHIELDCHARGE#Punição Divina #
+4022,251,5,250,3,0,0,0,0,0,0,0,0 //CR_SHIELDBOOMERANG#Escudo Bumerangue #
+4022,252,10,251,3,0,0,0,0,0,0,0,0 //CR_REFLECTSHIELD#Escudo Refletor #
+4022,253,10,248,7,0,0,0,0,0,0,0,0 //CR_HOLYCROSS#Crux Divinum #
+4022,254,10,253,6,248,10,0,0,0,0,0,0 //CR_GRANDCROSS#Crux Magnun #
+4022,255,5,252,5,254,4,0,0,0,0,0,0 //CR_DEVOTION#Redenção #
+4022,256,5,22,5,28,5,0,0,0,0,0,0 //CR_PROVIDENCE#Divina Providência #
+4022,257,5,251,1,0,0,0,0,0,0,0,0 //CR_DEFENDER#Aura Sagrada #
+4022,258,10,55,10,0,0,0,0,0,0,0,0 //CR_SPEARQUICKEN#Rapidez com Lança #
+4022,1002,1,0,0,0,0,0,0,0,0,0,0 //CR_SHRINK#Submissão #
+4022,367,5,8,5,248,5,250,2,0,0,0,0 //PA_PRESSURE#Gloria Domini #
+4022,368,5,8,5,248,5,255,3,0,0,0,0 //PA_SACRIFICE#Sacrifício do Mártir #
+4022,369,10,248,8,22,3,23,5,0,0,0,0 //PA_GOSPEL#Canto de Batalha #
+4022,480,5,251,5,0,0,0,0,0,0,0,0 //PA_SHIELDCHAIN#Choque Rápido #
+4022,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4022,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby (Novice)
+4023,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4023,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4023,143,1,0,0,0,0,0,0,0,0,0,0 //NV_TRICKDEAD#Fingir de Morto #
+4023,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4023,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4023,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Swordman
+4024,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4024,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4024,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4024,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+4024,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+4024,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+4024,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+4024,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+4024,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+4024,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+4024,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+4024,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+4024,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4024,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4024,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Magician
+4025,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4025,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4025,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+4025,10,1,0,0,0,0,0,0,0,0,0,0 //MG_SIGHT#Chama Reveladora #
+4025,11,10,0,0,0,0,0,0,0,0,0,0 //MG_NAPALMBEAT#Ataque Espiritual #
+4025,12,10,11,7,13,5,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+4025,13,10,11,4,0,0,0,0,0,0,0,0 //MG_SOULSTRIKE#Espíritos Anciões #
+4025,14,10,0,0,0,0,0,0,0,0,0,0 //MG_COLDBOLT#Lanças de Gelo #
+4025,15,10,14,5,0,0,0,0,0,0,0,0 //MG_FROSTDIVER#Rajada Congelante #
+4025,16,10,0,0,0,0,0,0,0,0,0,0 //MG_STONECURSE#Petrificar #
+4025,17,10,19,4,0,0,0,0,0,0,0,0 //MG_FIREBALL#Bolas de Fogo #
+4025,18,10,17,5,10,1,0,0,0,0,0,0 //MG_FIREWALL#Barreira de Fogo #
+4025,19,10,0,0,0,0,0,0,0,0,0,0 //MG_FIREBOLT#Lanças de Fogo #
+4025,20,10,0,0,0,0,0,0,0,0,0,0 //MG_LIGHTNINGBOLT#Relâmpago #
+4025,21,10,20,4,0,0,0,0,0,0,0,0 //MG_THUNDERSTORM#Tempestade de Raios #
+4025,157,1,0,0,0,0,0,0,0,0,0,0 //MG_ENERGYCOAT#Proteção Arcana #
+4025,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4025,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4025,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Archer
+4026,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4026,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4026,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+4026,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+4026,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+4026,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+4026,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+4026,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+4026,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+4026,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4026,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4026,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Acolyte
+4027,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4027,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4027,22,10,0,0,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4027,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4027,24,1,0,0,0,0,0,0,0,0,0,0 //AL_RUWACH#Revelação #
+4027,25,1,27,4,0,0,0,0,0,0,0,0 //AL_PNEUMA#Escudo Sagrado #
+4027,26,2,24,1,0,0,0,0,0,0,0,0 //AL_TELEPORT#Teleporte #
+4027,27,4,26,2,0,0,0,0,0,0,0,0 //AL_WARP#Portal #
+4027,28,10,0,0,0,0,0,0,0,0,0,0 //AL_HEAL#Curar #
+4027,29,10,28,3,0,0,0,0,0,0,0,0 //AL_INCAGI#Aumentar Agilidade #
+4027,30,10,29,1,0,0,0,0,0,0,0,0 //AL_DECAGI#Diminuir Agilidade #
+4027,31,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYWATER#Aqua Benedicta #
+4027,32,10,23,3,0,0,0,0,0,0,0,0 //AL_CRUCIS#Signum Crusis #
+4027,33,10,22,3,0,0,0,0,0,0,0,0 //AL_ANGELUS#Angelus #
+4027,34,10,22,5,0,0,0,0,0,0,0,0 //AL_BLESSING#Bênção #
+4027,35,1,28,2,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4027,156,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYLIGHT#Luz Divina #
+4027,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4027,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4027,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Merchant
+4028,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4028,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4028,36,10,0,0,0,0,0,0,0,0,0,0 //MC_INCCARRY#Aumentar Capacidade de Carga #
+4028,37,10,36,3,0,0,0,0,0,0,0,0 //MC_DISCOUNT#Desconto #
+4028,38,10,37,3,0,0,0,0,0,0,0,0 //MC_OVERCHARGE#Superfaturar #
+4028,39,10,36,5,0,0,0,0,0,0,0,0 //MC_PUSHCART#Usar Carrinho #
+4028,40,1,0,0,0,0,0,0,0,0,0,0 //MC_IDENTIFY#Identificar Item #
+4028,41,10,39,3,0,0,0,0,0,0,0,0 //MC_VENDING#Comércio #
+4028,42,10,0,0,0,0,0,0,0,0,0,0 //MC_MAMMONITE#Mammonita #
+4028,153,1,0,0,0,0,0,0,0,0,0,0 //MC_CARTREVOLUTION#Cavalo-de-Pau #
+4028,154,1,0,0,0,0,0,0,0,0,0,0 //MC_CHANGECART#Personalizar Carrinho #
+4028,155,1,0,0,0,0,0,0,0,0,0,0 //MC_LOUD#Grito de Guerra #
+4028,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4028,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4028,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+4028,2535,1,41,1,0,0,0,0,0,0,0,0 //ALL_BUYING_STORE#Open Buying Store#
+//Baby Thief
+4029,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4029,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4029,48,10,0,0,0,0,0,0,0,0,0,0 //TF_DOUBLE#Ataque Duplo #
+4029,49,10,0,0,0,0,0,0,0,0,0,0 //TF_MISS#Perícia em Esquiva #
+4029,50,10,0,0,0,0,0,0,0,0,0,0 //TF_STEAL#Furto #
+4029,51,10,50,5,0,0,0,0,0,0,0,0 //TF_HIDING#Esconderijo #
+4029,52,10,0,0,0,0,0,0,0,0,0,0 //TF_POISON#Envenenar #
+4029,53,1,52,3,0,0,0,0,0,0,0,0 //TF_DETOXIFY#Desintoxicar #
+4029,149,1,0,0,0,0,0,0,0,0,0,0 //TF_SPRINKLESAND#Chutar Areia #
+4029,150,1,0,0,0,0,0,0,0,0,0,0 //TF_BACKSLIDING#Recuar #
+4029,151,1,0,0,0,0,0,0,0,0,0,0 //TF_PICKSTONE#Procurar Pedras #
+4029,152,1,0,0,0,0,0,0,0,0,0,0 //TF_THROWSTONE#Arremessar Pedra #
+4029,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4029,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4029,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Knight
+4030,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4030,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4030,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4030,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+4030,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+4030,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+4030,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+4030,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+4030,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+4030,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+4030,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+4030,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+4030,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4030,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4030,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+4030,56,10,55,1,0,0,0,0,0,0,0,0 //KN_PIERCE#Perfurar #
+4030,57,10,63,1,58,3,0,0,0,0,0,0 //KN_BRANDISHSPEAR#Brandir Lança #
+4030,58,10,56,5,0,0,0,0,0,0,0,0 //KN_SPEARSTAB#Estocada #
+4030,59,5,56,3,0,0,0,0,0,0,0,0 //KN_SPEARBOOMERANG#Lança Bumerangue #
+4030,60,10,3,1,0,0,0,0,0,0,0,0 //KN_TWOHANDQUICKEN#Rapidez com Duas Mãos #
+4030,61,5,3,1,0,0,0,0,0,0,0,0 //KN_AUTOCOUNTER#Contra-Ataque #
+4030,62,10,5,10,7,3,3,5,60,10,61,5//KN_BOWLINGBASH#Impacto de Tyr #
+4030,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+4030,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+4030,1001,1,0,0,0,0,0,0,0,0,0,0 //KN_CHARGEATK#Avanço Ofensivo #
+4030,495,1,60,10,0,0,0,0,0,0,0,0 //KN_ONEHAND#Rapidez com Uma Mão #
+4030,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Priest
+4031,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4031,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4031,22,10,0,0,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4031,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4031,24,1,0,0,0,0,0,0,0,0,0,0 //AL_RUWACH#Revelação #
+4031,25,1,27,4,0,0,0,0,0,0,0,0 //AL_PNEUMA#Escudo Sagrado #
+4031,26,2,24,1,0,0,0,0,0,0,0,0 //AL_TELEPORT#Teleporte #
+4031,27,4,26,2,0,0,0,0,0,0,0,0 //AL_WARP#Portal #
+4031,28,10,0,0,0,0,0,0,0,0,0,0 //AL_HEAL#Curar #
+4031,29,10,28,3,0,0,0,0,0,0,0,0 //AL_INCAGI#Aumentar Agilidade #
+4031,30,10,29,1,0,0,0,0,0,0,0,0 //AL_DECAGI#Diminuir Agilidade #
+4031,31,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYWATER#Aqua Benedicta #
+4031,32,10,23,3,0,0,0,0,0,0,0,0 //AL_CRUCIS#Signum Crusis #
+4031,33,10,22,3,0,0,0,0,0,0,0,0 //AL_ANGELUS#Angelus #
+4031,34,10,22,5,0,0,0,0,0,0,0,0 //AL_BLESSING#Bênção #
+4031,35,1,28,2,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4031,156,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYLIGHT#Luz Divina #
+4031,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4031,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4031,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+4031,12,10,68,4,70,3,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+4031,54,4,72,1,9,4,0,0,0,0,0,0 //ALL_RESURRECTION#Ressuscitar #
+4031,65,10,0,0,0,0,0,0,0,0,0,0 //PR_MACEMASTERY#Perícia com Maça #
+4031,66,5,0,0,0,0,0,0,0,0,0,0 //PR_IMPOSITIO#Impositio Manus #
+4031,67,3,66,2,0,0,0,0,0,0,0,0 //PR_SUFFRAGIUM#Suffragium #
+4031,68,5,31,1,66,3,0,0,0,0,0,0 //PR_ASPERSIO#Aspersio #
+4031,69,5,75,3,68,5,0,0,0,0,0,0 //PR_BENEDICTIO#B.S. Sacramenti #
+4031,70,10,28,1,0,0,0,0,0,0,0,0 //PR_SANCTUARY#Santuário #
+4031,71,4,0,0,0,0,0,0,0,0,0,0 //PR_SLOWPOISON#Retardar Veneno #
+4031,72,1,0,0,0,0,0,0,0,0,0,0 //PR_STRECOVERY#Graça Divina #
+4031,73,10,33,2,0,0,0,0,0,0,0,0 //PR_KYRIE#Kyrie Eleison #
+4031,74,5,0,0,0,0,0,0,0,0,0,0 //PR_MAGNIFICAT#Magnificat #
+4031,75,5,73,4,74,3,0,0,0,0,0,0 //PR_GLORIA#Glória #
+4031,76,10,24,1,0,0,0,0,0,0,0,0 //PR_LEXDIVINA#Lex Divina #
+4031,77,10,54,1,76,3,0,0,0,0,0,0 //PR_TURNUNDEAD#Esconjurar #
+4031,78,1,76,5,0,0,0,0,0,0,0,0 //PR_LEXAETERNA#Lex Aeterna #
+4031,79,10,12,1,78,1,77,3,0,0,0,0 //PR_MAGNUS#Magnus Exorcismus #
+4031,1014,1,0,0,0,0,0,0,0,0,0,0 //PR_REDEMPTIO#Martírio #
+4031,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Wizard
+4032,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4032,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4032,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+4032,10,1,0,0,0,0,0,0,0,0,0,0 //MG_SIGHT#Chama Reveladora #
+4032,11,10,0,0,0,0,0,0,0,0,0,0 //MG_NAPALMBEAT#Ataque Espiritual #
+4032,12,10,11,7,13,5,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+4032,13,10,11,4,0,0,0,0,0,0,0,0 //MG_SOULSTRIKE#Espíritos Anciões #
+4032,14,10,0,0,0,0,0,0,0,0,0,0 //MG_COLDBOLT#Lanças de Gelo #
+4032,15,10,14,5,0,0,0,0,0,0,0,0 //MG_FROSTDIVER#Rajada Congelante #
+4032,16,10,0,0,0,0,0,0,0,0,0,0 //MG_STONECURSE#Petrificar #
+4032,17,10,19,4,0,0,0,0,0,0,0,0 //MG_FIREBALL#Bolas de Fogo #
+4032,18,10,17,5,10,1,0,0,0,0,0,0 //MG_FIREWALL#Barreira de Fogo #
+4032,19,10,0,0,0,0,0,0,0,0,0,0 //MG_FIREBOLT#Lanças de Fogo #
+4032,20,10,0,0,0,0,0,0,0,0,0,0 //MG_LIGHTNINGBOLT#Relâmpago #
+4032,21,10,20,4,0,0,0,0,0,0,0,0 //MG_THUNDERSTORM#Tempestade de Raios #
+4032,157,1,0,0,0,0,0,0,0,0,0,0 //MG_ENERGYCOAT#Proteção Arcana #
+4032,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4032,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4032,80,10,18,1,0,0,0,0,0,0,0,0 //WZ_FIREPILLAR#Coluna de Fogo #
+4032,81,10,20,1,10,1,0,0,0,0,0,0 //WZ_SIGHTRASHER#Supernova #
+4032,83,10,81,2,21,1,0,0,0,0,0,0 //WZ_METEOR#Chuva de Meteoros #
+4032,84,10,11,1,20,1,0,0,0,0,0,0 //WZ_JUPITEL#Trovão e Júpiter #
+4032,85,10,21,1,84,5,0,0,0,0,0,0 //WZ_VERMILION#Ira de Thor #
+4032,86,5,14,1,20,1,0,0,0,0,0,0 //WZ_WATERBALL#Esfera d'Água #
+4032,87,10,16,1,15,1,0,0,0,0,0,0 //WZ_ICEWALL#Barreira de Gelo #
+4032,88,10,87,1,0,0,0,0,0,0,0,0 //WZ_FROSTNOVA#Congelar #
+4032,89,10,15,1,84,3,0,0,0,0,0,0 //WZ_STORMGUST#Nevasca #
+4032,90,5,16,1,0,0,0,0,0,0,0,0 //WZ_EARTHSPIKE#Coluna de Pedra #
+4032,91,5,90,3,0,0,0,0,0,0,0,0 //WZ_HEAVENDRIVE#Fúria da Terra #
+4032,92,5,91,1,0,0,0,0,0,0,0,0 //WZ_QUAGMIRE#Pântano dos Mortos #
+4032,93,1,0,0,0,0,0,0,0,0,0,0 //WZ_ESTIMATION#Sentido Sobrenatural #
+4032,1006,1,0,0,0,0,0,0,0,0,0,0 //WZ_SIGHTBLASTER#Explosão Protetora #
+4032,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Blacksmith
+4033,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4033,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4033,36,10,0,0,0,0,0,0,0,0,0,0 //MC_INCCARRY#Aumentar Capacidade de Carga #
+4033,37,10,36,3,0,0,0,0,0,0,0,0 //MC_DISCOUNT#Desconto #
+4033,38,10,37,3,0,0,0,0,0,0,0,0 //MC_OVERCHARGE#Superfaturar #
+4033,39,10,36,5,0,0,0,0,0,0,0,0 //MC_PUSHCART#Usar Carrinho #
+4033,40,1,0,0,0,0,0,0,0,0,0,0 //MC_IDENTIFY#Identificar Item #
+4033,41,10,39,3,0,0,0,0,0,0,0,0 //MC_VENDING#Comércio #
+4033,42,10,0,0,0,0,0,0,0,0,0,0 //MC_MAMMONITE#Mammonita #
+4033,153,1,0,0,0,0,0,0,0,0,0,0 //MC_CARTREVOLUTION#Cavalo-de-Pau #
+4033,154,1,0,0,0,0,0,0,0,0,0,0 //MC_CHANGECART#Personalizar Carrinho #
+4033,155,1,0,0,0,0,0,0,0,0,0,0 //MC_LOUD#Grito de Guerra #
+4033,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4033,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4033,94,5,0,0,0,0,0,0,0,0,0,0 //BS_IRON#Trabalhar Ferro #
+4033,95,5,94,1,0,0,0,0,0,0,0,0 //BS_STEEL#Trabalhar Aço #
+4033,96,5,94,1,0,0,0,0,0,0,0,0 //BS_ENCHANTEDSTONE#Produzir Pedra Fundamental #
+4033,97,5,96,1,0,0,0,0,0,0,0,0 //BS_ORIDEOCON#Perícia com Oridecon #
+4033,98,3,0,0,0,0,0,0,0,0,0,0 //BS_DAGGER#Forjar Adaga #
+4033,99,3,98,1,0,0,0,0,0,0,0,0 //BS_SWORD#Forjar Espada #
+4033,100,3,99,1,0,0,0,0,0,0,0,0 //BS_TWOHANDSWORD#Forjar Espada de Duas Mãos #
+4033,101,3,99,2,0,0,0,0,0,0,0,0 //BS_AXE#Forjar Machado #
+4033,102,3,103,1,0,0,0,0,0,0,0,0 //BS_MACE#Forjar Maça #
+4033,103,3,98,1,0,0,0,0,0,0,0,0 //BS_KNUCKLE#Forjar Soqueira #
+4033,104,3,98,2,0,0,0,0,0,0,0,0 //BS_SPEAR#Forjar Lança #
+4033,105,1,0,0,0,0,0,0,0,0,0,0 //BS_HILTBINDING#Punho Firme #
+4033,106,1,95,1,105,1,0,0,0,0,0,0 //BS_FINDINGORE#Encontrar Minério #
+4033,107,10,105,1,0,0,0,0,0,0,0,0 //BS_WEAPONRESEARCH#Perícia em Armamento #
+4033,108,1,107,1,0,0,0,0,0,0,0,0 //BS_REPAIRWEAPON#Consertar Armas #
+4033,109,5,0,0,0,0,0,0,0,0,0,0 //BS_SKINTEMPER#Resistência ao Fogo #
+4033,110,5,0,0,0,0,0,0,0,0,0,0 //BS_HAMMERFALL#Martelo de Thor #
+4033,111,5,110,2,0,0,0,0,0,0,0,0 //BS_ADRENALINE#Adrenalina Pura #
+4033,112,5,107,2,111,2,0,0,0,0,0,0 //BS_WEAPONPERFECT#Manejo Perfeito #
+4033,113,5,111,3,0,0,0,0,0,0,0,0 //BS_OVERTHRUST#Força Violenta #
+4033,114,5,112,3,113,2,0,0,0,0,0,0 //BS_MAXIMIZE#Amplificar Poder #
+4033,1012,1,0,0,0,0,0,0,0,0,0,0 //BS_UNFAIRLYTRICK#Venda Duvidosa #
+4033,1013,1,0,0,0,0,0,0,0,0,0,0 //BS_GREED#Ganância #
+4033,459,1,111,5,0,0,0,0,0,0,0,0 //BS_ADRENALINE2#Adrenalina Concentrada #
+4033,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+4033,2535,1,41,1,0,0,0,0,0,0,0,0 //ALL_BUYING_STORE#Open Buying Store#
+//Baby Hunter
+4034,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4034,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4034,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+4034,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+4034,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+4034,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+4034,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+4034,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+4034,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+4034,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4034,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4034,115,5,0,0,0,0,0,0,0,0,0,0 //HT_SKIDTRAP#Armadilha Escorregadia #
+4034,116,5,0,0,0,0,0,0,0,0,0,0 //HT_LANDMINE#Armadilha Atordoante #
+4034,117,5,115,1,0,0,0,0,0,0,0,0 //HT_ANKLESNARE#Instalar Armadilha #
+4034,118,5,117,1,0,0,0,0,0,0,0,0 //HT_SHOCKWAVE#Armadilha Extenuante #
+4034,119,5,120,1,0,0,0,0,0,0,0,0 //HT_SANDMAN#Armadilha Sonífera #
+4034,120,5,115,1,0,0,0,0,0,0,0,0 //HT_FLASHER#Armadilha Luminosa #
+4034,121,5,120,1,0,0,0,0,0,0,0,0 //HT_FREEZINGTRAP#Armadilha Congelante #
+4034,122,5,116,1,119,1,121,1,0,0,0,0 //HT_BLASTMINE#Instalar Mina #
+4034,123,5,118,1,122,1,0,0,0,0,0,0 //HT_CLAYMORETRAP#Armadilha Explosiva #
+4034,124,1,116,1,0,0,0,0,0,0,0,0 //HT_REMOVETRAP#Remover Armadilha #
+4034,125,1,118,1,124,1,0,0,0,0,0,0 //HT_TALKIEBOX#Mensagem Secreta #
+4034,126,10,0,0,0,0,0,0,0,0,0,0 //HT_BEASTBANE#Flagelo das Feras #
+4034,127,1,126,1,0,0,0,0,0,0,0,0 //HT_FALCON#Adestrar Falcão #
+4034,128,10,129,5,0,0,0,0,0,0,0,0 //HT_STEELCROW#Garras de Aço #
+4034,129,5,127,1,0,0,0,0,0,0,0,0 //HT_BLITZBEAT#Ataque Aéreo #
+4034,130,4,45,1,127,1,0,0,0,0,0,0 //HT_DETECTING#Detectar #
+4034,131,5,124,1,127,1,0,0,0,0,0,0 //HT_SPRINGTRAP#Desativar Armadilha #
+4034,1009,1,0,0,0,0,0,0,0,0,0,0 //HT_PHANTASMIC#Flecha Fantasma #
+4034,499,1,46,10,0,0,0,0,0,0,0,0 //HT_POWER#Ataque da Fera #
+4034,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Assassin
+4035,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4035,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4035,48,10,0,0,0,0,0,0,0,0,0,0 //TF_DOUBLE#Ataque Duplo #
+4035,49,10,0,0,0,0,0,0,0,0,0,0 //TF_MISS#Perícia em Esquiva #
+4035,50,10,0,0,0,0,0,0,0,0,0,0 //TF_STEAL#Furto #
+4035,51,10,50,5,0,0,0,0,0,0,0,0 //TF_HIDING#Esconderijo #
+4035,52,10,0,0,0,0,0,0,0,0,0,0 //TF_POISON#Envenenar #
+4035,53,1,52,3,0,0,0,0,0,0,0,0 //TF_DETOXIFY#Desintoxicar #
+4035,149,1,0,0,0,0,0,0,0,0,0,0 //TF_SPRINKLESAND#Chutar Areia #
+4035,150,1,0,0,0,0,0,0,0,0,0,0 //TF_BACKSLIDING#Recuar #
+4035,151,1,0,0,0,0,0,0,0,0,0,0 //TF_PICKSTONE#Procurar Pedras #
+4035,152,1,0,0,0,0,0,0,0,0,0,0 //TF_THROWSTONE#Arremessar Pedra #
+4035,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4035,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4035,132,5,0,0,0,0,0,0,0,0,0,0 //AS_RIGHT#Perícia com Mão Direita #
+4035,133,5,132,2,0,0,0,0,0,0,0,0 //AS_LEFT#Perícia com Mão Esquerda #
+4035,134,10,0,0,0,0,0,0,0,0,0,0 //AS_KATAR#Perícia com Katar #
+4035,135,10,51,2,0,0,0,0,0,0,0,0 //AS_CLOAKING#Furtividade #
+4035,136,10,134,4,0,0,0,0,0,0,0,0 //AS_SONICBLOW#Lâminas Destruidoras #
+4035,137,5,135,2,136,5,0,0,0,0,0,0 //AS_GRIMTOOTH##
+4035,138,10,52,1,0,0,0,0,0,0,0,0 //AS_ENCHANTPOISON#Envenenar Arma #
+4035,139,10,138,3,0,0,0,0,0,0,0,0 //AS_POISONREACT#Refletir Veneno #
+4035,140,10,138,5,0,0,0,0,0,0,0,0 //AS_VENOMDUST#Névoa Tóxica #
+4035,141,10,139,5,140,5,0,0,0,0,0,0 //AS_SPLASHER#Explosão Tóxica #
+4035,1003,1,0,0,0,0,0,0,0,0,0,0 //AS_SONICACCEL#Lâminas Aceleradas #
+4035,1004,1,0,0,0,0,0,0,0,0,0,0 //AS_VENOMKNIFE#Faca Envenenada #
+4035,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Knight(Peco)
+4036,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4036,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4036,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4036,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+4036,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+4036,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+4036,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+4036,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+4036,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+4036,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+4036,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+4036,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+4036,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4036,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4036,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+4036,56,10,55,1,0,0,0,0,0,0,0,0 //KN_PIERCE#Perfurar #
+4036,57,10,63,1,58,3,0,0,0,0,0,0 //KN_BRANDISHSPEAR#Brandir Lança #
+4036,58,10,56,5,0,0,0,0,0,0,0,0 //KN_SPEARSTAB#Estocada #
+4036,59,5,56,3,0,0,0,0,0,0,0,0 //KN_SPEARBOOMERANG#Lança Bumerangue #
+4036,60,10,3,1,0,0,0,0,0,0,0,0 //KN_TWOHANDQUICKEN#Rapidez com Duas Mãos #
+4036,61,5,3,1,0,0,0,0,0,0,0,0 //KN_AUTOCOUNTER#Contra-Ataque #
+4036,62,10,5,10,7,3,3,5,60,10,61,5//KN_BOWLINGBASH#Impacto de Tyr #
+4036,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+4036,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+4036,1001,1,0,0,0,0,0,0,0,0,0,0 //KN_CHARGEATK#Avanço Ofensivo #
+4036,495,1,60,10,0,0,0,0,0,0,0,0 //KN_ONEHAND#Rapidez com Uma Mão #
+4036,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Crusader
+4037,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4037,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4037,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4037,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+4037,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+4037,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+4037,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+4037,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+4037,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+4037,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+4037,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+4037,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+4037,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4037,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4037,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+4037,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+4037,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+4037,35,1,248,5,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4037,22,10,35,1,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4037,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4037,28,10,23,5,248,10,0,0,0,0,0,0 //AL_HEAL#Curar #
+4037,248,10,0,0,0,0,0,0,0,0,0,0 //CR_TRUST#Fé #
+4037,249,10,0,0,0,0,0,0,0,0,0,0 //CR_AUTOGUARD#Bloqueio #
+4037,250,5,249,5,0,0,0,0,0,0,0,0 //CR_SHIELDCHARGE#Punição Divina #
+4037,251,5,250,3,0,0,0,0,0,0,0,0 //CR_SHIELDBOOMERANG#Escudo Bumerangue #
+4037,252,10,251,3,0,0,0,0,0,0,0,0 //CR_REFLECTSHIELD#Escudo Refletor #
+4037,253,10,248,7,0,0,0,0,0,0,0,0 //CR_HOLYCROSS#Crux Divinum #
+4037,254,10,253,6,248,10,0,0,0,0,0,0 //CR_GRANDCROSS#Crux Magnun #
+4037,255,5,252,5,254,4,0,0,0,0,0,0 //CR_DEVOTION#Redenção #
+4037,256,5,22,5,28,5,0,0,0,0,0,0 //CR_PROVIDENCE#Divina Providência #
+4037,257,5,251,1,0,0,0,0,0,0,0,0 //CR_DEFENDER#Aura Sagrada #
+4037,258,10,55,10,0,0,0,0,0,0,0,0 //CR_SPEARQUICKEN#Rapidez com Lança #
+4037,1002,1,0,0,0,0,0,0,0,0,0,0 //CR_SHRINK#Submissão #
+4037,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Monk
+4038,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4038,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4038,22,10,0,0,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4038,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4038,24,1,0,0,0,0,0,0,0,0,0,0 //AL_RUWACH#Revelação #
+4038,25,1,27,4,0,0,0,0,0,0,0,0 //AL_PNEUMA#Escudo Sagrado #
+4038,26,2,24,1,0,0,0,0,0,0,0,0 //AL_TELEPORT#Teleporte #
+4038,27,4,26,2,0,0,0,0,0,0,0,0 //AL_WARP#Portal #
+4038,28,10,0,0,0,0,0,0,0,0,0,0 //AL_HEAL#Curar #
+4038,29,10,28,3,0,0,0,0,0,0,0,0 //AL_INCAGI#Aumentar Agilidade #
+4038,30,10,29,1,0,0,0,0,0,0,0,0 //AL_DECAGI#Diminuir Agilidade #
+4038,31,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYWATER#Aqua Benedicta #
+4038,32,10,23,3,0,0,0,0,0,0,0,0 //AL_CRUCIS#Signum Crusis #
+4038,33,10,22,3,0,0,0,0,0,0,0,0 //AL_ANGELUS#Angelus #
+4038,34,10,22,5,0,0,0,0,0,0,0,0 //AL_BLESSING#Bênção #
+4038,35,1,28,2,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4038,156,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYLIGHT#Luz Divina #
+4038,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4038,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4038,259,10,23,10,22,10,0,0,0,0,0,0 //MO_IRONHAND#Punhos de Ferro #
+4038,260,5,269,2,0,0,0,0,0,0,0,0 //MO_SPIRITSRECOVERY#Meditação #
+4038,261,5,259,2,0,0,0,0,0,0,0,0 //MO_CALLSPIRITS#Invocar Esfera Espiritual #
+4038,262,1,261,5,0,0,0,0,0,0,0,0 //MO_ABSORBSPIRITS#Absorver Esferas Espirituais #
+4038,263,10,265,5,0,0,0,0,0,0,0,0 //MO_TRIPLEATTACK#Combo Triplo #
+4038,264,1,271,3,260,2,268,3,0,0,0,0 //MO_BODYRELOCATION#Passo Etéreo #
+4038,265,10,259,5,261,5,0,0,0,0,0,0 //MO_DODGE#Cair das Pétalas #
+4038,266,5,261,5,0,0,0,0,0,0,0,0 //MO_INVESTIGATE#Impacto Psíquico #
+4038,267,5,266,3,0,0,0,0,0,0,0,0 //MO_FINGEROFFENSIVE#Disparo de Esferas Espirituais #
+4038,268,5,273,3,0,0,0,0,0,0,0,0 //MO_STEELBODY#Corpo Fechado #
+4038,269,5,265,5,0,0,0,0,0,0,0,0 //MO_BLADESTOP#Dilema #
+4038,270,5,262,1,0,0,0,0,0,0,0,0 //MO_EXPLOSIONSPIRITS#Fúria Interior #
+4038,271,5,270,3,267,3,0,0,0,0,0,0 //MO_EXTREMITYFIST#Punho Supremo de Asura #
+4038,272,5,263,5,0,0,0,0,0,0,0,0 //MO_CHAINCOMBO#Combo Quádruplo #
+4038,273,5,272,3,0,0,0,0,0,0,0,0 //MO_COMBOFINISH#O Último Dragão #
+4038,1015,1,0,0,0,0,0,0,0,0,0,0 //MO_KITRANSLATION#Concessão Espiritual #
+4038,1016,1,0,0,0,0,0,0,0,0,0,0 //MO_BALKYOUNG#Punhos Intensos #
+4038,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Sage
+4039,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4039,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4039,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+4039,10,1,0,0,0,0,0,0,0,0,0,0 //MG_SIGHT#Chama Reveladora #
+4039,11,10,0,0,0,0,0,0,0,0,0,0 //MG_NAPALMBEAT#Ataque Espiritual #
+4039,12,10,11,7,13,5,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+4039,13,10,11,4,0,0,0,0,0,0,0,0 //MG_SOULSTRIKE#Espíritos Anciões #
+4039,14,10,0,0,0,0,0,0,0,0,0,0 //MG_COLDBOLT#Lanças de Gelo #
+4039,15,10,14,5,0,0,0,0,0,0,0,0 //MG_FROSTDIVER#Rajada Congelante #
+4039,16,10,0,0,0,0,0,0,0,0,0,0 //MG_STONECURSE#Petrificar #
+4039,17,10,19,4,0,0,0,0,0,0,0,0 //MG_FIREBALL#Bolas de Fogo #
+4039,18,10,17,5,10,1,0,0,0,0,0,0 //MG_FIREWALL#Barreira de Fogo #
+4039,19,10,0,0,0,0,0,0,0,0,0,0 //MG_FIREBOLT#Lanças de Fogo #
+4039,20,10,0,0,0,0,0,0,0,0,0,0 //MG_LIGHTNINGBOLT#Relâmpago #
+4039,21,10,20,4,0,0,0,0,0,0,0,0 //MG_THUNDERSTORM#Tempestade de Raios #
+4039,157,1,0,0,0,0,0,0,0,0,0,0 //MG_ENERGYCOAT#Proteção Arcana #
+4039,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4039,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4039,93,1,0,0,0,0,0,0,0,0,0,0 //WZ_ESTIMATION#Sentido Sobrenatural #
+4039,90,5,283,1,0,0,0,0,0,0,0,0 //WZ_EARTHSPIKE#Coluna de Pedra #
+4039,91,5,90,1,0,0,0,0,0,0,0,0 //WZ_HEAVENDRIVE#Fúria da Terra #
+4039,274,10,0,0,0,0,0,0,0,0,0,0 //SA_ADVANCEDBOOK#Estudo de Livros #
+4039,275,5,274,2,0,0,0,0,0,0,0,0 //SA_CASTCANCEL#Cancelar magia #
+4039,276,5,274,4,0,0,0,0,0,0,0,0 //SA_MAGICROD#Espelho Mágico #
+4039,277,5,276,1,0,0,0,0,0,0,0,0 //SA_SPELLBREAKER#Desconcentrar #
+4039,278,10,275,1,0,0,0,0,0,0,0,0 //SA_FREECAST#Conjuração Livre #
+4039,279,10,278,4,0,0,0,0,0,0,0,0 //SA_AUTOSPELL#Desejo Arcano #
+4039,280,5,19,1,274,5,0,0,0,0,0,0 //SA_FLAMELAUNCHER#Encantar com Chama #
+4039,281,5,14,1,274,5,0,0,0,0,0,0 //SA_FROSTWEAPON#Encantar com Geada #
+4039,282,5,20,1,274,5,0,0,0,0,0,0 //SA_LIGHTNINGLOADER#Encantar com Ventania #
+4039,283,5,16,1,274,5,0,0,0,0,0,0 //SA_SEISMICWEAPON#Encantar com Terremoto #
+4039,284,5,274,9,0,0,0,0,0,0,0,0 //SA_DRAGONOLOGY#Dragonologia #
+4039,285,5,280,2,0,0,0,0,0,0,0,0 //SA_VOLCANO#Vulcão #
+4039,286,5,281,2,0,0,0,0,0,0,0,0 //SA_DELUGE#Dilúvio #
+4039,287,5,282,2,0,0,0,0,0,0,0,0 //SA_VIOLENTGALE#Furacão #
+4039,288,5,285,3,286,3,287,3,0,0,0,0 //SA_LANDPROTECTOR#Proteger Terreno #
+4039,289,5,277,3,0,0,0,0,0,0,0,0 //SA_DISPELL#Desencantar #
+4039,290,10,279,5,289,1,288,1,0,0,0,0 //SA_ABRACADABRA#Abracadabra #
+4039,1007,1,0,0,0,0,0,0,0,0,0,0 //SA_CREATECON#Criar Conversor Elemental #
+4039,1008,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTWATER#Mudança Elemental - Água #
+4039,1017,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTGROUND#Mudança Elemental - Terra #
+4039,1018,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTFIRE#Mudança Elemental - Fogo #
+4039,1019,1,0,0,0,0,0,0,0,0,0,0 //SA_ELEMENTWIND#Mudança Elemental - Vento #
+4039,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Rogue
+4040,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4040,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4040,48,10,0,0,0,0,0,0,0,0,0,0 //TF_DOUBLE#Ataque Duplo #
+4040,49,10,0,0,0,0,0,0,0,0,0,0 //TF_MISS#Perícia em Esquiva #
+4040,50,10,0,0,0,0,0,0,0,0,0,0 //TF_STEAL#Furto #
+4040,51,10,50,5,0,0,0,0,0,0,0,0 //TF_HIDING#Esconderijo #
+4040,52,10,0,0,0,0,0,0,0,0,0,0 //TF_POISON#Envenenar #
+4040,53,1,52,3,0,0,0,0,0,0,0,0 //TF_DETOXIFY#Desintoxicar #
+4040,149,1,0,0,0,0,0,0,0,0,0,0 //TF_SPRINKLESAND#Chutar Areia #
+4040,150,1,0,0,0,0,0,0,0,0,0,0 //TF_BACKSLIDING#Recuar #
+4040,151,1,0,0,0,0,0,0,0,0,0,0 //TF_PICKSTONE#Procurar Pedras #
+4040,152,1,0,0,0,0,0,0,0,0,0,0 //TF_THROWSTONE#Arremessar Pedra #
+4040,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4040,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4040,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4040,44,10,0,0,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+4040,46,10,44,10,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+4040,124,1,46,5,0,0,0,0,0,0,0,0 //HT_REMOVETRAP#Remover Armadilha #
+4040,210,10,50,1,0,0,0,0,0,0,0,0 //RG_SNATCHER#Mãos Leves #
+4040,211,10,210,4,0,0,0,0,0,0,0,0 //RG_STEALCOIN#Afanar #
+4040,212,10,211,4,0,0,0,0,0,0,0,0 //RG_BACKSTAP#Apunhalar #
+4040,213,5,51,1,0,0,0,0,0,0,0,0 //RG_TUNNELDRIVE#Túnel de Fuga #
+4040,214,5,212,2,213,2,0,0,0,0,0,0 //RG_RAID#Ataque Surpresa #
+4040,215,5,217,5,0,0,0,0,0,0,0,0 //RG_STRIPWEAPON#Remover Arma #
+4040,216,5,218,5,0,0,0,0,0,0,0,0 //RG_STRIPSHIELD#Remover Escudo #
+4040,217,5,216,5,0,0,0,0,0,0,0,0 //RG_STRIPARMOR#Remover Armadura #
+4040,218,5,211,2,0,0,0,0,0,0,0,0 //RG_STRIPHELM#Remover Capacete #
+4040,219,5,212,4,214,5,0,0,0,0,0,0 //RG_INTIMIDATE#Rapto #
+4040,220,1,221,5,0,0,0,0,0,0,0,0 //RG_GRAFFITI#Grafitti #
+4040,221,5,222,1,0,0,0,0,0,0,0,0 //RG_FLAGGRAFFITI#Pichar #
+4040,222,1,223,1,0,0,0,0,0,0,0,0 //RG_CLEANER#Faxina #
+4040,223,1,216,3,0,0,0,0,0,0,0,0 //RG_GANGSTER#Malandragem #
+4040,224,5,223,1,0,0,0,0,0,0,0,0 //RG_COMPULSION#Extorquir #
+4040,225,10,219,5,0,0,0,0,0,0,0,0 //RG_PLAGIARISM#Plágio #
+4040,1005,1,0,0,0,0,0,0,0,0,0,0 //RG_CLOSECONFINE#Confinamento #
+4040,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Alchemist
+4041,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4041,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4041,36,10,0,0,0,0,0,0,0,0,0,0 //MC_INCCARRY#Aumentar Capacidade de Carga #
+4041,37,10,36,3,0,0,0,0,0,0,0,0 //MC_DISCOUNT#Desconto #
+4041,38,10,37,3,0,0,0,0,0,0,0,0 //MC_OVERCHARGE#Superfaturar #
+4041,39,10,36,5,0,0,0,0,0,0,0,0 //MC_PUSHCART#Usar Carrinho #
+4041,40,1,0,0,0,0,0,0,0,0,0,0 //MC_IDENTIFY#Identificar Item #
+4041,41,10,39,3,0,0,0,0,0,0,0,0 //MC_VENDING#Comércio #
+4041,42,10,0,0,0,0,0,0,0,0,0,0 //MC_MAMMONITE#Mammonita #
+4041,153,1,0,0,0,0,0,0,0,0,0,0 //MC_CARTREVOLUTION#Cavalo-de-Pau #
+4041,154,1,0,0,0,0,0,0,0,0,0,0 //MC_CHANGECART#Personalizar Carrinho #
+4041,155,1,0,0,0,0,0,0,0,0,0,0 //MC_LOUD#Grito de Guerra #
+4041,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4041,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4041,226,10,0,0,0,0,0,0,0,0,0,0 //AM_AXEMASTERY#Perícia com Machado #
+4041,227,10,0,0,0,0,0,0,0,0,0,0 //AM_LEARNINGPOTION#Pesquisa de Poções #
+4041,228,10,227,5,0,0,0,0,0,0,0,0 //AM_PHARMACY#Preparar Poção #
+4041,229,5,228,4,0,0,0,0,0,0,0,0 //AM_DEMONSTRATION#Fogo Grego #
+4041,230,5,228,5,0,0,0,0,0,0,0,0 //AM_ACIDTERROR#Terror Ácido #
+4041,231,5,228,3,0,0,0,0,0,0,0,0 //AM_POTIONPITCHER#Arremessar Poção #
+4041,232,5,228,6,0,0,0,0,0,0,0,0 //AM_CANNIBALIZE#Criar Monstro Planta #
+4041,233,5,228,2,0,0,0,0,0,0,0,0 //AM_SPHEREMINE#Criar Esfera Marinha #
+4041,234,5,236,3,0,0,0,0,0,0,0,0 //AM_CP_WEAPON#Revestir Arma #
+4041,235,5,237,3,0,0,0,0,0,0,0,0 //AM_CP_SHIELD#Revestir Escudo #
+4041,236,5,235,3,0,0,0,0,0,0,0,0 //AM_CP_ARMOR#Revestir Armadura #
+4041,237,5,228,2,0,0,0,0,0,0,0,0 //AM_CP_HELM#Revestir Capacete #
+4041,238,1,0,0,0,0,0,0,0,0,0,0 //AM_BIOETHICS#Bioética #
+4041,243,1,244,1,0,0,0,0,0,0,0,0 //AM_CALLHOMUN#Criar Homunculus #
+4041,244,1,238,1,0,0,0,0,0,0,0,0 //AM_REST#Vaporizar #
+4041,247,5,243,1,0,0,0,0,0,0,0,0 //AM_RESURRECTHOMUN#Ressuscitar Homunculu #
+4041,446,1,0,0,0,0,0,0,0,0,0,0 //AM_BERSERKPITCHER#Arremessar Poção da Fúria Selvagem #
+4041,496,1,228,10,0,0,0,0,0,0,0,0 //AM_TWILIGHT1#Criação Espiritual de Poções #
+4041,497,1,228,10,0,0,0,0,0,0,0,0 //AM_TWILIGHT2#Criação Espiritual de Poções #
+4041,498,1,228,10,0,0,0,0,0,0,0,0 //AM_TWILIGHT3#Criação Espiritual de Poções #
+4041,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+4041,2535,1,41,1,0,0,0,0,0,0,0,0 //ALL_BUYING_STORE#Open Buying Store#
+//Baby Bard
+4042,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4042,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4042,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+4042,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+4042,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+4042,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+4042,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+4042,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+4042,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+4042,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4042,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4042,315,10,0,0,0,0,0,0,0,0,0,0 //BA_MUSICALLESSON#Lições de Música #
+4042,316,5,315,3,0,0,0,0,0,0,0,0 //BA_MUSICALSTRIKE#Flecha Melódica #
+4042,317,5,315,1,304,1,0,0,0,0,0,0 //BA_DISSONANCE#Dissonância #
+4042,318,5,305,1,0,0,0,0,0,0,0,0 //BA_FROSTJOKE#Piada Infame #
+4042,319,10,317,3,0,0,0,0,0,0,0,0 //BA_WHISTLE#Assovio #
+4042,320,10,317,3,0,0,0,0,0,0,0,0 //BA_ASSASSINCROSS#Crepúsculo Sangrento #
+4042,321,10,317,3,0,0,0,0,0,0,0,0 //BA_POEMBRAGI#Poema de Bragi #
+4042,322,10,317,3,0,0,0,0,0,0,0,0 //BA_APPLEIDUN#Maçãs de Idun #
+4042,304,1,0,0,0,0,0,0,0,0,0,0 //BD_ADAPTATION#Encerramento #
+4042,305,1,304,1,0,0,0,0,0,0,0,0 //BD_ENCORE#Bis #
+4042,306,1,319,10,0,0,0,0,0,0,0,0 //BD_LULLABY#Cantiga de Nina #
+4042,307,5,313,3,0,0,0,0,0,0,0,0 //BD_RICHMANKIM#Banquete de Njord #
+4042,308,1,311,1,0,0,0,0,0,0,0,0 //BD_ETERNALCHAOS#Ritmo Caótico #
+4042,309,5,322,10,0,0,0,0,0,0,0,0 //BD_DRUMBATTLEFIELD#Rufar dos Tambores #
+4042,310,5,309,3,0,0,0,0,0,0,0,0 //BD_RINGNIBELUNGEN#Anel dos Nibelungos #
+4042,311,1,320,10,0,0,0,0,0,0,0,0 //BD_ROKISWEIL#Lamento de Loki #
+4042,312,1,306,1,0,0,0,0,0,0,0,0 //BD_INTOABYSS#Canção Preciosa #
+4042,313,5,321,10,0,0,0,0,0,0,0,0 //BD_SIEGFRIED#Ode a Siegfried #
+4042,1010,1,0,0,0,0,0,0,0,0,0,0 //BA_PANGVOICE#Voz Dolorosa #
+4042,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Dancer
+4043,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4043,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4043,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+4043,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+4043,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+4043,46,10,0,0,0,0,0,0,0,0,0,0 //AC_DOUBLE#Rajada e Flechas #
+4043,47,10,46,5,0,0,0,0,0,0,0,0 //AC_SHOWER#Chuva e Flechas #
+4043,147,1,0,0,0,0,0,0,0,0,0,0 //AC_MAKINGARROW#Fabricar Flechas #
+4043,148,1,0,0,0,0,0,0,0,0,0,0 //AC_CHARGEARROW#Disparo Violento #
+4043,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4043,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4043,323,10,0,0,0,0,0,0,0,0,0,0 //DC_DANCINGLESSON#Lições de Dança #
+4043,324,5,323,3,0,0,0,0,0,0,0,0 //DC_THROWARROW#Estilingue #
+4043,325,5,323,1,304,1,0,0,0,0,0,0 //DC_UGLYDANCE#Dança do Ventre #
+4043,326,5,305,1,0,0,0,0,0,0,0,0 //DC_SCREAM#Escândalo #
+4043,327,10,325,3,0,0,0,0,0,0,0,0 //DC_HUMMING#Sibilo #
+4043,328,10,325,3,0,0,0,0,0,0,0,0 //DC_DONTFORGETME#Não Me Abandones #
+4043,329,10,325,3,0,0,0,0,0,0,0,0 //DC_FORTUNEKISS#Beijo da Sorte #
+4043,330,10,325,3,0,0,0,0,0,0,0,0 //DC_SERVICEFORYOU#Dança Cigana #
+4043,304,1,0,0,0,0,0,0,0,0,0,0 //BD_ADAPTATION#Encerramento #
+4043,305,1,304,1,0,0,0,0,0,0,0,0 //BD_ENCORE#Bis #
+4043,306,1,327,10,0,0,0,0,0,0,0,0 //BD_LULLABY#Cantiga de Nina #
+4043,307,5,313,3,0,0,0,0,0,0,0,0 //BD_RICHMANKIM#Banquete de Njord #
+4043,308,1,311,1,0,0,0,0,0,0,0,0 //BD_ETERNALCHAOS#Ritmo Caótico #
+4043,309,5,330,10,0,0,0,0,0,0,0,0 //BD_DRUMBATTLEFIELD#Rufar dos Tambores #
+4043,310,5,309,3,0,0,0,0,0,0,0,0 //BD_RINGNIBELUNGEN#Anel dos Nibelungos #
+4043,311,1,328,10,0,0,0,0,0,0,0,0 //BD_ROKISWEIL#Lamento de Loki #
+4043,312,1,306,1,0,0,0,0,0,0,0,0 //BD_INTOABYSS#Canção Preciosa #
+4043,313,5,329,10,0,0,0,0,0,0,0,0 //BD_SIEGFRIED#Ode a Siegfried #
+4043,1011,1,0,0,0,0,0,0,0,0,0,0 //DC_WINKCHARM#Piscadela #
+4043,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Baby Crusader(Peco)
+4044,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4044,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4044,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4044,3,10,2,1,0,0,0,0,0,0,0,0 //SM_TWOHAND#Perícia com Espada de Duas Mãos #
+4044,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+4044,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+4044,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+4044,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+4044,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+4044,144,1,0,0,0,0,0,0,0,0,0,0 //SM_MOVINGRECOVERY#Recuperar HP em Movimento #
+4044,145,1,0,0,0,0,0,0,0,0,0,0 //SM_FATALBLOW#Ataque Fatal #
+4044,146,1,0,0,0,0,0,0,0,0,0,0 //SM_AUTOBERSERK#Instinto de Sobrevivência #
+4044,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4044,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4044,63,1,8,1,0,0,0,0,0,0,0,0 //KN_RIDING#Montaria #
+4044,64,5,63,1,0,0,0,0,0,0,0,0 //KN_CAVALIERMASTERY#Perícia em Montaria #
+4044,55,10,0,0,0,0,0,0,0,0,0,0 //KN_SPEARMASTERY#Perícia com Lança #
+4044,35,1,248,5,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4044,22,10,35,1,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4044,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4044,28,10,23,5,248,10,0,0,0,0,0,0 //AL_HEAL#Curar #
+4044,248,10,0,0,0,0,0,0,0,0,0,0 //CR_TRUST#Fé #
+4044,249,10,0,0,0,0,0,0,0,0,0,0 //CR_AUTOGUARD#Bloqueio #
+4044,250,5,249,5,0,0,0,0,0,0,0,0 //CR_SHIELDCHARGE#Punição Divina #
+4044,251,5,250,3,0,0,0,0,0,0,0,0 //CR_SHIELDBOOMERANG#Escudo Bumerangue #
+4044,252,10,251,3,0,0,0,0,0,0,0,0 //CR_REFLECTSHIELD#Escudo Refletor #
+4044,253,10,248,7,0,0,0,0,0,0,0,0 //CR_HOLYCROSS#Crux Divinum #
+4044,254,10,253,6,248,10,0,0,0,0,0,0 //CR_GRANDCROSS#Crux Magnun #
+4044,255,5,252,5,254,4,0,0,0,0,0,0 //CR_DEVOTION#Redenção #
+4044,256,5,22,5,28,5,0,0,0,0,0,0 //CR_PROVIDENCE#Divina Providência #
+4044,257,5,251,1,0,0,0,0,0,0,0,0 //CR_DEFENDER#Aura Sagrada #
+4044,258,10,55,10,0,0,0,0,0,0,0,0 //CR_SPEARQUICKEN#Rapidez com Lança #
+4044,1002,1,0,0,0,0,0,0,0,0,0,0 //CR_SHRINK#Submissão #
+4044,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Super Baby
+4045,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4045,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4045,2,10,0,0,0,0,0,0,0,0,0,0 //SM_SWORD#Perícia com Espada #
+4045,4,10,0,0,0,0,0,0,0,0,0,0 //SM_RECOVERY#Aumentar Recuperação de HP #
+4045,5,10,0,0,0,0,0,0,0,0,0,0 //SM_BASH#Golpe Fulminante #
+4045,6,10,0,0,0,0,0,0,0,0,0,0 //SM_PROVOKE#Provocar #
+4045,7,10,5,5,0,0,0,0,0,0,0,0 //SM_MAGNUM#Impacto Explosivo #
+4045,8,10,6,5,0,0,0,0,0,0,0,0 //SM_ENDURE#Vigor #
+4045,9,10,0,0,0,0,0,0,0,0,0,0 //MG_SRECOVERY#Aumentar Recuperação de SP #
+4045,10,1,0,0,0,0,0,0,0,0,0,0 //MG_SIGHT#Chama Reveladora #
+4045,11,10,0,0,0,0,0,0,0,0,0,0 //MG_NAPALMBEAT#Ataque Espiritual #
+4045,12,10,11,7,13,5,0,0,0,0,0,0 //MG_SAFETYWALL#Escudo Mágico #
+4045,13,10,11,4,0,0,0,0,0,0,0,0 //MG_SOULSTRIKE#Espíritos Anciões #
+4045,14,10,0,0,0,0,0,0,0,0,0,0 //MG_COLDBOLT#Lanças de Gelo #
+4045,15,10,14,5,0,0,0,0,0,0,0,0 //MG_FROSTDIVER#Rajada Congelante #
+4045,16,10,0,0,0,0,0,0,0,0,0,0 //MG_STONECURSE#Petrificar #
+4045,17,10,19,4,0,0,0,0,0,0,0,0 //MG_FIREBALL#Bolas de Fogo #
+4045,18,10,17,5,10,1,0,0,0,0,0,0 //MG_FIREWALL#Barreira de Fogo #
+4045,19,10,0,0,0,0,0,0,0,0,0,0 //MG_FIREBOLT#Lanças de Fogo #
+4045,20,10,0,0,0,0,0,0,0,0,0,0 //MG_LIGHTNINGBOLT#Relâmpago #
+4045,21,10,20,4,0,0,0,0,0,0,0,0 //MG_THUNDERSTORM#Tempestade de Raios #
+4045,22,10,0,0,0,0,0,0,0,0,0,0 //AL_DP#Proteção Divina #
+4045,23,10,22,3,0,0,0,0,0,0,0,0 //AL_DEMONBANE#Flagelo do Mal #
+4045,24,1,0,0,0,0,0,0,0,0,0,0 //AL_RUWACH#Revelação #
+4045,25,1,27,4,0,0,0,0,0,0,0,0 //AL_PNEUMA#Escudo Sagrado #
+4045,26,2,24,1,0,0,0,0,0,0,0,0 //AL_TELEPORT#Teleporte #
+4045,27,4,26,2,0,0,0,0,0,0,0,0 //AL_WARP#Portal #
+4045,28,10,0,0,0,0,0,0,0,0,0,0 //AL_HEAL#Curar #
+4045,29,10,28,3,0,0,0,0,0,0,0,0 //AL_INCAGI#Aumentar Agilidade #
+4045,30,10,29,1,0,0,0,0,0,0,0,0 //AL_DECAGI#Diminuir Agilidade #
+4045,31,1,0,0,0,0,0,0,0,0,0,0 //AL_HOLYWATER#Aqua Benedicta #
+4045,32,10,23,3,0,0,0,0,0,0,0,0 //AL_CRUCIS#Signum Crusis #
+4045,33,10,22,3,0,0,0,0,0,0,0,0 //AL_ANGELUS#Angelus #
+4045,34,10,22,5,0,0,0,0,0,0,0,0 //AL_BLESSING#Bênção #
+4045,35,1,0,0,0,0,0,0,0,0,0,0 //AL_CURE#Medicar #
+4045,36,10,0,0,0,0,0,0,0,0,0,0 //MC_INCCARRY#Aumentar Capacidade de Carga #
+4045,37,10,36,3,0,0,0,0,0,0,0,0 //MC_DISCOUNT#Desconto #
+4045,38,10,37,3,0,0,0,0,0,0,0,0 //MC_OVERCHARGE#Superfaturar #
+4045,39,10,36,5,0,0,0,0,0,0,0,0 //MC_PUSHCART#Usar Carrinho #
+4045,40,1,0,0,0,0,0,0,0,0,0,0 //MC_IDENTIFY#Identificar Item #
+4045,41,10,39,3,0,0,0,0,0,0,0,0 //MC_VENDING#Comércio #
+4045,42,10,0,0,0,0,0,0,0,0,0,0 //MC_MAMMONITE#Mammonita #
+4045,43,10,0,0,0,0,0,0,0,0,0,0 //AC_OWL#Precisão #
+4045,44,10,43,3,0,0,0,0,0,0,0,0 //AC_VULTURE#Olhos de Águia #
+4045,45,10,44,1,0,0,0,0,0,0,0,0 //AC_CONCENTRATION#Concentração #
+4045,48,10,0,0,0,0,0,0,0,0,0,0 //TF_DOUBLE#Ataque Duplo #
+4045,49,10,0,0,0,0,0,0,0,0,0,0 //TF_MISS#Perícia em Esquiva #
+4045,50,10,0,0,0,0,0,0,0,0,0,0 //TF_STEAL#Furto #
+4045,51,10,50,5,0,0,0,0,0,0,0,0 //TF_HIDING#Esconderijo #
+4045,52,10,0,0,0,0,0,0,0,0,0,0 //TF_POISON#Envenenar #
+4045,53,1,52,3,0,0,0,0,0,0,0,0 //TF_DETOXIFY#Desintoxicar #
+4045,408,1,0,0,0,0,0,0,0,0,0,0 //WE_BABY#Mãe e Pai amo vocês! #
+4045,409,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLPARENT#Mãe e Pai cadê vocês? #
+4045,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+4045,2535,1,41,1,0,0,0,0,0,0,0,0 //ALL_BUYING_STORE#Open Buying Store#
+//Taekwon
+4046,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4046,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4046,411,10,0,0,0,0,0,0,0,0,0,0 //TK_RUN#Corrida #
+4046,412,1,413,1,0,0,0,0,0,0,0,0 //TK_READYSTORM#Postura do Tornado #
+4046,413,7,0,0,0,0,0,0,0,0,0,0 //TK_STORMKICK#Chute do Tornado #
+4046,414,1,415,1,0,0,0,0,0,0,0,0 //TK_READYDOWN#Postura da Patada Voadora #
+4046,415,7,0,0,0,0,0,0,0,0,0,0 //TK_DOWNKICK#Patada Voadora #
+4046,416,1,417,1,0,0,0,0,0,0,0,0 //TK_READYTURN#Postura da Rasteira #
+4046,417,7,0,0,0,0,0,0,0,0,0,0 //TK_TURNKICK#Rasteira #
+4046,418,1,419,1,0,0,0,0,0,0,0,0 //TK_READYCOUNTER#Postura do Contrachute #
+4046,419,7,0,0,0,0,0,0,0,0,0,0 //TK_COUNTER#Contrachute #
+4046,420,1,421,7,0,0,0,0,0,0,0,0 //TK_DODGE#Cambalhota #
+4046,421,7,0,0,0,0,0,0,0,0,0,0 //TK_JUMPKICK#Chute Aéreo #
+4046,422,10,0,0,0,0,0,0,0,0,0,0 //TK_HPTIME#Trégua Rápida #
+4046,423,10,0,0,0,0,0,0,0,0,0,0 //TK_SPTIME#Retiro Rápido #
+4046,424,5,0,0,0,0,0,0,0,0,0,0 //TK_POWER#Kihop #
+4046,425,7,422,5,423,5,424,5,0,0,0,0 //TK_SEVENWIND#Brisa Leve #
+4046,426,5,0,0,0,0,0,0,0,0,0,0 //TK_HIGHJUMP#Salto #
+4046,493,1,424,5,0,0,0,0,0,0,0,0 //TK_MISSION#Taekwon Mission #
+4046,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4046,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Star Gladiator
+4047,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4047,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4047,411,10,0,0,0,0,0,0,0,0,0,0 //TK_RUN#Corrida #
+4047,412,1,413,1,0,0,0,0,0,0,0,0 //TK_READYSTORM#Postura do Tornado #
+4047,413,7,0,0,0,0,0,0,0,0,0,0 //TK_STORMKICK#Chute do Tornado #
+4047,414,1,415,1,0,0,0,0,0,0,0,0 //TK_READYDOWN#Postura da Patada Voadora #
+4047,415,7,0,0,0,0,0,0,0,0,0,0 //TK_DOWNKICK#Patada Voadora #
+4047,416,1,417,1,0,0,0,0,0,0,0,0 //TK_READYTURN#Postura da Rasteira #
+4047,417,7,0,0,0,0,0,0,0,0,0,0 //TK_TURNKICK#Rasteira #
+4047,418,1,419,1,0,0,0,0,0,0,0,0 //TK_READYCOUNTER#Postura do Contrachute #
+4047,419,7,0,0,0,0,0,0,0,0,0,0 //TK_COUNTER#Contrachute #
+4047,420,1,421,7,0,0,0,0,0,0,0,0 //TK_DODGE#Cambalhota #
+4047,421,7,0,0,0,0,0,0,0,0,0,0 //TK_JUMPKICK#Chute Aéreo #
+4047,422,10,0,0,0,0,0,0,0,0,0,0 //TK_HPTIME#Trégua Rápida #
+4047,423,10,0,0,0,0,0,0,0,0,0,0 //TK_SPTIME#Retiro Rápido #
+4047,424,5,0,0,0,0,0,0,0,0,0,0 //TK_POWER#Kihop #
+4047,425,7,422,5,423,5,424,5,0,0,0,0 //TK_SEVENWIND#Brisa Leve #
+4047,426,5,0,0,0,0,0,0,0,0,0,0 //TK_HIGHJUMP#Salto #
+4047,493,1,424,5,0,0,0,0,0,0,0,0 //TK_MISSION#Taekwon Mission #
+4047,427,3,0,0,0,0,0,0,0,0,0,0 //SG_FEEL#Percepção\Solar e Lunar e Estelar #
+4047,428,3,427,1,0,0,0,0,0,0,0,0 //SG_SUN_WARM#Calor Solar #
+4047,429,3,427,2,0,0,0,0,0,0,0,0 //SG_MOON_WARM#Calor Luna #
+4047,430,3,427,3,0,0,0,0,0,0,0,0 //SG_STAR_WARM#Calor Estelar #
+4047,431,4,427,1,0,0,0,0,0,0,0,0 //SG_SUN_COMFORT#Proteção Solar #
+4047,432,4,427,2,0,0,0,0,0,0,0,0 //SG_MOON_COMFORT#Proteção Lunar #
+4047,433,4,427,3,0,0,0,0,0,0,0,0 //SG_STAR_COMFORT#Proteção Estelar #
+4047,434,3,0,0,0,0,0,0,0,0,0,0 //SG_HATE#Oposição Solar\ Lunar e Estelar #
+4047,435,3,434,1,0,0,0,0,0,0,0,0 //SG_SUN_ANGER#Fúria Solar #
+4047,436,3,434,2,0,0,0,0,0,0,0,0 //SG_MOON_ANGER#Fúria Lunar #
+4047,437,3,434,3,0,0,0,0,0,0,0,0 //SG_STAR_ANGER#Fúria Estelar #
+4047,438,5,427,1,434,1,0,0,0,0,0,0 //SG_SUN_BLESS#Bênção Solar #
+4047,439,5,427,2,434,2,0,0,0,0,0,0 //SG_MOON_BLESS#Bênção Lunar #
+4047,440,5,427,3,434,3,0,0,0,0,0,0 //SG_STAR_BLESS#Bênção Estelar #
+4047,441,10,0,0,0,0,0,0,0,0,0,0 //SG_DEVIL#Sombra Solar\ Lunar e Estelar #
+4047,442,3,0,0,0,0,0,0,0,0,0,0 //SG_FRIEND#Auxílio Solar\ Lunar e Estelar #
+4047,443,10,0,0,0,0,0,0,0,0,0,0 //SG_KNOWLEDGE#Transmissão Solar\ Lunar e Estelar #
+4047,444,1,443,9,0,0,0,0,0,0,0,0 #União Solar\ Lunar e Estelar
+//SG_FUSION#Union of the Sun, Moon and Stars#
+4047,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4047,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Star Gladiator (Flying)
+4048,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4048,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4048,411,10,0,0,0,0,0,0,0,0,0,0 //TK_RUN#Corrida #
+4048,412,1,413,1,0,0,0,0,0,0,0,0 //TK_READYSTORM#Postura do Tornado #
+4048,413,7,0,0,0,0,0,0,0,0,0,0 //TK_STORMKICK#Chute do Tornado #
+4048,414,1,415,1,0,0,0,0,0,0,0,0 //TK_READYDOWN#Postura da Patada Voadora #
+4048,415,7,0,0,0,0,0,0,0,0,0,0 //TK_DOWNKICK#Patada Voadora #
+4048,416,1,417,1,0,0,0,0,0,0,0,0 //TK_READYTURN#Postura da Rasteira #
+4048,417,7,0,0,0,0,0,0,0,0,0,0 //TK_TURNKICK#Rasteira #
+4048,418,1,419,1,0,0,0,0,0,0,0,0 //TK_READYCOUNTER#Postura do Contrachute #
+4048,419,7,0,0,0,0,0,0,0,0,0,0 //TK_COUNTER#Contrachute #
+4048,420,1,421,7,0,0,0,0,0,0,0,0 //TK_DODGE#Cambalhota #
+4048,421,7,0,0,0,0,0,0,0,0,0,0 //TK_JUMPKICK#Chute Aéreo #
+4048,422,10,0,0,0,0,0,0,0,0,0,0 //TK_HPTIME#Trégua Rápida #
+4048,423,10,0,0,0,0,0,0,0,0,0,0 //TK_SPTIME#Retiro Rápido #
+4048,424,5,0,0,0,0,0,0,0,0,0,0 //TK_POWER#Kihop #
+4048,425,7,422,5,423,5,424,5,0,0,0,0 //TK_SEVENWIND#Brisa Leve #
+4048,426,5,0,0,0,0,0,0,0,0,0,0 //TK_HIGHJUMP#Salto #
+4048,493,1,424,5,0,0,0,0,0,0,0,0 //TK_MISSION#Taekwon Mission #
+4048,427,3,0,0,0,0,0,0,0,0,0,0 //SG_FEEL#Percepção\Solar e Lunar e Estelar #
+4048,428,3,427,1,0,0,0,0,0,0,0,0 //SG_SUN_WARM#Calor Solar #
+4048,429,3,427,2,0,0,0,0,0,0,0,0 //SG_MOON_WARM#Calor Luna #
+4048,430,3,427,3,0,0,0,0,0,0,0,0 //SG_STAR_WARM#Calor Estelar #
+4048,431,4,427,1,0,0,0,0,0,0,0,0 //SG_SUN_COMFORT#Proteção Solar #
+4048,432,4,427,2,0,0,0,0,0,0,0,0 //SG_MOON_COMFORT#Proteção Lunar #
+4048,433,4,427,3,0,0,0,0,0,0,0,0 //SG_STAR_COMFORT#Proteção Estelar #
+4048,434,3,0,0,0,0,0,0,0,0,0,0 //SG_HATE#Oposição Solar\ Lunar e Estelar #
+4048,435,3,434,1,0,0,0,0,0,0,0,0 //SG_SUN_ANGER#Fúria Solar #
+4048,436,3,434,2,0,0,0,0,0,0,0,0 //SG_MOON_ANGER#Fúria Lunar #
+4048,437,3,434,3,0,0,0,0,0,0,0,0 //SG_STAR_ANGER#Fúria Estelar #
+4048,438,5,427,1,434,1,0,0,0,0,0,0 //SG_SUN_BLESS#Bênção Solar #
+4048,439,5,427,2,434,2,0,0,0,0,0,0 //SG_MOON_BLESS#Bênção Lunar #
+4048,440,5,427,3,434,3,0,0,0,0,0,0 //SG_STAR_BLESS#Bênção Estelar #
+4048,441,10,0,0,0,0,0,0,0,0,0,0 //SG_DEVIL#Sombra Solar\ Lunar e Estelar #
+4048,442,3,0,0,0,0,0,0,0,0,0,0 //SG_FRIEND#Auxílio Solar\ Lunar e Estelar #
+4048,443,10,0,0,0,0,0,0,0,0,0,0 //SG_KNOWLEDGE#Transmissão Solar\ Lunar e Estelar #
+4048,444,1,443,9,0,0,0,0,0,0,0,0 #União Solar\ Lunar e Estelar
+//SG_FUSION#Union of the Sun, Moon and Stars#
+4048,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4048,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #
+//Soul Linker
+4049,1,9,0,0,0,0,0,0,0,0,0,0 //NV_BASIC#Habilidades Básicas #
+4049,142,1,0,0,0,0,0,0,0,0,0,0 //NV_FIRSTAID#Primeiros Socorros #
+4049,411,10,0,0,0,0,0,0,0,0,0,0 //TK_RUN#Corrida #
+4049,412,1,413,1,0,0,0,0,0,0,0,0 //TK_READYSTORM#Postura do Tornado #
+4049,413,7,0,0,0,0,0,0,0,0,0,0 //TK_STORMKICK#Chute do Tornado #
+4049,414,1,415,1,0,0,0,0,0,0,0,0 //TK_READYDOWN#Postura da Patada Voadora #
+4049,415,7,0,0,0,0,0,0,0,0,0,0 //TK_DOWNKICK#Patada Voadora #
+4049,416,1,417,1,0,0,0,0,0,0,0,0 //TK_READYTURN#Postura da Rasteira #
+4049,417,7,0,0,0,0,0,0,0,0,0,0 //TK_TURNKICK#Rasteira #
+4049,418,1,419,1,0,0,0,0,0,0,0,0 //TK_READYCOUNTER#Postura do Contrachute #
+4049,419,7,0,0,0,0,0,0,0,0,0,0 //TK_COUNTER#Contrachute #
+4049,420,1,421,7,0,0,0,0,0,0,0,0 //TK_DODGE#Cambalhota #
+4049,421,7,0,0,0,0,0,0,0,0,0,0 //TK_JUMPKICK#Chute Aéreo #
+4049,422,10,0,0,0,0,0,0,0,0,0,0 //TK_HPTIME#Trégua Rápida #
+4049,423,10,0,0,0,0,0,0,0,0,0,0 //TK_SPTIME#Retiro Rápido #
+4049,424,5,0,0,0,0,0,0,0,0,0,0 //TK_POWER#Kihop #
+4049,425,7,422,5,423,5,424,5,0,0,0,0 //TK_SEVENWIND#Brisa Leve #
+4049,426,5,0,0,0,0,0,0,0,0,0,0 //TK_HIGHJUMP#Salto #
+4049,493,1,424,5,0,0,0,0,0,0,0,0 //TK_MISSION#Taekwon Mission #
+4049,445,5,0,0,0,0,0,0,0,0,0,0 //SL_ALCHEMIST#Espírito do Alquimista #
+4049,447,5,0,0,0,0,0,0,0,0,0,0 //SL_MONK#Espírito do Monge #
+4049,448,5,0,0,0,0,0,0,0,0,0,0 //SL_STAR#Espírito do Mestre Taekwon #
+4049,449,5,0,0,0,0,0,0,0,0,0,0 //SL_SAGE#Espírito do Sábio #
+4049,450,5,0,0,0,0,0,0,0,0,0,0 //SL_CRUSADER#Espírito do Templário #
+4049,451,5,0,0,0,0,0,0,0,0,0,0 //SL_SUPERNOVICE#Espírito do Superaprendiz #
+4049,452,5,450,1,0,0,0,0,0,0,0,0 //SL_KNIGHT#Espírito do Cavaleiro #
+4049,453,5,449,1,0,0,0,0,0,0,0,0 //SL_WIZARD#Espírito do Bruxo #
+4049,454,5,447,1,0,0,0,0,0,0,0,0 //SL_PRIEST#Espírito do Sacerdote #
+4049,455,5,0,0,0,0,0,0,0,0,0,0 //SL_BARDDANCER#Espírito do Artista #
+4049,456,5,457,1,0,0,0,0,0,0,0,0 //SL_ROGUE#Espírito do Arruaceiro #
+4049,457,5,0,0,0,0,0,0,0,0,0,0 //SL_ASSASIN#Espírito do Mercenário #
+4049,458,5,445,1,0,0,0,0,0,0,0,0 //SL_BLACKSMITH#Adrenalina Concentrada #
+4049,460,5,455,1,0,0,0,0,0,0,0,0 //SL_HUNTER#Espírito do Caçador #
+4049,461,5,448,1,0,0,0,0,0,0,0,0 //SL_SOULLINKER#Espírito do Espiritualista #
+4049,462,7,454,1,0,0,0,0,0,0,0,0 //SL_KAIZEL#Kaizel #
+4049,463,7,454,1,450,1,0,0,0,0,0,0 //SL_KAAHI#Kaahi #
+4049,464,3,456,1,0,0,0,0,0,0,0,0 //SL_KAUPE#Kaupe #
+4049,465,7,453,1,0,0,0,0,0,0,0,0 //SL_KAITE#Kaite #
+4049,466,7,423,1,0,0,0,0,0,0,0,0 //SL_KAINA#Kaina #
+4049,467,7,453,1,0,0,0,0,0,0,0,0 //SL_STIN#Estin #
+4049,468,7,453,1,0,0,0,0,0,0,0,0 //SL_STUN#Estun #
+4049,469,10,467,7,468,7,0,0,0,0,0,0 //SL_SMA#Esma #
+4049,470,7,454,1,0,0,0,0,0,0,0,0 //SL_SWOO#Eswoo #
+4049,471,3,452,1,0,0,0,0,0,0,0,0 //SL_SKE#Eske #
+4049,472,3,447,1,0,0,0,0,0,0,0,0 //SL_SKA#Eska #
+4049,494,5,451,1,0,0,0,0,0,0,0,0 //SL_HIGH#Espírito dos Transcendentais #
+4049,410,1,0,0,0,0,0,0,0,0,0,0 //WE_CALLBABY#Vem cá filhote! #
+4049,681,1,0,0,0,0,0,0,0,0,0,0 //ALL_INCCARRY#Increase Weight Limit R #

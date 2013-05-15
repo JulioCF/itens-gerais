@@ -1,0 +1,853 @@
+//=  __  __ _    _                  _   ___    _ _ _
+//= |  \/  (_)__| |__ _ __ _ _ _ __| | | __|__| (_) |_ ___ _ _
+//= | |\/| | / _` / _` / _` | '_/ _` | | _|/ _` | |  _/ _ \ '_|
+//= |_|  |_|_\__,_\__, \__,_|_| \__,_| |___\__,_|_|\__\___/_|
+//=               |___/
+//= http://
+//===== Por: =================================================
+//= Programação: Mortify (raul_raniery@hotmail.com)
+//=
+//===== Script ===============================================
+//= Curandeira
+//===== Versão Atual: ========================================
+//= 1.0
+//===== Criado Por: ==========================================
+//= Mortify
+//===== Emuladores: ==========================================
+//= Cronus
+//===== Comentários ==========================================
+//= Curandeira que responde a chamados,
+//= Totalmente configurada in Game!
+//============================================================
+
+prontera,156,184,4	script	curandeira::curandeira	936,2,2,{
+
+   If (GetGmLevel()>90){
+      Cutin "ra_bishop",2;
+      Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+      Show "Olá ^D57352"+StrCharInfo(0)+"^000000,";
+      Show "Usar o NPC como:";
+      Next;
+      Switch (select("^D57352Player.^000000","^FF0000Administrador.^000000")){
+         Case 1: GoTo OnTouch;
+         Case 2: GoTo M_Admin;
+      }
+   }
+
+OnTouch:
+   If (ConfiguraBuffs == 1){ Goto Curinha; }
+   Emotion 51;
+
+   sc_end SC_STONE;
+   sc_end SC_FREEZE;
+   sc_end SC_STUN;
+   sc_end SC_SLEEP;
+   sc_end SC_POISON;
+   sc_end SC_CURSE;
+   sc_end SC_SILENCE;
+   sc_end SC_CONFUSION;
+   sc_end SC_BLIND;
+   sc_end SC_BLEEDING;
+   sc_end SC_DPOISON;
+   sc_end SC_PROVOKE;
+   sc_end SC_AETERNA;
+   sc_end SC_HALLUCINATION;
+   sc_end SC_SLOWDOWN;
+
+   GoTo B_Cura;
+
+//== Dar Buffs =============================================================================
+
+B_Cura: If ($MCCura != 0){ If ((($MCCura == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCCura == 1) || (($MCCuraWoE == 1) && (AgitCheck()==1))){ GoTo B_Bencao; } PercentHeal 100,100; }
+B_Bencao: If ($MCBencao != 0){ If ((($MCBencao == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCBencao == 1) || (($MCBencaoWoE == 1) && (AgitCheck()==1))){ GoTo B_Agilidade; } Sc_Start 30,300000,10; }
+B_Agilidade: If ($MCAgilidade != 0){ If ((($MCAgilidade == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCAgilidade == 1) || (($MCAgilidadeWoE == 1) && (AgitCheck()==1))){ GoTo B_Vigor; } Sc_Start 32,300000,10; }
+B_Vigor: If ($MCVigor != 0){ If ((($MCVigor == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCVigor == 1) || (($MCVigorWoE == 1) && (AgitCheck()==1))){ GoTo B_RCDM; } sc_start 21,300000,10; }
+B_RCDM: If ($MCRCDM != 0){ If ((($MCRCDM == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCRCDM == 1) || (($MCRCDMWoE == 1) && (AgitCheck()==1))){ GoTo B_Concentracao; } sc_start 22,300000,10; } //Rapidez com Duas Mãos
+B_Concentracao: If ($MCConcentracao != 0){ If ((($MCConcentracao == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCConcentracao == 1) || (($MCConcentracaoWoE == 1) && (AgitCheck()==1))){ GoTo B_Angelus; } sc_start 23,240000,10; }
+B_Angelus: If ($MCAngelus != 0){ If ((($MCAngelus == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCAngelus == 1) || (($MCAngelusWoE == 1) && (AgitCheck()==1))){ GoTo B_Impositio; } sc_start 29,300000,10; }
+B_Impositio: If ($MCImpositio != 0){ If ((($MCImpositio == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCImpositio == 1) || (($MCImpositioWoE == 1) && (AgitCheck()==1))){ GoTo B_Kyrie; } sc_start 35,300000,10; } //Impositio Manus
+B_Kyrie: If ($MCKyrie != 0){ If ((($MCKyrie == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCKyrie == 1) || (($MCKyrieWoE == 1) && (AgitCheck()==1))){ GoTo B_Magnificat; } sc_start 39,300000,10; } //Kyrie Eleison
+B_Magnificat: If ($MCMagnificat != 0){ If ((($MCMagnificat == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCMagnificat == 1) || (($MCMagnificatWoE == 1) && (AgitCheck()==1))){ GoTo B_Gloria; } sc_start 40,300000,10; }
+B_Gloria: If ($MCGloria != 0){ If ((($MCGloria == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCGloria == 1) || (($MCGloriaWoE == 1) && (AgitCheck()==1))){ GoTo B_Adrenalina; } sc_start 41,300000,10; }
+B_Adrenalina: If ($MCAdrenalina != 0){ If ((($MCAdrenalina == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCAdrenalina == 1) || (($MCAdrenalinaWoE == 1) && (AgitCheck()==1))){ GoTo B_Manejo; } sc_start 43,300000,10; } //Adrenalina Pura
+B_Manejo: If ($MCManejo != 0){ If ((($MCManejo == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCManejo == 1) || (($MCManejoWoE == 1) && (AgitCheck()==1))){ GoTo B_Forca; } sc_start 44,300000,10; } //Manejo Perfeito
+B_Forca: If ($MCForca != 0){ If ((($MCForca == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCForca == 1) || (($MCForcaWoE == 1) && (AgitCheck()==1))){ GoTo B_Amplificar; } sc_start 45,300000,10; } //Força Violenta
+B_Amplificar: If ($MCAmplificar != 0){ If ((($MCAmplificar == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCAmplificar == 1) || (($MCAmplificarWoE == 1) && (AgitCheck()==1))){ GoTo B_Grito; } sc_start 46,300000,10; } //Amplificar Poder
+B_Grito: If ($MCGrito != 0){ If ((($MCGrito == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCGrito == 1) || (($MCGritoWoE == 1) && (AgitCheck()==1))){ GoTo B_Protecao; } sc_start 48,300000,10; } //Grito de Guerra
+B_Protecao: If ($MCProtecao != 0){ If ((($MCProtecao == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCProtecao == 1) || (($MCProtecaoWoE == 1) && (AgitCheck()==1))){ GoTo B_Bloqueio; } sc_start 49,300000,10; } //Proteção Arcana
+B_Bloqueio: If ($MCBloqueio != 0){ If ((($MCBloqueio == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCBloqueio == 1) || (($MCBloqueioWoE == 1) && (AgitCheck()==1))){ GoTo B_Escudo; } sc_start 76,300000,10; }
+B_Escudo: If ($MCEscudo != 0){ If ((($MCEscudo == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCEscudo == 1) || (($MCEscudoWoE == 1) && (AgitCheck()==1))){ GoTo B_Desejo; } sc_start 77,300000,10; } //Escudo Refletor
+B_Desejo: If ($MCDesejo != 0){ If ((($MCDesejo == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCDesejo == 1) || (($MCDesejoWoE == 1) && (AgitCheck()==1))){ GoTo B_Rapidez; } sc_start 83,300000,10; } //Desejo Arcano
+B_Rapidez: If ($MCRapidez != 0){ If ((($MCRapidez == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCRapidez == 1) || (($MCRapidezWoE == 1) && (AgitCheck()==1))){ GoTo B_Lamina; } sc_start 86,300000,10; } //Rapidez com Lança
+B_Lamina: If ($MCLamina != 0){ If ((($MCLamina == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCLamina == 1) || (($MCLaminaWoE == 1) && (AgitCheck()==1))){ GoTo B_Aparar; } sc_start 108,300000,10; } //Lâmina de Aura
+B_Aparar: If ($MCAparar != 0){ If ((($MCAparar == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCAparar == 1) || (($MCApararWoE == 1) && (AgitCheck()==1))){ GoTo B_Dedicacao; } sc_start 109,300000,10; } //Aparar Golpe
+B_Dedicacao: If ($MCDedicacao != 0){ If ((($MCDedicacao == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCDedicacao == 1) || (($MCDedicacaoWoE == 1) && (AgitCheck()==1))){ GoTo B_Assumptio; } sc_start 110,300000,10; }
+B_Assumptio: If ($MCAssumptio != 0){ If ((($MCAssumptio == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCAssumptio == 1) || (($MCAssumptioWoE == 1) && (AgitCheck()==1))){ GoTo B_Amplificacao; } sc_start 115,300000,10; }
+B_Amplificacao: If ($MCAmplificacao != 0){ If ((($MCAmplificacao == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCAmplificacao == 1) || (($MCAmplificacaoWoE == 1) && (AgitCheck()==1))){ GoTo B_Visao; } sc_start 118,300000,10; } //Amplificação Mística
+B_Visao: If ($MCVisao != 0){ If ((($MCVisao == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCVisao == 1) || (($MCVisaoWoE == 1) && (AgitCheck()==1))){ GoTo B_Caminho; } sc_start 120,300000,10; } //Visão Real
+B_Caminho: If ($MCCaminho != 0){ If ((($MCCaminho == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCCaminho == 1) || (($MCCaminhoWoE == 1) && (AgitCheck()==1))){ GoTo B_Golpe; } sc_start 121,300000,10; } //Caminho do Vento
+B_Golpe: If ($MCGolpe != 0){ If ((($MCGolpe == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCGolpe == 1) || (($MCGolpeWoE == 1) && (AgitCheck()==1))){ GoTo B_Impulso; } sc_start 122,300000,10; } //Golpe Estilhaçante
+B_Impulso: If ($MCImpulso != 0){ If ((($MCImpulso == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCImpulso == 1) || (($MCImpulsoWoE == 1) && (AgitCheck()==1))){ GoTo B_Instinto; } sc_start 123,300000,10; } //Impulso no Carrinho
+B_Instinto: If ($MCInstinto != 0){ If ((($MCInstinto == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCInstinto == 1) || (($MCInstintoWoE == 1) && (AgitCheck()==1))){ GoTo B_Presciencia; } sc_start 125,300000,10; } //Instinto de Defesa
+B_Presciencia: If ($MCPresciencia != 0){ If ((($MCPresciencia == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCPresciencia == 1) || (($MCPrescienciaWoE == 1) && (AgitCheck()==1))){ GoTo B_AdrenalinaC; } sc_start 131,300000,10; }
+B_AdrenalinaC: If ($MCAdrenalinaC != 0){ If ((($MCAdrenalinaC == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCAdrenalinaC == 1) || (($MCAdrenalinaCWoE == 1) && (AgitCheck()==1))){ GoTo B_RCUM; } sc_start 145,300000,10; } //Adrenalina Concentrada
+B_RCUM: If ($MCRCUM != 0){ If ((($MCRCUM == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCRCUM == 1) || (($MCRCUMWoE == 1) && (AgitCheck()==1))){ GoTo B_Preservar; } sc_start 150,300000,10; } //Rapidez com Uma Mão
+B_Preservar: If ($MCPreservar != 0){ If ((($MCPreservar == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCPreservar == 1) || (($MCPreservarWoE == 1) && (AgitCheck()==1))){ GoTo B_LancasD; } sc_start 151,300000,10; }
+B_LancasD: If ($MCLancasD != 0){ If ((($MCLancasD == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCLancasD == 1) || (($MCLancasDWoE == 1) && (AgitCheck()==1))){ GoTo B_ForcaV; } sc_start 154,300000,10; } //Lanças Duplas
+B_ForcaV: If ($MCForcaV != 0){ If ((($MCForcaV == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCForcaV == 1) || (($MCForcaVWoE == 1) && (AgitCheck()==1))){ GoTo B_Submissao; } sc_start 156,300000,10; } //Força Violentíssima
+B_Submissao: If ($MCSubmissao != 0){ If ((($MCSubmissao == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCSubmissao == 1) || (($MCSubmissaoWoE == 1) && (AgitCheck()==1))){ GoTo B_Refletir; } sc_start 159,300000,10; }
+//Novas
+B_Refletir: If ($MCRefletir != 0){ If ((($MCRefletir == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCRefletir == 1) || (($MCRefletirWoE == 1) && (AgitCheck()==1))){ GoTo B_RetardarV; } sc_start 27,300000,10; } //Refletir Veneno
+B_RetardarV: If ($MCRetardarV != 0){ If ((($MCRetardarV == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCRetardarV == 1) || (($MCRetardarVWoE == 1) && (AgitCheck()==1))){ GoTo B_PocaoASPD; } sc_start 34,300000,10; } //Retardar Veneno
+B_IncASPD: If ($MCIncASPD != 0){ If ((($MCIncASPD == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncASPD == 1) || (($MCIncASPDWoE == 1) && (AgitCheck()==1))){ GoTo B_IncAtk; } sc_start 58,300000,10; sc_start 219,300000,10; sc_start 244,300000,10; } //Almentar ASPD
+B_IncAtk: If ($MCIncAtk != 0){ If ((($MCIncAtk == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncAtk == 1) || (($MCIncAtkWoE == 1) && (AgitCheck()==1))){ GoTo B_IncAtkM; } sc_start 61,300000,10; sc_start 200,300000,10; sc_start 211,300000,10; sc_start 212,300000,10; sc_start 243,300000,10; sc_start 244,300000,10; sc_start 263,300000,10; } //Almentar Ataque
+B_IncAtkM: If ($MCIncAtkM != 0){ If ((($MCIncAtkM == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncAtkM == 1) || (($MCIncAtkMWoE == 1) && (AgitCheck()==1))){ GoTo B_RevestirArma; } sc_start 62,300000,10; sc_start 201,300000,10; sc_start 213,300000,10; } //Almentar Ataque Mágico
+B_RevestirArm: If ($MCRevestirArm != 0){ If ((($MCRevestirArm == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCRevestirArm == 1) || (($MCRevestirArmWoE == 1) && (AgitCheck()==1))){ GoTo B_RevestirEsc; } sc_start 72,300000,10; } //Revestir Arma
+B_RevestirEsc: If ($MCRevestirEsc != 0){ If ((($MCRevestirEsc == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCRevestirEsc == 1) || (($MCRevestirEscWoE == 1) && (AgitCheck()==1))){ GoTo B_RevestirRop; } sc_start 73,300000,10; } //Revestir Escudo
+B_RevestirRop: If ($MCRevestirRop != 0){ If ((($MCRevestirRop == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCRevestirRop == 1) || (($MCRevestirRopWoE == 1) && (AgitCheck()==1))){ GoTo B_RevestirCap; } sc_start 74,300000,10; } //Revestir Armadura
+B_RevestirCap: If ($MCRevestirCap != 0){ If ((($MCRevestirCap == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCRevestirCap == 1) || (($MCRevestirCapWoE == 1) && (AgitCheck()==1))){ GoTo B_Kaizel; } sc_start 75,300000,10; } //Revestir Capacete
+B_Kaizel: If ($MCKaizel != 0){ If ((($MCKaizel == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCKaizel == 1) || (($MCKaizelWoE == 1) && (AgitCheck()==1))){ GoTo B_IncAllStatus; } sc_start 147,300000,10; } //Ressucita o Player quando ele morre
+B_IncAllStatus: If ($MCIncAllStatus != 0){ If ((($MCIncAllStatus == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncAllStatus == 1) || (($MCIncAllStatusWoE == 1) && (AgitCheck()==1))){ GoTo B_IncHit; } sc_start 187,300000,10; sc_start 188,300000,10; sc_start 189,300000,10; sc_start 190,300000,10; sc_start 191,300000,10; sc_start 192,300000,10; sc_start 193,300000,10; sc_start 203,300000,10; sc_start 204,300000,10; sc_start 205,300000,10; sc_start 206,300000,10; sc_start 207,300000,10; sc_start 208,300000,10; sc_start 242,300000,10; } //Almentar todos os Atributos
+B_IncHit: If ($MCIncHit != 0){ If ((($MCIncHit == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncHit == 1) || (($MCIncHitWoE == 1) && (AgitCheck()==1))){ GoTo B_IncFlee; } sc_start 194,300000,10; sc_start 195,300000,10; sc_start 209,300000,10; }
+B_IncFlee: If ($MCIncFlee != 0){ If ((($MCIncFlee == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncFlee == 1) || (($MCIncFleeWoE == 1) && (AgitCheck()==1))){ GoTo B_IncHp; } sc_start 196,300000,10; sc_start 197,300000,10; sc_start 210,300000,10; sc_start 218,300000,10; sc_start 245,300000,10; sc_start 248,300000,10; }
+B_IncHp: If ($MCIncHp != 0){ If ((($MCIncHp == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncHp == 1) || (($MCIncHpWoE == 1) && (AgitCheck()==1))){ GoTo B_IncSp; } sc_start 198,300000,10; } //Almentar HP
+B_IncSp: If ($MCIncSp != 0){ If ((($MCIncSp == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncSp == 1) || (($MCIncSpWoE == 1) && (AgitCheck()==1))){ GoTo B_IncDef; } sc_start 199,300000,10; } //Almentar SP
+B_IncDef: If ($MCIncDef != 0){ If ((($MCIncDef == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncDef == 1) || (($MCIncDefWoE == 1) && (AgitCheck()==1))){ GoTo B_Eske; } sc_start 202,300000,10; sc_start 217,300000,10; sc_start 246,300000,10; sc_start 262,300000,10; } //Almentar Defesa
+B_Eske: If ($MCEske != 0){ If ((($MCEske == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCEske == 1) || (($MCEskeWoE == 1) && (AgitCheck()==1))){ GoTo B_Eska; } sc_start 222,300000,10; }
+B_Eska: If ($MCEska != 0){ If ((($MCEska == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCEska == 1) || (($MCEskaWoE == 1) && (AgitCheck()==1))){ GoTo B_ResistenciaF; } sc_start 225,300000,10; }
+B_ResistenciaF: If ($MCResistenciaF != 0){ If ((($MCResistenciaF == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCResistenciaF == 1) || (($MCResistenciaFWoE == 1) && (AgitCheck()==1))){ GoTo B_Panico; } sc_start 228,300000,10; } //Resistência Final
+B_Panico: If ($MCPanico != 0){ If ((($MCPanico == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCPanico == 1) || (($MCPanicoWoE == 1) && (AgitCheck()==1))){ GoTo B_AlmentarP; } sc_start 229,300000,10; } //Pânico do Justiceiro
+B_AlmentarP: If ($MCAlmentarP != 0){ If ((($MCAlmentarP == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCAlmentarP == 1) || (($MCAlmentarPWoE == 1) && (AgitCheck()==1))){ GoTo B_AuraN; } sc_start 230,300000,10; } //Aumentar Precisão
+B_AuraN: If ($MCAuraN != 0){ If ((($MCAuraN == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCAuraN == 1) || (($MCAuraNWoE == 1) && (AgitCheck()==1))){ GoTo B_IncEXP; } sc_start 237,300000,10; } //Aura Ninja
+B_IncEXP: If ($MCIncEXP != 0){ If ((($MCIncEXP == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncEXP == 1) || (($MCIncEXPWoE == 1) && (AgitCheck()==1))){ GoTo B_IncItem; } sc_start 257,300000,10; } //Almentar EXP em 1.5
+B_IncItem: If ($MCIncItem != 0){ If ((($MCIncItem == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncItem == 1) || (($MCIncItemWoE == 1) && (AgitCheck()==1))){ GoTo B_SeguroV; } sc_start 258,300000,10; } //Almentar Drop em 2
+B_SeguroV: If ($MCSeguroV != 0){ If ((($MCSeguroV == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCSeguroV == 1) || (($MCSeguroVWoE == 1) && (AgitCheck()==1))){ GoTo B_IncCri; } sc_start 260,300000,10; } //Seguro de Vida
+B_IncCri: If ($MCIncCri != 0){ If ((($MCIncCri == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncCri == 1) || (($MCIncCriWoE == 1) && (AgitCheck()==1))){ GoTo B_IncCast; } sc_start 261,300000,10; } //Almetar Crítico
+B_IncCast: If ($MCIncCast != 0){ If ((($MCIncCast == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCIncCast == 1) || (($MCIncCastWoE == 1) && (AgitCheck()==1))){ GoTo B_Cura2; } sc_start 264,300000,10; } //Diminuir tempo de conjuração
+B_Cura2: If ($MCCura != 0){ If ((($MCCura == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCCura == 1) || (($MCCuraWoE == 1) && (AgitCheck()==1))){ GoTo B_PocaoVento; } PercentHeal 100,100; }
+B_PocaoVento: If ($MCPocaoVento != 0){ If ((($MCPocaoVento == 1) && (GetGmLevel() < $MCLvlVIP)) || (MCPocaoVento == 1) || (($MCPocaoVentoWoE == 1) && (AgitCheck()==1))){ GoTo B_Fim; } sc_start 60,300000,10; } //Poção do Vento
+B_Fim:
+
+//Efeitos
+SpecialEffect2 215; SpecialEffect2 223; SpecialEffect2 238;
+
+   If (getgmlevel()<$MCLvlVIP){
+      Cutin "ra_bishop",2;
+      Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+      Show "Olá, ^853D85"+strcharinfo(0)+"^000000!";
+      Show "Adiquirindo VIP você terá alguns privilégios. Saiba como se tornar ^0000FFVIP^000000 no nosso site.";
+      Close2;
+      Cutin "",255;
+      End;
+   }
+
+Cutin "",255;
+Close;
+
+//== Menu de Administração =================================================================
+
+M_Admin:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "O que você deseja fazer?";
+   Next;
+   Menu "Pegar Buffs.",OnTouch,"Remover Buffs.",RemoverBuffs,"Configurar.",M_Admin1,"Nada.",Sair;
+   Close2;
+   Cutin "",255;
+   End;
+
+M_Admin1:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "O que você deseja Configurar?";
+   Set @CW_Menu, 1;
+   Next;
+   Menu "Chamados",CC_Config,"Level dos VIPs.",Config_VIP,"Quem receberá cada Buff.",CA_Config,"Buffs liberadas no horário de WoE.",CW_Config,"Nada.",Sair;
+   Close2;
+   Cutin "",255;
+   End;
+
+//== Configurar Buffs (ADM) ================================================================
+
+CA_Config:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Qual Buff você gostaria de editar?";
+   Next;
+   Switch (select("^0B7420Todas!^000000","^0000FFUma por uma!^000000")){
+      Case 1:
+         Set @CA_Menu, 3;
+         Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+         Show "Quem vai poderá receber ^333399Todos os Buffs^000000?";
+         Next;
+         Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){
+            Case 1: Set $MCCura, 2; Set $MCBencao, 2; Set $MCAgilidade, 2; Set $MCVigor, 2; Set $MCRCDM, 2; Set $MCConcentracao, 2; Set $MCAngelus, 2; Set $MCImpositio, 2; Set $MCKyrie, 2; Set $MCMagnificat, 2;
+                    Set $MCGloria, 2; Set $MCAdrenalina, 2; Set $MCManejo, 2; Set $MCForca, 2; Set $MCAmplificar, 2; Set $MCGrito, 2; Set $MCProtecao, 2; Set $MCBloqueio, 2; Set $MCEscudo, 2; Set $MCDesejo, 2;
+                    Set $MCRapidez, 2; Set $MCLamina, 2; Set $MCAparar, 2; Set $MCDedicacao, 2; Set $MCAssumptio, 2; Set $MCAmplificacao, 2; Set $MCVisao, 2; Set $MCCaminho, 2; Set $MCGolpe, 2; Set $MCImpulso, 2;
+                    Set $MCInstinto, 2; Set $MCPresciencia, 2; Set $MCAdrenalinaC, 2; Set $MCRCUM, 2; Set $MCPreservar, 2; Set $MCLancasD, 2; Set $MCForcaV, 2; Set $MCSubmissao, 2; Set $MCRefletir, 2; Set $MCRetardarV, 2;
+                    Set $MCIncASPD, 2; Set $MCPocaoVento, 2; Set $MCIncAtk, 2; Set $MCIncAtkM, 2; Set $MCRevestirArm, 2; Set $MCRevestirEsc, 2; Set $MCRevestirRop, 2; Set $MCRevestirCap, 2; Set $MCKaizel, 2; Set $MCIncAllStatus, 2;
+                    Set $MCIncHit, 2; Set $MCIncFlee, 2; Set $MCIncHp, 2; Set $MCIncSp, 2; Set $MCIncDef, 2; Set $MCEske, 2; Set $MCEska, 2; Set $MCResistenciaF, 2; Set $MCPanico, 2; Set $MCAlmentarP, 2;
+                    Set $MCAuraN, 2; Set $MCIncEXP, 2; Set $MCIncItem, 2; Set $MCSeguroV, 2; Set $MCIncCri, 2; Set $MCIncCast, 2;
+                    GoTo CA_Save;
+            Case 2: Set $MCCura, 1; Set $MCBencao, 1; Set $MCAgilidade, 1; Set $MCVigor, 1; Set $MCRCDM, 1; Set $MCConcentracao, 1; Set $MCAngelus, 1; Set $MCImpositio, 1; Set $MCKyrie, 1; Set $MCMagnificat, 1;
+                    Set $MCGloria, 1; Set $MCAdrenalina, 1; Set $MCManejo, 1; Set $MCForca, 1; Set $MCAmplificar, 1; Set $MCGrito, 1; Set $MCProtecao, 1; Set $MCBloqueio, 1; Set $MCEscudo, 1; Set $MCDesejo, 1;
+                    Set $MCRapidez, 1; Set $MCLamina, 1; Set $MCAparar, 1; Set $MCDedicacao, 1; Set $MCAssumptio, 1; Set $MCAmplificacao, 1; Set $MCVisao, 1; Set $MCCaminho, 1; Set $MCGolpe, 1; Set $MCImpulso, 1;
+                    Set $MCInstinto, 1; Set $MCPresciencia, 1; Set $MCAdrenalinaC, 1; Set $MCRCUM, 1; Set $MCPreservar, 1; Set $MCLancasD, 1; Set $MCForcaV, 1; Set $MCSubmissao, 1; Set $MCRefletir, 1; Set $MCRetardarV, 1;
+                    Set $MCIncASPD, 1; Set $MCPocaoVento, 1; Set $MCIncAtk, 1; Set $MCIncAtkM, 1; Set $MCRevestirArm, 1; Set $MCRevestirEsc, 1; Set $MCRevestirRop, 1; Set $MCRevestirCap, 1; Set $MCKaizel, 1; Set $MCIncAllStatus, 1;
+                    Set $MCIncHit, 1; Set $MCIncFlee, 1; Set $MCIncHp, 1; Set $MCIncSp, 1; Set $MCIncDef, 1; Set $MCEske, 1; Set $MCEska, 1; Set $MCResistenciaF, 1; Set $MCPanico, 1; Set $MCAlmentarP, 1;
+                    Set $MCAuraN, 1; Set $MCIncEXP, 1; Set $MCIncItem, 1; Set $MCSeguroV, 1; Set $MCIncCri, 1; Set $MCIncCast, 1;
+                    GoTo CA_Save;
+            Case 3: Set $MCCura, 0; Set $MCBencao, 0; Set $MCAgilidade, 0; Set $MCVigor, 0; Set $MCRCDM, 0; Set $MCConcentracao, 0; Set $MCAngelus, 0; Set $MCImpositio, 0; Set $MCKyrie, 0; Set $MCMagnificat, 0;
+                    Set $MCGloria, 0; Set $MCAdrenalina, 0; Set $MCManejo, 0; Set $MCForca, 0; Set $MCAmplificar, 0; Set $MCGrito, 0; Set $MCProtecao, 0; Set $MCBloqueio, 0; Set $MCEscudo, 0; Set $MCDesejo, 0;
+                    Set $MCRapidez, 0; Set $MCLamina, 0; Set $MCAparar, 0; Set $MCDedicacao, 0; Set $MCAssumptio, 0; Set $MCAmplificacao, 0; Set $MCVisao, 0; Set $MCCaminho, 0; Set $MCGolpe, 0; Set $MCImpulso, 0;
+                    Set $MCInstinto, 0; Set $MCPresciencia, 0; Set $MCAdrenalinaC, 0; Set $MCRCUM, 0; Set $MCPreservar, 0; Set $MCLancasD, 0; Set $MCForcaV, 0; Set $MCSubmissao, 0; Set $MCRefletir, 0; Set $MCRetardarV, 0;
+                    Set $MCIncASPD, 0; Set $MCPocaoVento, 0; Set $MCIncAtk, 0; Set $MCIncAtkM, 0; Set $MCRevestirArm, 0; Set $MCRevestirEsc, 0; Set $MCRevestirRop, 0; Set $MCRevestirCap, 0; Set $MCKaizel, 0; Set $MCIncAllStatus, 0;
+                    Set $MCIncHit, 0; Set $MCIncFlee, 0; Set $MCIncHp, 0; Set $MCIncSp, 0; Set $MCIncDef, 0; Set $MCEske, 0; Set $MCEska, 0; Set $MCResistenciaF, 0; Set $MCPanico, 0; Set $MCAlmentarP, 0;
+                    Set $MCAuraN, 0; Set $MCIncEXP, 0; Set $MCIncItem, 0; Set $MCSeguroV, 0; Set $MCIncCri, 0; Set $MCIncCast, 0;
+                    GoTo CA_Save;
+         }
+      Case 2:
+         Set @CA_Menu, 1;
+         GoTo CA_Menu;
+   }
+
+CA_Menu:
+   If ($MCCura == 0){ Set @MCBuffs$[0], "^FF0000Ninguém^000000"; }Else{ If ($MCCura == 1){ Set @MCBuffs$[0], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[0], "^0B7420Todos^000000"; } }
+   If ($MCBencao == 0){ Set @MCBuffs$[1], "^FF0000Ninguém^000000"; }Else{ If ($MCBencao == 1){ Set @MCBuffs$[1], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[1], "^0B7420Todos^000000"; } }
+   If ($MCAgilidade == 0){ Set @MCBuffs$[2], "^FF0000Ninguém^000000"; }Else{ If ($MCAgilidade == 1){ Set @MCBuffs$[2], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[2], "^0B7420Todos^000000"; } }
+   If ($MCVigor == 0){ Set @MCBuffs$[3], "^FF0000Ninguém^000000"; }Else{ If ($MCVigor == 1){ Set @MCBuffs$[3], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[3], "^0B7420Todos^000000"; } }
+   If ($MCRCDM == 0){ Set @MCBuffs$[4], "^FF0000Ninguém^000000"; }Else{ If ($MCRCDM == 1){ Set @MCBuffs$[4], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[4], "^0B7420Todos^000000"; } }
+   If ($MCConcentracao == 0){ Set @MCBuffs$[5], "^FF0000Ninguém^000000"; }Else{ If ($MCConcentracao == 1){ Set @MCBuffs$[5], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[5], "^0B7420Todos^000000"; } }
+   If ($MCAngelus == 0){ Set @MCBuffs$[6], "^FF0000Ninguém^000000"; }Else{ If ($MCAngelus == 1){ Set @MCBuffs$[6], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[6], "^0B7420Todos^000000"; } }
+   If ($MCImpositio == 0){ Set @MCBuffs$[7], "^FF0000Ninguém^000000"; }Else{ If ($MCImpositio == 1){ Set @MCBuffs$[7], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[7], "^0B7420Todos^000000"; } }
+   If ($MCKyrie == 0){ Set @MCBuffs$[8], "^FF0000Ninguém^000000"; }Else{ If ($MCKyrie == 1){ Set @MCBuffs$[8], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[8], "^0B7420Todos^000000"; } }
+   If ($MCMagnificat == 0){ Set @MCBuffs$[9], "^FF0000Ninguém^000000"; }Else{ If ($MCMagnificat == 1){ Set @MCBuffs$[9], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[9], "^0B7420Todos^000000"; } }
+   If ($MCGloria == 0){ Set @MCBuffs$[10], "^FF0000Ninguém^000000"; }Else{ If ($MCGloria == 1){ Set @MCBuffs$[10], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[10], "^0B7420Todos^000000"; } }
+   If ($MCAdrenalina == 0){ Set @MCBuffs$[11], "^FF0000Ninguém^000000"; }Else{ If ($MCAdrenalina == 1){ Set @MCBuffs$[11], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[11], "^0B7420Todos^000000"; } }
+   If ($MCManejo == 0){ Set @MCBuffs$[12], "^FF0000Ninguém^000000"; }Else{ If ($MCManejo == 1){ Set @MCBuffs$[12], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[12], "^0B7420Todos^000000"; } }
+   If ($MCForca == 0){ Set @MCBuffs$[13], "^FF0000Ninguém^000000"; }Else{ If ($MCForca == 1){ Set @MCBuffs$[13], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[13], "^0B7420Todos^000000"; } }
+   If ($MCAmplificar == 0){ Set @MCBuffs$[14], "^FF0000Ninguém^000000"; }Else{ If ($MCAmplificar == 1){ Set @MCBuffs$[14], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[14], "^0B7420Todos^000000"; } }
+   If ($MCGrito == 0){ Set @MCBuffs$[15], "^FF0000Ninguém^000000"; }Else{ If ($MCGrito == 1){ Set @MCBuffs$[15], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[15], "^0B7420Todos^000000"; } }
+   If ($MCProtecao == 0){ Set @MCBuffs$[16], "^FF0000Ninguém^000000"; }Else{ If ($MCProtecao == 1){ Set @MCBuffs$[16], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[16], "^0B7420Todos^000000"; } }
+   If ($MCBloqueio == 0){ Set @MCBuffs$[17], "^FF0000Ninguém^000000"; }Else{ If ($MCBloqueio == 1){ Set @MCBuffs$[17], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[17], "^0B7420Todos^000000"; } }
+   If ($MCEscudo == 0){ Set @MCBuffs$[18], "^FF0000Ninguém^000000"; }Else{ If ($MCEscudo == 1){ Set @MCBuffs$[18], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[18], "^0B7420Todos^000000"; } }
+   If ($MCDesejo == 0){ Set @MCBuffs$[19], "^FF0000Ninguém^000000"; }Else{ If ($MCDesejo == 1){ Set @MCBuffs$[19], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[19], "^0B7420Todos^000000"; } }
+   If ($MCRapidez == 0){ Set @MCBuffs$[20], "^FF0000Ninguém^000000"; }Else{ If ($MCRapidez == 1){ Set @MCBuffs$[20], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[20], "^0B7420Todos^000000"; } }
+   If ($MCLamina == 0){ Set @MCBuffs$[21], "^FF0000Ninguém^000000"; }Else{ If ($MCLamina == 1){ Set @MCBuffs$[21], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[21], "^0B7420Todos^000000"; } }
+   If ($MCAparar == 0){ Set @MCBuffs$[22], "^FF0000Ninguém^000000"; }Else{ If ($MCAparar == 1){ Set @MCBuffs$[22], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[22], "^0B7420Todos^000000"; } }
+   If ($MCDedicacao == 0){ Set @MCBuffs$[23], "^FF0000Ninguém^000000"; }Else{ If ($MCDedicacao == 1){ Set @MCBuffs$[23], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[23], "^0B7420Todos^000000"; } }
+   If ($MCAssumptio == 0){ Set @MCBuffs$[24], "^FF0000Ninguém^000000"; }Else{ If ($MCAssumptio == 1){ Set @MCBuffs$[24], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[24], "^0B7420Todos^000000"; } }
+   If ($MCAmplificacao == 0){ Set @MCBuffs$[25], "^FF0000Ninguém^000000"; }Else{ If ($MCAmplificacao == 1){ Set @MCBuffs$[25], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[25], "^0B7420Todos^000000"; } }
+   If ($MCVisao == 0){ Set @MCBuffs$[26], "^FF0000Ninguém^000000"; }Else{ If ($MCVisao == 1){ Set @MCBuffs$[26], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[26], "^0B7420Todos^000000"; } }
+   If ($MCCaminho == 0){ Set @MCBuffs$[27], "^FF0000Ninguém^000000"; }Else{ If ($MCCaminho == 1){ Set @MCBuffs$[27], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[27], "^0B7420Todos^000000"; } }
+   If ($MCGolpe == 0){ Set @MCBuffs$[28], "^FF0000Ninguém^000000"; }Else{ If ($MCGolpe == 1){ Set @MCBuffs$[28], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[28], "^0B7420Todos^000000"; } }
+   If ($MCImpulso == 0){ Set @MCBuffs$[29], "^FF0000Ninguém^000000"; }Else{ If ($MCImpulso == 1){ Set @MCBuffs$[29], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[29], "^0B7420Todos^000000"; } }
+   If ($MCInstinto == 0){ Set @MCBuffs$[30], "^FF0000Ninguém^000000"; }Else{ If ($MCInstinto == 1){ Set @MCBuffs$[30], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[30], "^0B7420Todos^000000"; } }
+   If ($MCPresciencia == 0){ Set @MCBuffs$[31], "^FF0000Ninguém^000000"; }Else{ If ($MCPresciencia == 1){ Set @MCBuffs$[31], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[31], "^0B7420Todos^000000"; } }
+   If ($MCAdrenalinaC == 0){ Set @MCBuffs$[32], "^FF0000Ninguém^000000"; }Else{ If ($MCAdrenalinaC == 1){ Set @MCBuffs$[32], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[32], "^0B7420Todos^000000"; } }
+   If ($MCRCUM == 0){ Set @MCBuffs$[33], "^FF0000Ninguém^000000"; }Else{ If ($MCRCUM == 1){ Set @MCBuffs$[33], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[33], "^0B7420Todos^000000"; } }
+   If ($MCPreservar == 0){ Set @MCBuffs$[34], "^FF0000Ninguém^000000"; }Else{ If ($MCPreservar == 1){ Set @MCBuffs$[34], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[34], "^0B7420Todos^000000"; } }
+   If ($MCLancasD == 0){ Set @MCBuffs$[35], "^FF0000Ninguém^000000"; }Else{ If ($MCLancasD == 1){ Set @MCBuffs$[35], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[35], "^0B7420Todos^000000"; } }
+   If ($MCForcaV == 0){ Set @MCBuffs$[36], "^FF0000Ninguém^000000"; }Else{ If ($MCForcaV == 1){ Set @MCBuffs$[36], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[36], "^0B7420Todos^000000"; } }
+   If ($MCSubmissao == 0){ Set @MCBuffs$[37], "^FF0000Ninguém^000000"; }Else{ If ($MCSubmissao == 1){ Set @MCBuffs$[37], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[37], "^0B7420Todos^000000"; } }
+//Novas
+   If ($MCRefletir == 0){ Set @MCBuffs$[38], "^FF0000Ninguém^000000"; }Else{ If ($MCRefletir == 1){ Set @MCBuffs$[38], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[38], "^0B7420Todos^000000"; } }
+   If ($MCRetardarV == 0){ Set @MCBuffs$[39], "^FF0000Ninguém^000000"; }Else{ If ($MCRetardarV == 1){ Set @MCBuffs$[39], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[39], "^0B7420Todos^000000"; } }
+   If ($MCIncASPD == 0){ Set @MCBuffs$[40], "^FF0000Ninguém^000000"; }Else{ If ($MCIncASPD == 1){ Set @MCBuffs$[40], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[40], "^0B7420Todos^000000"; } }
+   If ($MCPocaoVento == 0){ Set @MCBuffs$[41], "^FF0000Ninguém^000000"; }Else{ If ($MCPocaoVento == 1){ Set @MCBuffs$[41], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[41], "^0B7420Todos^000000"; } }
+   If ($MCIncAtk == 0){ Set @MCBuffs$[42], "^FF0000Ninguém^000000"; }Else{ If ($MCIncAtk == 1){ Set @MCBuffs$[42], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[42], "^0B7420Todos^000000"; } }
+   If ($MCIncAtkM == 0){ Set @MCBuffs$[43], "^FF0000Ninguém^000000"; }Else{ If ($MCIncAtkM == 1){ Set @MCBuffs$[43], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[43], "^0B7420Todos^000000"; } }
+   If ($MCRevestirArm == 0){ Set @MCBuffs$[44], "^FF0000Ninguém^000000"; }Else{ If ($MCRevestirArm == 1){ Set @MCBuffs$[44], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[44], "^0B7420Todos^000000"; } }
+   If ($MCRevestirEsc == 0){ Set @MCBuffs$[45], "^FF0000Ninguém^000000"; }Else{ If ($MCRevestirEsc == 1){ Set @MCBuffs$[45], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[45], "^0B7420Todos^000000"; } }
+   If ($MCRevestirRop == 0){ Set @MCBuffs$[46], "^FF0000Ninguém^000000"; }Else{ If ($MCRevestirRop == 1){ Set @MCBuffs$[46], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[46], "^0B7420Todos^000000"; } }
+   If ($MCRevestirCap == 0){ Set @MCBuffs$[47], "^FF0000Ninguém^000000"; }Else{ If ($MCRevestirCap == 1){ Set @MCBuffs$[47], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[47], "^0B7420Todos^000000"; } }
+   If ($MCKaizel == 0){ Set @MCBuffs$[48], "^FF0000Ninguém^000000"; }Else{ If ($MCKaizel == 1){ Set @MCBuffs$[48], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[48], "^0B7420Todos^000000"; } }
+   If ($MCIncAllStatus == 0){ Set @MCBuffs$[49], "^FF0000Ninguém^000000"; }Else{ If ($MCIncAllStatus == 1){ Set @MCBuffs$[49], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[49], "^0B7420Todos^000000"; } }
+   If ($MCIncHit == 0){ Set @MCBuffs$[50], "^FF0000Ninguém^000000"; }Else{ If ($MCIncHit == 1){ Set @MCBuffs$[50], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[50], "^0B7420Todos^000000"; } }
+   If ($MCIncFlee == 0){ Set @MCBuffs$[51], "^FF0000Ninguém^000000"; }Else{ If ($MCIncFlee == 1){ Set @MCBuffs$[51], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[51], "^0B7420Todos^000000"; } }
+   If ($MCIncHp == 0){ Set @MCBuffs$[52], "^FF0000Ninguém^000000"; }Else{ If ($MCIncHp == 1){ Set @MCBuffs$[52], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[52], "^0B7420Todos^000000"; } }
+   If ($MCIncSp == 0){ Set @MCBuffs$[53], "^FF0000Ninguém^000000"; }Else{ If ($MCIncSp == 1){ Set @MCBuffs$[53], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[53], "^0B7420Todos^000000"; } }
+   If ($MCIncDef == 0){ Set @MCBuffs$[54], "^FF0000Ninguém^000000"; }Else{ If ($MCIncDef == 1){ Set @MCBuffs$[54], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[54], "^0B7420Todos^000000"; } }
+   If ($MCEske == 0){ Set @MCBuffs$[55], "^FF0000Ninguém^000000"; }Else{ If ($MCEske == 1){ Set @MCBuffs$[55], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[55], "^0B7420Todos^000000"; } }
+   If ($MCEska == 0){ Set @MCBuffs$[56], "^FF0000Ninguém^000000"; }Else{ If ($MCEska == 1){ Set @MCBuffs$[56], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[56], "^0B7420Todos^000000"; } }
+   If ($MCResistenciaF == 0){ Set @MCBuffs$[57], "^FF0000Ninguém^000000"; }Else{ If ($MCResistenciaF == 1){ Set @MCBuffs$[57], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[57], "^0B7420Todos^000000"; } }
+   If ($MCPanico == 0){ Set @MCBuffs$[58], "^FF0000Ninguém^000000"; }Else{ If ($MCPanico == 1){ Set @MCBuffs$[58], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[58], "^0B7420Todos^000000"; } }
+   If ($MCAlmentarP == 0){ Set @MCBuffs$[59], "^FF0000Ninguém^000000"; }Else{ If ($MCAlmentarP == 1){ Set @MCBuffs$[59], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[59], "^0B7420Todos^000000"; } }
+   If ($MCAuraN == 0){ Set @MCBuffs$[60], "^FF0000Ninguém^000000"; }Else{ If ($MCAuraN == 1){ Set @MCBuffs$[60], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[60], "^0B7420Todos^000000"; } }
+   If ($MCIncEXP == 0){ Set @MCBuffs$[61], "^FF0000Ninguém^000000"; }Else{ If ($MCIncEXP == 1){ Set @MCBuffs$[61], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[61], "^0B7420Todos^000000"; } }
+   If ($MCIncItem == 0){ Set @MCBuffs$[62], "^FF0000Ninguém^000000"; }Else{ If ($MCIncItem == 1){ Set @MCBuffs$[62], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[62], "^0B7420Todos^000000"; } }
+   If ($MCSeguroV == 0){ Set @MCBuffs$[63], "^FF0000Ninguém^000000"; }Else{ If ($MCSeguroV == 1){ Set @MCBuffs$[63], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[63], "^0B7420Todos^000000"; } }
+   If ($MCIncCri == 0){ Set @MCBuffs$[64], "^FF0000Ninguém^000000"; }Else{ If ($MCIncCri == 1){ Set @MCBuffs$[64], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[64], "^0B7420Todos^000000"; } }
+   If ($MCIncCast == 0){ Set @MCBuffs$[65], "^FF0000Ninguém^000000"; }Else{ If ($MCIncCast == 1){ Set @MCBuffs$[65], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[65], "^0B7420Todos^000000"; } }
+   Next;
+   If (@CA_Menu == 1){ GoTo CA_Menu1; }Else{ GoTo CA_Menu2; }
+
+CA_Menu1:
+   Set @CA_Menu, 1;
+   Menu @MCBuffs$[0]+" - ^333399Cura^000000",CA_Cura,@MCBuffs$[1]+" - ^333399Benção^000000",CA_Bencao,@MCBuffs$[2]+" - ^333399Agilidade^000000",CA_Agilidade,@MCBuffs$[3]+" - ^333399Vigor^000000^000000",CA_Vigor,@MCBuffs$[4]+" - ^333399Rapidez com Duas Mãos^000000",CA_RCDM,@MCBuffs$[5]+" - ^333399Concentração^000000",CA_Concentracao,@MCBuffs$[6]+" - ^333399Angelus^000000",CA_Angelus,@MCBuffs$[7]+" - ^333399Impositio Manus^000000",CA_Impositio,@MCBuffs$[8]+" - ^333399Kyrie Eleison^000000",CA_Kyrie,@MCBuffs$[9]+" - ^333399Magnificat^000000",CA_Magnificat,
+        @MCBuffs$[10]+" - ^333399Gloria^000000",CA_Gloria,@MCBuffs$[11]+" - ^333399Adrenalina Pura,^000000",CA_Adrenalina,@MCBuffs$[12]+" - ^333399Manejo Perfeito^000000",CA_Manejo,@MCBuffs$[13]+" - ^333399Força Violenta^000000",CA_Forca,@MCBuffs$[14]+" - ^333399Amplificar Poder^000000",CA_Amplificar,@MCBuffs$[15]+" - ^333399Grito de Guerra^000000",CA_Grito,@MCBuffs$[16]+" - ^333399Proteção Arcana^000000",CA_Protecao,@MCBuffs$[17]+" - ^333399Bloqueio^000000",CA_Bloqueio,@MCBuffs$[18]+" - ^333399Escudo Refletor^000000",CA_Escudo,@MCBuffs$[19]+" - ^333399Desejo Arcano^000000",CA_Desejo,
+        @MCBuffs$[20]+" - ^333399Rapidez com Lança^000000",CA_Rapidez,@MCBuffs$[21]+" - ^333399Lâmina de Aura^000000",CA_Lamina,@MCBuffs$[22]+" - ^333399Aparar Golpe^000000",CA_Aparar,@MCBuffs$[23]+" - ^333399Dedicação^000000",CA_Dedicacao,@MCBuffs$[24]+" - ^333399Assumptio^000000",CA_Assumptio,@MCBuffs$[25]+" - ^333399Amplificação Mística^000000",CA_Amplificacao,@MCBuffs$[26]+" - ^333399Visão Real^000000",CA_Visao,@MCBuffs$[27]+" - ^333399Caminho do Vento^000000",CA_Caminho,@MCBuffs$[28]+" - ^333399Golpe Estilhaçante^000000",CA_Golpe,@MCBuffs$[29]+" - ^333399Impulso no Carrinho^000000",CA_Impulso,
+        @MCBuffs$[30]+" - ^333399Instinto de Defesa^000000",CA_Instinto,@MCBuffs$[31]+" - ^333399Presciência^000000",CA_Presciencia,@MCBuffs$[32]+" - ^333399Adrenalina Concentrada^000000",CA_AdrenalinaC,@MCBuffs$[33]+" - ^333399Rapidez com Uma Mão^000000",CA_RCUM,"Ver Mais Buffs.",CA_Menu2,"Nenhuma! Assim já esta bom.",Sair;
+
+CA_Menu2:
+   Set @CA_Menu, 2;
+   Menu @MCBuffs$[34]+" - ^333399Preservar^000000",CA_Preservar,@MCBuffs$[35]+" - ^333399Lanças Duplas^000000",CA_LancasD,@MCBuffs$[36]+" - ^333399Força Violentíssima^000000",CA_ForcaV,@MCBuffs$[37]+" - ^333399Submissão^000000",CA_Submissao,@MCBuffs$[38]+" - ^333399Refletir Veneno^000000",CA_Refletir,@MCBuffs$[39]+" - ^333399Retardar Veneno^000000",CA_RetardarV,@MCBuffs$[40]+" - ^333399Almentar ASPD^000000",CA_IncASPD,@MCBuffs$[41]+" - ^333399Super Agilidade^000000",CA_PocaoVento,@MCBuffs$[42]+" - ^333399Almentar Ataque^000000",CA_IncAtk,@MCBuffs$[43]+" - ^333399Almentar Ataque Mágico^000000",CA_IncAtkM,
+        @MCBuffs$[44]+" - ^333399Revestir Arma^000000",CA_RevestirArm,@MCBuffs$[45]+" - ^333399Revestir Escudo^000000",CA_RevestirEsc,@MCBuffs$[46]+" - ^333399Revestir Armadura^000000",CA_RevestirRop,@MCBuffs$[47]+" - ^333399Revestir Capacete^000000",CA_RevestirCap,@MCBuffs$[48]+" - ^333399Kaizel^000000",CA_Kaizel,@MCBuffs$[49]+" - ^333399Almentar todos os Atributos^000000",CA_IncAllStatus,@MCBuffs$[50]+" - ^333399Almentar Hit^000000",CA_IncHit,@MCBuffs$[51]+" - ^333399Almentar Esquiva^000000",CA_IncFlee,@MCBuffs$[52]+" - ^333399Almentar HP^000000",CA_IncHP,@MCBuffs$[53]+" - ^333399Almentar SP^000000",CA_IncSP,
+        @MCBuffs$[54]+" - ^333399Almentar Defesa^000000",CA_IncDef,@MCBuffs$[55]+" - ^333399Eske^000000",CA_Eske,@MCBuffs$[56]+" - ^333399Eska^000000",CA_Eska,@MCBuffs$[57]+" - ^333399Resistência Final^000000",CA_ResistenciaF,@MCBuffs$[58]+" - ^333399Pânico do Justiceiro^000000",CA_Panico,@MCBuffs$[59]+" - ^333399Aumentar Precisão^000000",CA_AlmentarP,@MCBuffs$[60]+" - ^333399Aura Ninja^000000",CA_AuraN,@MCBuffs$[61]+" - ^333399Almentar EXP em 1.5^000000",CA_IncEXP,@MCBuffs$[62]+" - ^333399Almentar Drop em 2x^000000",CA_IncItem,
+        @MCBuffs$[63]+" - ^333399Seguro de Vida^000000",CA_SeguroV,@MCBuffs$[64]+" - ^333399Almetar Crítico^000000",CA_IncCri,@MCBuffs$[65]+" - ^333399Diminuir tempo de conjuração^000000",CA_IncCast,"Ver Buffs Anteriores",CA_Menu1,"Nenhuma! Assim já esta bom.",Sair;
+
+CA_Cura: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Cura^000000?"; Show "Atualmente: "+@MCBuffs$[0]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCCura, 2; GoTo CA_Save; Case 2: Set $MCCura, 1; GoTo CA_Save; Case 3: Set $MCCura, 0; GoTo CA_Save; }
+CA_Bencao: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Benção^000000?"; Show "Atualmente: "+@MCBuffs$[1]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCBencao, 2; GoTo CA_Save; Case 2: Set $MCBencao, 1; GoTo CA_Save; Case 3: Set $MCBencao, 0; GoTo CA_Save; }
+CA_Agilidade: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Agilidade^000000?"; Show "Atualmente: "+@MCBuffs$[2]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCAgilidade, 2; GoTo CA_Save; Case 2: Set $MCAgilidade, 1; GoTo CA_Save; Case 3: Set $MCAgilidade, 0; GoTo CA_Save; }
+CA_Vigor: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Vigor^000000?"; Show "Atualmente: "+@MCBuffs$[3]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCVigor, 2; GoTo CA_Save; Case 2: Set $MCVigor, 1; GoTo CA_Save; Case 3: Set $MCVigor, 0; GoTo CA_Save; }
+CA_RCDM: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Rapidez com Duas Mãos^000000?"; Show "Atualmente: "+@MCBuffs$[4]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCRCDM, 2; GoTo CA_Save; Case 2: Set $MCRCDM, 1; GoTo CA_Save; Case 3: Set $MCRCDM, 0; GoTo CA_Save; }
+CA_Concentracao: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Concentração^000000?"; Show "Atualmente: "+@MCBuffs$[5]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCConcentracao, 2; GoTo CA_Save; Case 2: Set $MCConcentracao, 1; GoTo CA_Save; Case 3: Set $MCConcentracao, 0; GoTo CA_Save; }
+CA_Angelus: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Angelus^000000?"; Show "Atualmente: "+@MCBuffs$[6]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCAngelus, 2; GoTo CA_Save; Case 2: Set $MCAngelus, 1; GoTo CA_Save; Case 3: Set $MCAngelus, 0; GoTo CA_Save; }
+CA_Impositio: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Impositio Manus^000000?"; Show "Atualmente: "+@MCBuffs$[7]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCImpositio, 2; GoTo CA_Save; Case 2: Set $MCImpositio, 1; GoTo CA_Save; Case 3: Set $MCImpositio, 0; GoTo CA_Save; }
+CA_Kyrie: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Kyrie Eleison^000000?"; Show "Atualmente: "+@MCBuffs$[8]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCKyrie, 2; GoTo CA_Save; Case 2: Set $MCKyrie, 1; GoTo CA_Save; Case 3: Set $MCKyrie, 0; GoTo CA_Save; }
+CA_Magnificat: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Magnificat^000000?"; Show "Atualmente: "+@MCBuffs$[9]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCMagnificat, 2; GoTo CA_Save; Case 2: Set $MCMagnificat, 1; GoTo CA_Save; Case 3: Set $MCMagnificat, 0; GoTo CA_Save; }
+CA_Gloria: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Gloria^000000?"; Show "Atualmente: "+@MCBuffs$[10]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCGloria, 2; GoTo CA_Save; Case 2: Set $MCGloria, 1; GoTo CA_Save; Case 3: Set $MCGloria, 0; GoTo CA_Save; }
+CA_Adrenalina: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Adrenalina Pura^000000?"; Show "Atualmente: "+@MCBuffs$[11]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCAdrenalina, 2; GoTo CA_Save; Case 2: Set $MCAdrenalina, 1; GoTo CA_Save; Case 3: Set $MCAdrenalina, 0; GoTo CA_Save; }
+CA_Manejo: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Manejo Perfeito^000000?"; Show "Atualmente: "+@MCBuffs$[12]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCManejo, 2; GoTo CA_Save; Case 2: Set $MCManejo, 1; GoTo CA_Save; Case 3: Set $MCManejo, 0; GoTo CA_Save; }
+CA_Forca: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Força Violenta^000000?"; Show "Atualmente: "+@MCBuffs$[13]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCForca, 2; GoTo CA_Save; Case 2: Set $MCForca, 1; GoTo CA_Save; Case 3: Set $MCForca, 0; GoTo CA_Save; }
+CA_Amplificar: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Amplificar Poder^000000?"; Show "Atualmente: "+@MCBuffs$[14]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCAmplificar, 2; GoTo CA_Save; Case 2: Set $MCAmplificar, 1; GoTo CA_Save; Case 3: Set $MCAmplificar, 0; GoTo CA_Save; }
+CA_Grito: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Grito de Guerra^000000?"; Show "Atualmente: "+@MCBuffs$[15]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCGrito, 2; GoTo CA_Save; Case 2: Set $MCGrito, 1; GoTo CA_Save; Case 3: Set $MCGrito, 0; GoTo CA_Save; }
+CA_Protecao: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Proteção Arcana^000000?"; Show "Atualmente: "+@MCBuffs$[16]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCProtecao, 2; GoTo CA_Save; Case 2: Set $MCProtecao, 1; GoTo CA_Save; Case 3: Set $MCProtecao, 0; GoTo CA_Save; }
+CA_Bloqueio: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Bloqueio^000000?"; Show "Atualmente: "+@MCBuffs$[17]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCBloqueio, 2; GoTo CA_Save; Case 2: Set $MCBloqueio, 1; GoTo CA_Save; Case 3: Set $MCBloqueio, 0; GoTo CA_Save; }
+CA_Escudo: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Escudo Refletor^000000?"; Show "Atualmente: "+@MCBuffs$[18]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCEscudo, 2; GoTo CA_Save; Case 2: Set $MCEscudo, 1; GoTo CA_Save; Case 3: Set $MCEscudo, 0; GoTo CA_Save; }
+CA_Desejo: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Desejo Arcano^000000?"; Show "Atualmente: "+@MCBuffs$[19]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCDesejo, 2; GoTo CA_Save; Case 2: Set $MCDesejo, 1; GoTo CA_Save; Case 3: Set $MCDesejo, 0; GoTo CA_Save; }
+CA_Rapidez: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Rapidez com Lança^000000?"; Show "Atualmente: "+@MCBuffs$[20]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCRapidez, 2; GoTo CA_Save; Case 2: Set $MCRapidez, 1; GoTo CA_Save; Case 3: Set $MCRapidez, 0; GoTo CA_Save; }
+CA_Lamina: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Lâmina de Aura^000000?"; Show "Atualmente: "+@MCBuffs$[21]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCLamina, 2; GoTo CA_Save; Case 2: Set $MCLamina, 1; GoTo CA_Save; Case 3: Set $MCLamina, 0; GoTo CA_Save; }
+CA_Aparar: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Aparar Golpe^000000?"; Show "Atualmente: "+@MCBuffs$[22]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCAparar, 2; GoTo CA_Save; Case 2: Set $MCAparar, 1; GoTo CA_Save; Case 3: Set $MCAparar, 0; GoTo CA_Save; }
+CA_Dedicacao: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Dedicação^000000?"; Show "Atualmente: "+@MCBuffs$[23]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCDedicacao, 2; GoTo CA_Save; Case 2: Set $MCDedicacao, 1; GoTo CA_Save; Case 3: Set $MCDedicacao, 0; GoTo CA_Save; }
+CA_Assumptio: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Assumptio^000000?"; Show "Atualmente: "+@MCBuffs$[24]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCAssumptio, 2; GoTo CA_Save; Case 2: Set $MCAssumptio, 1; GoTo CA_Save; Case 3: Set $MCAssumptio, 0; GoTo CA_Save; }
+CA_Amplificacao: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Amplificação Mística^000000?"; Show "Atualmente: "+@MCBuffs$[25]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCAmplificacao, 2; GoTo CA_Save; Case 2: Set $MCAmplificacao, 1; GoTo CA_Save; Case 3: Set $MCAmplificacao, 0; GoTo CA_Save; }
+CA_Visao: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Visão Real^000000?"; Show "Atualmente: "+@MCBuffs$[26]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCVisao, 2; GoTo CA_Save; Case 2: Set $MCVisao, 1; GoTo CA_Save; Case 3: Set $MCVisao, 0; GoTo CA_Save; }
+CA_Caminho: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Caminho do Vento^000000?"; Show "Atualmente: "+@MCBuffs$[27]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCCaminho, 2; GoTo CA_Save; Case 2: Set $MCCaminho, 1; GoTo CA_Save; Case 3: Set $MCCaminho, 0; GoTo CA_Save; }
+CA_Golpe: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Golpe Estilhaçante^000000?"; Show "Atualmente: "+@MCBuffs$[28]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCGolpe, 2; GoTo CA_Save; Case 2: Set $MCGolpe, 1; GoTo CA_Save; Case 3: Set $MCGolpe, 0; GoTo CA_Save; }
+CA_Impulso: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Impulso no Carrinho^000000?"; Show "Atualmente: "+@MCBuffs$[29]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCImpulso, 2; GoTo CA_Save; Case 2: Set $MCImpulso, 1; GoTo CA_Save; Case 3: Set $MCImpulso, 0; GoTo CA_Save; }
+CA_Instinto: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Instinto de Defesa^000000?"; Show "Atualmente: "+@MCBuffs$[30]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCInstinto, 2; GoTo CA_Save; Case 2: Set $MCInstinto, 1; GoTo CA_Save; Case 3: Set $MCInstinto, 0; GoTo CA_Save; }
+CA_Presciencia: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Presciência^000000?"; Show "Atualmente: "+@MCBuffs$[31]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCPresciencia, 2; GoTo CA_Save; Case 2: Set $MCPresciencia, 1; GoTo CA_Save; Case 3: Set $MCPresciencia, 0; GoTo CA_Save; }
+CA_AdrenalinaC: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Adrenalina Concentrada^000000?"; Show "Atualmente: "+@MCBuffs$[32]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCAdrenalinaC, 2; GoTo CA_Save; Case 2: Set $MCAdrenalinaC, 1; GoTo CA_Save; Case 3: Set $MCAdrenalinaC, 0; GoTo CA_Save; }
+CA_RCUM: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Rapidez com Uma Mão^000000?"; Show "Atualmente: "+@MCBuffs$[33]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCRCUM, 2; GoTo CA_Save; Case 2: Set $MCRCUM, 1; GoTo CA_Save; Case 3: Set $MCRCUM, 0; GoTo CA_Save; }
+CA_Preservar: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Preservar^000000?"; Show "Atualmente: "+@MCBuffs$[34]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCPreservar, 2; GoTo CA_Save; Case 2: Set $MCPreservar, 1; GoTo CA_Save; Case 3: Set $MCPreservar, 0; GoTo CA_Save; }
+CA_LancasD: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Lanças Duplas^000000?"; Show "Atualmente: "+@MCBuffs$[35]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCLancasD, 2; GoTo CA_Save; Case 2: Set $MCLancasD, 1; GoTo CA_Save; Case 3: Set $MCLancasD, 0; GoTo CA_Save; }
+CA_ForcaV: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Força Violentíssima^000000?"; Show "Atualmente: "+@MCBuffs$[36]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCForcaV, 2; GoTo CA_Save; Case 2: Set $MCForcaV, 1; GoTo CA_Save; Case 3: Set $MCForcaV, 0; GoTo CA_Save; }
+CA_Submissao: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Submissão^000000?"; Show "Atualmente: "+@MCBuffs$[37]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCSubmissao, 2; GoTo CA_Save; Case 2: Set $MCSubmissao, 1; GoTo CA_Save; Case 3: Set $MCSubmissao, 0; GoTo CA_Save; }
+//Novas
+CA_Refletir: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Refletir Veneno^000000?"; Show "Atualmente: "+@MCBuffs$[38]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCRefletir, 2; GoTo CA_Save; Case 2: Set $MCRefletir, 1; GoTo CA_Save; Case 3: Set $MCRefletir, 0; GoTo CA_Save; }
+CA_RetardarV: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Retardar Veneno^000000?"; Show "Atualmente: "+@MCBuffs$[39]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCRetardarV, 2; GoTo CA_Save; Case 2: Set $MCRetardarV, 1; GoTo CA_Save; Case 3: Set $MCRetardarV, 0; GoTo CA_Save; }
+CA_IncASPD: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar ASPD^000000?"; Show "Atualmente: "+@MCBuffs$[40]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncASPD, 2; GoTo CA_Save; Case 2: Set $MCIncASPD, 1; GoTo CA_Save; Case 3: Set $MCIncASPD, 0; GoTo CA_Save; }
+CA_PocaoVento: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Super Agilidade^000000?"; Show "Atualmente: "+@MCBuffs$[41]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCPocaoVento, 2; GoTo CA_Save; Case 2: Set $MCPocaoVento, 1; GoTo CA_Save; Case 3: Set $MCPocaoVento, 0; GoTo CA_Save; }
+CA_IncAtk: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar Ataque^000000?"; Show "Atualmente: "+@MCBuffs$[42]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncAtk, 2; GoTo CA_Save; Case 2: Set $MCIncAtk, 1; GoTo CA_Save; Case 3: Set $MCIncAtk, 0; GoTo CA_Save; }
+CA_IncAtkM: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar Ataque Mágico^000000?"; Show "Atualmente: "+@MCBuffs$[43]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncAtkM, 2; GoTo CA_Save; Case 2: Set $MCIncAtkM, 1; GoTo CA_Save; Case 3: Set $MCIncAtkM, 0; GoTo CA_Save; }
+CA_RevestirArm: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Revestir Arma^000000?"; Show "Atualmente: "+@MCBuffs$[44]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCRevestirArm, 2; GoTo CA_Save; Case 2: Set $MCRevestirArm, 1; GoTo CA_Save; Case 3: Set $MCRevestirArm, 0; GoTo CA_Save; }
+CA_RevestirEsc: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Revestir Escudo^000000?"; Show "Atualmente: "+@MCBuffs$[45]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCRevestirEsc, 2; GoTo CA_Save; Case 2: Set $MCRevestirEsc, 1; GoTo CA_Save; Case 3: Set $MCRevestirEsc, 0; GoTo CA_Save; }
+CA_RevestirRop: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Revestir Armadura^000000?"; Show "Atualmente: "+@MCBuffs$[46]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCRevestirRop, 2; GoTo CA_Save; Case 2: Set $MCRevestirRop, 1; GoTo CA_Save; Case 3: Set $MCRevestirRop, 0; GoTo CA_Save; }
+CA_RevestirCap: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Revestir Capacete^000000?"; Show "Atualmente: "+@MCBuffs$[47]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCRevestirCap, 2; GoTo CA_Save; Case 2: Set $MCRevestirCap, 1; GoTo CA_Save; Case 3: Set $MCRevestirCap, 0; GoTo CA_Save; }
+CA_Kaizel: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Kaizel^000000?"; Show "Atualmente: "+@MCBuffs$[48]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCKaizel, 2; GoTo CA_Save; Case 2: Set $MCKaizel, 1; GoTo CA_Save; Case 3: Set $MCKaizel, 0; GoTo CA_Save; }
+CA_IncAllStatus: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar todos os Atributos^000000?"; Show "Atualmente: "+@MCBuffs$[49]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncAllStatus, 2; GoTo CA_Save; Case 2: Set $MCIncAllStatus, 1; GoTo CA_Save; Case 3: Set $MCIncAllStatus, 0; GoTo CA_Save; }
+CA_IncHit: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar Hit^000000?"; Show "Atualmente: "+@MCBuffs$[50]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncHit, 2; GoTo CA_Save; Case 2: Set $MCIncHit, 1; GoTo CA_Save; Case 3: Set $MCIncHit, 0; GoTo CA_Save; }
+CA_IncFlee: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar Esquiva^000000?"; Show "Atualmente: "+@MCBuffs$[51]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncFlee, 2; GoTo CA_Save; Case 2: Set $MCIncFlee, 1; GoTo CA_Save; Case 3: Set $MCIncFlee, 0; GoTo CA_Save; }
+CA_IncHp: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar HP^000000?"; Show "Atualmente: "+@MCBuffs$[52]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncHp, 2; GoTo CA_Save; Case 2: Set $MCIncHp, 1; GoTo CA_Save; Case 3: Set $MCIncHp, 0; GoTo CA_Save; }
+CA_IncSp: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar SP^000000?"; Show "Atualmente: "+@MCBuffs$[53]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncSp, 2; GoTo CA_Save; Case 2: Set $MCIncSp, 1; GoTo CA_Save; Case 3: Set $MCIncSp, 0; GoTo CA_Save; }
+CA_IncDef: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar Defesa^000000?"; Show "Atualmente: "+@MCBuffs$[54]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncDef, 2; GoTo CA_Save; Case 2: Set $MCIncDef, 1; GoTo CA_Save; Case 3: Set $MCIncDef, 0; GoTo CA_Save; }
+CA_Eske: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Eske^000000?"; Show "Atualmente: "+@MCBuffs$[55]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCEske, 2; GoTo CA_Save; Case 2: Set $MCEske, 1; GoTo CA_Save; Case 3: Set $MCEske, 0; GoTo CA_Save; }
+CA_Eska: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Eska^000000?"; Show "Atualmente: "+@MCBuffs$[56]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCEska, 2; GoTo CA_Save; Case 2: Set $MCEska, 1; GoTo CA_Save; Case 3: Set $MCEska, 0; GoTo CA_Save; }
+CA_ResistenciaF: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Resistência Final^000000?"; Show "Atualmente: "+@MCBuffs$[57]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCResistenciaF, 2; GoTo CA_Save; Case 2: Set $MCResistenciaF, 1; GoTo CA_Save; Case 3: Set $MCResistenciaF, 0; GoTo CA_Save; }
+CA_Panico: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Pânico do Justiceiro^000000?"; Show "Atualmente: "+@MCBuffs$[58]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCPanico, 2; GoTo CA_Save; Case 2: Set $MCPanico, 1; GoTo CA_Save; Case 3: Set $MCPanico, 0; GoTo CA_Save; }
+CA_AlmentarP: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar Precisão^000000?"; Show "Atualmente: "+@MCBuffs$[59]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCAlmentarP, 2; GoTo CA_Save; Case 2: Set $MCAlmentarP, 1; GoTo CA_Save; Case 3: Set $MCAlmentarP, 0; GoTo CA_Save; }
+CA_AuraN: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Aura Ninja^000000?"; Show "Atualmente: "+@MCBuffs$[60]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCAuraN, 2; GoTo CA_Save; Case 2: Set $MCAuraN, 1; GoTo CA_Save; Case 3: Set $MCAuraN, 0; GoTo CA_Save; }
+CA_IncEXP: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar EXP em 1.5^000000?"; Show "Atualmente: "+@MCBuffs$[61]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncEXP, 2; GoTo CA_Save; Case 2: Set $MCIncEXP, 1; GoTo CA_Save; Case 3: Set $MCIncEXP, 0; GoTo CA_Save; }
+CA_IncItem: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almentar Drop em 2x^000000?"; Show "Atualmente: "+@MCBuffs$[62]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncItem, 2; GoTo CA_Save; Case 2: Set $MCIncItem, 1; GoTo CA_Save; Case 3: Set $MCIncItem, 0; GoTo CA_Save; }
+CA_SeguroV: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Seguro de Vida^000000?"; Show "Atualmente: "+@MCBuffs$[63]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCSeguroV, 2; GoTo CA_Save; Case 2: Set $MCSeguroV, 1; GoTo CA_Save; Case 3: Set $MCSeguroV, 0; GoTo CA_Save; }
+CA_IncCri: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Almetar Crítico^000000?"; Show "Atualmente: "+@MCBuffs$[64]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncCri, 2; GoTo CA_Save; Case 2: Set $MCIncCri, 1; GoTo CA_Save; Case 3: Set $MCIncCri, 0; GoTo CA_Save; }
+CA_IncCast: Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000"; Show "Quem vai poderá receber ^333399Diminuir Tempo de Conjuração^000000?"; Show "Atualmente: "+@MCBuffs$[65]; Next; Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){ Case 1: Set $MCIncCast, 2; GoTo CA_Save; Case 2: Set $MCIncCast, 1; GoTo CA_Save; Case 3: Set $MCIncCast, 0; GoTo CA_Save; }
+CA_Save:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Olá ^D57352"+StrCharInfo(0)+"^000000,";
+   Show "suas configurações foram salvas com sucesso!!";
+   If (@CA_Menu == 3){ Next; GoTo CA_Config; }Else{ GoTo CA_Menu; }
+
+//== Configurar Level dos VIPs =============================================================
+
+Config_VIP:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Digite o level dos VIPs do seu servidor:";
+   Next;
+   Digit $MCLvlVIP;
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Level VIP alterado com sucesso para ^D57352"+$MCLvlVIP+"^000000.";
+   Close2;
+   Cutin "",255;
+   End;
+
+//== Configurar WoE ========================================================================
+
+CW_Config:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Permitir que esse Buff seja dado ao player no horário de Guerra do Emperium (WoE)?";
+   If ($MCCuraWoE == 1){ Set @MCBuffs$[0], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[0], "^0B7420Sim^000000"; }
+   If ($MCBencaoWoE == 1){ Set @MCBuffs$[1], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[1], "^0B7420Sim^000000"; }
+   If ($MCAgilidadeWoE == 1){ Set @MCBuffs$[2], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[2], "^0B7420Sim^000000"; }
+   If ($MCVigorWoE == 1){ Set @MCBuffs$[3], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[3], "^0B7420Sim^000000"; }
+   If ($MCRCDMWoE == 1){ Set @MCBuffs$[4], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[4], "^0B7420Sim^000000"; }
+   If ($MCConcentracaoWoE == 1){ Set @MCBuffs$[5], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[5], "^0B7420Sim^000000"; }
+   If ($MCAngelusWoE == 1){ Set @MCBuffs$[6], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[6], "^0B7420Sim^000000"; }
+   If ($MCImpositioWoE == 1){ Set @MCBuffs$[7], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[7], "^0B7420Sim^000000"; }
+   If ($MCKyrieWoE == 1){ Set @MCBuffs$[8], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[8], "^0B7420Sim^000000"; }
+   If ($MCMagnificatWoE == 1){ Set @MCBuffs$[9], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[9], "^0B7420Sim^000000"; }
+   If ($MCGloriaWoE == 1){ Set @MCBuffs$[10], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[10], "^0B7420Sim^000000"; }
+   If ($MCAdrenalinaWoE == 1){ Set @MCBuffs$[11], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[11], "^0B7420Sim^000000"; }
+   If ($MCManejoWoE == 1){ Set @MCBuffs$[12], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[12], "^0B7420Sim^000000"; }
+   If ($MCForcaWoE == 1){ Set @MCBuffs$[13], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[13], "^0B7420Sim^000000"; }
+   If ($MCAmplificarWoE == 1){ Set @MCBuffs$[14], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[14], "^0B7420Sim^000000"; }
+   If ($MCGritoWoE == 1){ Set @MCBuffs$[15], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[15], "^0B7420Sim^000000"; }
+   If ($MCProtecaoWoE == 1){ Set @MCBuffs$[16], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[16], "^0B7420Sim^000000"; }
+   If ($MCBloqueioWoE == 1){ Set @MCBuffs$[17], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[17], "^0B7420Sim^000000"; }
+   If ($MCEscudoWoE == 1){ Set @MCBuffs$[18], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[18], "^0B7420Sim^000000"; }
+   If ($MCDesejoWoE == 1){ Set @MCBuffs$[19], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[19], "^0B7420Sim^000000"; }
+   If ($MCRapidezWoE == 1){ Set @MCBuffs$[20], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[20], "^0B7420Sim^000000"; }
+   If ($MCLaminaWoE == 1){ Set @MCBuffs$[21], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[21], "^0B7420Sim^000000"; }
+   If ($MCApararWoE == 1){ Set @MCBuffs$[22], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[22], "^0B7420Sim^000000"; }
+   If ($MCDedicacaoWoE == 1){ Set @MCBuffs$[23], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[23], "^0B7420Sim^000000"; }
+   If ($MCAssumptioWoE == 1){ Set @MCBuffs$[24], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[24], "^0B7420Sim^000000"; }
+   If ($MCAmplificacaoWoE == 1){ Set @MCBuffs$[25], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[25], "^0B7420Sim^000000"; }
+   If ($MCVisaoWoE == 1){ Set @MCBuffs$[26], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[26], "^0B7420Sim^000000"; }
+   If ($MCCaminhoWoE == 1){ Set @MCBuffs$[27], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[27], "^0B7420Sim^000000"; }
+   If ($MCGolpeWoE == 1){ Set @MCBuffs$[28], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[28], "^0B7420Sim^000000"; }
+   If ($MCImpulsoWoE == 1){ Set @MCBuffs$[29], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[29], "^0B7420Sim^000000"; }
+   If ($MCInstintoWoE == 1){ Set @MCBuffs$[30], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[30], "^0B7420Sim^000000"; }
+   If ($MCPrescienciaWoE == 1){ Set @MCBuffs$[31], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[31], "^0B7420Sim^000000"; }
+   If ($MCAdrenalinaCWoE == 1){ Set @MCBuffs$[32], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[32], "^0B7420Sim^000000"; }
+   If ($MCRCUMWoE == 1){ Set @MCBuffs$[33], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[33], "^0B7420Sim^000000"; }
+   If ($MCPreservarWoE == 1){ Set @MCBuffs$[34], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[34], "^0B7420Sim^000000"; }
+   If ($MCLancasDWoE == 1){ Set @MCBuffs$[35], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[35], "^0B7420Sim^000000"; }
+   If ($MCForcaVWoE == 1){ Set @MCBuffs$[36], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[36], "^0B7420Sim^000000"; }
+   If ($MCSubmissaoWoE == 1){ Set @MCBuffs$[37], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[37], "^0B7420Sim^000000"; }
+//Novas
+   If ($MCRefletirWoE == 1){ Set @MCBuffs$[38], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[38], "^0B7420Sim^000000"; }
+   If ($MCRetardarVWoE == 1){ Set @MCBuffs$[39], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[39], "^0B7420Sim^000000"; }
+   If ($MCIncASPDWoE == 1){ Set @MCBuffs$[40], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[40], "^0B7420Sim^000000"; }
+   If ($MCPocaoVentoWoE == 1){ Set @MCBuffs$[41], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[41], "^0B7420Sim^000000"; }
+   If ($MCIncAtkWoE == 1){ Set @MCBuffs$[42], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[42], "^0B7420Sim^000000"; }
+   If ($MCIncAtkMWoE == 1){ Set @MCBuffs$[43], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[43], "^0B7420Sim^000000"; }
+   If ($MCRevestirArmWoE == 1){ Set @MCBuffs$[44], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[44], "^0B7420Sim^000000"; }
+   If ($MCRevestirEscWoE == 1){ Set @MCBuffs$[45], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[45], "^0B7420Sim^000000"; }
+   If ($MCRevestirRopWoE == 1){ Set @MCBuffs$[46], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[46], "^0B7420Sim^000000"; }
+   If ($MCRevestirCapWoE == 1){ Set @MCBuffs$[47], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[47], "^0B7420Sim^000000"; }
+   If ($MCKaizelWoE == 1){ Set @MCBuffs$[48], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[48], "^0B7420Sim^000000"; }
+   If ($MCIncAllStatusWoE == 1){ Set @MCBuffs$[49], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[49], "^0B7420Sim^000000"; }
+   If ($MCIncHitWoE == 1){ Set @MCBuffs$[50], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[50], "^0B7420Sim^000000"; }
+   If ($MCIncFleeWoE == 1){ Set @MCBuffs$[51], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[51], "^0B7420Sim^000000"; }
+   If ($MCIncHpWoE == 1){ Set @MCBuffs$[52], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[52], "^0B7420Sim^000000"; }
+   If ($MCIncSpWoE == 1){ Set @MCBuffs$[53], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[53], "^0B7420Sim^000000"; }
+   If ($MCIncDefWoE == 1){ Set @MCBuffs$[54], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[54], "^0B7420Sim^000000"; }
+   If ($MCEskeWoE == 1){ Set @MCBuffs$[55], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[55], "^0B7420Sim^000000"; }
+   If ($MCEskaWoE == 1){ Set @MCBuffs$[56], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[56], "^0B7420Sim^000000"; }
+   If ($MCResistenciaFWoE == 1){ Set @MCBuffs$[57], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[57], "^0B7420Sim^000000"; }
+   If ($MCPanicoWoE == 1){ Set @MCBuffs$[58], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[58], "^0B7420Sim^000000"; }
+   If ($MCAlmentarPWoE == 1){ Set @MCBuffs$[59], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[59], "^0B7420Sim^000000"; }
+   If ($MCAuraNWoE == 1){ Set @MCBuffs$[60], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[60], "^0B7420Sim^000000"; }
+   If ($MCIncEXPWoE == 1){ Set @MCBuffs$[61], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[61], "^0B7420Sim^000000"; }
+   If ($MCIncItemWoE == 1){ Set @MCBuffs$[62], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[62], "^0B7420Sim^000000"; }
+   If ($MCSeguroVWoE == 1){ Set @MCBuffs$[63], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[63], "^0B7420Sim^000000"; }
+   If ($MCIncCriWoE == 1){ Set @MCBuffs$[64], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[64], "^0B7420Sim^000000"; }
+   If ($MCIncCastWoE == 1){ Set @MCBuffs$[65], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[65], "^0B7420Sim^000000"; }
+   If (@CW_Menu == 1){ GoTo CW_Menu1; }Else{ GoTo CW_Menu2; }
+
+CW_Menu1:
+   Next;
+   Set @CW_Menu, 1;
+   Menu @MCBuffs$[0]+" - ^333399Cura^000000",CW_Cura,@MCBuffs$[1]+" - ^333399Benção^000000",CW_Bencao,@MCBuffs$[2]+" - ^333399Agilidade^000000",CW_Agilidade,@MCBuffs$[3]+" - ^333399Vigor^000000^000000",CW_Vigor,@MCBuffs$[4]+" - ^333399Rapidez com Duas Mãos^000000",CW_RCDM,@MCBuffs$[5]+" - ^333399Concentração^000000",CW_Concentracao,@MCBuffs$[6]+" - ^333399Angelus^000000",CW_Angelus,@MCBuffs$[7]+" - ^333399Impositio Manus^000000",CW_Impositio,@MCBuffs$[8]+" - ^333399Kyrie Eleison^000000",CW_Kyrie,@MCBuffs$[9]+" - ^333399Magnificat^000000",CW_Magnificat,
+        @MCBuffs$[10]+" - ^333399Gloria^000000",CW_Gloria,@MCBuffs$[11]+" - ^333399Adrenalina Pura,^000000",CW_Adrenalina,@MCBuffs$[12]+" - ^333399Manejo Perfeito^000000",CW_Manejo,@MCBuffs$[13]+" - ^333399Força Violenta^000000",CW_Forca,@MCBuffs$[14]+" - ^333399Amplificar Poder^000000",CW_Amplificar,@MCBuffs$[15]+" - ^333399Grito de Guerra^000000",CW_Grito,@MCBuffs$[16]+" - ^333399Proteção Arcana^000000",CW_Protecao,@MCBuffs$[17]+" - ^333399Bloqueio^000000",CW_Bloqueio,@MCBuffs$[18]+" - ^333399Escudo Refletor^000000",CW_Escudo,@MCBuffs$[19]+" - ^333399Desejo Arcano^000000",CW_Desejo,
+        @MCBuffs$[20]+" - ^333399Rapidez com Lança^000000",CW_Rapidez,@MCBuffs$[21]+" - ^333399Lâmina de Aura^000000",CW_Lamina,@MCBuffs$[22]+" - ^333399Aparar Golpe^000000",CW_Aparar,@MCBuffs$[23]+" - ^333399Dedicação^000000",CW_Dedicacao,@MCBuffs$[24]+" - ^333399Assumptio^000000",CW_Assumptio,@MCBuffs$[25]+" - ^333399Amplificação Mística^000000",CW_Amplificacao,@MCBuffs$[26]+" - ^333399Visão Real^000000",CW_Visao,@MCBuffs$[27]+" - ^333399Caminho do Vento^000000",CW_Caminho,@MCBuffs$[28]+" - ^333399Golpe Estilhaçante^000000",CW_Golpe,@MCBuffs$[29]+" - ^333399Impulso no Carrinho^000000",CW_Impulso,
+        @MCBuffs$[30]+" - ^333399Instinto de Defesa^000000",CW_Instinto,@MCBuffs$[31]+" - ^333399Presciência^000000",CW_Presciencia,@MCBuffs$[32]+" - ^333399Adrenalina Concentrada^000000",CW_AdrenalinaC,@MCBuffs$[33]+" - ^333399Rapidez com Uma Mão^000000",CW_RCUM,"Ver Mais Buffs.",CW_Menu2,"Assim já esta bom.",Sair;
+
+CW_Menu2:
+   Next;
+   Set @CW_Menu, 2;
+   Menu @MCBuffs$[34]+" - ^333399Preservar^000000",CW_Preservar,@MCBuffs$[35]+" - ^333399Lanças Duplas^000000",CW_LancasD,@MCBuffs$[36]+" - ^333399Força Violentíssima^000000",CW_ForcaV,@MCBuffs$[37]+" - ^333399Submissão^000000",CW_Submissao,@MCBuffs$[38]+" - ^333399Refletir Veneno^000000",CW_Refletir,@MCBuffs$[39]+" - ^333399Retardar Veneno^000000",CW_RetardarV,@MCBuffs$[40]+" - ^333399Almentar ASPD^000000",CW_IncASPD,@MCBuffs$[41]+" - ^333399Super Agilidade^000000",CW_PocaoVento,@MCBuffs$[42]+" - ^333399Almentar Ataque^000000",CW_IncAtk,@MCBuffs$[43]+" - ^333399Almentar Ataque Mágico^000000",CW_IncAtkM,
+        @MCBuffs$[44]+" - ^333399Revestir Arma^000000",CW_RevestirArm,@MCBuffs$[45]+" - ^333399Revestir Escudo^000000",CW_RevestirEsc,@MCBuffs$[46]+" - ^333399Revestir Armadura^000000",CW_RevestirRop,@MCBuffs$[47]+" - ^333399Revestir Capacete^000000",CW_RevestirCap,@MCBuffs$[48]+" - ^333399Kaizel^000000",CW_Kaizel,@MCBuffs$[49]+" - ^333399Almentar todos os Atributos^000000",CW_IncAllStatus,@MCBuffs$[50]+" - ^333399Almentar Hit^000000",CW_IncHit,@MCBuffs$[51]+" - ^333399Almentar Esquiva^000000",CW_IncFlee,@MCBuffs$[52]+" - ^333399Almentar HP^000000",CW_IncHP,@MCBuffs$[53]+" - ^333399Almentar SP^000000",CW_IncSP,
+        @MCBuffs$[54]+" - ^333399Almentar Defesa^000000",CW_IncDef,@MCBuffs$[55]+" - ^333399Eske^000000",CW_Eske,@MCBuffs$[56]+" - ^333399Eska^000000",CW_Eska,@MCBuffs$[57]+" - ^333399Resistência Final^000000",CW_ResistenciaF,@MCBuffs$[58]+" - ^333399Pânico do Justiceiro^000000",CW_Panico,@MCBuffs$[59]+" - ^333399Aumentar Precisão^000000",CW_AlmentarP,@MCBuffs$[60]+" - ^333399Aura Ninja^000000",CW_AuraN,@MCBuffs$[61]+" - ^333399Almentar EXP em 1.5^000000",CW_IncEXP,@MCBuffs$[62]+" - ^333399Almentar Drop em 2x^000000",CW_IncItem,
+        @MCBuffs$[63]+" - ^333399Seguro de Vida^000000",CW_SeguroV,@MCBuffs$[64]+" - ^333399Almetar Crítico^000000",CW_IncCri,@MCBuffs$[65]+" - ^333399Diminuir tempo de conjuração^000000",CW_IncCast,"Ver Buffs Anteriores",CW_Menu1,"Assim já esta bom.",Sair;
+
+CW_Cura: If ($MCCuraWoE == 0){ Set $MCCuraWoE, 1; }Else{ Set $MCCuraWoE, 0; } GoTo CW_Config;
+CW_Bencao: If ($MCBencaoWoE == 0){ Set $MCBencaoWoE, 1; }Else{ Set $MCBencaoWoE, 0; } GoTo CW_Config;
+CW_Agilidade: If ($MCAgilidadeWoE == 0){ Set $MCAgilidadeWoE, 1; }Else{ Set $MCAgilidadeWoE, 0; } GoTo CW_Config;
+CW_Vigor: If ($MCVigorWoE == 0){ Set $MCVigorWoE, 1; }Else{ Set $MCVigorWoE, 0; } GoTo CW_Config;
+CW_RCDM: If ($MCRCDMWoE == 0){ Set $MCRCDMWoE, 1; }Else{ Set $MCRCDMWoE, 0; } GoTo CW_Config;
+CW_Concentracao: If ($MCConcentracaoWoE == 0){ Set $MCConcentracaoWoE, 1; }Else{ Set $MCConcentracaoWoE, 0; } GoTo CW_Config;
+CW_Angelus: If ($MCAngelusWoE == 0){ Set $MCAngelusWoE, 1; }Else{ Set $MCAngelusWoE, 0; } GoTo CW_Config;
+CW_Impositio: If ($MCImpositioWoE == 0){ Set $MCImpositioWoE, 1; }Else{ Set $MCImpositioWoE, 0; } GoTo CW_Config;
+CW_Kyrie: If ($MCKyrieWoE == 0){ Set $MCKyrieWoE, 1; }Else{ Set $MCKyrieWoE, 0; } GoTo CW_Config;
+CW_Magnificat: If ($MCMagnificatWoE == 0){ Set $MCMagnificatWoE, 1; }Else{ Set $MCMagnificatWoE, 0; } GoTo CW_Config;
+CW_Gloria: If ($MCGloriaWoE == 0){ Set $MCGloriaWoE, 1; }Else{ Set $MCGloriaWoE, 0; } GoTo CW_Config;
+CW_Adrenalina: If ($MCAdrenalinaWoE == 0){ Set $MCAdrenalinaWoE, 1; }Else{ Set $MCAdrenalinaWoE, 0; } GoTo CW_Config;
+CW_Manejo: If ($MCManejoWoE == 0){ Set $MCManejoWoE, 1; }Else{ Set $MCManejoWoE, 0; } GoTo CW_Config;
+CW_Forca: If ($MCForcaWoE == 0){ Set $MCForcaWoE, 1; }Else{ Set $MCForcaWoE, 0; } GoTo CW_Config;
+CW_Amplificar: If ($MCAmplificarWoE == 0){ Set $MCAmplificarWoE, 1; }Else{ Set $MCAmplificarWoE, 0; } GoTo CW_Config;
+CW_Grito: If ($MCGritoWoE == 0){ Set $MCGritoWoE, 1; }Else{ Set $MCGritoWoE, 0; } GoTo CW_Config;
+CW_Protecao: If ($MCProtecaoWoE == 0){ Set $MCProtecaoWoE, 1; }Else{ Set $MCProtecaoWoE, 0; } GoTo CW_Config;
+CW_Bloqueio: If ($MCBloqueioWoE == 0){ Set $MCBloqueioWoE, 1; }Else{ Set $MCBloqueioWoE, 0; } GoTo CW_Config;
+CW_Escudo: If ($MCEscudoWoE == 0){ Set $MCEscudoWoE, 1; }Else{ Set $MCEscudoWoE, 0; } GoTo CW_Config;
+CW_Desejo: If ($MCDesejoWoE == 0){ Set $MCDesejoWoE, 1; }Else{ Set $MCDesejoWoE, 0; } GoTo CW_Config;
+CW_Rapidez: If ($MCRapidezWoE == 0){ Set $MCRapidezWoE, 1; }Else{ Set $MCRapidezWoE, 0; } GoTo CW_Config;
+CW_Lamina: If ($MCLaminaWoE == 0){ Set $MCLaminaWoE, 1; }Else{ Set $MCLaminaWoE, 0; } GoTo CW_Config;
+CW_Aparar: If ($MCApararWoE == 0){ Set $MCApararWoE, 1; }Else{ Set $MCApararWoE, 0; } GoTo CW_Config;
+CW_Dedicacao: If ($MCDedicacaoWoE == 0){ Set $MCDedicacaoWoE, 1; }Else{ Set $MCDedicacaoWoE, 0; } GoTo CW_Config;
+CW_Assumptio: If ($MCAssumptioWoE == 0){ Set $MCAssumptioWoE, 1; }Else{ Set $MCAssumptioWoE, 0; } GoTo CW_Config;
+CW_Amplificacao: If ($MCAmplificacaoWoE == 0){ Set $MCAmplificacaoWoE, 1; }Else{ Set $MCAmplificacaoWoE, 0; } GoTo CW_Config;
+CW_Visao: If ($MCVisaoWoE == 0){ Set $MCVisaoWoE, 1; }Else{ Set $MCVisaoWoE, 0; } GoTo CW_Config;
+CW_Caminho: If ($MCCaminhoWoE == 0){ Set $MCCaminhoWoE, 1; }Else{ Set $MCCaminhoWoE, 0; } GoTo CW_Config;
+CW_Golpe: If ($MCGolpeWoE == 0){ Set $MCGolpeWoE, 1; }Else{ Set $MCGolpeWoE, 0; } GoTo CW_Config;
+CW_Impulso: If ($MCImpulsoWoE == 0){ Set $MCImpulsoWoE, 1; }Else{ Set $MCImpulsoWoE, 0; } GoTo CW_Config;
+CW_Instinto: If ($MCInstintoWoE == 0){ Set $MCInstintoWoE, 1; }Else{ Set $MCInstintoWoE, 0; } GoTo CW_Config;
+CW_Presciencia: If ($MCPrescienciaWoE == 0){ Set $MCPrescienciaWoE, 1; }Else{ Set $MCPrescienciaWoE, 0; } GoTo CW_Config;
+CW_AdrenalinaC: If ($MCAdrenalinaCWoE == 0){ Set $MCAdrenalinaCWoE, 1; }Else{ Set $MCAdrenalinaCWoE, 0; } GoTo CW_Config;
+CW_RCUM: If ($MCRCUMWoE == 0){ Set $MCRCUMWoE, 1; }Else{ Set $MCRCUMWoE, 0; } GoTo CW_Config;
+CW_Preservar: If ($MCPreservarWoE == 0){ Set $MCPreservarWoE, 1; }Else{ Set $MCPreservarWoE, 0; } GoTo CW_Config;
+CW_LancasD: If ($MCLancasDWoE == 0){ Set $MCLancasDWoE, 1; }Else{ Set $MCLancasDWoE, 0; } GoTo CW_Config;
+CW_ForcaV: If ($MCForcaVWoE == 0){ Set $MCForcaVWoE, 1; }Else{ Set $MCForcaVWoE, 0; } GoTo CW_Config;
+CW_Submissao: If ($MCSubmissaoWoE == 0){ Set $MCSubmissaoWoE, 1; }Else{ Set $MCSubmissaoWoE, 0; } GoTo CW_Config;
+//Novas
+CW_Refletir: If ($MCRefletirWoE == 0){ Set $MCRefletirWoE, 1; }Else{ Set $MCRefletirWoE, 0; } GoTo CW_Config;
+CW_RetardarV: If ($MCRetardarVWoE == 0){ Set $MCRetardarVWoE, 1; }Else{ Set $MCRetardarVWoE, 0; } GoTo CW_Config;
+CW_IncASPD: If ($MCIncASPDWoE == 0){ Set $MCIncASPDWoE, 1; }Else{ Set $MCIncASPDWoE, 0; } GoTo CW_Config;
+CW_PocaoVento: If ($MCPocaoVentoWoE == 0){ Set $MCPocaoVentoWoE, 1; }Else{ Set $MCPocaoVentoWoE, 0; } GoTo CW_Config;
+CW_IncAtk: If ($MCIncAtkWoE == 0){ Set $MCIncAtkWoE, 1; }Else{ Set $MCIncAtkWoE, 0; } GoTo CW_Config;
+CW_IncAtkM: If ($MCIncAtkMWoE == 0){ Set $MCIncAtkMWoE, 1; }Else{ Set $MCIncAtkMWoE, 0; } GoTo CW_Config;
+CW_RevestirArm: If ($MCRevestirArmWoE == 0){ Set $MCRevestirArmWoE, 1; }Else{ Set $MCRevestirArmWoE, 0; } GoTo CW_Config;
+CW_RevestirEsc: If ($MCRevestirEscWoE == 0){ Set $MCRevestirEscWoE, 1; }Else{ Set $MCRevestirEscWoE, 0; } GoTo CW_Config;
+CW_RevestirRop: If ($MCRevestirRopWoE == 0){ Set $MCRevestirRopWoE, 1; }Else{ Set $MCRevestirRopWoE, 0; } GoTo CW_Config;
+CW_RevestirCap: If ($MCRevestirCapWoE == 0){ Set $MCRevestirCapWoE, 1; }Else{ Set $MCRevestirCapWoE, 0; } GoTo CW_Config;
+CW_Kaizel: If ($MCKaizelWoE == 0){ Set $MCKaizelWoE, 1; }Else{ Set $MCKaizelWoE, 0; } GoTo CW_Config;
+CW_IncAllStatus: If ($MCIncAllStatusWoE == 0){ Set $MCIncAllStatusWoE, 1; }Else{ Set $MCIncAllStatusWoE, 0; } GoTo CW_Config;
+CW_IncHit: If ($MCIncHitWoE == 0){ Set $MCIncHitWoE, 1; }Else{ Set $MCIncHitWoE, 0; } GoTo CW_Config;
+CW_IncFlee: If ($MCIncFleeWoE == 0){ Set $MCIncFleeWoE, 1; }Else{ Set $MCIncFleeWoE, 0; } GoTo CW_Config;
+CW_IncHp: If ($MCIncHpWoE == 0){ Set $MCIncHpWoE, 1; }Else{ Set $MCIncHpWoE, 0; } GoTo CW_Config;
+CW_IncSp: If ($MCIncSpWoE == 0){ Set $MCIncSpWoE, 1; }Else{ Set $MCIncSpWoE, 0; } GoTo CW_Config;
+CW_IncDef: If ($MCIncDefWoE == 0){ Set $MCIncDefWoE, 1; }Else{ Set $MCIncDefWoE, 0; } GoTo CW_Config;
+CW_Eske: If ($MCEskeWoE == 0){ Set $MCEskeWoE, 1; }Else{ Set $MCEskeWoE, 0; } GoTo CW_Config;
+CW_Eska: If ($MCEskaWoE == 0){ Set $MCEskaWoE, 1; }Else{ Set $MCEskaWoE, 0; } GoTo CW_Config;
+CW_ResistenciaF: If ($MCResistenciaFWoE == 0){ Set $MCResistenciaFWoE, 1; }Else{ Set $MCResistenciaFWoE, 0; } GoTo CW_Config;
+CW_Panico: If ($MCPanicoWoE == 0){ Set $MCPanicoWoE, 1; }Else{ Set $MCPanicoWoE, 0; } GoTo CW_Config;
+CW_AlmentarP: If ($MCAlmentarPWoE == 0){ Set $MCAlmentarPWoE, 1; }Else{ Set $MCAlmentarPWoE, 0; } GoTo CW_Config;
+CW_AuraN: If ($MCAuraNWoE == 0){ Set $MCAuraNWoE, 1; }Else{ Set $MCAuraNWoE, 0; } GoTo CW_Config;
+CW_IncEXP: If ($MCIncEXPWoE == 0){ Set $MCIncEXPWoE, 1; }Else{ Set $MCIncEXPWoE, 0; } GoTo CW_Config;
+CW_IncItem: If ($MCIncItemWoE == 0){ Set $MCIncItemWoE, 1; }Else{ Set $MCIncItemWoE, 0; } GoTo CW_Config;
+CW_SeguroV: If ($MCSeguroVWoE == 0){ Set $MCSeguroVWoE, 1; }Else{ Set $MCSeguroVWoE, 0; } GoTo CW_Config;
+CW_IncCri: If ($MCIncCriWoE == 0){ Set $MCIncCriWoE, 1; }Else{ Set $MCIncCriWoE, 0; } GoTo CW_Config;
+CW_IncCast: If ($MCIncCastWoE == 0){ Set $MCIncCastWoE, 1; }Else{ Set $MCIncCastWoE, 0; } GoTo CW_Config;
+
+Close2;
+Cutin "",255;
+End;
+
+//== Configurar Chamados ===================================================================
+
+CC_Config:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Quem vai poder fazer chamados para receber Buffs em qualquer lugar?";
+   If ($MCWhisper == 0){ Set @MCBuffs$[0], "^FF0000Ninguém^000000"; }Else{ If ($MCWhisper == 1){ Set @MCBuffs$[0], "^0000FFVIP^000000"; }Else{ Set @MCBuffs$[0], "^0B7420Todos^000000"; } }
+   Show "Atualmente: "+@MCBuffs$[0];
+   Next;
+   Switch (select("^0B7420Todos^000000","^0000FFVIP^000000","^FF0000Ninguém^000000")){
+      Case 1: Set $MCWhisper, 2; GoTo CC_WoE;
+      Case 2: Set $MCWhisper, 1; GoTo CC_WoE;
+      Case 3: Set $MCWhisper, 0; GoTo CC_WoE;
+   }
+
+CC_WoE:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Eu atenderei chamados na hora da Guerra do Emperium (WoE)?";
+   If ($MCWhisperWoE == 1){ Set @MCBuffs$[0], "^FF0000Não^000000"; }Else{ Set @MCBuffs$[0], "^0B7420Sim^000000"; }
+   Show "Atualmente: "+@MCBuffs$[0];
+   Next;
+   Switch (select("^0B7420Sim^000000","^FF0000Não^000000")){
+      Case 1: Set $MCWhisperWoE, 0; GoTo CC_Ress;
+      Case 2: Set $MCWhisperWoE, 1; GoTo CC_Ress;
+   }
+
+CC_Ress:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Eu devo ressucitar os players ao atender os chamados?";
+   If ($MCWhisperRess == 1){ Set @MCBuffs$[0], "^FF0000Não^000000"; }Else{ Set @MCBuffs$[0], "^0B7420Sim^000000"; }
+   Show "Atualmente: "+@MCBuffs$[0];
+   Next;
+   Switch (select("^0B7420Sim^000000","^FF0000Não^000000")){
+      Case 1: Set $MCWhisperRess, 0; GoTo CC_Save;
+      Case 2: Set $MCWhisperRess, 1; GoTo CC_Save;
+   }
+
+CC_Save:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Olá ^D57352"+StrCharInfo(0)+"^000000,";
+   Show "suas configurações foram salvas com sucesso!!";
+   Next;
+   GoTo M_Admin;
+
+//= Chamado ================================================================================
+
+OnWhisperGlobal:
+   If ((($MCWhisper == 1) && (GetGmLevel() < $MCLvlVIP)) || (($MCWhisperWoE == 1) && (AgitCheck() == 1)) || ($MCWhisper == 0)){
+      Cutin "ra_bishop",2;
+      Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+      Show "Me desculpe mas eu não posso te ajudar.";
+      Close2;
+      Cutin "",255;
+      End;
+   }Else{ If ($MCWhisperRess == 0){Atcommand "@alive"; } Goto OnTouch; }
+End;
+
+//= Curinha ================================================================================
+
+Curinha:
+   Cutin "ra_bishop",2;
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Olá, ^853D85"+strcharinfo(0)+"^000000!";
+   Show "Como recompensa por brincar com meu cachorro, vou deixar você escolher quais Buffs eu vou te dar.";
+   Show "O que você deseja fazer?";
+   Set ConfiguraBuffs, 0;
+   Next;
+   Menu "Pegar Buffs.",OnTouch,"Remover Buffs.",RemoverBuffs,"Configurar Buffs.",Configurar,"Nada.",Sair;
+
+RemoverBuffs:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   sc_start 158,24000000,10;
+   Show "Buffs Removidos com sucesso!";
+   Close2;
+   Cutin "",255;
+   End;
+
+Configurar:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Quais Buffs (VIPs) Você deseja receber?";
+   Set @CP_Menu, 1;
+   Next;
+   Menu "Todas",ConfigurarAll,"Nenhuma",ConfigurarNone,"Eu posso escolher?",CP_Config;
+
+ConfigurarAll:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Set MCCura, 0; Set MCBencao, 0; Set MCAgilidade, 0; Set MCVigor, 0; Set MCRCDM, 0; Set MCConcentracao, 0; Set MCAngelus, 0; Set MCImpositio, 0; Set MCKyrie, 0; Set MCMagnificat, 0;
+   Set MCGloria, 0; Set MCAdrenalina, 0; Set MCManejo, 0; Set MCForca, 0; Set MCAmplificar, 0; Set MCGrito, 0; Set MCProtecao, 0; Set MCBloqueio, 0; Set MCEscudo, 0; Set MCDesejo, 0;
+   Set MCRapidez, 0; Set MCLamina, 0; Set MCAparar, 0; Set MCDedicacao, 0; Set MCAssumptio, 0; Set MCAmplificacao, 0; Set MCVisao, 0; Set MCCaminho, 0; Set MCGolpe, 0; Set MCImpulso, 0;
+   Set MCInstinto, 0; Set MCPresciencia, 0; Set MCAdrenalinaC, 0; Set MCRCUM, 0; Set MCPreservar, 0; Set MCLancasD, 0; Set MCForcaV, 0; Set MCSubmissao, 0; Set MCRefletir, 0; Set MCRetardarV, 0;
+   Set MCIncASPD, 0; Set MCPocaoVento, 0; Set MCIncAtk, 0; Set MCIncAtkM, 0; Set MCRevestirArm, 0; Set MCRevestirEsc, 0; Set MCRevestirRop, 0; Set MCRevestirCap, 0; Set MCKaizel, 0; Set MCIncAllStatus, 0;
+   Set MCIncHit, 0; Set MCIncFlee, 0; Set MCIncHp, 0; Set MCIncSp, 0; Set MCIncDef, 0; Set MCEske, 0; Set MCEska, 0; Set MCResistenciaF, 0; Set MCPanico, 0; Set MCAlmentarP, 0;
+   Set MCAuraN, 0; Set MCIncEXP, 0; Set MCIncItem, 0; Set MCSeguroV, 0; Set MCIncCri, 0; Set MCIncCast, 0;
+   Show "Suas Modificações foram salvas com sucesso!";
+   Close2;
+   Cutin "",255;
+   End;
+
+ConfigurarNone:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Set MCCura, 1; Set MCBencao, 1; Set MCAgilidade, 1; Set MCVigor, 1; Set MCRCDM, 1; Set MCConcentracao, 1; Set MCAngelus, 1; Set MCImpositio, 1; Set MCKyrie, 1; Set MCMagnificat, 1;
+   Set MCGloria, 1; Set MCAdrenalina, 1; Set MCManejo, 1; Set MCForca, 1; Set MCAmplificar, 1; Set MCGrito, 1; Set MCProtecao, 1; Set MCBloqueio, 1; Set MCEscudo, 1; Set MCDesejo, 1;
+   Set MCRapidez, 1; Set MCLamina, 1; Set MCAparar, 1; Set MCDedicacao, 1; Set MCAssumptio, 1; Set MCAmplificacao, 1; Set MCVisao, 1; Set MCCaminho, 1; Set MCGolpe, 1; Set MCImpulso, 1;
+   Set MCInstinto, 1; Set MCPresciencia, 1; Set MCAdrenalinaC, 1; Set MCRCUM, 1; Set MCPreservar, 1; Set MCLancasD, 1; Set MCForcaV, 1; Set MCSubmissao, 1; Set MCRefletir, 1; Set MCRetardarV, 1;
+   Set MCIncASPD, 1; Set MCPocaoVento, 1; Set MCIncAtk, 1; Set MCIncAtkM, 1; Set MCRevestirArm, 1; Set MCRevestirEsc, 1; Set MCRevestirRop, 1; Set MCRevestirCap, 1; Set MCKaizel, 1; Set MCIncAllStatus, 1;
+   Set MCIncHit, 1; Set MCIncFlee, 1; Set MCIncHp, 1; Set MCIncSp, 1; Set MCIncDef, 1; Set MCEske, 1; Set MCEska, 1; Set MCResistenciaF, 1; Set MCPanico, 1; Set MCAlmentarP, 1;
+   Set MCAuraN, 1; Set MCIncEXP, 1; Set MCIncItem, 1; Set MCSeguroV, 1; Set MCIncCri, 1; Set MCIncCast, 1;
+   Show "Suas Modificações foram salvas com sucesso!";
+   Close2;
+   Cutin "",255;
+   End;
+
+CP_Config:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Você deseja receber esse Buff?";
+   If ($MCCura == 0){ Set @MCBuffs$[0], "^FFFF00Off^000000"; }Else{ If (MCCura == 1){ Set @MCBuffs$[0], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[0], "^0B7420Sim^000000"; } }
+   If ($MCBencao == 0){ Set @MCBuffs$[1], "^FFFF00Off^000000"; }Else{ If (MCBencao == 1){ Set @MCBuffs$[1], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[1], "^0B7420Sim^000000"; } }
+   If ($MCAgilidade == 0){ Set @MCBuffs$[2], "^FFFF00Off^000000"; }Else{ If (MCAgilidade == 1){ Set @MCBuffs$[2], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[2], "^0B7420Sim^000000"; } }
+   If ($MCVigor == 0){ Set @MCBuffs$[3], "^FFFF00Off^000000"; }Else{ If (MCVigor == 1){ Set @MCBuffs$[3], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[3], "^0B7420Sim^000000"; } }
+   If ($MCRCDM == 0){ Set @MCBuffs$[4], "^FFFF00Off^000000"; }Else{ If (MCRCDM == 1){ Set @MCBuffs$[4], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[4], "^0B7420Sim^000000"; } }
+   If ($MCConcentracao == 0){ Set @MCBuffs$[5], "^FFFF00Off^000000"; }Else{ If (MCConcentracao == 1){ Set @MCBuffs$[5], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[5], "^0B7420Sim^000000"; } }
+   If ($MCAngelus == 0){ Set @MCBuffs$[6], "^FFFF00Off^000000"; }Else{ If (MCAngelus == 1){ Set @MCBuffs$[6], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[6], "^0B7420Sim^000000"; } }
+   If ($MCImpositio == 0){ Set @MCBuffs$[7], "^FFFF00Off^000000"; }Else{ If (MCImpositio == 1){ Set @MCBuffs$[7], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[7], "^0B7420Sim^000000"; } }
+   If ($MCKyrie == 0){ Set @MCBuffs$[8], "^FFFF00Off^000000"; }Else{ If (MCKyrie == 1){ Set @MCBuffs$[8], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[8], "^0B7420Sim^000000"; } }
+   If ($MCMagnificat == 0){ Set @MCBuffs$[9], "^FFFF00Off^000000"; }Else{ If (MCMagnificat == 1){ Set @MCBuffs$[9], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[9], "^0B7420Sim^000000"; } }
+   If ($MCGloria == 0){ Set @MCBuffs$[10], "^FFFF00Off^000000"; }Else{ If (MCGloria == 1){ Set @MCBuffs$[10], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[10], "^0B7420Sim^000000"; } }
+   If ($MCAdrenalina == 0){ Set @MCBuffs$[11], "^FFFF00Off^000000"; }Else{ If (MCAdrenalina == 1){ Set @MCBuffs$[11], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[11], "^0B7420Sim^000000"; } }
+   If ($MCManejo == 0){ Set @MCBuffs$[12], "^FFFF00Off^000000"; }Else{ If (MCManejo == 1){ Set @MCBuffs$[12], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[12], "^0B7420Sim^000000"; } }
+   If ($MCForca == 0){ Set @MCBuffs$[13], "^FFFF00Off^000000"; }Else{ If (MCForca == 1){ Set @MCBuffs$[13], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[13], "^0B7420Sim^000000"; } }
+   If ($MCAmplificar == 0){ Set @MCBuffs$[14], "^FFFF00Off^000000"; }Else{ If (MCAmplificar == 1){ Set @MCBuffs$[14], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[14], "^0B7420Sim^000000"; } }
+   If ($MCGrito == 0){ Set @MCBuffs$[15], "^FFFF00Off^000000"; }Else{ If (MCGrito == 1){ Set @MCBuffs$[15], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[15], "^0B7420Sim^000000"; } }
+   If ($MCProtecao == 0){ Set @MCBuffs$[16], "^FFFF00Off^000000"; }Else{ If (MCProtecao == 1){ Set @MCBuffs$[16], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[16], "^0B7420Sim^000000"; } }
+   If ($MCBloqueio == 0){ Set @MCBuffs$[17], "^FFFF00Off^000000"; }Else{ If (MCBloqueio == 1){ Set @MCBuffs$[17], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[17], "^0B7420Sim^000000"; } }
+   If ($MCEscudo == 0){ Set @MCBuffs$[18], "^FFFF00Off^000000"; }Else{ If (MCEscudo == 1){ Set @MCBuffs$[18], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[18], "^0B7420Sim^000000"; } }
+   If ($MCDesejo == 0){ Set @MCBuffs$[19], "^FFFF00Off^000000"; }Else{ If (MCDesejo == 1){ Set @MCBuffs$[19], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[19], "^0B7420Sim^000000"; } }
+   If ($MCRapidez == 0){ Set @MCBuffs$[20], "^FFFF00Off^000000"; }Else{ If (MCRapidez == 1){ Set @MCBuffs$[20], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[20], "^0B7420Sim^000000"; } }
+   If ($MCLamina == 0){ Set @MCBuffs$[21], "^FFFF00Off^000000"; }Else{ If (MCLamina == 1){ Set @MCBuffs$[21], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[21], "^0B7420Sim^000000"; } }
+   If ($MCAparar == 0){ Set @MCBuffs$[22], "^FFFF00Off^000000"; }Else{ If (MCAparar == 1){ Set @MCBuffs$[22], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[22], "^0B7420Sim^000000"; } }
+   If ($MCDedicacao == 0){ Set @MCBuffs$[23], "^FFFF00Off^000000"; }Else{ If (MCDedicacao == 1){ Set @MCBuffs$[23], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[23], "^0B7420Sim^000000"; } }
+   If ($MCAssumptio == 0){ Set @MCBuffs$[24], "^FFFF00Off^000000"; }Else{ If (MCAssumptio == 1){ Set @MCBuffs$[24], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[24], "^0B7420Sim^000000"; } }
+   If ($MCAmplificacao == 0){ Set @MCBuffs$[25], "^FFFF00Off^000000"; }Else{ If (MCAmplificacao == 1){ Set @MCBuffs$[25], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[25], "^0B7420Sim^000000"; } }
+   If ($MCVisao == 0){ Set @MCBuffs$[26], "^FFFF00Off^000000"; }Else{ If (MCVisao == 1){ Set @MCBuffs$[26], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[26], "^0B7420Sim^000000"; } }
+   If ($MCCaminho == 0){ Set @MCBuffs$[27], "^FFFF00Off^000000"; }Else{ If (MCCaminho == 1){ Set @MCBuffs$[27], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[27], "^0B7420Sim^000000"; } }
+   If ($MCGolpe == 0){ Set @MCBuffs$[28], "^FFFF00Off^000000"; }Else{ If (MCGolpe == 1){ Set @MCBuffs$[28], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[28], "^0B7420Sim^000000"; } }
+   If ($MCImpulso == 0){ Set @MCBuffs$[29], "^FFFF00Off^000000"; }Else{ If (MCImpulso == 1){ Set @MCBuffs$[29], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[29], "^0B7420Sim^000000"; } }
+   If ($MCInstinto == 0){ Set @MCBuffs$[30], "^FFFF00Off^000000"; }Else{ If (MCInstinto == 1){ Set @MCBuffs$[30], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[30], "^0B7420Sim^000000"; } }
+   If ($MCPresciencia == 0){ Set @MCBuffs$[31], "^FFFF00Off^000000"; }Else{ If (MCPresciencia == 1){ Set @MCBuffs$[31], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[31], "^0B7420Sim^000000"; } }
+   If ($MCAdrenalinaC == 0){ Set @MCBuffs$[32], "^FFFF00Off^000000"; }Else{ If (MCAdrenalinaC == 1){ Set @MCBuffs$[32], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[32], "^0B7420Sim^000000"; } }
+   If ($MCRCUM == 0){ Set @MCBuffs$[33], "^FFFF00Off^000000"; }Else{ If (MCRCUM == 1){ Set @MCBuffs$[33], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[33], "^0B7420Sim^000000"; } }
+   If ($MCPreservar == 0){ Set @MCBuffs$[34], "^FFFF00Off^000000"; }Else{ If (MCPreservar == 1){ Set @MCBuffs$[34], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[34], "^0B7420Sim^000000"; } }
+   If ($MCLancasD == 0){ Set @MCBuffs$[35], "^FFFF00Off^000000"; }Else{ If (MCLancasD == 1){ Set @MCBuffs$[35], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[35], "^0B7420Sim^000000"; } }
+   If ($MCForcaV == 0){ Set @MCBuffs$[36], "^FFFF00Off^000000"; }Else{ If (MCForcaV == 1){ Set @MCBuffs$[36], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[36], "^0B7420Sim^000000"; } }
+   If ($MCSubmissao == 0){ Set @MCBuffs$[37], "^FFFF00Off^000000"; }Else{ If (MCSubmissao == 1){ Set @MCBuffs$[37], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[37], "^0B7420Sim^000000"; } }
+//Novas
+   If ($MCRefletir == 0){ Set @MCBuffs$[38], "^FFFF00Off^000000"; }Else{ If (MCRefletir == 1){ Set @MCBuffs$[38], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[38], "^0B7420Sim^000000"; } }
+   If ($MCRetardarV == 0){ Set @MCBuffs$[39], "^FFFF00Off^000000"; }Else{ If (MCRetardarV == 1){ Set @MCBuffs$[38], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[39], "^0B7420Sim^000000"; } }
+   If ($MCIncASPD == 0){ Set @MCBuffs$[40], "^FFFF00Off^000000"; }Else{ If (MCIncASPD == 1){ Set @MCBuffs$[39], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[40], "^0B7420Sim^000000"; } }
+   If ($MCPocaoVento == 0){ Set @MCBuffs$[41], "^FFFF00Off^000000"; }Else{ If (MCPocaoVento == 1){ Set @MCBuffs$[40], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[41], "^0B7420Sim^000000"; } }
+   If ($MCIncAtk == 0){ Set @MCBuffs$[42], "^FFFF00Off^000000"; }Else{ If (MCIncAtk == 1){ Set @MCBuffs$[41], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[42], "^0B7420Sim^000000"; } }
+   If ($MCIncAtkM == 0){ Set @MCBuffs$[43], "^FFFF00Off^000000"; }Else{ If (MCIncAtkM == 1){ Set @MCBuffs$[42], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[43], "^0B7420Sim^000000"; } }
+   If ($MCRevestirArm == 0){ Set @MCBuffs$[44], "^FFFF00Off^000000"; }Else{ If (MCRevestirArm == 1){ Set @MCBuffs$[43], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[44], "^0B7420Sim^000000"; } }
+   If ($MCRevestirEsc == 0){ Set @MCBuffs$[45], "^FFFF00Off^000000"; }Else{ If (MCRevestirEsc == 1){ Set @MCBuffs$[44], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[45], "^0B7420Sim^000000"; } }
+   If ($MCRevestirRop == 0){ Set @MCBuffs$[46], "^FFFF00Off^000000"; }Else{ If (MCRevestirRop == 1){ Set @MCBuffs$[45], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[46], "^0B7420Sim^000000"; } }
+   If ($MCRevestirCap == 0){ Set @MCBuffs$[47], "^FFFF00Off^000000"; }Else{ If (MCRevestirCap == 1){ Set @MCBuffs$[46], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[47], "^0B7420Sim^000000"; } }
+   If ($MCKaizel == 0){ Set @MCBuffs$[48], "^FFFF00Off^000000"; }Else{ If (MCKaizel == 1){ Set @MCBuffs$[47], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[48], "^0B7420Sim^000000"; } }
+   If ($MCIncAllStatus == 0){ Set @MCBuffs$[49], "^FFFF00Off^000000"; }Else{ If (MCIncAllStatus == 1){ Set @MCBuffs$[48], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[49], "^0B7420Sim^000000"; } }
+   If ($MCIncHit == 0){ Set @MCBuffs$[50], "^FFFF00Off^000000"; }Else{ If (MCIncHit == 1){ Set @MCBuffs$[49], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[50], "^0B7420Sim^000000"; } }
+   If ($MCIncFlee == 0){ Set @MCBuffs$[51], "^FFFF00Off^000000"; }Else{ If (MCIncFlee == 1){ Set @MCBuffs$[50], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[51], "^0B7420Sim^000000"; } }
+   If ($MCIncHp == 0){ Set @MCBuffs$[52], "^FFFF00Off^000000"; }Else{ If (MCIncHp == 1){ Set @MCBuffs$[51], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[52], "^0B7420Sim^000000"; } }
+   If ($MCIncSp == 0){ Set @MCBuffs$[53], "^FFFF00Off^000000"; }Else{ If (MCIncSp == 1){ Set @MCBuffs$[52], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[53], "^0B7420Sim^000000"; } }
+   If ($MCIncDef == 0){ Set @MCBuffs$[54], "^FFFF00Off^000000"; }Else{ If (MCIncDef == 1){ Set @MCBuffs$[53], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[54], "^0B7420Sim^000000"; } }
+   If ($MCEske == 0){ Set @MCBuffs$[55], "^FFFF00Off^000000"; }Else{ If (MCEske == 1){ Set @MCBuffs$[54], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[55], "^0B7420Sim^000000"; } }
+   If ($MCEska == 0){ Set @MCBuffs$[56], "^FFFF00Off^000000"; }Else{ If (MCEska == 1){ Set @MCBuffs$[55], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[56], "^0B7420Sim^000000"; } }
+   If ($MCResistenciaF == 0){ Set @MCBuffs$[57], "^FFFF00Off^000000"; }Else{ If (MCResistenciaF == 1){ Set @MCBuffs$[56], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[57], "^0B7420Sim^000000"; } }
+   If ($MCPanico == 0){ Set @MCBuffs$[58], "^FFFF00Off^000000"; }Else{ If (MCPanico == 1){ Set @MCBuffs$[57], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[58], "^0B7420Sim^000000"; } }
+   If ($MCAlmentarP == 0){ Set @MCBuffs$[59], "^FFFF00Off^000000"; }Else{ If (MCAlmentarP == 1){ Set @MCBuffs$[58], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[59], "^0B7420Sim^000000"; } }
+   If ($MCAuraN == 0){ Set @MCBuffs$[60], "^FFFF00Off^000000"; }Else{ If (MCAuraN == 1){ Set @MCBuffs$[59], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[60], "^0B7420Sim^000000"; } }
+   If ($MCIncEXP == 0){ Set @MCBuffs$[61], "^FFFF00Off^000000"; }Else{ If (MCIncEXP == 1){ Set @MCBuffs$[60], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[61], "^0B7420Sim^000000"; } }
+   If ($MCIncItem == 0){ Set @MCBuffs$[62], "^FFFF00Off^000000"; }Else{ If (MCIncItem == 1){ Set @MCBuffs$[61], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[62], "^0B7420Sim^000000"; } }
+   If ($MCSeguroV == 0){ Set @MCBuffs$[63], "^FFFF00Off^000000"; }Else{ If (MCSeguroV == 1){ Set @MCBuffs$[62], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[63], "^0B7420Sim^000000"; } }
+   If ($MCIncCri == 0){ Set @MCBuffs$[64], "^FFFF00Off^000000"; }Else{ If (MCIncCri == 1){ Set @MCBuffs$[63], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[64], "^0B7420Sim^000000"; } }
+   If ($MCIncCast == 0){ Set @MCBuffs$[65], "^FFFF00Off^000000"; }Else{ If (MCIncCast == 1){ Set @MCBuffs$[65], "^FF0000Não^000000"; }Else{  Set @MCBuffs$[65], "^0B7420Sim^000000"; } }
+   If (@CP_Menu == 1){ GoTo CP_Menu1; }Else{ GoTo CP_Menu2; }
+
+CP_Menu1:
+   Next;
+   Set @CP_Menu, 1;
+   Menu @MCBuffs$[0]+" - ^333399Cura^000000",CP_Cura,@MCBuffs$[1]+" - ^333399Benção^000000",CP_Bencao,@MCBuffs$[2]+" - ^333399Agilidade^000000",CP_Agilidade,@MCBuffs$[3]+" - ^333399Vigor^000000^000000",CP_Vigor,@MCBuffs$[4]+" - ^333399Rapidez com Duas Mãos^000000",CP_RCDM,@MCBuffs$[5]+" - ^333399Concentração^000000",CP_Concentracao,@MCBuffs$[6]+" - ^333399Angelus^000000",CP_Angelus,@MCBuffs$[7]+" - ^333399Impositio Manus^000000",CP_Impositio,@MCBuffs$[8]+" - ^333399Kyrie Eleison^000000",CP_Kyrie,@MCBuffs$[9]+" - ^333399Magnificat^000000",CP_Magnificat,
+        @MCBuffs$[10]+" - ^333399Gloria^000000",CP_Gloria,@MCBuffs$[11]+" - ^333399Adrenalina Pura,^000000",CP_Adrenalina,@MCBuffs$[12]+" - ^333399Manejo Perfeito^000000",CP_Manejo,@MCBuffs$[13]+" - ^333399Força Violenta^000000",CP_Forca,@MCBuffs$[14]+" - ^333399Amplificar Poder^000000",CP_Amplificar,@MCBuffs$[15]+" - ^333399Grito de Guerra^000000",CP_Grito,@MCBuffs$[16]+" - ^333399Proteção Arcana^000000",CP_Protecao,@MCBuffs$[17]+" - ^333399Bloqueio^000000",CP_Bloqueio,@MCBuffs$[18]+" - ^333399Escudo Refletor^000000",CP_Escudo,@MCBuffs$[19]+" - ^333399Desejo Arcano^000000",CP_Desejo,
+        @MCBuffs$[20]+" - ^333399Rapidez com Lança^000000",CP_Rapidez,@MCBuffs$[21]+" - ^333399Lâmina de Aura^000000",CP_Lamina,@MCBuffs$[22]+" - ^333399Aparar Golpe^000000",CP_Aparar,@MCBuffs$[23]+" - ^333399Dedicação^000000",CP_Dedicacao,@MCBuffs$[24]+" - ^333399Assumptio^000000",CP_Assumptio,@MCBuffs$[25]+" - ^333399Amplificação Mística^000000",CP_Amplificacao,@MCBuffs$[26]+" - ^333399Visão Real^000000",CP_Visao,@MCBuffs$[27]+" - ^333399Caminho do Vento^000000",CP_Caminho,@MCBuffs$[28]+" - ^333399Golpe Estilhaçante^000000",CP_Golpe,@MCBuffs$[29]+" - ^333399Impulso no Carrinho^000000",CP_Impulso,
+        @MCBuffs$[30]+" - ^333399Instinto de Defesa^000000",CP_Instinto,@MCBuffs$[31]+" - ^333399Presciência^000000",CP_Presciencia,@MCBuffs$[32]+" - ^333399Adrenalina Concentrada^000000",CP_AdrenalinaC,@MCBuffs$[33]+" - ^333399Rapidez com Uma Mão^000000",CP_RCUM,"Ver Mais Buffs.",CP_Menu2,"Assim já esta bom.",Sair;
+
+CP_Menu2:
+   Next;
+   Set @CP_Menu, 2;
+   Menu @MCBuffs$[34]+" - ^333399Preservar^000000",CP_Preservar,@MCBuffs$[35]+" - ^333399Lanças Duplas^000000",CP_LancasD,@MCBuffs$[36]+" - ^333399Força Violentíssima^000000",CP_ForcaV,@MCBuffs$[37]+" - ^333399Submissão^000000",CP_Submissao,@MCBuffs$[38]+" - ^333399Refletir Veneno^000000",CP_Refletir,@MCBuffs$[39]+" - ^333399Retardar Veneno^000000",CP_RetardarV,@MCBuffs$[40]+" - ^333399Almentar ASPD^000000",CP_IncASPD,@MCBuffs$[41]+" - ^333399Super Agilidade^000000",CP_PocaoVento,@MCBuffs$[42]+" - ^333399Almentar Ataque^000000",CP_IncAtk,@MCBuffs$[43]+" - ^333399Almentar Ataque Mágico^000000",CP_IncAtkM,
+        @MCBuffs$[44]+" - ^333399Revestir Arma^000000",CP_RevestirArm,@MCBuffs$[45]+" - ^333399Revestir Escudo^000000",CP_RevestirEsc,@MCBuffs$[46]+" - ^333399Revestir Armadura^000000",CP_RevestirRop,@MCBuffs$[47]+" - ^333399Revestir Capacete^000000",CP_RevestirCap,@MCBuffs$[48]+" - ^333399Kaizel^000000",CP_Kaizel,@MCBuffs$[49]+" - ^333399Almentar todos os Atributos^000000",CP_IncAllStatus,@MCBuffs$[50]+" - ^333399Almentar Hit^000000",CP_IncHit,@MCBuffs$[51]+" - ^333399Almentar Esquiva^000000",CP_IncFlee,@MCBuffs$[52]+" - ^333399Almentar HP^000000",CP_IncHP,@MCBuffs$[53]+" - ^333399Almentar SP^000000",CP_IncSP,
+        @MCBuffs$[54]+" - ^333399Almentar Defesa^000000",CP_IncDef,@MCBuffs$[55]+" - ^333399Eske^000000",CP_Eske,@MCBuffs$[56]+" - ^333399Eska^000000",CP_Eska,@MCBuffs$[57]+" - ^333399Resistência Final^000000",CP_ResistenciaF,@MCBuffs$[58]+" - ^333399Pânico do Justiceiro^000000",CP_Panico,@MCBuffs$[59]+" - ^333399Aumentar Precisão^000000",CP_AlmentarP,@MCBuffs$[60]+" - ^333399Aura Ninja^000000",CP_AuraN,@MCBuffs$[61]+" - ^333399Almentar EXP em 1.5^000000",CP_IncEXP,@MCBuffs$[62]+" - ^333399Almentar Drop em 2x^000000",CP_IncItem,
+        @MCBuffs$[63]+" - ^333399Seguro de Vida^000000",CP_SeguroV,@MCBuffs$[64]+" - ^333399Almetar Crítico^000000",CP_IncCri,@MCBuffs$[65]+" - ^333399Diminuir tempo de conjuração^000000",CP_IncCast,"Ver Buffs Anteriores",CP_Menu1,"Assim já esta bom.",Sair;
+
+CP_Cura: If (MCCura == 0){ Set MCCura, 1; }Else{ Set MCCura, 0; } GoTo CP_Config;
+CP_Bencao: If (MCBencao == 0){ Set MCBencao, 1; }Else{ Set MCBencao, 0; } GoTo CP_Config;
+CP_Agilidade: If (MCAgilidade == 0){ Set MCAgilidade, 1; }Else{ Set MCAgilidade, 0; } GoTo CP_Config;
+CP_Vigor: If (MCVigor == 0){ Set MCVigor, 1; }Else{ Set MCVigor, 0; } GoTo CP_Config;
+CP_RCDM: If (MCRCDM == 0){ Set MCRCDM, 1; }Else{ Set MCRCDM, 0; } GoTo CP_Config;
+CP_Concentracao: If (MCConcentracao == 0){ Set MCConcentracao, 1; }Else{ Set MCConcentracao, 0; } GoTo CP_Config;
+CP_Angelus: If (MCAngelus == 0){ Set MCAngelus, 1; }Else{ Set MCAngelus, 0; } GoTo CP_Config;
+CP_Impositio: If (MCImpositio == 0){ Set MCImpositio, 1; }Else{ Set MCImpositio, 0; } GoTo CP_Config;
+CP_Kyrie: If (MCKyrie == 0){ Set MCKyrie, 1; }Else{ Set MCKyrie, 0; } GoTo CP_Config;
+CP_Magnificat: If (MCMagnificat == 0){ Set MCMagnificat, 1; }Else{ Set MCMagnificat, 0; } GoTo CP_Config;
+CP_Gloria: If (MCGloria == 0){ Set MCGloria, 1; }Else{ Set MCGloria, 0; } GoTo CP_Config;
+CP_Adrenalina: If (MCAdrenalina == 0){ Set MCAdrenalina, 1; }Else{ Set MCAdrenalina, 0; } GoTo CP_Config;
+CP_Manejo: If (MCManejo == 0){ Set MCManejo, 1; }Else{ Set MCManejo, 0; } GoTo CP_Config;
+CP_Forca: If (MCForca == 0){ Set MCForca, 1; }Else{ Set MCForca, 0; } GoTo CP_Config;
+CP_Amplificar: If (MCAmplificar == 0){ Set MCAmplificar, 1; }Else{ Set MCAmplificar, 0; } GoTo CP_Config;
+CP_Grito: If (MCGrito == 0){ Set MCGrito, 1; }Else{ Set MCGrito, 0; } GoTo CP_Config;
+CP_Protecao: If (MCProtecao == 0){ Set MCProtecao, 1; }Else{ Set MCProtecao, 0; } GoTo CP_Config;
+CP_Bloqueio: If (MCBloqueio == 0){ Set MCBloqueio, 1; }Else{ Set MCBloqueio, 0; } GoTo CP_Config;
+CP_Escudo: If (MCEscudo == 0){ Set MCEscudo, 1; }Else{ Set MCEscudo, 0; } GoTo CP_Config;
+CP_Desejo: If (MCDesejo == 0){ Set MCDesejo, 1; }Else{ Set MCDesejo, 0; } GoTo CP_Config;
+CP_Rapidez: If (MCRapidez == 0){ Set MCRapidez, 1; }Else{ Set MCRapidez, 0; } GoTo CP_Config;
+CP_Lamina: If (MCLamina == 0){ Set MCLamina, 1; }Else{ Set MCLamina, 0; } GoTo CP_Config;
+CP_Aparar: If (MCAparar == 0){ Set MCAparar, 1; }Else{ Set MCAparar, 0; } GoTo CP_Config;
+CP_Dedicacao: If (MCDedicacao == 0){ Set MCDedicacao, 1; }Else{ Set MCDedicacao, 0; } GoTo CP_Config;
+CP_Assumptio: If (MCAssumptio == 0){ Set MCAssumptio, 1; }Else{ Set MCAssumptio, 0; } GoTo CP_Config;
+CP_Amplificacao: If (MCAmplificacao == 0){ Set MCAmplificacao, 1; }Else{ Set MCAmplificacao, 0; } GoTo CP_Config;
+CP_Visao: If (MCVisao == 0){ Set MCVisao, 1; }Else{ Set MCVisao, 0; } GoTo CP_Config;
+CP_Caminho: If (MCCaminho == 0){ Set MCCaminho, 1; }Else{ Set MCCaminho, 0; } GoTo CP_Config;
+CP_Golpe: If (MCGolpe == 0){ Set MCGolpe, 1; }Else{ Set MCGolpe, 0; } GoTo CP_Config;
+CP_Impulso: If (MCImpulso == 0){ Set MCImpulso, 1; }Else{ Set MCImpulso, 0; } GoTo CP_Config;
+CP_Instinto: If (MCInstinto == 0){ Set MCInstinto, 1; }Else{ Set MCInstinto, 0; } GoTo CP_Config;
+CP_Presciencia: If (MCPresciencia == 0){ Set MCPresciencia, 1; }Else{ Set MCPresciencia, 0; } GoTo CP_Config;
+CP_AdrenalinaC: If (MCAdrenalinaC == 0){ Set MCAdrenalinaC, 1; }Else{ Set MCAdrenalinaC, 0; } GoTo CP_Config;
+CP_RCUM: If (MCRCUM == 0){ Set MCRCUM, 1; }Else{ Set MCRCUM, 0; } GoTo CP_Config;
+CP_Preservar: If (MCPreservar == 0){ Set MCPreservar, 1; }Else{ Set MCPreservar, 0; } GoTo CP_Config;
+CP_LancasD: If (MCLancasD == 0){ Set MCLancasD, 1; }Else{ Set MCLancasD, 0; } GoTo CP_Config;
+CP_ForcaV: If (MCForcaV == 0){ Set MCForcaV, 1; }Else{ Set MCForcaV, 0; } GoTo CP_Config;
+CP_Submissao: If (MCSubmissao == 0){ Set MCSubmissao, 1; }Else{ Set MCSubmissao, 0; } GoTo CP_Config;
+//Novas
+CP_Refletir: If (MCRefletir == 0){ Set MCRefletir, 1; }Else{ Set MCRefletir, 0; } GoTo CP_Config;
+CP_RetardarV: If (MCRetardarV == 0){ Set MCRetardarV, 1; }Else{ Set MCRetardarV, 0; } GoTo CP_Config;
+CP_IncASPD: If (MCIncASPD == 0){ Set MCIncASPD, 1; }Else{ Set MCIncASPD, 0; } GoTo CP_Config;
+CP_PocaoVento: If (MCPocaoVento == 0){ Set MCPocaoVento, 1; }Else{ Set MCPocaoVento, 0; } GoTo CP_Config;
+CP_IncAtk: If (MCIncAtk == 0){ Set MCIncAtk, 1; }Else{ Set MCIncAtk, 0; } GoTo CP_Config;
+CP_IncAtkM: If (MCIncAtkM == 0){ Set MCIncAtkM, 1; }Else{ Set MCIncAtkM, 0; } GoTo CP_Config;
+CP_RevestirArm: If (MCRevestirArm == 0){ Set MCRevestirArm, 1; }Else{ Set MCRevestirArm, 0; } GoTo CP_Config;
+CP_RevestirEsc: If (MCRevestirEsc == 0){ Set MCRevestirEsc, 1; }Else{ Set MCRevestirEsc, 0; } GoTo CP_Config;
+CP_RevestirRop: If (MCRevestirRop == 0){ Set MCRevestirRop, 1; }Else{ Set MCRevestirRop, 0; } GoTo CP_Config;
+CP_RevestirCap: If (MCRevestirCap == 0){ Set MCRevestirCap, 1; }Else{ Set MCRevestirCap, 0; } GoTo CP_Config;
+CP_Kaizel: If (MCKaizel == 0){ Set MCKaizel, 1; }Else{ Set MCKaizel, 0; } GoTo CP_Config;
+CP_IncAllStatus: If (MCIncAllStatus == 0){ Set MCIncAllStatus, 1; }Else{ Set MCIncAllStatus, 0; } GoTo CP_Config;
+CP_IncHit: If (MCIncHit == 0){ Set MCIncHit, 1; }Else{ Set MCIncHit, 0; } GoTo CP_Config;
+CP_IncFlee: If (MCIncFlee == 0){ Set MCIncFlee, 1; }Else{ Set MCIncFlee, 0; } GoTo CP_Config;
+CP_IncHp: If (MCIncHp == 0){ Set MCIncHp, 1; }Else{ Set MCIncHp, 0; } GoTo CP_Config;
+CP_IncSp: If (MCIncSp == 0){ Set MCIncSp, 1; }Else{ Set MCIncSp, 0; } GoTo CP_Config;
+CP_IncDef: If (MCIncDef == 0){ Set MCIncDef, 1; }Else{ Set MCIncDef, 0; } GoTo CP_Config;
+CP_Eske: If (MCEske == 0){ Set MCEske, 1; }Else{ Set MCEske, 0; } GoTo CP_Config;
+CP_Eska: If (MCEska == 0){ Set MCEska, 1; }Else{ Set MCEska, 0; } GoTo CP_Config;
+CP_ResistenciaF: If (MCResistenciaF == 0){ Set MCResistenciaF, 1; }Else{ Set MCResistenciaF, 0; } GoTo CP_Config;
+CP_Panico: If (MCPanico == 0){ Set MCPanico, 1; }Else{ Set MCPanico, 0; } GoTo CP_Config;
+CP_AlmentarP: If (MCAlmentarP == 0){ Set MCAlmentarP, 1; }Else{ Set MCAlmentarP, 0; } GoTo CP_Config;
+CP_AuraN: If (MCAuraN == 0){ Set MCAuraN, 1; }Else{ Set MCAuraN, 0; } GoTo CP_Config;
+CP_IncEXP: If (MCIncEXP == 0){ Set MCIncEXP, 1; }Else{ Set MCIncEXP, 0; } GoTo CP_Config;
+CP_IncItem: If (MCIncItem == 0){ Set MCIncItem, 1; }Else{ Set MCIncItem, 0; } GoTo CP_Config;
+CP_SeguroV: If (MCSeguroV == 0){ Set MCSeguroV, 1; }Else{ Set MCSeguroV, 0; } GoTo CP_Config;
+CP_IncCri: If (MCIncCri == 0){ Set MCIncCri, 1; }Else{ Set MCIncCri, 0; } GoTo CP_Config;
+CP_IncCast: If (MCIncCast == 0){ Set MCIncCast, 1; }Else{ Set MCIncCast, 0; } GoTo CP_Config;
+
+Close2;
+Cutin "",255;
+End;
+
+Sair:
+   Show "^333399[Curandeira]^000000 ^E1E1E1SeuRO^000000";
+   Show "Volte quando precisar dos meus serviços.";
+   Close2;
+   Cutin "",255;
+   End;
+}
+
+//== Curinha ===============================================================================
+
+prontera,155,183,5	script	Curinha::curandeiraPet	81,{ If (getgmlevel() >= $MCLvlVIP){ If (ConfiguraBuffs == 0){ Emotion 18; Set ConfiguraBuffs, 1; End; }Else{ Emotion 21; Set ConfiguraBuffs, 0; End; } } }
+
+//== Duplicatas ============================================================================
+
+morocc,150,97,5	duplicate(curandeira)	curandeira#1	936,2,2,
+geffen,112,65,5	duplicate(curandeira)	curandeira#2	936,2,2,
+payon,165,229,3	duplicate(curandeira)	curandeira#3	936,2,2,
+alberta,187,147,5	duplicate(curandeira)	curandeira#4	936,2,2,
+izlude,125,118,5	duplicate(curandeira)	curandeira#5	936,2,2,
+aldebaran,147,119,4	duplicate(curandeira)	curandeira#6	936,2,2,
+xmas,141,137,5	duplicate(curandeira)	curandeira#7	936,2,2,
+comodo,208,148,4	duplicate(curandeira)	curandeira#8	936,2,2,
+yuno,151,46,5	duplicate(curandeira)	curandeira#9	936,2,2,
+amatsu,200,79,5	duplicate(curandeira)	curandeira#10	936,2,2,
+gonryun,157,124,5	duplicate(curandeira)	curandeira#11	936,2,2,
+umbala,88,159,5	duplicate(curandeira)	curandeira#12	936,2,2,
+niflheim,29,162,5	duplicate(curandeira)	curandeira#13	936,2,2,
+louyang,212,105,4	duplicate(curandeira)	curandeira#14	936,2,2,
+new_1-1,51,112,5	duplicate(curandeira)	curandeira#15	936,2,2,
+sec_pri,16,61,5	duplicate(curandeira)	curandeira#16	936,2,2,
+jawaii,246,131,5	duplicate(curandeira)	curandeira#17	936,2,2,
+ayothaya,155,117,4	duplicate(curandeira)	curandeira#18	936,2,2,
+einbroch,55,202,5	duplicate(curandeira)	curandeira#19	936,2,2,
+lighthalzen,162,79,4	duplicate(curandeira)	curandeira#20	936,2,2,
+einbech,79,100,1	duplicate(curandeira)	curandeira#21	936,2,2,
+hugel,93,151,4	duplicate(curandeira)	curandeira#22	936,2,2,
+rachel,132,117,5	duplicate(curandeira)	curandeira#23	936,2,2,
+veins,210,127,4	duplicate(curandeira)	curandeira#24	936,2,2,
+sec_in02,132,165,3	duplicate(curandeira)	curandeira#24	936,2,2,

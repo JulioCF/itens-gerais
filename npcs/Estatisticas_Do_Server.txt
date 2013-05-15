@@ -1,0 +1,50 @@
+
+prontera,169,171,2	script	Estatísticas::ONL	837,{
+		
+
+		query_sql "SELECT COUNT(1) FROM `login` WHERE `sex` != 'S'",$@CT;
+		query_sql "SELECT COUNT(1) FROM `char` WHERE `account_id` > '0'",$@CC;
+		query_sql "SELECT SUM(`zeny`) FROM `char` WHERE `account_id` > '0'",$CZ$;                            
+		mes "[^FF0000Estatística do servidor^000000]";
+		mes "^0000FFHomens Online^000000     "  + $@TP;
+		mes "^800080Mulheres Online^000000    "  + $@TT;
+		mes "^000000Total Online^000000            "+ $@TC;  
+		mes "^339966Total de Contas^000000     "+ $@CT; 
+		mes "^339966Total de Char^000000          "+ $@CC; 
+		mes "^339966Total de Zeny^000000          "+ $CZ$;
+		close;
+
+	OnInit:
+	query_sql "SELECT COUNT(1) FROM `login` WHERE `sex` != 'S'",$@CT;
+	query_sql "SELECT COUNT(1) FROM `char` WHERE `account_id` > '0'",$@CC;
+	query_sql "SELECT SUM(`zeny`) FROM `char` WHERE `account_id` > '0'",$CZ$;    
+	waitingroom "",0;
+	OnTimer3000:
+	setarray .@Titulo$,"Homens online  "+$@TP+"","Mulheres online "+$@TT+"","Total online "+$@TC+"","Total de contas "+$@CT+"",
+	"Total de char "+$@CC+"","Total de zeny "+$CZ$+"";
+	delwaitingroom;
+	waitingroom .@Titulo$[rand(0,6)],0; initnpctimer;
+	end;
+								
+}
+
+-	script	online	-1,{		
+OnPcLoginEvent:
+	       set $@TC, $@TC + 1; 
+	       if(Sex == 1)
+	       {
+	       set $@TP, $@TP + 1; end;
+	       }
+	       set $@TT, $@TT + 1; end;     	       
+OnPcLogoutEvent:
+               set $@TC, $@TC - 1; 
+	       if(Sex == 1)
+	       {
+	       set $@TP, $@TP - 1; end;
+	       }
+	       set $@TT, $@TT - 1; end;
+
+
+}
+
+new_1-1,57,117,5	duplicate(ONL)	Estatísticas#1	837

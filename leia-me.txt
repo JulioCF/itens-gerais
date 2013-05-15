@@ -1,0 +1,23 @@
+Repositório criado por Jonyll - Julio Cesar Fornazier
+
+http://jonyll.net
+
+contato@jonyll.net
+
+Licença deste: GNU GPL 3.0 | Creative Commons 3.0
+
+// --------------------------------------------------- \\
+			Agradecimentos:
+
+Ao google code
+Ao assembla
+A empresa http://virtuati.com.br
+Aos emuladores;
+
+- eAthena.ws | http://eathena-project.googlecode.com/svn/
+
+- rAthena.org | https://rathena.svn.sourceforge.net/svnroot/rathena/
+
+- Cronus-emulator.com | https://github.com/Cronus-Emulator/Cronus-Emulator ou http://svn.cronus-emulator.com/cronus/
+
+- brAthena.org | http://svn.brathena.org/

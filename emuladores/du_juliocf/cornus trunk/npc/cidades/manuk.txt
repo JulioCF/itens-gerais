@@ -1,0 +1,100 @@
+//===== Cronus Script ========================================
+//= Cidade de Manuk
+//===== Por: =================================================
+//= L0ne_W0lf
+//===== Versão Atual: ========================================
+//= 1.0a
+//===== Additional Comments: =================================
+//= 1.0 First Version.
+//= 1.0a Traduzido. [RoM]
+//============================================================
+
+man_in01,346,135,0	script	 Trabalhador#ep13bsg1	454,{
+	if (isequipped(2782) == 1) {
+		mes "[Trabalhador]";
+		mes "É perigoso se a válvula não for checada apropriadamente todo dia.";
+		mes "Na verdade, já houve um acidente.";
+		mes "Me dá arrepios só de pensar sobre isto.";
+		close;
+	}
+	else {
+		mes "[Trabalhador]";
+		mes "Gs df o aj ud pa";
+		mes "N sd asw ewt jj ";
+		mes "Ud aso pda s ";
+		close;
+	}
+}
+
+man_in01,393,134,3	script	Trabalhador#ep13bsg2	454,{
+	if (isequipped(2782) == 1) {
+		mes "[Trabalhador]";
+		mes "O quê!! Qu.. eh... eu... Eu não cochilei!!";
+		mes "Vamos voltar ao trabalho... esta é a forma correta...";
+		close;
+	}
+	else {
+		mes "[Trabalhador]";
+		mes "Ns ad jai osd";
+		mes "Rt odj as jo dp as";
+		close;
+	}
+}
+
+man_in01,377,143,5	script	Trabalhador#ep13bsg3	454,{
+	if (isequipped(2782) == 1) {
+		mes "[Trabalhador]";
+		mes "Hmm... Está funcionando bem... Nenhum problema...";
+		close;
+	}
+	else {
+		mes "[Trabalhador]";
+		mes "Mou ii ros oa d d ";
+		close;
+	}
+}
+
+man_in01,333,128,5	script	Trabalhador#ep13bsg4	454,{
+	if (isequipped(2782) == 1) {
+		mes "[Trabalhador]";
+		mes "Meu campo de visão está ficando menor estes dias.";
+		close;
+	}
+	else {
+		mes "[Trabalhador]";
+		mes "Yw I eus ia d ap s";
+		close;
+	}
+}
+
+man_in01,336,128,5	script	Trabalhador#ep13bsg5	454,{
+	if (isequipped(2782) == 1) {
+		mes "[Trabalhador]";
+		mes "Não é fabuloso?";
+		close;
+	}
+	else {
+		mes "[Trabalhador]";
+		mes "R tt osj dj d";
+		close;
+	}
+}
+
+man_in01,283,288,3	script	Trabalhador#ep13bsg6	454,{
+	if (isequipped(2782) == 1) {
+		mes "[Trabalhador]";
+		mes "É muita sorte ter tanto Brádium de alta qualidade hoje em dia.";
+		next;
+		mes "[Trabalhador]";
+		mes "Isto é tudo que restou para nós.";
+		close;
+	}
+	else {
+		mes "[Trabalhador]";
+		mes "Qw eI hs pado as d p ";
+		next;
+		mes "[Trabalhador]";
+		mes "Too fn ish d fd";
+		close;
+	}
+}

@@ -1,0 +1,55 @@
+$agit_hora_start_se	-1
+$agit_hora_end_se	-1
+$agit_hora_start	-1
+$agit_hora_end	-1
+$ttranks	999999
+$ET_Cooldown	583200
+$ET_Timelimit	14400
+$ET_Minlevel	50
+$top_50min	5
+$ET_Minparty	1
+$ET_AshID	6000
+$top_60min	6
+$ET_GM	60
+$top_70min	7
+$top_80min	8
+$top_ptmin	10
+$agit_hora_start_se,5	-1
+$agit_hora_end_se,5	-1
+$agit_hora_start,5	-1
+$agit_hora_end,5	-1
+$agit_hora_start_se,3	-1
+$agit_hora_end_se,3	-1
+$agit_hora_start,3	-1
+$agit_hora_end,3	-1
+$agit_hora_start_se,1	-1
+$agit_hora_end_se,1	-1
+$agit_hora_start,1	-1
+$agit_hora_end,1	-1
+$agit_hora_start_se,6	-1
+$agit_hora_end_se,6	-1
+$agit_hora_start,6	16
+$agit_hora_end,6	18
+$agit_hora_start_se,4	-1
+$agit_hora_end_se,4	-1
+$agit_hora_start,4	21
+$agit_hora_end,4	23
+$agit_hora_start_se,2	-1
+$agit_hora_end_se,2	-1
+$agit_hora_start,2	21
+$agit_hora_end,2	23
+$ttnames$,11	Senorita Sylvia
+$ttnames$	Breezy Havana
+$timezonestring$	^FF0000GMT -3^000000
+$ttnames$,9	Breezy Havana
+$ttnames$,7	Breezy Havana
+$ttnames$,5	Kafra Jasmine
+$ttnames$,3	Antonio
+$ttnames$,12	Joo Jahk
+$ttnames$,1	RS125
+$ttnames$,10	Nari
+$ttnames$,8	RS125
+$ttnames$,6	Chris
+$ttnames$,4	Aragham
+$ttnames$,13	RS125
+$ttnames$,2	Hollgrehenn

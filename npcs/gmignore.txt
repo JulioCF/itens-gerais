@@ -1,0 +1,10 @@
+-	script	gmignore	-1,{
+
+	OnPCLoginEvent:
+	if (getgroupid() >= 20 ){
+	atcommand "@hide";
+	atcommand "@battleignore";
+	atcommand "@speed 1";
+	}
+	end;
+}

@@ -1,0 +1,192 @@
+prontera,184,211,4	script	Build Saver	410,{
+// == Configurações ==
+Set @Npc$,"[ Mestra Build ]";	// Nome do Npc.
+SetArray @Price[0],100000,50000;	// Preço, em Zenys, para utilizar o Npc. O primeiro número é para não Vips e o segundo para Vips.
+SetArray @MaxSaves[0],5,10;		// Número máximo de builds a serem salvas. O primeiro número é para não Vips e o segundo para Vips.
+Set @CanPrivate,1;				// Nível de GM mínimo para definir build pública/particular.
+Set @CanSave,0;					// Nível de GM mínimo para salvar uma build.
+Set @ReqLevel,99;				// Nível de Classe requerido para utilizar o npc.
+Set @PopBuilds,10;				// Número de Build Populares para se mostrar.
+// ===================
+// == Funções ==
+function BuildSaver;
+// =============
+while(true)
+{
+	Mes @Npc$;
+	Mes "Olá "+StrCharInfo(0)+", posso salvar Builds de Stats"+(@Price[(GetGMLevel() ? 1 : 0)]? " por um quantia de "+@Price[(GetGMLevel() ? 1 : 0)]+"z ":"")+" para você!";
+	if(Zeny < @Price[(GetGMLevel() ? 1 : 0)])
+	{
+		Mes "Infelizmente você não tem Zenys para me pagar...";
+		close;
+	}
+	Mes "O que deseja?";
+	next;
+	switch(select("- Ver Builds Populares","- Ver Minhas Builds","- Salvar Build","- Sair"))
+	{
+		case 1:
+			BuildSaver(0);
+			break;
+		case 2:
+			BuildSaver(1);
+			break;
+		case 3:
+			Mes @Npc$;
+			if(GetGMLevel() < @CanSave)
+			{
+				Mes "Desculpe-me, mas você não está autorizado para salvar Builds.";
+				next;
+				break;
+			}
+			query_sql "Select `build_name` From `build_saver` Where `char_id` = "+GetCharID(0),@BName$;
+			if(GetArraySize(@BName$) >= @MaxSaves[(GetGMLevel() ? 1 : 0)])
+			{
+				Mes "Você já salvou o número máximo possível de Builds, por favor apague uma Build se deseja salvar outra.";
+				next;
+				break;
+			}
+			if(BaseLevel < @ReqLevel)
+			{
+				Mes "Desculpe-me, mas você precisa ser, no mínimo, nível "+@ReqLevel+" para poder salvar suas Builds";
+				next;
+				break;
+			}
+			Mes "Deseja mesmo salvar sua Build atual?";
+			next;
+			if(select("- Sim:- Não") == 2)
+				break;
+			Mes @Npc$;
+			Mes "Por favor, digite um nome para sua Build atual:";
+			next;
+			input @BuildName$,1;
+			query_sql "Select `build_name` From `build_saver` Where `build_name` = '"+@BuildName$+"' And `char_id` = "+GetCharID(0),@BName$;
+			Mes @Npc$;
+			if(@BName$ != "")
+			{
+				Mes "Você já possui um Build salva com este nome, deseja sobrescrevê-la?";
+				next;
+				if(select("- Sim:- Não") == 2)
+					break;
+				Mes @Npc$;
+			}
+			if(GetGMLevel() >= @CanPrivate)
+			{
+				Mes "Deseja que esta Build seja Pública ou Privada?";
+				Mes "Se for Pública, qualquer um poderá vê-la e copiá-la, caso seja Particular apenas você a verá.";
+				next;
+				Set @Public,select("- Pública:- Privada:- Cancelar") - 1;
+				if(@Public == 2)
+					break;
+				Mes @Npc$;
+			}
+			Mes "Build Salva com sucesso!";
+			Set Zeny, Zeny - @Price[(GetGMLevel() ? 1 : 0)];
+			query_sql "Insert Into `build_saver` Values ("+GetCharID(0)+", '"+@BuildName$+"', "+@Public+",'"+StrCharInfo(0)+"', "+Class+", "+BaseLevel+", "+ReadParam(bStr)+", "+ReadParam(bAgi)+", "+ReadParam(bVit)+", "+ReadParam(bInt)+", "+ReadParam(bDex)+", "+ReadParam(bLuk)+",0)";
+			next;
+			break;
+		case 4:
+			Mes @Npc$;
+			Mes "Até a próxima!";
+			close;
+	}
+}
+function	BuildSaver	{
+	DeleteArray @BuildName$[0],GetArraySize(@BuildName$);
+	DeleteArray @Name$[0],GetArraySize(@Name$);
+	DeleteArray @Class[0],GetArraySize(@Class);
+	DeleteArray @Lvl[0],GetArraySize(@Lvl);
+	DeleteArray @Str[0],GetArraySize(@Str);
+	DeleteArray @Agi[0],GetArraySize(@Agi);
+	DeleteArray @Vit[0],GetArraySize(@Vit);
+	DeleteArray @Int[0],GetArraySize(@Int);
+	DeleteArray @Dex[0],GetArraySize(@Dex);
+	DeleteArray @Luk[0],GetArraySize(@Luk);
+	DeleteArray @Copied[0],GetArraySize(@Copied);
+	query_sql "Select `build_name`, `name`, `class`, `lvl`, `str`, `agi`, `vit`, `int`, `dex`, `luk`, `copiedtimes` From `build_saver` "+(!GetArg(0,0)?"Where `public` = 0 Order By `copiedtimes` Desc Limit "+@PopBuilds:"Where `char_id` = "+GetCharID(0)),@BuildName$,@Name$,@Class,@Lvl,@Str,@Agi,@Vit,@Int,@Dex,@Luk,@Copied;
+	for(Set @i,0; @i < GetArraySize(@BuildName$); Set @i,@i + 1)
+	{
+		Mes @Npc$;
+		Mes "Build \""+@BuildName$[@i]+"\""+(!GetArg(0,0)?" por "+@Name$[@i]+", "+JobName(@Class[@i]):"")+", Lv."+@Lvl[@i];
+		Mes "Str: "+@Str[@i];
+		Mes "Agi: "+@Agi[@i];
+		Mes "Vit: "+@Vit[@i];
+		Mes "Int: "+@Int[@i];
+		Mes "Dex: "+@Dex[@i];
+		Mes "Luk: "+@Luk[@i];
+		Mes "Build Copiada "+@Copied[@i]+" vezes.";
+		next;
+	}
+	if(!GetArraySize(@BuildName$))
+	{
+		Mes @Npc$;
+		Mes "Nenhuma Build encontrada.";
+		next;
+		return;
+	}
+	if(BaseLevel < @ReqLevel)
+		return;
+	Mes @Npc$;
+	Mes "Deseja aplicar "+(GetArg(0,0)?"ou apagar":"")+" alguma build?";
+	next;
+	Set @sel1,select((!GetArg(0,0)?"- Sim:- Não":"- Aplicar:- Apagar:- Cancelar")) - 1;
+	if(@sel1 == (!GetArg(0,0)? 1 : 2))
+		return;
+	Mes @Npc$;
+	Mes "Qual Build deseja "+(!@sel1?"aplicar":"apagar")+"?";
+	next;
+	Set @menu$,"";
+	for(Set @i,0; @i < GetArraySize(@BuildName$); Set @i,@i + 1)
+		if(@menu$ == "") Set @menu$,"Build \""+@BuildName$[@i]+"\" por "+@Name$[@i]+", "+JobName(@Class[@i])+", Lv."+@Lvl[@i];
+		else Set @menu$,@menu$+":Build \""+@BuildName$[@i]+"\" por "+@Name$[@i]+", "+JobName(@Class[@i])+", Lv."+@Lvl[@i];
+	Set @menu$,@menu$+":Cancelar";
+	Set @sel,select(@menu$)-1;
+	if(@sel == GetArraySize(@BuildName$))
+		return;
+	Mes @Npc$;
+	if(BaseLevel < @Lvl[@sel])
+	{
+		Mes "Seu nível é menor do que o da Build \""+@BuildName$[@sel]+"\", portanto você não pode aplicá-la.";
+		next;
+		return;
+	}
+	Mes "Deseja mesmo "+(!@sel1?"aplicar":"apagar")+" esta Build?";
+	Mes "Build \""+@BuildName$[@sel]+"\""+(!GetArg(0,0)?" por "+@Name$[@i]+", "+JobName(@Class[@i]):"")+", Lv."+@Lvl[@sel];
+	Mes "Str: "+@Str[@sel];
+	Mes "Agi: "+@Agi[@sel];
+	Mes "Vit: "+@Vit[@sel];
+	Mes "Int: "+@Int[@sel];
+	Mes "Dex: "+@Dex[@sel];
+	Mes "Luk: "+@Luk[@sel];
+	next;
+	if(select("- Sim:- Não") == 2)
+		return;
+	Mes @Npc$;
+	Mes "Build "+(!@sel1?"Aplicada":"Apagada")+"!";
+	if(!@sel1)
+	{
+		if(!GetArg(0,0) && StrCharInfo(0) != @Name$[@sel])
+			query_sql "Update `build_saver` Set `copiedtimes` = `copiedtimes` + 1 Where `build_name` = '"+@BuildName$[@sel]+"' And `name` = '"+@Name$[@sel]+"' And `class` = "+@Class[@sel];
+		ResetStatus;
+		while(ReadParam(bStr) < @Str[@sel] && StatusPoint)
+			StatusUp bStr;
+		while(ReadParam(bVit) < @Vit[@sel] && StatusPoint)
+			StatusUp bVit;
+		while(ReadParam(bAgi) < @Agi[@sel] && StatusPoint)
+			StatusUp bAgi;
+		while(ReadParam(bInt) < @Int[@sel] && StatusPoint)
+			StatusUp bInt;
+		while(ReadParam(bDex) < @Dex[@sel] && StatusPoint)
+			StatusUp bDex;
+		while(ReadParam(bLuk) < @Luk[@sel] && StatusPoint)
+			StatusUp bLuk;
+	}
+	else
+		query_sql "Delete From `build_saver` Where `build_name` = '"+@BuildName$[@sel]+"' And `char_id` = "+GetCharID(0);
+	Set Zeny, Zeny - @Price[(GetGMLevel() ? 1 : 0)];
+	next;
+	return;
+}
+OnInit:
+	query_sql "Create Table If Not Exists `build_saver` ( `char_id` int(11) unsigned NOT NULL, `build_name` varchar(255) NOT NULL, `public` tinyint(1) unsigned NOT NULL, `name` varchar(255) NOT NULL, `class` mediumint(4) unsigned NOT NULL, `lvl` mediumint(4) unsigned NOT NULL, `str` tinyint(3) unsigned NOT NULL, `agi` tinyint(3) unsigned NOT NULL, `vit` tinyint(3) unsigned NOT NULL, `int` tinyint(3) unsigned NOT NULL, `dex` tinyint(3) unsigned NOT NULL, `luk` tinyint(3) unsigned NOT NULL, `copiedtimes` int(11) unsigned NOT NULL, Primary Key (`char_id`) )";
+end;
+}

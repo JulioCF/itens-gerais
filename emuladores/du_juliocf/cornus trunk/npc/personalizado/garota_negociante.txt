@@ -1,0 +1,31 @@
+//===== Cronus Script ================================================= 
+//= Garota Negociante
+//===== Por: ==========================================================
+//= Rafael (baseado na do Mehah, oficial do cronus)
+//===== Versão Atual: ================================================= 
+//= 1.2
+//===== Descrição: ==================================================== 
+//= Dá gratuitamente falcões, pecopecos e carrinhos
+//===== Changelog: ====================================================
+//= 1.1 Otimizado [Mooka]
+//= 1.1a Removido show [Keoy]
+//= 1.2 Realizada outra otimização [Mara]
+//=====================================================================
+prontera,130,196,5	script	Garota Negociante	90,{
+
+	mes "Olá, aqui você pode alugar um carrinho, pecopeco ou falcão depedendo de sua profissão.";
+	mes "[Garota Negociante]";
+	next;
+	mes "[Garota Negociante]";
+	if ((BaseClass == 5 || Class == 23) && !checkcart() && getskilllv(39)) setcart;
+	else if (BaseClass == 1 && !checkriding() && getskilllv(63)) setriding;
+	else if (BaseClass == 3 && !checkfalcon() && getskilllv(127)) setfalcon;
+	else
+	{
+		mes "Desculpe, mas não posso ajudar você.";
+		mes "Verifique se você já possui a habilidade necessária ou se já está com algo alugado!";
+		close;
+	}
+	mes "Aqui está, faça bom proveito!";
+	close;
+}

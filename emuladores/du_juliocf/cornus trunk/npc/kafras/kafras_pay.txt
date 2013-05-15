@@ -1,0 +1,87 @@
+//===== Cronus Script ========================================
+//= Kafras de Payon
+//===== Por: =================================================
+//= eAthena Dev Team
+//===== Versão Atual: ========================================
+//= 2.4d
+//===== Compatibilidade: =====================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= Kafras da cidade de Payon.
+//===== Comentários Adicionais: ==============================
+//= v1.1 Now using functions
+//= v2.1b Minor changes to function calls.  Using arguments.
+//= This version uses arrays .[kobra_k88]
+//= v2.2 New Payon Locations. [Darkchild]
+//= 2.3 1 New Kafra, fixed save menus
+//= 2.31 New prices [Evera]
+//= 2.32 Minor fix to Payon Archer Kafra [SinSloth]
+//= 2.4 Updated function calls with new arguments. [L0ne_W0lf]
+//=	Added unique Kafra Welcome message.
+//= 2.4b Updated the remaning names for the Kafras. [L0ne_W0lf]
+//= 2.4c Traduzido. [Puncker]
+//= 2.4d Revisado. [RoM]
+//============================================================
+
+// Cidade Principal, Sul ----------------------------------------------------
+payon,181,104,4	script	Funcionária Kafra::kaf_payon	113,{
+	cutin "kafra_05",2;
+	callfunc "F_KafSetPay";
+	mes "[Funcionária Kafra]";
+	mes "A Corporação Kafra";
+	mes "está sempre trabalhando para lhe dar";
+	mes "o melhor de nossos serviços.";
+	mes "Como posso ajudá-lo?";
+	callfunc "F_Kafra",5,0,1,60,930;
+
+	M_Save:
+		savepoint "payon",160,58;
+		callfunc "F_KafEnd",0,1,"na cidade de Payon";
+}
+
+// Cidade Principal, Centro-Norte -------------------------------------------
+payon,175,226,4	script	Funcionária Kafra::kaf_payon2	116,{
+	cutin "kafra_02",2;
+	callfunc "F_KafSetPay";
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra.";
+	mes "Os Serviços Kafra";
+	mes "estão sempre ao seu lado.";
+	mes "Como posso ajudá-lo?";
+	callfunc "F_Kafra",5,0,1,60,930;
+
+	M_Save:
+		savepoint "payon",257,242;
+		callfunc "F_KafEnd",0,1,"na cidade de Payon";
+}
+
+// Vila dos Arqueiros -------------------------------------------------------
+pay_arche,55,123,0	script	Funcionária Kafra::kaf_payon3	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSetPay";
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra.";
+	mes "Os Serviços Kafra";
+	mes "estão sempre ao seu lado.";
+	mes "Como posso ajudá-lo?";
+	callfunc "F_Kafra",5,5,1,90,1200;
+
+	M_Save:
+		savepoint "pay_arche",49,144;
+		callfunc "F_KafEnd",0,1,"na Caverna de Payon";
+}
+
+
+// Funcão: Setar as variáveis -----------------------------------------------
+function	script	F_KafSetPay	{
+	cleararray @wrpC$[0],"",getarraysize(@wrpC$);
+	setarray @wrpD$[0], "Alberta", "Prontera", "Morroc";
+	setarray @wrpP[0], 1200, 1200, 1200;
+	set @wrpC$[0], @wrpD$[0]+" -> "+@wrpP[0];
+	set @wrpC$[1], @wrpD$[1]+" -> "+@wrpP[1];
+	set @wrpC$[2], @wrpD$[2]+" -> "+@wrpP[2];
+	set @wrpC$[3], "Cancelar";
+	return;
+}

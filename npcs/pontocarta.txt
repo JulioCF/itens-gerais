@@ -1,0 +1,140 @@
+prontera,150,150,5	script	Negociador de Cartas	65,{
+
+	set .@beginCardID, 4001;
+	set .@finalCardID, 4455;
+	
+	setarray .exchangeID[0],	603,	616,	617,	5000;
+	setarray .exchangePrice[0],	100,	1000,	500,	2000;
+	
+	mes "["+strnpcinfo(1)+"]";
+	mes "Estou aqui para trocar suas cartas por pontos, juntando uma certa quantidade de pontos, você pode trocar por itens.";
+	next;
+	switch (select ("Cartas por Pontos:Pontos por Caixa:Cancelar"))
+	{
+		case 1:
+			mes "["+strnpcinfo(1)+"]";
+			mes "Você possui as seguintes cartas:";
+			for (set .@i, .@beginCardID; .@i <= .@finalCardID; set .@i, .@i + 1)
+			{
+				if (countitem(.@i) > 0)
+				{
+					mes countitem(.@i)+"x "+getitemname(.@i);
+					set $@exchangeCount, $@exchangeCount + (1 * countitem(.@i));
+				}
+				else
+					continue;
+			}
+			next;
+			switch (select ("Escolher quais trocar:Trocar todas:Cancelar")
+			{
+				case 1:
+					set .@menu$, "";
+					set $@exchangeCount, 0;
+					for (set .@i, .@beginCardID; .@i <= .@finalCardID; set .@i, .@i + 1)
+					{
+						if (countitem(.@i) > 0)
+						{
+							setarray .@tmpArray[getarraysize(.@tmpArray)+((!getarraysize(.@tmpArray))?0:1)], .@i;
+							set .@menu$, .@menu$ + countitem(.@i)+"x "+getitemname(.@i) + ":";
+							set $@exchangeCount, $@exchangeCount + 1;
+						}
+						else
+							continue;
+					}
+					next;
+					select(.@menu$);
+					set @firstMenu, @menu;
+					mes "["+strnpcinfo(1)+"]";
+					mes "Quantas "+getitemname(.@tmpArray[(@firstMenu-1)]+" você deseja trocar?";
+					input .@input,0,29999;
+					next;
+					mes "["+strnpcinfo(1)+"]";
+					if (.@input > countitem(.@tmpArray[(@firstMenu-1)]))
+					{
+						mes "Você não tem essa quantidade!";
+						close;
+					}
+					mes "Você perderá "+countitem(.@tmpArray[(@firstMenu-1)])+"x "+getitemname(.@tmpArray[(@firstMenu-1)]);
+					mes "Deseja continuar?";
+					next;
+					if (select ("Cancelar:Continuar") == 1) close;
+					mes "["+strnpcinfo(1)+"]";
+					mes "Aí está, você acaba de receber "+countitem(.@tmpArray[(@firstMenu-1)])+" para trocar!";
+					close2;
+					set exchangePoints, exchangePoints + countitem(.@tmpArray[(@firstMenu-1)]);
+					end;
+				
+				case 2:
+					mes "["+strnpcinfo(1)+"]";
+					mes "Tem certeza? Você irá receber "+$@exchangeCount+" pontos e perderá todas as cartas!";
+					next;
+					if (select ("Cancelar:Trocar tudo") == 1) close;
+					mes "["+strnpcinfo(1)+"]";
+					mes "Aí está, você acaba de receber "+$@exchangeCount+" para trocar!";
+					close2;
+					for (set .@i, .@beginCardID; .@i <= .@finalCardID; set .@i, .@i + 1)
+					{
+						if (countitem(.@i) > 0)
+							set $@exchangeCount, $@exchangeCount + (1 * countitem(.@i));
+						else
+							continue;
+					}
+					set exchangePoints, exchangePoints + $@exchangeCount;
+					end;
+					
+				case 3:
+					close;
+			}
+	
+		case 2:
+			mes "["+strnpcinfo(1)+"]";
+			mes "Os preços das caixas em pontos aparecerão entre [colchetes] logo após o nome do item.";
+			next;
+			mes "["+strnpcinfo(1)+"]";
+			mes "Escolha o item que deseja comprar:";
+			next;
+			set .@menu$, "";
+			for (set .@i, 0; .@i < getarraysize(.exchangeID); set .@i, .@i + 1)
+				set .@menu$, .@menu$ + getitemname(.exchangeID[.@i]) + "["+.exchangePrice[.@i]+"]" + ":";
+			select (.@menu$);
+			set @secondMenu, @menu;
+			mes "["+strnpcinfo(1)+"]";
+			if (exchangePoints < .exchangePrice[(@secondMenu-1)])
+			{
+				mes "Você não tem os pontos necessários.";
+				close;
+			}
+			mes "Qual a forma de compra?";
+			next;
+			switch (select ("Digitar:Somente um:Cancelar"))
+			{
+				case 1:
+					input .@input,0,29999;
+					mes "["+strnpcinfo(1)+"]";
+					if ((.@input*.exchangePrice[(@secondMenu-1)]) > exchangePoints)
+					{
+						mes "Você não tem esses pontos.";
+						close;
+					}
+					set @delItem, (.@input*.exchangePrice[(@secondMenu-1)]);
+					set @getItem, .@input;
+					break;
+					
+				case 2:
+					set @delItem, .exchangePrice[(@secondMenu-1)];
+					set @getItem, 1;
+					break;
+					
+				case 3:
+					close;		
+			}
+			mes "Aqui está, "+@getItem+"x "+getitemname(.exchangeID[(@secondMenu-1)]);
+			close2;
+			getitem .exchangeID[(@secondMenu-1)], @getItem;
+			set exchangePoints, exchangePoints - @delItem;
+			end;
+			
+		case 3:
+			close;
+	}
+}

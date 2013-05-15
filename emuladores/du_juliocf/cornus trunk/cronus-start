@@ -1,0 +1,64 @@
+#!/bin/sh
+# athena starting script by rowla
+# modified by shazeya@syafi.com (NL101541)
+# modified for Cronus Remake by RoM.
+# modified for dnkroz's SQL detection.
+
+PATH=./:$PATH
+
+# Detect if using txt or sql
+# Courtesy by dnkroz
+if [ -x login-server ] && [ -x char-server ] && [ -x map-server ]; then
+    L_SRV=login-server
+    C_SRV=char-server
+    M_SRV=map-server
+else
+    L_SRV=login-server_sql
+    C_SRV=char-server_sql
+    M_SRV=map-server_sql
+fi
+
+print_start(){
+echo "Cronus Iniciando..."
+echo "            (c) 2003 Athena Project"
+echo "         modificado por shazeya@syafi.com"
+echo "      -------------------------------------"
+echo "      modificado para o Cronus Remake por RoM"
+echo ""
+echo "checando..."
+}
+
+check_files(){
+    for i in ${L_SRV} ${C_SRV} ${M_SRV}
+    do
+        if [ ! -f ./$i ]; then
+            echo "$i não existe, ou não pôde ser executado."
+            echo "Servidor parado. Favor checar sua compilação."
+            exit 1;
+        fi
+    done
+
+echo "Checagem completa."
+echo "Tudo parece estar funcionando perfeitamente!"
+}
+
+case $1 in
+    'iniciar')
+        print_start
+        check_files
+        exec ./${L_SRV}&
+        exec ./${C_SRV}&
+        exec ./${M_SRV}&
+        echo "Cronus Iniciado!"
+;;
+    'parar')
+        ps ax | grep -E "${L_SRV}|${C_SRV}|${M_SRV}" | awk '{print $1}' | xargs kill
+;;
+    'reiniciar')
+        $0 parar
+        $0 iniciar
+;;
+    *)
+        echo "Uso: cronus-start { iniciar | parar | reiniciar }"
+;;
+esac

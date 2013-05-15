@@ -1,0 +1,292 @@
+// ===========================================================
+//===== Cronus Script ========================================
+//= Sistema Pack Guild 2.2
+//===== Por: =================================================
+//= Adriano Barbosa
+//===== Versão Atual: ========================================
+//= 2.2
+//===== Compatibilidade: =====================================
+//= Cronus Emulador
+//===== Descrição: ===========================================
+// Entrega o Pack Guild automaticamente para o Lider da Guild.
+// Itens entregues conforme o Numero de Player OnLine.
+// Numero minimo de Player para Receber o Pack Guild é 15.
+// Contas com IP Semelhantes serão Barrados no Sistema.
+// Guild's que recebem o Pack Guild são fixadas na Tabela SQL.
+// Sera anunciado o Nome da Guild quando Receber o Pack Guild.
+// Quando um Player sai da Guild que Recebeu o Pack Guild os Itens contidos na Conta Dele são Deletados.(OBS: Apenas os Itens do Pack Guild.)
+// NPC Só entrega os Item se houver espaço no inventario do Lider.
+// Player's com o Mesmo IP do Lider não serão computados.
+//============================================================
+/*
+CREATE TABLE IF NOT EXISTS `pack_guild` (
+  `char_id` int(10) NOT NULL,
+  `acc_id` int(10) NOT NULL,
+  `master` varchar(32) NOT NULL,
+  `guild_id` int(10) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `data` datetime NOT NULL,
+  `pack_guild` int(32) NOT NULL,
+  `ip` varchar(100) NOT NULL,
+  PRIMARY KEY  (`char_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+*/
+
+prontera,156,170,6	script	Pack Guild	108,{
+
+	set .nn$, "[^D90000"+StrNpcInfo(1)+"^000000]";
+
+	set @GID, getcharid(2);
+	query_sql "SELECT `char_id`, `acc_id`, `master`, `guild_id`, `name`, `data`, `pack_guild` FROM `pack_guild` WHERE `char_id` = '"+getcharid(0)+"'", @charid, @accid, @master$, @guildid, @nameg$, @date$, @PKG;
+	
+	mes .nn$;
+	mes "Olá ^0000FF"+StrCharInfo(0)+"^000000 oque Deseja ?";
+	next;
+	switch(select("- Receber Pack Guild:- Informações:- Nada")){
+		case 1:
+		if(@GID != 0){
+			if(getguildmaster(@GID) == StrCharInfo(0)){
+				if(@guildid != @GID){
+					query_sql "SELECT `last_ip` FROM `login` WHERE `account_id` = '"+getcharid(3)+"'",@LIP$;
+					query_sql "SELECT `ip` FROM  `pack_guild` WHERE  `ip` = '"+@LIP$+"'",@GIP$;
+					if(@GIP$ != @LIP$){
+						mes .nn$;
+						mes "Para Receber o Pack Guild toda sua Guild deve estar Presente.";
+						mes "^FF0000"+StrCharInfo(0)+"^000000 gostaria de Receber seu Pack Guild ?";
+						next;
+						if(select("- Sim:- Não")==2)close;
+							query_sql "SELECT `char_id`,`account_id`,`name` FROM `char` WHERE `guild_id` = '"+@GID+"' ORDER BY `char_id`,`account_id`,`name` DESC ", @vCharId, @vAccId, @vName$;
+							set @peso, 0;
+							set @rPeso, MaxWeight - Weight;
+							query_sql "SELECT COUNT(*) FROM `char` WHERE `online` = 1 AND `guild_id` = '"+@GID+"'", @Cont;
+							set @Cont, @Cont +1;
+							for(set @i, 0; @i < getarraysize(@vCharId); set @i, @i+1){
+								query_sql "SELECT `last_ip` FROM `login` WHERE `account_id` = '"+@vAccId[@i]+"'", @vLip$;
+								if(@vLip$ == @LIP$){
+									set @Cont, @Cont -1;
+								}
+							}
+							if(@Cont <= 14){
+								mes .nn$;
+								mes "O Mínimo de Player Online para Receber o Pack Guild é 15.";
+								close;
+							}
+							else if(@Cont >= 15){
+								for(set @i,0; @i < getarraysize($PackGuild1); set @i,@i+1) set @peso, @peso + getiteminfo($PackGuild1,6);
+								if(@peso <= @rPeso){
+									mes .nn$;
+									mes "Sua Guild contem ^00FF00["+@Cont+"]^000000 Membros Online e ira receber o Pack Guild 1.";
+									close2;
+									set @Time$, gettimestr("%Y-%m/%d %H:%M:%S",21);
+									//for(set @i, 0; @i < getarraysize($PackGuild1); set @i, @i+1) getitem2 $PackGuild1[@i],$PackQnt1[@i],getcharid(2),0,0,0,0,0,0;
+									for(set @i, 0; @i < getarraysize($PackGuild1); set @i, @i+1) query_sql "INSERT INTO `storage` (`id`, `account_id`, `nameid`, `amount`, `identify`, `refine`, `attribute`, `card0`, `card1`, `card2`, `card3`, `expire_time`) VALUES (NULL, '"+getcharid(3)+"', '"+$PackGuild1[@i]+"', '"+$PackQnt1[@i]+"', '"+getcharid(2)+"', '0', '0', '0', '0', '0', '0', '0')";
+									announce "[AVISO] A Guild ["+strcharinfo(2)+"] acaba de Receber o Pack Guild.",bc_all;
+									query_sql "INSERT INTO `pack_guild` (`char_id`, `acc_id`, `master`, `guild_id`, `name`, `data`, `pack_guild`, `ip`) VALUES ("+getcharid(0)+", "+getcharid(3)+", '"+StrCharInfo(0)+"', "+getcharid(2)+", '"+StrCharInfo(2)+"', '"+@time$+"', '"+@cont+"', '"+@LIP$+"')";
+									atcommand "@kick "+StrCharInfo(0);
+									end;
+								}
+								else{
+									mes .nn$;
+									mes "Seu Personagem não suporta o Peso do Pack Guild.";
+									close;
+								}
+							}
+							else if(@Cont >= 20){
+								for(set @i,0; @i < getarraysize($PackGuild1); set @i,@i+1) set @peso, @peso + getiteminfo($PackGuild1,6);
+								if(@peso <= @rPeso){
+									mes .nn$;
+									mes "Sua Guild contem ^00FF00["+@Cont+"]^000000 Membros Online e ira receber o Pack Guild 2.";
+									close2;
+									//for(set @i, 0; @i < getarraysize($PackGuild2); set @i, @i+1) getitem2 $PackGuild2[@i],$PackQnt2[@i],getcharid(2),0,0,0,0,0,0;
+									for(set @i, 0; @i < getarraysize($PackGuild2); set @i, @i+1) query_sql "INSERT INTO `storage` (`id`, `account_id`, `nameid`, `amount`, `identify`, `refine`, `attribute`, `card0`, `card1`, `card2`, `card3`, `expire_time`) VALUES (NULL, '"+getcharid(3)+"', '"+$PackGuild2[@i]+"', '"+$PackQnt2[@i]+"', '"+getcharid(2)+"', '0', '0', '0', '0', '0', '0', '0')";
+									announce "[AVISO] A Guild ["+strcharinfo(2)+"] acaba de Receber o Pack Guild.",bc_all;
+									query_sql "INSERT INTO `pack_guild` (`char_id`, `acc_id`, `master`, `guild_id`, `name`, `data`, `pack_guild`, `ip`) VALUES ("+getcharid(0)+", "+getcharid(3)+", '"+StrCharInfo(0)+"', "+getcharid(2)+", '"+StrCharInfo(2)+"', '"+@time$+"', '"+@cont+"', '"+@LIP$+"')";
+									end;
+								}
+								else{
+									mes .nn$;
+									mes "Seu Personagem não suporta o Peso do Pack Guild.";
+									close;
+								}
+							}
+							else if(@Cont > 25){
+								for(set @i,0; @i < getarraysize($PackGuild1); set @i,@i+1) set @peso, @peso + getiteminfo($PackGuild1,6);
+								if(@peso <= @rPeso){
+									mes .nn$;
+									mes "Sua Guild contem ^00FF00["+@Cont+"]^000000 Membros Online e ira receber o Pack Guild 3.";
+									close2;
+									//for(set @i, 0; @i < getarraysize($PackGuild3); set @i, @i+1) getitem2 $PackGuild3[@i],$PackQnt3[@i],getcharid(2),0,0,0,0,0,0;
+									for(set @i, 0; @i < getarraysize($PackGuild3); set @i, @i+1) query_sql "INSERT INTO `storage` (`id`, `account_id`, `nameid`, `amount`, `identify`, `refine`, `attribute`, `card0`, `card1`, `card2`, `card3`, `expire_time`) VALUES (NULL, '"+getcharid(3)+"', '"+$PackGuild3[@i]+"', '"+$PackQnt3[@i]+"', '"+getcharid(2)+"', '0', '0', '0', '0', '0', '0', '0')";
+									announce "[AVISO] A Guild ["+strcharinfo(2)+"] acaba de Receber o Pack Guild.",bc_all;
+									query_sql "INSERT INTO `pack_guild` (`char_id`, `acc_id`, `master`, `guild_id`, `name`, `data`, `pack_guild`, `ip`) VALUES ("+getcharid(0)+", "+getcharid(3)+", '"+StrCharInfo(0)+"', "+getcharid(2)+", '"+StrCharInfo(2)+"', '"+@time$+"', '"+@cont+"', '"+@LIP$+"')";
+									end;
+								}
+								else{
+									mes .nn$;
+									mes "Seu Personagem não suporta o Peso do Pack Guild.";
+									close;
+								}
+							}
+						
+					}
+					else
+					{
+						mes .nn$;
+						mes "Você recebeu o Pack Guild Recentemente.";
+						close;
+					}
+				}
+				else
+				{
+					mes .nn$;
+					mes "Sua Guild ja Recebeu o Pack Guild.";
+					close;
+				}
+			}
+			else
+			{
+				mes .nn$;
+				mes "Desculpe mas só converso com Lideres de Guild.";
+				close;
+			}
+		}
+		else
+		{
+			mes .nn$;
+			mes "Desculpe mas só converso com Lideres de Guild.";
+			close;
+		}
+		
+		case 2:
+		mes .nn$;
+		mes "Oque gostaria de Saber Sobre o Pack Guild ?";
+		next;
+		switch(select("- Oque é Pack Guild:- Como Receber:- Premios:- Nada")){
+			case 1:
+			mes .nn$;
+			mes "Pack Guild é um Incentivo para que Jogadores de outros Servidores";
+			mes "e sua Guild venham Jogar em Nosso Servidor.";
+			close;
+			
+			case 2:
+			mes .nn$;
+			mes "Apenas o Lider da Guild Pode Receber o Pack Guild e junto a ele os Membros da Guild.";
+			mes "Para Receber o Pack Guild devem estar Online no minimo 15 Player's.";
+			mes "^FF0000[1]^000000 - 15 Player's ^C90000-^000000 Pack Guild 1.";
+			mes "^FF0000[2]^000000 - 20 Player's ^C90000-^000000 Pack Guild 2.";
+			mes "^FF0000[3]^000000 - 25 Player's ^C90000-^000000 Pack Guild 3.";
+			close;
+			
+			case 3:
+			mes "-----------------------------------";
+			mes "       Informações - Pack 1        ";
+			mes "-----------------------------------";
+			for(set @i, 0; @i < getarraysize($PackGuild1); set @i, @i + 1) mes "[^FF0000"+$PackQnt1[@i]+"^000000] <-> [^C90000"+getitemname($PackGuild1[@i])+"^000000].";
+			next;
+			mes "-----------------------------------";
+			mes "       Informações - Pack 2        ";
+			mes "-----------------------------------";
+			for(set @i, 0; @i < getarraysize($PackGuild2); set @i, @i + 1) mes "[^FF0000"+$PackQnt2[@i]+"^000000] <-> [^C90000"+getitemname($PackGuild2[@i])+"^000000].";
+			next;
+			mes "-----------------------------------";
+			mes "       Informações - Pack 3        ";
+			mes "-----------------------------------";
+			for(set @i, 0; @i < getarraysize($PackGuild3); set @i, @i + 1) mes "[^FF0000"+$PackQnt3[@i]+"^000000] <-> [^C90000"+getitemname($PackGuild3[@i])+"^000000].";
+			close;			
+		}
+		
+		case 3:
+		mes .nn$;
+		mes "Volte sempre.";
+		close;
+	}
+OnInit:
+	waitingroom StrNpcInfo(1),0;
+//===== Itens do Pack Guild 1: ===============================
+	setarray $PackGuild1[0], 501,501,501,501,501,501,501,501;
+	setarray $PackQnt1[0],   1,1,1,1,1,1,1,1;
+//============================================================
+//===== Itens do Pack Guild 2: ===============================
+	setarray $PackGuild2[0], 501,501,501,501,501,501,501,501;
+	setarray $PackQnt2[0],   1,1,1,1,1,1,1,1;
+//============================================================
+//===== Itens do Pack Guild 3: ===============================
+	setarray $PackGuild3[0], 501,501,501,501,501,501,501,501;
+	setarray $PackQnt3[0],   1,1,1,1,1,1,1,1;
+//============================================================
+End;
+}
+
+-	script	RMVPI	-1,{
+OnPCLoginEvent:
+
+//===== Itens de Todos os Pack Guild: ========================
+	setarray .@ITEM[0], 501,501,501,501,501,501,501,501;
+//============================================================
+	
+	query_sql "SELECT `char_id`,`nameid`,`amount`,`identify` FROM `inventory` WHERE `char_id` = '"+getcharid(0)+"' ORDER BY `char_id`,`nameid`,`amount`,`identify` DESC", @charid, .@IDI, @AMT, .@IDF;
+	query_sql "SELECT `char_id`,`nameid`,`amount`,`identify` FROM `cart_inventory` WHERE `char_id` = '"+getcharid(0)+"' ORDER BY `char_id`,`nameid`,`amount`,`identify` DESC", @charidCI, .@IDIci, @AMTci, .@IDFci;
+	query_sql "SELECT `account_id`,`nameid`,`amount`,`identify` FROM `storage` WHERE `account_id` = '"+getcharid(3)+"' ORDER BY `account_id`,`nameid`,`amount`,`identify` DESC", @charidS, .@IDIs, @AMTs, .@IDFs;
+	query_sql "SELECT `guild_id`,`nameid`,`amount`,`identify` FROM `guild_storage` WHERE `guild_id` = '"+getcharid(2)+"' ORDER BY `guild_id`,`nameid`,`amount`,`identify` DESC", @guildid, .@IDIgs, @AMTgs, .@IDFgs;
+	query_sql "SELECT COUNT(*) FROM `inventory`", @CNT;
+
+	for(set .@i, 0; .@i < @CNT;set .@i,.@i +1){
+		for(set @n, 0; @n < getarraysize(.@ITEM);set @n,@n +1){
+			if(.@IDI[.@i] == .@ITEM[@n]){
+				if(.@IDF[.@i] == getcharid(2)){ end;}
+				else if(.@IDF[.@i] <= 1){ end; }
+				else{
+					dispbottom "Você contem Itens que não lhe Pertencem.";
+					sleep2 2000;
+					dispbottom "Você sera Deslogado para a remoção do Item.";
+					sleep2 2000;
+					for(set .@a, 10; .@a > 0; set .@a,.@a -1) unequip(.@a);
+					query_sql "DELETE FROM `inventory` WHERE `nameid` = '"+.@IDI[.@i]+"' AND `identify` = '"+.@IDF[.@i]+"' AND `char_id` = '"+getcharid(0)+"'";
+					atcommand "@kick "+StrCharInfo(0);
+					end;
+				}
+			}
+			else if(.@IDIci[.@i] == .@ITEM[@n]){
+				if(.@IDFci[.@i] == getcharid(2)){ end;}
+				else if(.@IDFci[.@i] <= 1){ end; }
+				else{
+					dispbottom "Você contem Itens que não lhe Pertencem.";
+					sleep2 2000;
+					dispbottom "Você sera Deslogado para a remoção do Item.";
+					sleep2 2000;
+					for(set .@a, 10; .@a > 0; set .@a,.@a -1) unequip(.@a);
+					query_sql "DELETE FROM `cart_inventory` WHERE `nameid` = '"+.@IDIci[.@i]+"' AND `identify` = '"+.@IDFci[.@i]+"' AND `char_id` = '"+getcharid(0)+"'";
+					atcommand "@kick "+StrCharInfo(0);
+					end;
+				}
+			}
+			else if(.@IDIs[.@i] == .@ITEM[@n]){
+				if(.@IDFs[.@i] == getcharid(2)){ end;}
+				else if(.@IDFs[.@i] <= 1){ end; }
+				else{
+					dispbottom "Você contem Itens que não lhe Pertencem.";
+					sleep2 2000;
+					dispbottom "Você sera Deslogado para a remoção do Item.";
+					sleep2 2000;
+					query_sql "DELETE FROM `storage` WHERE `nameid` = '"+.@IDIs[.@i]+"' AND `identify` = '"+.@IDFs[.@i]+"' AND `account_id` = '"+getcharid(3)+"'";
+					atcommand "@kick "+StrCharInfo(0);
+					end;
+				}
+			}
+			else if(.@IDIgs[.@i] == .@ITEM[@n]){
+				if(.@IDFgs[.@i] == getcharid(2)){ end;}
+				else if(.@IDFgs[.@i] <= 1){ end; }
+				else{
+					dispbottom "Você contem Itens que não lhe Pertencem.";
+					sleep2 2000;
+					dispbottom "Você sera Deslogado para a remoção do Item.";
+					sleep2 2000;
+					query_sql "DELETE FROM `guild_storage` WHERE `nameid` = '"+.@IDIgs[.@i]+"' AND `identify` = '"+.@IDFgs[.@i]+"' AND `guild_id` = '"+getcharid(2)+"'";
+					atcommand "@kick "+StrCharInfo(0);
+					end;
+				}
+			}
+		}
+	}
+end;
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `loginlog` MODIFY `ip` varchar(100) NOT NULL default '';

@@ -1,0 +1,71 @@
+Links de download dos arquivos eAmod-A e eAmod-B
+
+Arquivos upados por um contribuidor:
+
+======================================
+Atualizado em: 08/08/2012
+eAmod-A
+
+Link: http://adf.ly/Bhn2x
+
+======================================
+Atualizado em: 08/08/2012
+eAmod-B
+
+Link: http://adf.ly/BhmCt
+
+
+======================================
+
+eAmod-A
+
+Link: http://adf.ly/9J2ii
+
+======================================
+
+eAmod-B
+
+Link: http://adf.ly/9J2kv
+
+======================================
+
+rAthena+eAmod atualizado
+
+Link: http://adf.ly/AOLb7
+
+======================================
+
+======================================
+
+CP do eAmod
+
+Link: http://adf.ly/AuxyB 
+
+Atenção! Existe um arquivo a ser upado em sua tabela do servidor de ragnarok
+Basta ler o arquivo de texto: Msg_Longa_Colada_0b00
+
+Porém como é uma mensagem colada do MSN, contém alguns errinhos, basta tirar os "quadrados" ou "interrogações" no fim de cada linha.
+bom uso a todos.
+
+======================= Diferenças entre versões ========================
+
+Muita gente ta me procurando perguntas qual a diferença entre eAmod-A e eAmod-B.
+Bem, eu não sei 100%, eu sei o que me foi dito que é:
+
+eAmod-A = A versão criada dos arquivos, então esta sujo e alguns casos não funcionando, porém
+tem mais conteúdo, quem tiver conhecimento, pode pegar o que tem e aprimorar/completar.
+
+eAmod-B = A versão limpa, usável e fixa, então seria basicamente um emulador com o completo pronto.
+
+Vai de cada um escolher melhor o seu e baixar.
+
+=========================================================================
+
+Vale lembrar que os responsáveis do GoogleCODE e do site, jonyll.net, não tem nada a ver com os arquivos aqui expostos.
+
+Lembrando também para exclarecer um detalhe.
+
+Os arquivos eAmod nunca deveria ser vendidos, eles não são criações feitas 100% pelo seu criador.
+Eles são provenientes de um sistema gratuito(eAthena.ws - emulador de ragnarok online) por tanto,
+este tipo de serviço nunca poderia-se ser vendido, já que ele veio de um item protegido pela lei
+de contribuição gratuita.

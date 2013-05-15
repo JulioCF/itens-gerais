@@ -1,0 +1,133 @@
+//===== Cronus Script ========================================
+//= Kafras nas Cavernas e Campos
+//===== Por: =================================================
+//= eAthena Dev Team
+//===== Versão Atual: ========================================
+//= 2.7c
+//===== Compatibilidade: =====================================
+//= Cronus SVN
+//===== Descrição: ===========================================
+//= Kafras nas Cavernas e Campos.
+//===== Comentários Adicionais: ==============================
+//= v1.1 Now using functions. Added teleport service for Orc Dungeon
+//= and Coal Mine Kafras.
+//= v2.1 Fixed bug with Merc job quest kafra.[Lupus]
+//= v2.1b Minor changes to function calls.  Using arguments.
+//= Added ant hell kafras.  This version uses arrays .[kobra_k88]
+//= Fixed Kafras, not giving you Save menu [Lupus]
+//= 2.3 Removed SAVE menu from dungeons Kafras [Lupus]
+//= 2.4 Now Baby Merchant can pass Merch Job Quest w/o probs [Lupus]
+//= 2.41 Removed useless warp points, already nullified by func call [Evera]
+//= 2.5 Allowed Culvert save point [Evera]
+//= 2.6 Updated function calls with new arguments. [L0ne_W0lf]
+//=	Added unique Kafra Welcome message.
+//=	Removed Ant Hell Kafra Employees.
+//= 2.7 Merchant quest in the Biliban kafra. (Barron-Monster) [L0ne_W0lf]
+//= 2.7a Corrected a problem with Dobuel "Welcome Message". (bugreport:783) [Samuray22]
+//= 2.7b Script traduzido. [Lanter]
+//= 2.7c Revisado. [RoM]
+//============================================================
+
+//<============================= Ilha Byalan ============================>
+izlu2dun,106,58,8	script	Funcionária Kafra::kaf_izlu2dun	115,{
+
+	cutin "kafra_03",2;
+	if(BaseJob==Job_Novice && job_merchant_q2>0) callfunc "F_MercKafra";  //F_MercKafra found in merchant.txt
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra.";
+	mes "O serviço Kafra";
+	mes "está sempre pronto para ajudar você.";
+	mes "Como posso ajudá-lo?";
+	callfunc "F_Kafra",5,2,1,120,1200;
+
+	M_Save:
+		savepoint "izlu2dun",87,170;
+		callfunc "F_KafEnd",0,1,"na Ilha Byalan";
+}
+
+
+//<======================== Esgotos de Prontera =========================>
+prt_fild05,290,224,3	script	Funcionária Kafra::prt_fild05	114,{
+	cutin "kafra_04",2;
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo!";
+	mes "A Corporação Kafra";
+	mes "sempre ajudará os";
+	mes "aventureiros de Rune-Midgard";
+	mes "com este excelente serviço. Então,";
+	mes "o que posso fazer por você?";
+	callfunc "F_Kafra",5,1,1,40,0;
+
+	M_Save:
+		savepoint "prt_fild05",274,243;
+		callfunc "F_KafEnd",0,1, "no Esgoto de Prontera";
+}
+
+
+//<============================= Mina de Carvão =========================>
+mjolnir_02,83,362,4	script	Funcionária Kafra::kaf_mjolnir_02	116,{
+	cutin "kafra_02",2;
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra.";
+	mes "O serviço Kafra";
+	mes "está sempre pronto para ajudar você.";
+	mes "Como posso ajudá-lo?";
+	callfunc "F_Kafra",5,6,1,100,0;
+
+	M_Save:
+		savepoint "mjolnir_02",98,352;
+		callfunc "F_KafEnd",0,1,"na Mina de Carvão";
+}
+
+
+//<============================ Ruínas de Morroc =========================>
+moc_ruins,59,157,5	script	Funcionária Kafra::moc_ruins	114,{
+	cutin "kafra_04",2;
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo!";
+	mes "A Corporação Kafra";
+	mes "sempre ajudará os";
+	mes "aventureiros de Rune-Midgard";
+	mes "com esse excelente serviço. Então,";
+	mes "o que posso fazer por você hoje?";
+	callfunc "F_Kafra",5,2,1,90,1200;
+
+	M_Save:
+		savepoint "moc_ruins",41,141;
+		callfunc "F_KafEnd",0,1,"nas Pirâmides";
+}
+
+
+//<============================== Vila dos Orcs ==========================>
+gef_fild10,73,340,5	script	Funcionária Kafra::kaf_gef_fild10	116,{
+	cutin "kafra_02",2;
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra.";
+	mes "O serviço Kafra";
+	mes "está sempre pronto para ajudar você.";
+	mes "Como posso ajudá-lo?";
+	callfunc "F_Kafra",5,6,1,130,0;
+
+	M_Save:
+		savepoint "gef_fild10",54,326;
+		callfunc "F_KafEnd",0,1,"na Vila dos Orcs";
+}
+
+//<============================== Navio Fantasma ==========================>
+alb2trea,59,69,5	script	Funcionária Kafra::kaf_alb2trea	117,{
+	cutin "kafra_01",2;
+	mes "[Funcionária Kafra]";
+	mes "Bem-vindo à";
+	mes "Corporação Kafra.";
+	mes "O serviço Kafra";
+	mes "está sempre ao seu lado.";
+	mes "Como posso ajudá-lo?";
+	callfunc "F_Kafra",5,2,1,50,0;
+
+	M_Save:
+		savepoint "alb2trea",92,64;
+		callfunc "F_KafEnd",0,1,0,"no Navio Fantasma";
+}

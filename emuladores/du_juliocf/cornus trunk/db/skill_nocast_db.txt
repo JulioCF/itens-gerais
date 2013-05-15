@@ -1,0 +1,127 @@
+// Database de Habilidades Restritas
+//
+// Estrutura da Database:
+// SkillID,Flag
+//
+// Legenda para o campo 'Flag' (bitmask):
+//  1 = Não pode ser usada em mapas normais
+//  2 = Não pode ser usada em mapas de PvP (use isso ao invés de 1 para servidores PK)
+//  4 = Não pode ser usada em mapas de GvG
+//  8 = Não pode ser usada em Campos de Batalha
+//  16 = Não pode ser plagiada
+//  Zonas Restritas - são configuradas pelo mapflag 'restricted <número>'
+//  32 = Não pode ser usada em mapas zona 1
+//  64 = Não pode ser usada em mapas zona 2
+//  128 = Não pode ser usada em mapas zona 3
+//  256 = Não pode ser usada em mapas zona 4
+//  512 = Não pode ser usada em mapas zona 5
+//  1024 = Não pode ser usada em mapas zona 6
+//  2048 = Não pode ser usada em mapas zona 7
+//
+// Exemplo:
+// 8,6 = Vigor não pode ser usado em mapas de PvP e GvG (2+4=6)
+
+//Não podem ser usadas em GvG
+26,4	//AL_TELEPORT#Teleporte#
+27,4	//AL_WARP#Portal#
+87,4	//WZ_ICEWALL#Barreira de Gelo#
+150,4	//TF_BACKSLIDING#Recuar#
+219,4	//RG_INTIMIDATE#Rapto#
+336,4	//WE_CALLPARTNER#Saudades_de_Você#
+361,4	//HP_ASSUMPTIO#Assumptio#
+362,4	//HP_BASILICA#Basílica#
+395,4	//CG_MOONLIT#Bênção Protetora#
+409,4	//WE_CALLPARENT#Mãe, Pai, cadê vocês?#
+410,4	//WE_CALLBABY#Vem cá, filhote!#
+491,4	//CR_CULTIVATION#Cultivar Planta#
+530,4	//NJ_KIRIKAGE#Corte das Sombras#
+691,4	//CASH_ASSUMPTIO#Assumptio em Grupo#
+1013,2	//BS_GREED#Ganância#
+
+//Não podem ser usadas em Campos de Batalha
+26,8	//AL_TELEPORT#Teleporte#
+27,8	//AL_WARP#Portal#
+87,8	//WZ_ICEWALL#Barreira de Gelo#
+150,8	//TF_BACKSLIDING#Recuar#
+219,8	//RG_INTIMIDATE#Rapto#
+264,8	//MO_BODYRELOCATION#Passo Etéreo#
+336,8	//WE_CALLPARTNER#Saudades_de_Você#
+361,8	//HP_ASSUMPTIO#Assumptio#
+362,8	//HP_BASILICA#Basílica#
+395,8	//CG_MOONLIT#Bênção Protetora#
+409,8	//WE_CALLPARENT#Mãe, Pai, cadê vocês?#
+410,8	//WE_CALLBABY#Vem cá, filhote!#
+491,8	//CR_CULTIVATION#Cultivar Planta#
+411,8	//TK_RUN#Corrida#
+426,8	//High Jump#Salto#
+427,8	//SG_FEEL#Percepção Solar; Lunar e Estelar#
+428,8	//SG_SUN_WARM#Calor Solar#
+429,8	//SG_MOON_WARM#Calor Lunar#
+430,8	//SG_STAR_WARM#Calor Estelar#
+431,8	//SG_SUN_COMFORT#Proteção Solar#
+432,8	//SG_MOON_COMFORT#Proteção Lunar#
+433,8	//SG_STAR_COMFORT#Proteção Estelar#
+434,8	//SG_HATE#Oposição Solar; Lunar e Estelar#
+435,8	//SG_SUN_ANGER#Fúria Solar#
+436,8	//SG_MOON_ANGER#Fúria Lunar#
+437,8	//SG_STAR_ANGER#Fúria Estelar#
+438,8	//SG_SUN_BLESS#Bênção Solar#
+439,8	//SG_MOON_BLESS#Bênção Lunar#
+440,8	//SG_STAR_BLESS#Bênção Estelar#
+426,8	//TK_HIGHJUMP#Salto#
+691,8	//CASH_ASSUMPITO#Assumptio em Grupo#
+
+//Só podem ser usadas em GvG e Campos de Batalha
+488,3	//CG_HERMODE#Bastão de Hermod
+
+//Não podem ser plagiadas
+77,16	//PR_TURNUNDEAD#Esconjurar#
+79,16	//PR_MAGNUS#Magnus Exorcismus#
+
+//Zona 1 - Aldebaran Turbo Track
+8,32	//SM_ENDURE#Vigor#
+26,32	//AL_TELEPORT#Teleporte#
+27,32	//AL_WARP#Portal#
+35,32	//AL_CURE#Medicar#
+51,32	//TF_HIDING#Esconderijo#
+87,32	//WZ_ICEWALL#Barreira de Gelo#
+135,32	//AS_CLOAKING#Furtividade#
+219,32	//RG_INTIMIDATE#Rapto#
+264,32	//MO_BODYRELOCATION#Passo_Etéreo#
+357,32	//LK_CONCENTRATION#Dedicação#
+359,32	//LK_BERSERK#Frenesi#
+362,32	//HP_BASILICA#Basilica#
+389,32	//ST_CHASEWALK#Espreitar#
+395,32	//CG_MOONLIT#Bênção Protetora#
+
+//Zona 2 - Prisão
+421,64	//TK_JUMPKICK#Chute Aéreo#
+426,64	//TK_HIGHJUMP#Salto#
+
+//Zona 3 - Arena de Izlude
+26,128	//AC_TELEPORT#Teleporte#
+219,128 //RG_INTIMIDADE#Rapto#
+
+//Zona 4 - Guerra do Emperium SE
+426,256 //TK_HIGHJUMP#Salto#
+290,256	//SA_ABRACADABRA#Abracadabra#
+
+//Zona 5 - Santuário Selado
+12,512	//MG_SAFETYWALL#Escudo Mágico#
+26,512	//AL_TELEPORT#Teleporte#
+219,512	//RG_INTIMIDATE#Rapto#
+361,512	//HP_ASSUMPTIO#Assumptio#
+691,512	//CASH_ASSUMPTIO#Assumptio em Grupo#
+
+//Zona 6 - Torre Sem Fim, Memorial dos Orcs, Instância de Nydhoggs
+26,1024	//AL_TELEPORT#Teleporte#
+87,1024	//WZ_ICEWALL#Barreira de Gelo#
+219,1024	//RG_INTIMIDATE#Rapto#
+405,1024	//PF_SPIDERWEB#Prisão de Teia#
+674,1024	//NPC_EXPULSION#Expulsion#
+
+//Zone 7 - Cidades
+232,2048	//AM_CANNIBALIZE#Criar_Monstro_Planta#
+233,2048	//AM_SPHEREMINE#Criar_Esfera_Marinha#
+491,2048	//CR_CULTIVATION#Cultivar Planta#
+1013,2048	//BS_GREED#Ganância#

@@ -1,0 +1,207 @@
+Index: db/const.txt
+===================================================================
+--- db/const.txt	(revision 1167)
++++ db/const.txt	(working copy)
+@@ -373,6 +373,7 @@
+ mf_monster_noteleport	49
+ mf_pvp_nocalcrank	50
+ mf_battleground	51
++mf_nostorage	52
+ 
+ cell_walkable	0
+ cell_shootable	1
+Index: src/map/atcommand.c
+===================================================================
+--- src/map/atcommand.c	(revision 1167)
++++ src/map/atcommand.c	(working copy)
+@@ -814,20 +814,23 @@
+  *------------------------------------------*/
+ ACMD_FUNC(storage)
+ {
++	char msg[45];
++	int storage;
++	
+ 	nullpo_retr(-1, sd);
+ 
+ 	if (sd->npc_id || sd->state.vending || sd->state.buyingstore || sd->state.trading || sd->state.storage_flag)
+ 		return -1;
++		
++	storage = storage_storageopen(sd);
+ 
+-	if (storage_storageopen(sd) == 1)
+-	{	//Already open.
+-		clif_displaymessage(fd, msg_txt(250));
+-		return -1;
+-	}
+-
+-	clif_displaymessage(fd, "Armazém aberto.");
+-
+-	return 0;
++	if(storage == 1)
++		sprintf(msg, "O uso do armazém não é permitido nesse mapa.");
++		else
++		sprintf(msg, "Armazém aberto.");
++	
++	clif_displaymessage(fd, msg);
++	return(storage);
+ }
+ 
+ 
+@@ -855,8 +858,12 @@
+ 		clif_displaymessage(fd, msg_txt(251));
+ 		return -1;
+ 	}
++	
++	if(storage_guild_storageopen(sd) == 2){
++		clif_displaymessage(sd->fd, "O uso do armazém não é permitido nesse mapa.");
++		return -1;
++	}
+ 
+-	storage_guild_storageopen(sd);
+ 	clif_displaymessage(fd, "Armazém da guilda aberto.");
+ 	return 0;
+ }
+@@ -4129,6 +4136,8 @@
+ 		strcat(atcmd_output, "Grupo Trancado | ");
+ 	if (map[m_id].flag.guildlock)
+ 		strcat(atcmd_output, "Guilda Trancada | ");
++	if (map[m_id].nostorage)
++		strcat(atcmd_output, "Sem Armazém | ");
+ 	clif_displaymessage(fd, atcmd_output);
+ 
+ 	switch (list) {
+Index: src/map/map.c
+===================================================================
+--- src/map/map.c	(revision 1167)
++++ src/map/map.c	(working copy)
+@@ -2940,6 +2940,7 @@
+ 		map[i].nocommand = 0;  // nocommand mapflag level
+ 		map[i].bexp      = 100;  // per map base exp multiplicator
+ 		map[i].jexp      = 100;  // per map job exp multiplicator
++		map[i].nostorage = 0; // [Shiraz]
+ 		memset(map[i].drop_list, 0, sizeof(map[i].drop_list));  // pvp nightmare drop list
+ 
+ 		// adjustments
+Index: src/map/map.h
+===================================================================
+--- src/map/map.h	(revision 1167)
++++ src/map/map.h	(working copy)
+@@ -559,6 +559,7 @@
+ 	int jexp;	// map experience multiplicator
+ 	int bexp;	// map experience multiplicator
+ 	int nocommand; //Blocks @/# commands for non-gms. [Skotlex]
++	int nostorage; // [Shiraz]
+ 	/**
+ 	 * Ice wall reference counter for bugreport:3574
+ 	 * - since there are a thounsand mobs out there in a lot of maps checking on,
+Index: src/map/npc.c
+===================================================================
+--- src/map/npc.c	(revision 1167)
++++ src/map/npc.c	(working copy)
+@@ -3237,6 +3237,14 @@
+ 		map[m].flag.guildlock=state;
+ 	else if (!strcmpi(w3,"reset"))
+ 		map[m].flag.reset=state;
++	else if(!strcmpi(w3,"nostorage")){
++		if(state){
++			sscanf(w4, "%d", &state);
++			map[m].nostorage = state;
++		}else{
++			map[m].nostorage = 0;
++		}
++	}
+ 	else
+ 		ShowError("npc_parse_mapflag: mapflag nao reconhecido '%s' (arquivo '%s', linha '%d').\n", w3, filepath, strline(buffer,start-buffer));
+ 
+Index: src/map/script.c
+===================================================================
+--- src/map/script.c	(revision 1167)
++++ src/map/script.c	(working copy)
+@@ -361,7 +361,8 @@
+ 	MF_MONSTER_NOTELEPORT,
+ 	MF_PVP_NOCALCRANK,	//50
+ 	MF_BATTLEGROUND,
+-	MF_RESET
++	MF_RESET,
++	MF_NOSTORAGE
+ };
+ 
+ const char* script_op2name(int op)
+@@ -7798,12 +7799,17 @@
+ BUILDIN_FUNC(openstorage)
+ {
+ 	TBL_PC* sd;
++	int stor;
+ 
+ 	sd = script_rid2sd(st);
+ 	if( sd == NULL )
+ 		return 0;
+ 
+-	storage_storageopen(sd);
++	stor = storage_storageopen(sd);
++	
++	if(stor == 1) 
++		clif_displaymessage(sd->fd, "O uso do armazém não é permitido nesse mapa.");
++		
+ 	return 0;
+ }
+ 
+@@ -7817,6 +7823,10 @@
+ 		return 0;
+ 
+ 	ret = storage_guild_storageopen(sd);
++	
++	if(ret == 2) 
++		clif_displaymessage(sd->fd, "O uso do armazém não é permitido nesse mapa.");
++	
+ 	script_pushint(st,ret);
+ 	return 0;
+ }
+@@ -9785,6 +9795,7 @@
+ 			case MF_PVP_NOCALCRANK:		script_pushint(st,map[m].flag.pvp_nocalcrank); break;
+ 			case MF_BATTLEGROUND:		script_pushint(st,map[m].flag.battleground); break;
+ 			case MF_RESET:				script_pushint(st,map[m].flag.reset); break;
++			case MF_NOSTORAGE:			script_pushint(st,map[m].nostorage); break;
+ 		}
+ 	}
+ 
+@@ -9863,6 +9874,7 @@
+ 			case MF_PVP_NOCALCRANK:		map[m].flag.pvp_nocalcrank = 1; break;
+ 			case MF_BATTLEGROUND:		map[m].flag.battleground = (!val || atoi(val) < 0 || atoi(val) > 2) ? 1 : atoi(val); break;
+ 			case MF_RESET:				map[m].flag.reset = 1; break;
++			case MF_NOSTORAGE:			map[m].nostorage = (!val || atoi(val) <= 0) ? 0 : atoi(val); break;
+ 		}
+ 	}
+ 
+@@ -9943,6 +9955,7 @@
+ 			case MF_PVP_NOCALCRANK:		map[m].flag.pvp_nocalcrank = 0; break;
+ 			case MF_BATTLEGROUND:		map[m].flag.battleground = 0; break;
+ 			case MF_RESET:				map[m].flag.reset = 0; break;
++			case MF_NOSTORAGE:			map[m].nostorage = 0; break;
+ 		}
+ 	}
+ 
+Index: src/map/storage.c
+===================================================================
+--- src/map/storage.c	(revision 1167)
++++ src/map/storage.c	(working copy)
+@@ -96,6 +96,9 @@
+ 
+ 	if(sd->state.storage_flag)
+ 		return 1; //Already open?
++		
++	if(map[sd->bl.m].nostorage == 1 || map[sd->bl.m].nostorage > 2)
++		return 1;
+ 	
+ 	if( !pc_can_give_items(sd) )
+   	{ //check is this GM level is allowed to put items to storage
+@@ -365,6 +368,9 @@
+ 		clif_displaymessage(sd->fd, msg_txt(246));
+ 		return 1;
+ 	}
++	
++	if(map[sd->bl.m].nostorage > 1)
++		return 2;
+ 
+ 	if((gstor = guild2storage2(sd->status.guild_id)) == NULL) {
+ 		intif_request_guild_storage(sd->status.account_id,sd->status.guild_id);

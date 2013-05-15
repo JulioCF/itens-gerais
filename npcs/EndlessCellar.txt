@@ -1,0 +1,1021 @@
+// Como adicionar:
+//----------------
+//
+// conf\maps_athena.conf
+// map: 1@new
+// map: 2@new
+// map: 3@new
+// map: 4@new
+// map: 5@new
+//
+//-----------------
+//
+// db\map_index.txt
+// 1@new
+// 2@new
+// 3@new
+// 4@new
+// 5@new
+//
+//-----------------
+//
+// Adicione os novos mapas e recompile o emulador desejado
+//
+//=====================================================================================================
+//= Endless Tower 2: The Endless Cellar
+//==== Credits ========================================================================================
+//= Chilly
+//= Saithis (for allowing me to use many parts of his endless tower script)
+//==== Version ========================================================================================
+//= 1.0
+//===== Compatible With ===============================================================================
+//= eAthena SVN
+//==== Description ====================================================================================
+//= A custom sequel to Endless Tower containing almost all the monsters that were not in the original tower.  77 floors total and mvps are every 4 floors.
+//= Angel Pori Pori is the same as the Eternal Brazier in Endless Tower, this also applies to the Arc Pori Pori and Lost Soul npcs.
+//= Excluded monsters: Great Demon Baphomet because he has the skill NPC_INVINCIBLE, and any monsters that drop quest items like Kublin and Hellion Revenant for example.
+//==== Changelog ======================================================================================
+//= 1.0  First Release
+//=====================================================================================================
+
+
+
+// = Settings
+// ====================================================================================================
+-	script	EC_Settings	-1,{
+OnInit:
+	set $EC_Cooldown,583200;	// Seconds
+	set $EC_Timelimit,14400;	// Seconds
+	set $EC_Minparty,1;		// # of players a party must have
+	set $EC_AshID,6000;		// ItemID
+	set $EC_GM,60;			// Min GM level to control the cellar
+	end;
+}
+
+// = Cellar Protection Stone - Start the instance and enter the dungeon here
+// ====================================================================================================
+e_tower,82,80,3	script	Cellar Protection Stone	406,{
+	if(((EC_Lasttime + $EC_Cooldown > gettimetick(2) && EC_Lasttime < gettimetick(2)) || (EC_Lasttime > gettimetick(2) && EC_Lastinstid != instance_id(1))) && getgmlevel() < $EC_GM){
+		set .@last,EC_Lasttime + $EC_Cooldown - gettimetick(2);
+		set .@hours,.@last / 60 / 60;
+		set .@minutes,.@last / 60 % 60;
+		set .@seconds,.@last % 60;
+		mes "Due to the entree aftereffect,";
+		mes "you cannot enter the dungeon right";
+		mes "now, "+.@hours+"hours "+.@minutes+"minutes "+.@seconds+"seconds";
+		mes "left to enter the next dungeon.";
+		next;
+		mes "Here is dangerous. Let me move you to the place where you were.";
+		close2;
+		warp "alberta",223,36;
+		end;
+	}
+	getpartymember(getcharid(1)); 
+	if(!getcharid(1) || $@partymembercount < $EC_Minparty){
+		mes "Make or join the party with more than "+$EC_Minparty+" member or try again.";
+		set EC_makeparty,1;
+		close;
+	}
+	if(EC_makeparty){
+		mes "Confirmed. You are in a party. What would you like to do?";
+		set EC_makeparty,0;
+		next;
+	}
+	mes "If you have the dungeon generated already, you can enter it.";
+	next;
+	if(getpartyleader(getcharid(1),2) == getcharid(0)){
+		select("Endless CellarDungeon Generated:Enter the Endless Cellar:Return to Alberta:Cancel");
+	} else {
+		select(":Enter the Endless Cellar:Return to Alberta:Cancel");
+	}
+	switch(@menu){
+	case 1:
+		if(instance_id(1)){
+			if(has_instance("1@new") == ""){
+				mes "Your group is already registered at an other instance."; 
+				close;
+			}
+			mes "Your group is already registered."; 
+			mes "Select ^0000FFEnter the Dungeon^000000 in the main menu to enter."; 
+			close;
+		}
+		if(EC_Lasttime + $EC_Cooldown > gettimetick(2) && getgmlevel() < $EC_GM) {
+			mes "Your cooldown for the memorial dungeon Endless Cellar isn't over yet.";
+			close;	
+		}
+		mes "^0000FFEndless Cellar^000000 - Try to reserve";
+		mes "After making a reservation, you have to talk to NPC behind and";
+		mes "select the menu 'Enter the Dungeon' to enter the dungeon";
+		close2;
+		set .@instance_id,instance_create("Endless Cellar",getcharid(1)); 
+		if(.@instance_id < 0){
+			mes "Failed to create Memorial Dungeon."; 
+			mes "^FF0000Memorial Dungeon instances reached its limit.^000000"; 
+			mes "Please report this error to an administrator or GM."; 
+			close;
+		}
+		instance_attachmap("1@new",.@instance_id);
+		instance_attachmap("2@new",.@instance_id);
+		instance_attachmap("3@new",.@instance_id);
+		instance_attachmap("4@new",.@instance_id);
+		instance_attachmap("5@new",.@instance_id);
+		instance_set_timeout $EC_Timelimit,300,.@instance_id;
+		instance_init .@instance_id;
+		instance_attach .@instance_id;
+		set 'EC_Floor,1;
+		set 'EC_Lasttime,gettimetick(2) + $EC_Timelimit;
+		donpcevent instance_npcname("EC_Manager")+"::OnInstanceInit";
+		end;
+	case 2:
+		if(!instance_id(1) || has_instance("1@new") == ""){ 
+			mes "The memorial dungeon Endless Cellar does not exist.";
+			mes "Please confirm with your party leader wether the memorial dungeon";
+			mes "has been destructed or if the time given for entering has been expired.";
+			close;
+		}
+		instance_attach instance_id(1);
+		if(EC_Lasttime + $EC_Cooldown < gettimetick(2)){
+			set EC_Lasttime,'EC_Lasttime;
+			set EC_Lastinstid,instance_id(1);
+		}
+		mapannounce "e_tower",strcharinfo(0)+" of the party "+getpartyname(getcharid(1))+" is entering the dungeon, Endless Cellar.",bc_map | bc_blue;
+		warp has_instance("1@new"),96,393; 
+		end; 
+	case 3:
+		warp "alberta",223,36;
+		end;
+	case 4:
+		close;
+	}
+}
+
+// = EC_Manager
+// ====================================================================================================
+5@new,1,1,1	script	EC_Manager	111,{
+	end;
+OnInit: 
+OnInstanceInit:
+	if(strnpcinfo(3) == "EC_Manager")
+		end;
+	set .@k,'EC_Floor;
+	while(.@k < 77){
+		disablenpc instance_npcname("ECwarp_"+.@k);
+		set .@k,.@k+1;
+	}
+	if('EC_Floor <= 77){
+		getmapxy(.@map$,.@x,.@y,1,("ECwarp_"+'EC_Floor));
+		callfunc "EC_Spawns",'EC_Floor,.@map$,instance_id();
+		disablenpc instance_npcname("EC_Arc_Pori");
+	} else
+		donpcevent instance_npcname("EC_Manager")+"::OnPorDead";
+	end;
+	
+OnMobDead:
+	set .@i,instance_id(0);
+	set 'EC_Mobs,'EC_Mobs-1;
+	if('EC_Mobs){
+		instance_announce .@i,"Monsters remaining on Floor "+'EC_Floor+": "+'EC_Mobs,bc_map,0x00FF00;
+		end;
+	}
+	if('EC_Floor < 77)
+		enablenpc instance_npcname("ECwarp_"+'EC_Floor);
+	if('EC_Floor == 40) 
+		donpcevent instance_npcname("ECwarp_40")+"::OnEnableAshtimer";
+	instance_announce .@i,"All monsters on the "+'EC_Floor+('EC_Floor % 10 == 1 ? "st" : ('EC_Floor % 10 == 2 ? "nd" : ('EC_Floor % 10 == 3 ? "rd" : "th")))+" level have been defeated.",bc_map;
+	set 'EC_Floor,'EC_Floor+1;
+	if('EC_Floor == 77)
+		callfunc "EC_Spawns",'EC_Floor,"5@new",instance_id();
+	else if('EC_Floor < 77)
+		callfunc "EC_Spawns",'EC_Floor,(('EC_Floor-1) / 20 + 1)+"@new",instance_id();
+	else {
+		mes "[Endless Cellar]";
+		mes "Error on OnMobDead Label";
+		mes "'EC_Floor = "+'EC_Floor;
+		mes "Please report this to a Game Master or Administrator.";
+		close;
+	}
+	end;
+	
+OnPorDead:
+	instance_announce .@i,"Squeaky Voice: .....",bc_map,0xFF0000;
+	sleep 3000;
+	instance_announce .@i,"Squeaky Voice: That innocent poring did not harm you.",bc_map,0xFF0000;
+	sleep 3000;
+	instance_announce .@i,"Squeaky Voice: Why would you kill it?",bc_map,0xFF0000;
+	sleep 3000;
+	instance_announce .@i,"Squeaky Voice: You evil humans should pick on someone your own size.",bc_map,0xFF0000;
+	sleep 3000;
+	instance_announce .@i,"Squeaky Voice: I know.  I'll let you play with my pets, the Six Great Pains.",bc_map,0xFF0000;
+	sleep 3000;
+	instance_announce .@i,"Squeaky Voice: Try not to die too fast, they need thier exercise.",bc_map,0xFF0000;
+	monster	"5@new",156,145,"High Priest Magaleta",1649,1,instance_npcname("EC_Manager")+"::OnPain1";
+	end;
+
+OnPain1:
+	sleep 5000;
+	instance_announce .@i,"Squeaky Voice: You are stronger than you look, now try the pain of magic.",bc_map,0xFF0000;
+	sleep 5000;
+	monster	"5@new",156,145,"High Wizard Katrinn",1651,1,instance_npcname("EC_Manager")+"::OnPain2";
+	end;
+
+OnPain2:
+	sleep 5000;
+	instance_announce .@i,"Squeaky Voice: Impressive, but how will you handle the pain of distance?",bc_map,0xFF0000;
+	sleep 5000;
+	monster	"5@new",156,145,"Sniper Shecil",1650,1,instance_npcname("EC_Manager")+"::OnPain3";
+	end;
+
+OnPain3:
+	sleep 5000;
+	instance_announce .@i,"Squeaky Voice: Have you ever fought something you couldn't see?",bc_map,0xFF0000;
+	sleep 5000;
+	monster	"5@new",156,145,"Assassin Cross Eremes",1647,1,instance_npcname("EC_Manager")+"::OnPain4";
+	end;
+
+OnPain4:
+	sleep 5000;
+	instance_announce .@i,"Squeaky Voice: You murderers, it's time to feel the pain of paralysis.",bc_map,0xFF0000;
+	sleep 5000;
+	monster	"5@new",156,145,"Whitesmith Harword",1648,1,instance_npcname("EC_Manager")+"::OnPain5";
+	end;
+
+OnPain5:
+	sleep 5000;
+	instance_announce .@i,"Squeaky Voice: I'm getting annoyed, my last pet will finish you off.",bc_map,0xFF0000;
+	sleep 5000;
+	monster	"5@new",156,145,"Whitesmith Harword",1648,1,instance_npcname("EC_Manager")+"::OnPain6";
+	end;
+
+OnPain6:
+	sleep 3000;
+	instance_announce .@i,"Squeaky Voice: Well, It seems I've greatly underestimated you.",bc_map,0x00FF00;
+	sleep 3000;
+	instance_announce .@i,"Squeaky Voice: Do you really want to know who I am?",bc_map,0x00FF00;
+	sleep 3000;
+	instance_announce .@i,"Squeaky Voice: The few who have seen me were laughing right before I killed them!",bc_map,0x00FF00;
+	sleep 3000;
+	instance_announce .@i,"Squeaky Voice: Baphomet, make these weaklings entertain me a little more before they die.",bc_map,0x00FF00;
+	sleep 3000;
+	areamonster "5@new",151,122,160,134,"Super Baphomet",1399,1,instance_npcname("EC_Manager")+"::OnBapho";
+	areamonster "5@new",130,114,181,150,"Piamette",1930,3;
+	areamonster "5@new",130,114,181,150,"Wish Maiden",1931,3;
+	end;
+
+OnBapho:
+	sleep 3000;
+	instance_announce .@i,"Squeaky Voice: This is your last chance to run.",bc_map,0x00FF00;
+	sleep 3000;
+	instance_announce .@i,"Squeaky Voice: No?  Then its time to show you who I am.",bc_map,0x00FF00;
+	sleep 3000;
+	areamonster "5@new",151,122,160,134,"Pori Pori",1502,1,instance_npcname("EC_Manager")+"::OnPoripori";
+	areamonster "5@new",130,114,181,150,"Golden Savage",1840,10;
+	areamonster "5@new",130,114,181,150,"Pouring",1894,10;
+	areamonster "5@new",130,114,181,150,"Bomb Poring",1904,20;
+	end;
+
+OnPoripori:
+	instance_announce .@i,"Pori Pori: What..... what is happening?  How could I..... lose.....",bc_map,0xFFD700;
+	sleep 5000;
+	instance_announce .@i,"Pori Pori: I'll return when I've healed, then..... then you'll all suffer!!!",bc_map,0xFFD700;
+	enablenpc instance_npcname("EC_Arc_Pori");
+	end;
+}
+
+// = Angel Pori Pori - Allows you to use a Dark Ash to skip to floor 40
+// ====================================================================================================
+1@new,106,392,4	script	Angel Pori Pori	948,{
+	if(getgmlevel() >= $EC_GM){
+		mes "Hi, Master!";
+		next;
+		switch(select("Skip GM Menu:Set to Level:Warp to Level:instance infos:Delete Instance:Cancel")){
+		case 1:
+			break;
+		case 2:
+			mes "to which level should I set the instance?";
+			next;
+			input .@level,0,77;
+			if(.@level == 0) close;
+			set 'EC_Floor,.@level;
+			killmonsterall "1@new";
+			killmonsterall "2@new";
+			killmonsterall "3@new";
+			killmonsterall "4@new";
+			for(set .@k,1; .@k < 'EC_Floor && .@k < 77; set .@k,.@k + 1)
+				enablenpc instance_npcname("ECwarp_"+.@k);
+			donpcevent instance_npcname("EC_Manager")+"::OnInstanceInit";
+			mes "Should I warp you there now?";
+			next;
+			if(select("Yes:No") == 2) close;
+		case 3:
+			if(!.@level){
+				mes "Input the Level you want to warp to:";
+				next;
+				input .@level,0,77;
+				if(.@level == 0) close; 
+			}
+			if(.@level == 77)
+				warp has_instance("5@new"),156,65;
+			else {
+				setarray .@warpx[0],96,184,270,354;
+				setarray .@warpy[0],393,309,221,137,51;
+				set .@x,.@warpx[((.@level-1) % 20) % 4];
+				set .@y,.@warpy[((.@level-1) % 20) / 4];
+				warp has_instance(((.@level-1) / 20 + 1)+"@new"),.@x,.@y;
+			}
+			close;
+		case 4:
+			mes "Floor: "+'EC_Floor;
+			mes "Lasttime varibale: "+'EC_Lasttime;
+			if('EC_Floor == 77)
+				set .@map$,has_instance("5@new");
+			else if('EC_Floor < 77)
+				set .@map$,has_instance((('EC_Floor-1) / 20 + 1)+"@new");
+			mes "Alive mobs(variable): "+'EC_Mobs;
+			mes "Alive mobs(real): "+getmapmobs(.@map$);
+			close;
+		case 5:
+			mes "Are you sure?";
+			next;
+			if(select("Yes:No") == 2) close;
+			instance_destroy instance_id(0);
+			close;
+		default:
+			close;
+		}
+	}
+	mes "[Angel Pori Pori]";
+	mes "Om nom nom.  If you give me a yummy Dark Ash I'll warp you down to the 40th floor.";
+	next;
+	if(select("40th Level::Cancel") == 2) close;
+	if(countitem($EC_AshID) < 1){
+		mes "[Angel Pori Pori]";
+		mes "Aww, you don't have a Dark Ash.  Come back when you do.";
+		close;
+	}
+	if('EC_Floor >= 41) {
+		delitem $EC_AshID,1;
+		warp has_instance("3@new"),96,393; 
+		end;
+	}
+	if(getpartyleader(getcharid(1),2) != getcharid(0)){
+		mes "[Angel Pori Pori]";
+		mes "Only the party leader can give me a Dark Ash.";
+		close;
+	}
+	set 'EC_Floor,41;
+	killmonsterall has_instance("1@new");
+	killmonsterall has_instance("2@new");
+	callfunc "EC_Spawns",'EC_Floor,(('EC_Floor-1) / 20 + 1)+"@new",instance_id();
+	for(set .@k,1; .@k < 'EC_Floor && .@k < 77; set .@k,.@k + 1)
+		enablenpc instance_npcname("ECwarp_"+.@k);
+	delitem $EC_AshID,1;
+	warp has_instance("3@new"),96,393; 
+	end;
+}
+
+// = Arc Pori Pori - Rewards for clearing the dungeon
+// ====================================================================================================
+5@new,156,147,4	script	Arc Pori Pori::EC_Arc_Pori	949,{
+	mes "[Arc Pori Pori]";
+	mes "You actually defeated that Pori Pori?  Thank you!";
+	next;
+	mes "[Arc Pori Pori]";
+	mes "Hes been corrupted for far too long.  Maybe someday he will grow wings like the rest of us Pori Pori.";
+	next;
+	mes "[Arc Pori Pori]";
+	mes "Here, take this.  Its a small reward i want to give you for putting that evil Pori Pori in his place.";
+	next;
+	getitem 616,1; // Old Card Album
+	getitem 12103,1; // Bloody Branch
+	getitem 12106,1; // Jewelry Box
+	getitem 12109,1; // Poring Box
+	getitem 12130,1; // Cookie Bag
+	mes "[Arc Pori Pori]";
+	mes "Farewell, young adventurer. I wish you good luck in the future.";
+	close2;
+	warp "alberta",223,36;
+	end;
+}
+
+// = EC_Mobs
+// ====================================================================================================
+function	script	EC_Spawns	{
+	switch(getarg(0)){
+	case 1:
+		set 'EC_Mobs,40;
+		areamonster getarg(1),91,349,137,375,"Fabre",1007,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,349,137,375,"Picky",1049,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,349,137,375,"Picky",1050,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 2:
+		set 'EC_Mobs,30;
+		areamonster getarg(1),179,349,225,375,"Willow",1010,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,349,225,375,"Wolf",1013,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,349,225,375,"Creamy",1018,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 3:
+		set 'EC_Mobs,30;
+		areamonster getarg(1),265,349,311,375,"Condor",1009,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,349,311,375,"Peco Peco",1019,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,349,311,375,"Muka",1055,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 4:
+		set 'EC_Mobs,26;
+		areamonster getarg(1),349,349,395,375,"Greatest General",1277,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,349,395,375,"Eddga",1115,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 5:
+		set 'EC_Mobs,30;
+		areamonster getarg(1),91,265,137,291,"Spore",1014,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,265,137,291,"Poison Spore",1077,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 6:
+		set 'EC_Mobs,45;
+		areamonster getarg(1),179,265,225,291,"Crab",1073,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,265,225,291,"Shellfish",1074,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,265,225,291,"Aster",1266,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 7:
+		set 'EC_Mobs,40;
+		areamonster getarg(1),265,265,311,291,"Vadon",1066,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,265,311,291,"Cornutus",1067,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,265,311,291,"Marina",1141,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,265,311,291,"Plankton",1161,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 8:
+		set 'EC_Mobs,31;
+		areamonster getarg(1),349,265,395,291,"Garm Baby",1515,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,265,395,291,"Marine Sphere",1142,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,265,395,291,"Garm",1252,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 9:
+		set 'EC_Mobs,40;
+		areamonster getarg(1),91,177,137,203,"Metaller",1058,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,177,137,203,"Magnolia",1138,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 10:
+		set 'EC_Mobs,45;
+		areamonster getarg(1),179,177,225,203,"Coco",1104,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,177,225,203,"Caramel",1103,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,177,225,203,"Horn",1128,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 11:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),265,177,311,203,"Ambernite",1023,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,177,311,203,"Eggyra",1116,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 12:
+		set 'EC_Mobs,41;
+		areamonster getarg(1),349,177,395,203,"Megalith",1274,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,177,395,203,"Panzer Goblin",1308,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,177,395,203,"Rotar Zairo",1392,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,177,395,203,"Steam Goblin",1280,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,177,395,203,"Tao Gunka",1583,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 13:
+		set 'EC_Mobs,60;
+		areamonster getarg(1),91,94,137,119,"Smokie",1056,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,94,137,119,"Giearth",1121,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,94,137,119,"Martin",1145,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,94,137,119,"Raggler",1254,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 14:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),179,94,225,119,"Worm Tail",1024,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,94,225,119,"Stem Worm",1215,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 15:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),265,94,311,119,"Christmas Jakk",1244,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,94,311,119,"Christmas Goblin",1245,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,94,311,119,"Christmas Cookie",1246,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,94,311,119,"Cookie",1265,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,94,311,119,"Christmas Orc",1588,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 16:
+		set 'EC_Mobs,51;
+		areamonster getarg(1),349,94,395,119,"Antonio",1247,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,94,395,119,"Santa Poring",1062,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,94,395,119,"Stormy Knight",1251,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 17:
+		set 'EC_Mobs,46;
+		areamonster getarg(1),91,7,137,33,"Roda Frog",1012,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,7,137,33,"Thara Frog",1034,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,7,137,33,"Poison Toad",1402,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,7,137,33,"Toad",1089,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 18:
+		set 'EC_Mobs,41;
+		areamonster getarg(1),179,7,225,33,"Lunatic",1063,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,7,225,33,"Spring Rabbit",1322,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,7,225,33,"Eclipse",1093,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 19:
+		set 'EC_Mobs,41;
+		areamonster getarg(1),265,7,311,33,"Yoyo",1057,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,7,311,33,"Mime Monkey",1585,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,7,311,33,"Choco",1214,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 20:
+		set 'EC_Mobs,41;
+		areamonster getarg(1),349,7,395,33,"Ghoul",1036,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,7,395,33,"Myst",1151,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,7,395,33,"Vitata",1176,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,7,395,33,"Zenorc",1177,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,7,395,33,"Dracula",1389,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 21:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),91,349,137,375,"Stainer",1174,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,349,137,375,"Brilight",1211,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";		break;
+	case 22:
+		set 'EC_Mobs,60;
+		areamonster getarg(1),179,349,225,375,"Marc",1045,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,349,225,375,"Tri Joint",1279,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,349,225,375,"Fur Seal",1317,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,349,225,375,"Sea Otter",1323,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 23:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),265,349,311,375,"Wood Goblin",1880,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,349,311,375,"Les",1881,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,349,311,375,"Mavka",1884,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 24:
+		set 'EC_Mobs,31;
+		areamonster getarg(1),349,349,395,375,"Babayaga",1882,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,349,395,375,"Uzhas",1883,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,349,395,375,"Gopinich",1885,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 25:
+		set 'EC_Mobs,60;
+		areamonster getarg(1),91,265,137,291,"Kaho",1072,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,265,137,291,"Blazzer",1367,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,265,137,291,"Driller",1380,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,265,137,291,"Horong",1129,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,265,137,291,"Minorous",1149,5,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 26:
+		set 'EC_Mobs,60;
+		areamonster getarg(1),179,265,225,291,"Dokebi",1110,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,265,225,291,"Am Mut",1301,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,265,225,291,"Sageworm",1281,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 27:
+		set 'EC_Mobs,60;
+		areamonster getarg(1),265,265,311,291,"Savage",1166,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,265,311,291,"Gullinbursti",1311,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,265,311,291,"Goat",1372,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 28:
+		set 'EC_Mobs,71;
+		areamonster getarg(1),349,265,395,291,"Bettle King",1494,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,265,395,291,"Bacsojin",1518,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,265,395,291,"Chung E",1519,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,265,395,291,"Tamruan",1584,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,265,395,291,"Lady Tanee",1688,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 29:
+		set 'EC_Mobs,60;
+		areamonster getarg(1),91,177,137,203,"Requiem",1164,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,177,137,203,"Zerom",1178,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,177,137,203,"Skeleton General",1290,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 30:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),179,177,225,203,"Leaf Cat",1586,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,177,225,203,"Wild Rose",1261,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 31:
+		set 'EC_Mobs,40;
+		areamonster getarg(1),265,177,311,203,"Dustiness",1114,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,177,311,203,"Giant Spider",1304,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,177,311,203,"Porcellio",1619,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,177,311,203,"Pitman",1616,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+
+		break;
+	case 32:
+		set 'EC_Mobs,51;
+		areamonster getarg(1),349,177,395,203,"Mineral",1614,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,177,395,203,"Waste Stove",1617,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,177,395,203,"Noxious",1620,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,177,395,203,"Venomous",1621,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,177,395,203,"Teddy Bear",1622,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,177,395,203,"RSX-006",1623,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 33:
+		set 'EC_Mobs,45;
+		areamonster getarg(1),91,94,137,119,"Bathory",1102,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,94,137,119,"Sohee",1170,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,94,137,119,"Violy",1390,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";		break;
+	case 34:
+		set 'EC_Mobs,60;
+		areamonster getarg(1),179,94,225,119,"Dragon Tail",1321,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,94,225,119,"Geographer",1368,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,94,225,119,"Galapago",1391,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,94,225,119,"Kapha",1406,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 35:
+		set 'EC_Mobs,45;
+		areamonster getarg(1),265,94,311,119,"Rice Cake Boy",1409,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,94,311,119,"Boiled Rice",1520,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,94,311,119,"Baby Leopard",1415,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 36:
+		set 'EC_Mobs,51;
+		areamonster getarg(1),349,94,395,119,"Disguise",1506,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,94,395,119,"Dark Priest",1198,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,94,395,119,"Lord of Death",1373,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 37:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),91,7,137,33,"Wootan Shooter",1498,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,7,137,33,"Wootan Fighter",1499,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 38:
+		set 'EC_Mobs,40;
+		areamonster getarg(1),179,7,225,33,"Mole",1628,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,7,225,33,"Maya Purple",1289,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 39:
+		set 'EC_Mobs,40;
+		areamonster getarg(1),265,7,311,33,"Safeguard Chief",1981,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,7,311,33,"Orc Sniper",1982,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,7,311,33,"Depraved Orc Spirit",1983,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,7,311,33,"Shaman Cargalache",1984,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 40:
+		set 'EC_Mobs,41;
+		areamonster getarg(1),349,7,395,33,"Photon Cannon",1664,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,7,395,33,"Photon Cannon",1665,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,7,395,33,"Photon Cannon",1666,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,7,395,33,"Photon Cannon",1667,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,7,395,33,"Vesper",1685,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 41:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),91,349,137,375,"Remover",1682,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,349,137,375,"Gemini-S58",1681,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 42:
+		set 'EC_Mobs,60;
+		areamonster getarg(1),179,349,225,375,"Breeze",1692,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,349,225,375,"Roween",1782,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 43:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),265,349,311,375,"Gremlin",1632,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,349,311,375,"Hodremlin",1773,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 44:
+		set 'EC_Mobs,51;
+		areamonster getarg(1),349,349,395,375,"Novus",1715,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,349,395,375,"Novus",1716,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,349,395,375,"Detale",1719,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 45:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),91,265,137,291,"Banshee Master",1974,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,265,137,291,"Banshee",1868,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 46:
+		set 'EC_Mobs,55;
+		areamonster getarg(1),179,265,225,291,"Beholder Master",1975,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,265,225,291,"Beholder",1633,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,265,225,291,"Seeker",1774,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+
+		break;
+	case 47:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),265,265,311,291,"Cobalt Mineral",1976,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,265,311,291,"Heavy Metaling",1977,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 48:
+		set 'EC_Mobs,61;
+		areamonster getarg(1),349,265,395,291,"Alicel",1735,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,265,395,291,"Constant",1738,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,265,395,291,"Kiel D-01",1734,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 49:
+		set 'EC_Mobs,55;
+		areamonster getarg(1),91,177,137,203,"Frus",1753,55,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 50:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),179,177,225,203,"Hell Apocalips",1978,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,177,225,203,"Apocalips",1365,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 51:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),265,177,311,203,"Zakudam",1979,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,177,311,203,"Archdam",1668,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 52:
+		set 'EC_Mobs,51;
+		areamonster getarg(1),349,177,395,203,"Aunoe",1796,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,177,395,203,"Fanat",1797,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,177,395,203,"Gloom Under Night",1768,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 53:
+		set 'EC_Mobs,40;
+		areamonster getarg(1),91,94,137,119,"Zombie Slaughter",1864,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,94,137,119,"Hell Poodle",1866,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 54:
+		set 'EC_Mobs,60;
+		areamonster getarg(1),179,94,225,119,"Siroma",1776,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,94,225,119,"Snowier",1775,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,94,225,119,"Ice Titan",1777,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 55:
+		set 'EC_Mobs,75;
+		areamonster getarg(1),265,94,311,119,"Iceicle",1789,75,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";		break;
+	case 56:
+		set 'EC_Mobs,31;
+		areamonster getarg(1),349,94,395,119,"Gazeti",1778,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,94,395,119,"Ktullanux",1779,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 57:
+		set 'EC_Mobs,45;
+		areamonster getarg(1),91,7,137,33,"Magmaring",1836,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,7,137,33,"Knocker",1838,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,7,137,33,"Imp",1837,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 58:
+		set 'EC_Mobs,15;
+		areamonster getarg(1),179,7,225,33,"Ghostring",1120,3,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,7,225,33,"Angeling",1096,3,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,7,225,33,"Deviling",1582,3,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,7,225,33,"Arc Angeling",1388,3,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,7,225,33,"Mastering",1090,3,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 59:
+		set 'EC_Mobs,48;
+		areamonster getarg(1),265,7,311,33,"Thanatos Odium",1704,12,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,7,311,33,"Thanatos Despero",1705,12,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,7,311,33,"Thanatos Maero",1706,12,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,7,311,33,"Thanatos Dolor",1707,12,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 60:
+		set 'EC_Mobs,1;
+		areamonster getarg(1),349,7,395,33,"Thanatos Phantom",1708,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 61:
+		set 'EC_Mobs,80;
+		areamonster getarg(1),91,349,137,375,"Pinguicula",1995,40,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,349,137,375,"Dark Pinguicula",2015,40,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 62:
+		set 'EC_Mobs,90;
+		areamonster getarg(1),179,349,225,375,"Nepenthes",1988,60,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,349,225,375,"Luciola Vespa",1994,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 63:
+		set 'EC_Mobs,70;
+		areamonster getarg(1),265,349,311,375,"Naga",1993,50,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,349,311,375,"Cornus",1992,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 64:
+		set 'EC_Mobs,17;
+		areamonster getarg(1),349,349,395,375,"Hillslion",1989,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,349,395,375,"Tendril Lion",1991,2,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 65:
+		set 'EC_Mobs,75;
+		areamonster getarg(1),91,265,137,291,"Centipede Larva",1999,50,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,265,137,291,"Centipede",1987,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 66:
+		set 'EC_Mobs,80;
+		areamonster getarg(1),179,265,225,291,"Draco Egg",2014,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,265,225,291,"Draco",2013,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,265,225,291,"Tatacho",1986,40,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 67:
+		set 'EC_Mobs,60;
+		areamonster getarg(1),265,265,311,291,"Bradium Golem",2024,30,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,265,311,291,"Stalactic Golem",1278,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,265,311,291,"Lava Golem",1366,20,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 68:
+		set 'EC_Mobs,12;
+		areamonster getarg(1),349,265,395,291,"Tatacho",1986,10,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),349,265,395,291,"Hardrock Mammoth",1990,2,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 69:
+		set 'EC_Mobs,75;
+		areamonster getarg(1),91,177,137,203,"Aqua Elemental",2016,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,177,137,203,"Rhyncho",2020,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),91,177,137,203,"Phylla",2021,25,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 70:
+		set 'EC_Mobs,50;
+		areamonster getarg(1),179,177,225,203,"Ancient Tree",2019,35,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,177,225,203,"Dark Shadow",2023,15,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 71:
+		set 'EC_Mobs,24;
+		areamonster getarg(1),265,177,311,203,"Rata",2017,12,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,177,311,203,"Duneyrr",2018,12,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 72:
+		set 'EC_Mobs,1;
+		areamonster getarg(1),349,177,395,203,"Nidhoggr's Shadow",2022,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 73:
+		set 'EC_Mobs,16;
+		areamonster getarg(1),91,94,137,119,"Byorgue",1839,16,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 74:
+		set 'EC_Mobs,12;
+		areamonster getarg(1),179,94,225,119,"Lord Knight Seyren",1640,2,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,94,225,119,"Assassin Cross Eremes",1641,2,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,94,225,119,"Whitesmith Howard",1642,2,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,94,225,119,"High Priest Margaretha",1643,2,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,94,225,119,"Sniper Cecil",1644,2,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),179,94,225,119,"High Wizard Kathryne",1645,2,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 75:
+		set 'EC_Mobs,28;
+		areamonster getarg(1),265,94,311,119,"Incarnation of Morroc",1918,7,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,94,311,119,"Incarnation of Morroc",1919,7,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,94,311,119,"Incarnation of Morroc",1920,7,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		areamonster getarg(1),265,94,311,119,"Incarnation of Morroc",1921,7,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 76:
+		set 'EC_Mobs,1;
+		areamonster getarg(1),349,94,395,119,"Wounded Morroc",1917,1,instance_npcname("EC_Manager",getarg(2))+"::OnMobDead";
+		break;
+	case 77:
+		monster getarg(1),156,75,"Poring",1002,1,instance_npcname("EC_Manager",getarg(2))+"::OnPorDead";
+		break;
+	}
+	return;
+}
+
+// = Warps
+// ====================================================================================================
+// 1@new
+1@new,135,355,0	script	ECwarp_1	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),184,393;	end; }
+1@new,223,355,0	script	ECwarp_2	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),270,393;	end; }
+1@new,309,355,0	script	ECwarp_3	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),354,393;	end; }
+1@new,393,355,0	script	ECwarp_4	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),96,309;	end; }
+
+1@new,135,271,0	script	ECwarp_5	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),184,309;	end; }
+1@new,223,271,0	script	ECwarp_6	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),270,309;	end; }
+1@new,309,271,0	script	ECwarp_7	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),354,309;	end; }
+1@new,393,271,0	script	ECwarp_8	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),96,221;	end; }
+
+1@new,135,183,0	script	ECwarp_9	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),184,221;	end; }
+1@new,223,183,0	script	ECwarp_10	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),270,221;	end; }
+1@new,309,183,0	script	ECwarp_11	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),354,221;	end; }
+1@new,393,183,0	script	ECwarp_12	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),96,137;	end; }
+
+1@new,135,99,0	script	ECwarp_13	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),184,137;	end; }
+1@new,223,99,0	script	ECwarp_14	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),270,137;	end; }
+1@new,309,99,0	script	ECwarp_15	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),354,137;	end; }
+1@new,393,99,0	script	ECwarp_16	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),96,51;	end; }
+
+1@new,135,13,0 	script	ECwarp_17	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),184,51;	end; }
+1@new,223,13,0	script	ECwarp_18	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),270,51;	end; }
+1@new,309,13,0	script	ECwarp_19	45,1,1,{	end;	OnTouch:	warp has_instance("1@new"),354,51;	end; }
+1@new,393,13,0	script	ECwarp_20	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),96,393;	end; }
+
+// 2@new
+2@new,135,355,0	script	ECwarp_21	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),184,393;	end; }
+2@new,223,355,0	script	ECwarp_22	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),270,393;	end; }
+2@new,309,355,0	script	ECwarp_23	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),354,393;	end; }
+2@new,393,355,0	script	ECwarp_24	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),96,309;	end; }
+
+2@new,135,271,0	script	ECwarp_25	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),184,309;	end; }
+2@new,223,271,0	script	ECwarp_26	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),270,309;	end; }
+2@new,309,271,0	script	ECwarp_27	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),354,309;	end; }
+2@new,393,271,0	script	ECwarp_28	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),96,221;	end; }
+
+2@new,135,183,0	script	ECwarp_29	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),184,221;	end; }
+2@new,223,183,0	script	ECwarp_30	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),270,221;	end; }
+2@new,309,183,0	script	ECwarp_31	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),354,221;	end; }
+2@new,393,183,0	script	ECwarp_32	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),96,137;	end; }
+
+2@new,135,99,0	script	ECwarp_33	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),184,137;	end; }
+2@new,223,99,0	script	ECwarp_34	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),270,137;	end; }
+2@new,309,99,0	script	ECwarp_35	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),354,137;	end; }
+2@new,393,99,0	script	ECwarp_36	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),96,51;	end; }
+
+2@new,135,13,0 	script	ECwarp_37	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),184,51;	end; }
+2@new,223,13,0	script	ECwarp_38	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),270,51;	end; }
+2@new,309,13,0	script	ECwarp_39	45,1,1,{	end;	OnTouch:	warp has_instance("2@new"),354,51;	end; }
+2@new,393,13,0	script	ECwarp_40	45,1,1,{
+	end;
+
+OnTouch:
+	if('give_ash) getitem $EC_AshID,1;
+	warp has_instance("3@new"),96,393;
+	end;
+
+OnEnableAshtimer:
+	set 'give_ash,1;
+	sleep 60000;
+	set 'give_ash,0;
+	end;
+}
+
+// 3@new
+3@new,135,355,0	script	ECwarp_41	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),184,393;	end; }
+3@new,223,355,0	script	ECwarp_42	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),270,393;	end; }
+3@new,309,355,0	script	ECwarp_43	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),354,393;	end; }
+3@new,393,355,0	script	ECwarp_44	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),96,309;	end; }
+
+3@new,135,271,0	script	ECwarp_45	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),184,309;	end; }
+3@new,223,271,0	script	ECwarp_46	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),270,309;	end; }
+3@new,309,271,0	script	ECwarp_47	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),354,309;	end; }
+3@new,393,271,0	script	ECwarp_48	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),96,221;	end; }
+
+3@new,135,183,0	script	ECwarp_49	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),184,221;	end; }
+3@new,223,183,0	script	ECwarp_50	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),270,221;	end; }
+3@new,309,183,0	script	ECwarp_51	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),354,221;	end; }
+3@new,393,183,0	script	ECwarp_52	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),96,137;	end; }
+
+3@new,135,99,0	script	ECwarp_53	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),184,137;	end; }
+3@new,223,99,0	script	ECwarp_54	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),270,137;	end; }
+3@new,309,99,0	script	ECwarp_55	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),354,137;	end; }
+3@new,393,99,0	script	ECwarp_56	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),96,51;	end; }
+
+3@new,135,13,0 	script	ECwarp_57	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),184,51;	end; }
+3@new,223,13,0	script	ECwarp_58	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),270,51;	end; }
+3@new,309,13,0	script	ECwarp_59	45,1,1,{	end;	OnTouch:	warp has_instance("3@new"),354,51;	end; }
+3@new,393,13,0	script	ECwarp_60	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),96,393;	end; }
+
+// 4@new
+4@new,135,355,0	script	ECwarp_61	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),184,393;	end; }
+4@new,223,355,0	script	ECwarp_62	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),270,393;	end; }
+4@new,309,355,0	script	ECwarp_63	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),354,393;	end; }
+4@new,393,355,0	script	ECwarp_64	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),96,309;	end; }
+
+4@new,135,271,0	script	ECwarp_65	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),184,309;	end; }
+4@new,223,271,0	script	ECwarp_66	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),270,309;	end; }
+4@new,309,271,0	script	ECwarp_67	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),354,309;	end; }
+4@new,393,271,0	script	ECwarp_68	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),96,221;	end; }
+
+4@new,135,183,0	script	ECwarp_69	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),184,221;	end; }
+4@new,223,183,0	script	ECwarp_70	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),270,221;	end; }
+4@new,309,183,0	script	ECwarp_71	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),354,221;	end; }
+4@new,393,183,0	script	ECwarp_72	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),96,137;	end; }
+
+4@new,135,99,0	script	ECwarp_73	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),184,137;	end; }
+4@new,223,99,0	script	ECwarp_74	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),270,137;	end; }
+4@new,309,99,0	script	ECwarp_75	45,1,1,{	end;	OnTouch:	warp has_instance("4@new"),354,137;	end; }
+4@new,393,99,0	script	ECwarp_76	45,1,1,{	end;	OnTouch:	warp has_instance("5@new"),156,65;	end; }
+
+// = Mapflags
+// ====================================================================================================
+1@new	mapflag	nowarp
+1@new	mapflag	nowarpto
+1@new	mapflag	noteleport
+1@new	mapflag	nosave	SavePoint
+1@new	mapflag	nomemo
+1@new	mapflag	nobranch
+1@new	mapflag	noicewall
+1@new	mapflag	restricted	7
+1@new	mapflag	monster_noteleport
+
+2@new	mapflag	nowarp
+2@new	mapflag	nowarpto
+2@new	mapflag	noteleport
+2@new	mapflag	nosave	SavePoint
+2@new	mapflag	nomemo
+2@new	mapflag	nobranch
+2@new	mapflag	noicewall
+2@new	mapflag	restricted	7
+2@new	mapflag	monster_noteleport
+
+3@new	mapflag	nowarp
+3@new	mapflag	nowarpto
+3@new	mapflag	noteleport
+3@new	mapflag	nosave	SavePoint
+3@new	mapflag	nomemo
+3@new	mapflag	nobranch
+3@new	mapflag	noicewall
+3@new	mapflag	restricted	7
+3@new	mapflag	monster_noteleport
+
+4@new	mapflag	nowarp
+4@new	mapflag	nowarpto
+4@new	mapflag	noteleport
+4@new	mapflag	nosave	SavePoint
+4@new	mapflag	nomemo
+4@new	mapflag	nobranch
+4@new	mapflag	noicewall
+4@new	mapflag	restricted	7
+4@new	mapflag	monster_noteleport
+
+5@new	mapflag	nowarp
+5@new	mapflag	nowarpto
+5@new	mapflag	noteleport
+5@new	mapflag	nosave	SavePoint
+5@new	mapflag	nomemo
+5@new	mapflag	nobranch
+5@new	mapflag	noicewall
+5@new	mapflag	restricted	7
+5@new	mapflag	monster_noteleport

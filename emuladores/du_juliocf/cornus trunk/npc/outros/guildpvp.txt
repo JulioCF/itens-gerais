@@ -1,0 +1,281 @@
+//===== Cronus Script ========================================
+//= NPC Batalha de Clãs
+//===== Por: =================================================
+//= L0ne_W0lf
+//===== Versão Atual: ========================================
+//= 1.1a
+//===== Descrição: ===========================================
+//= [Aegis Conversion]
+//= Batalha de clãs com mecanismos PvP.
+//===== Changelog: ===========================================
+//= 1.0 First version. [L0ne_W0lf]
+//= 1.1 Traduzido por [Zidane Tribal]
+//= 1.1a Revisado script [Mara]
+//============================================================
+
+pvp_y_room,77,85,4	script	Guia da Batalha de Clãs	105,{
+	mes "[Guia da Batalha de Clãs]";
+	mes "Como vai?";
+	mes "Eu sou o Guia da Batalha de Clãs";
+	mes "para os novos mapas PvP.";
+	mes "Deixe-me saber para qual mapa";
+	mes "você quer que eu te leve.";
+	next;
+	switch(select("Mapa 1:Mapa 2:Mapa 3:Mapa 4:Mapa 5")) {
+	case 1:
+		mes "[Guia da Batalha de Clãs]";
+		mes "Você escolheu o Mapa 1.";
+		mes "Agora, de qual time";
+		mes "você quer ser? Você pode escolher";
+		mes "entre o Time 1 ou Time 2.";
+		next;
+		switch(select("Time 1:Time 2")) {
+		case 1:
+			mes "[Guia da Batalha de Clãs]";
+			mes "Certo, vou levá-lo";
+			mes "ao Mapa 1 como membro";
+			mes "do Time 1. Você está pronto";
+			mes "para ser transportado para lá agora?";
+			next;
+			switch(select("Sim:Não")) {
+			case 1:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Ótimo! Divirta-se!";
+				close2;
+				warp "guild_vs1",7,49;
+				end;
+			case 2:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Muito bem, espero";
+				mes "voltar a vê-lo";
+				mes "nos campos de PvP!";
+				close;
+			}
+		case 2:
+			mes "[Guia da Batalha de Clãs]";
+			mes "Certo, vou levá-lo";
+			mes "ao Mapa 1 como membro";
+			mes "do Time 2. Você está pronto";
+			mes "para ser transportado para lá agora?";
+			next;
+			switch(select("Sim:Não")) {
+			case 1:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Ótimo! Divirta-se!";
+				close2;
+				warp "guild_vs1",91,49;
+				end;
+			case 2:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Muito bem, espero";
+				mes "voltar a vê-lo";
+				mes "nos campos de PvP!";
+				close;
+			}
+		}
+	case 2:
+		mes "[Guia da Batalha de Clãs]";
+		mes "Você escolheu o Mapa 2.";
+		mes "Agora, de qual time";
+		mes "você quer ser? Você pode escolher";
+		mes "entre o Time 1 ou Time 2.";
+		next;
+		switch(select("Time 1:Time 2")) {
+		case 1:
+			mes "[Guia da Batalha de Clãs]";
+			mes "Certo, vou levá-lo";
+			mes "ao Mapa 2 como membro";
+			mes "do Time 1. Você está pronto";
+			mes "para ser transportado para lá agora?";
+			next;
+			switch(select("Sim:Não")) {
+			case 1:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Ótimo! Divirta-se!";
+				close2;
+				warp "guild_vs2",9,49;
+				end;
+			case 2:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Muito bem, espero";
+				mes "voltar a vê-lo";
+				mes "nos campos de PvP!";
+				close;
+			}
+		case 2:
+			mes "[Guia da Batalha de Clãs]";
+			mes "Certo, vou levá-lo";
+			mes "ao Mapa 2 como membro";
+			mes "do Time 2. Você está pronto";
+			mes "para ser transportado para lá agora?";
+			next;
+			switch(select("Sim:Não")) {
+			case 1:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Ótimo! Divirta-se!";
+				close2;
+				warp "guild_vs2",90,49;
+				end;
+			case 2:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Muito bem, espero";
+				mes "voltar a vê-lo";
+				mes "nos campos de PvP!";
+				close;
+			}
+		}
+	case 3:
+		mes "[Guia da Batalha de Clãs]";
+		mes "Você escolheu o Mapa 3.";
+		mes "Agora, de qual time";
+		mes "você quer ser? Você pode escolher";
+		mes "entre o Time 1 ou Time 2.";
+		next;
+		switch(select("Time 1:Time 2")) {
+		case 1:
+			mes "[Guia da Batalha de Clãs]";
+			mes "Certo, vou levá-lo";
+			mes "ao Mapa 3 como membro";
+			mes "do Time 1. Você está pronto";
+			mes "para ser transportado para lá agora?";
+			next;
+			switch(select("Sim:Não")) {
+			case 1:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Ótimo! Divirta-se!";
+				close2;
+				warp "guild_vs3",16,50;
+				end;
+			case 2:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Muito bem, espero";
+				mes "voltar a vê-lo";
+				mes "nos campos de PvP!";
+				close;
+			}
+		case 2:
+			mes "[Guia da Batalha de Clãs]";
+			mes "Certo, vou levá-lo";
+			mes "ao Mapa 3 como membro";
+			mes "do Time 2. Você está pronto";
+			mes "para ser transportado para lá agora?";
+			next;
+			switch(select("Sim:Não")) {
+			case 1:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Ótimo! Divirta-se!";
+				close2;
+				warp "guild_vs3",83,50;
+				end;
+			case 2:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Muito bem, espero";
+				mes "voltar a vê-lo";
+				mes "nos campos de PvP!";
+				close;
+			}
+		}
+	case 4:
+		mes "[Guia da Batalha de Clãs]";
+		mes "Você escolheu o Mapa 4.";
+		mes "Agora, de qual time";
+		mes "você quer ser? Você pode escolher";
+		mes "entre o Time 1 ou Time 2.";
+		next;
+		switch(select("Time 1:Time 2")) {
+		case 1:
+			mes "[Guia da Batalha de Clãs]";
+			mes "Certo, vou levá-lo";
+			mes "ao Mapa 4 como membro";
+			mes "do Time 1. Você está pronto";
+			mes "para ser transportado para lá agora?";
+			next;
+			switch(select("Sim:Não")) {
+			case 1:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Ótimo! Divirta-se!";
+				close2;
+				warp "guild_vs4",8,49;
+				end;
+			case 2:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Muito bem, espero";
+				mes "voltar a vê-lo";
+				mes "nos campos de PvP!";
+				close;
+			}
+		case 2:
+			mes "[Guia da Batalha de Clãs]";
+			mes "Certo, vou levá-lo";
+			mes "ao Mapa 4 como membro";
+			mes "do Time 2. Você está pronto";
+			mes "para ser transportado para lá agora?";
+			next;
+			switch(select("Sim:Não")) {
+			case 1:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Ótimo! Divirta-se!";
+				close2;
+				warp "guild_vs4",91,49;
+				end;
+			case 2:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Muito bem, espero";
+				mes "voltar a vê-lo";
+				mes "nos campos de PvP!";
+				close;
+			}
+		}
+	case 5:
+		mes "[Guia da Batalha de Clãs]";
+		mes "Você escolheu o Mapa 5.";
+		mes "Agora, de qual time";
+		mes "você quer ser? Você pode escolher";
+		mes "entre o Time 1 ou Time 2.";
+		next;
+		switch(select("Time 1:Time 2")) {
+		case 1:
+			mes "[Guia da Batalha de Clãs]";
+			mes "Certo, vou levá-lo";
+			mes "ao Mapa 5 como membro";
+			mes "do Time 1. Você está pronto";
+			mes "para ser transportado para lá agora?";
+			next;
+			switch(select("Sim:Não")) {
+			case 1:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Ótimo! Divirta-se!";
+				close2;
+				warp "guild_vs5",20,50;
+				end;
+			case 2:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Muito bem, espero";
+				mes "voltar a vê-lo";
+				mes "nos campos de PvP!";
+				close;
+			}
+		case 2:
+			mes "[Guia da Batalha de Clãs]";
+			mes "Certo, vou levá-lo";
+			mes "ao Mapa 5 como membro";
+			mes "do Time 2. Você está pronto";
+			mes "para ser transportado para lá agora?";
+			next;
+			switch(select("Sim:Não")) {
+			case 1:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Ótimo! Divirta-se!";
+				close2;
+				warp "guild_vs5",79,50;
+				end;
+			case 2:
+				mes "[Guia da Batalha de Clãs]";
+				mes "Muito bem, espero";
+				mes "voltar a vê-lo";
+				mes "nos campos de PvP!";
+				close;
+			}
+		}
+	}
+}

@@ -1,0 +1,141 @@
+﻿//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// Npc criado por Hefesto/WorD
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// Nome do Npc Trocador de Moedas
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// Versão atual 2.0
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// Compatível com Cronus Emulador
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+//Nao Retirem os Creditos Por Favor
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+prontera.gat,130,215,5	script	Trocador de moedas	994,{
+
+set @np$,"[ Trocador de Moedas ]";// nome do npc que vai aparecer no chat
+setarray @prices[0],250000000,500000000,1000000000;
+setarray @ids[0],672,676,670;
+
+	mes @np$;
+	mes "Olá "+strcharinfo(0)+"!";
+	mes "O que deseja..
+	mes "Comprar ou vender sacolas de moedas??";
+	if(select("-Comprar:-Vender") == 2)
+	{
+		next;
+		mes @np$;
+		mes "Qual sacola de moeda você quer vender?";
+		switch(select("-Sacola de moeda de Bronze","-Sacola de moedas de Prata","-Sacola de moedas de Ouro"))
+		{
+		case 1:
+				next;
+				mes @np$;
+				mes "Deixe-me verificar...";
+				if (countitem(@ids[0]) >= 1)
+				{
+					next;
+					mes @np$;
+					mes "Aqui está seu Zeny, volte sempre!";
+					delitem @ids[0],1;
+					set Zeny,Zeny+@prices[0];
+					close;
+				}
+				next;
+				mes @np$;
+				mes "Você não tem esta moeda!";
+				close;
+		
+		case 2:
+				next;
+				mes @np$;
+				mes "Deixe-me verificar...";
+				if (countitem(@ids[1]) >= 1)
+				{
+					next;
+					mes @np$;
+					mes "Aqui está seu Zeny, volte sempre!";
+					delitem @ids[1],1;
+					set Zeny,Zeny+@prices[1];
+					close;
+				}
+				next;
+				mes @np$;
+				mes "Você não tem a quantidade necessária";
+				close;
+		
+		case 3:
+				next;
+				mes @np$;
+				mes "Deixe-me verificar...";
+				if (countitem(@ids[2]) >= 1)
+				{
+					next;
+					mes @np$;
+					mes "Aqui está seu Zeny, volte sempre!";
+					delitem @ids[2],1;
+					set Zeny,Zeny+@prices[2];
+					close;
+				}
+				next;
+				mes @np$;
+				mes "Você não tem a quantidade necessária";
+				close;
+		}
+	}
+	
+	next;
+	mes @np$;
+	mes "Qual sacola de moeda você quer comprar?";
+	switch(select("-Broze","-Prata","-Ouro"))
+	{
+	case 1:
+		next;
+		mes @np$;
+		mes "Esta Sacola de moeda custa "+@prices[0]+" zenys";
+		mes "Quer mesmo ela?";
+		if(select("-Sim:-Não") == 2) close;
+		next;
+		mes @np$;
+		mes "Deixe-me verificar seu zeny...";
+		if (Zeny < @prices[0]) { next; mes @np$; mes "Você não tem Zenys suficientes"; close; }
+		next;
+		mes @np$;
+		mes "Aqui está sua moeda! Volte Sempre!";
+		set Zeny,Zeny-@prices[0];
+		getitem @ids[0],1;
+		close;
+
+	case 2:
+		next;
+		mes @np$;
+		mes "Esta Moeda custa "+@prices[1]+" zeny";
+		mes "Quer mesmo ela?";
+		if(select("-Sim:-Não") == 2) close;
+		next;
+		mes @np$;
+		mes "Deixe-me verificar seu zeny";
+		if (Zeny < @prices[1]) { next; mes @np$; mes "Você não tem Zenys suficientes"; close; }
+		next;
+		mes @np$;
+		mes "Aqui está sua moeda! Volte Sempre!";
+		set Zeny,Zeny-@prices[1];
+		getitem @ids[1],1;
+		close;
+
+	case 3:
+		next;
+		mes @np$;
+		mes "Esta Sacola de moeda custa "+@prices[2]+" zeny";
+		mes "Quer mesmo ela?";
+		if(select("-Sim:-Não") == 2) close;
+		next;
+		mes @np$;
+		mes "Deixe-me verificar seu zeny";
+		if (Zeny < @prices[2]) { next; mes @np$; mes "Você não tem Zenys suficientes"; close; }
+		next;
+		mes @np$;
+		mes "Aqui está sua Sacola! Volte Sempre!";
+		set Zeny,Zeny-@prices[2];
+		getitem @ids[2],1;
+		close;
+	}
+}

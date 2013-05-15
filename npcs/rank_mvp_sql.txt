@@ -1,0 +1,58 @@
+// tabela SQL
+//------------------------------------------------------------------------------
+//CREATE TABLE `mvprank` (
+//`id` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0',
+//`name` VARCHAR( 23 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ,
+//`mvpkills` BIGINT UNSIGNED NOT NULL ,
+//UNIQUE (
+//`id`
+//)
+//) ENGINE = MYISAM ;
+/
+
+
+
+-	script	Rank MvP	-1,{
+OnInit:
+	query_sql "CREATE TABLE IF NOT EXISTS `mvprank` (`id` INT( 11 ) UNSIGNED NOT NULL DEFAULT '0',`name` VARCHAR( 23 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL ,`mvpkills` BIGINT UNSIGNED NOT NULL ,UNIQUE (`id`)) ENGINE = MYISAM";
+	set $a, 1;
+	set $topmvp, 10;
+	setarray $mvpid[0],1511,1647,1785,1630,1399,1039,1874,2068,1272,1719,1046,1389,1112,1115,1957,1418,1871,1252,1768,1086,1688,1646,1373,1147,1059,1150,1956,2022,1087,1190,1038,1157,1159,1502,1623,1650,1583,1708,1312,1751,1685,1648,1917,1658,1832,1916;
+	end;
+
+OnNPCKillEvent:
+	for (set .@i, 0; .@i < getarraysize($mvpid); set .@i, .@i + 1) {
+		if (killedrid == $mvpid[.@i]) set .@s,1;
+	}
+	if (!.@s) end;
+	if ($a) announce "O player [ "+strcharinfo(0)+" ] matou o MvP [ "+getmonsterinfo(killedrid,0)+" ] no mapa [ "+strcharinfo(3)+" ]",bc_blue|bc_all;
+	query_sql "INSERT INTO mvprank (id, name, mvpkills) values('"+getcharid(0)+"','"+strcharinfo(0)+"','1') ON DUPLICATE KEY UPDATE mvpkills = mvpkills + '1'";
+	end;
+}
+
+prontera,141,180,7	script	Top MvP	404,{
+	if (getgmlevel() > 90) {
+		mes "[^0000FFTop MvP "+$topmvp+"^000000]";
+		mes "O que deseja fazer?";
+		switch(select("Ver Top",(($a) ? "Desligar anúncio":"Ligar anúncio"),"Resetar Top MvP:Número de posições")) {
+			case 1: break;
+			case 2:
+				set $a, ($a) ? 0 : 1;
+				close;
+			case 3:
+				query_sql "TRUNCATE `mvprank`";
+				close;
+			case 4:
+				mes "Digite o número de posições do top mvp.";
+				input $topmvp;
+				break;
+		}
+		next;
+	}
+	query_sql "SELECT `name`,`mvpkills` FROM `mvprank` ORDER BY `mvpkills` DESC LIMIT "+$topmvp+"",@names$,@mvpkills;
+	mes "[^0000FFTop MvP "+$topmvp+"^000000]";
+	for (set @c, 0; @c < $topmvp; set @c, @c + 1) {
+		mes "^FF0000"+(@c+1)+"º^000000 ^0000FF"+@names$[@c]+"^000000 matou ^FF0000"+@mvpkills[@c]+"^000000 MvP's.";
+	}
+	close;
+}

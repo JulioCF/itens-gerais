@@ -1,0 +1,67 @@
+	Data: Dia/Mês/Ano
+		- Comentário (opcional, só utilizado caso tenha sido corrigido um erro reportado)
+			* Comentário Adicional (opcional)
+
+-------------------------------------------------------------------------------------------------
+Projeto gratuito - Jonyll
+Vide LICENCE para informações da licença desse projeto (GNU/GPL)
+------------------------------------------------------------------------------------------------
+	27/01/2013
+		SVN limpo
+		Adiconado nova prontera
+
+	11/10/2012
+		SVN mudado, agora estamos no assembla.
+			* Espero que este seja menos instável que o googlecode.
+
+	19/07/2012
+		Adicionado antigo emulador TXT trunk do Cronus-Emulator
+		Aceita clients até 2011 06 09(irei criar um e por no repositório em breve)
+		Emulador já compilado e testado, pronto para uso.
+			*Compilado em Visual 2011
+			*O emulador esta na pasta emuladores/du_juliocf
+		Adicionado CP do eAmod
+			* Basta ler o arquivo de texto dentro da pasta eAmod
+
+	05/07/2012
+		Adicionado emulador rAthena c/ eAmod já instalado e atualizado, só não testado pessoalmente.
+			*Pasta eAmods, infos no .txt
+
+	30/06/2012
+		Adicionado Fraps 3.5.5 e Fraps Cracked na pasta /outros
+			*manual de uso dentro.
+	
+	29/06/2012
+		Repositório reinstalado, devido a problemas desconhecidos.
+
+	12/06/2012
+		Redefinido algumas senhas por segurança.
+
+	07/06/2012
+		Separado assuntos sobre eAmod, agora com sua pasta própria
+
+	04/06/2012
+		Adicionado Pronteras custons(vários)
+		Liberado acesso ao membro ACSII do Cronus-Emulator
+			* Irá contribuir ao projeto
+
+	03/06/2012
+		Adiconado versões eAmod-A e eAmod-B vazadas pelo @AnonyGamer
+			* Arquivo eAmods.txt na pasta Arquivos
+
+	19/05/2012
+		Adicionado script e um pacote, com um programa e jogos Arcade
+
+	18/05/2012
+		Adiconado Patch de novos comandos feitos por AXL - Cronus
+
+	16/05/2012
+		- Adicionado mais NPCs
+			* Em breve começarei a criar os Emuladores e Hexeds, aguardem!
+
+	14/05/2012
+		- Adicionado painel de votos - ZK-Vote
+			* Sistema gratuito de votos por pontos, mas atenção! ele também não reconhece se a pessoa realmente votou.
+
+	12/05/2012
+		- Adicionado change-log para melhor organização

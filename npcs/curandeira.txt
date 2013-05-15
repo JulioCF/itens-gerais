@@ -1,0 +1,41 @@
+//-- curandeira e bufadora
+//========================
+prontera,161,188,4	script	Curandeira#hG1-1::HealerG	91,{
+
+	if(!getgmlevel())
+	else
+	{
+		sc_start 32, 240000, 10;	// Increase Agi Duração: 540 sec
+		sc_start 30, 240000, 10; // Blessing Duraição: 540 sec
+		sc_start 40, 90000, 5;	// Magnificat Duraição: 540 sec
+		sc_start 41, 30000, 10;	// Gloria Duração: 80 sec
+		atcommand "@repairall "+strcharinfo(0);
+		set .@lv, 3;
+	}
+	sc_start SC_DEXFood, 1200000, .@lv;
+	sc_start SC_INTFood, 1200000, .@lv; 
+	sc_start SC_STRFood, 1200000, .@lv; 
+	sc_start SC_AGIFood, 1200000, .@lv; 
+	sc_start SC_VITFood, 1200000, .@lv;
+	sc_start SC_LUKFood, 1200000, .@lv;
+	percentheal 100,100;
+	end;
+}
+morocc,159,96,5	duplicate(HealerG)	Curandeira#hG2-2	91
+ayothaya,155,111,5	duplicate(HealerG)	Curandeira#hG2-3	91
+geffen,121,61,5	duplicate(HealerG)	Curandeira#hG2-4	91
+umbala,94,162,5	duplicate(HealerG)	Curandeira#hG2-5	91
+payon,180,105,5	duplicate(HealerG)	Curandeira#hG2-6	91
+alberta,185,144,5	duplicate(HealerG)	Curandeira#hG2-7	91
+aldebaran,134,123,5	duplicate(HealerG)	Curandeira#hG2-8	91
+izlude,125,118,5	duplicate(HealerG)	Curandeira#hG2-9	91
+xmas,149,136,5	duplicate(HealerG)	Curandeira#hG2-10	91
+comodo,188,162,5	duplicate(HealerG)	Curandeira#hG2-11	91
+amatsu,200,80,5	duplicate(HealerG)	Curandeira#hG2-12	91
+gonryun,164,130,5	duplicate(HealerG)	Curandeira#hG2-13	91
+yuno,152,186,5	duplicate(HealerG)	Curandeira#hG2-14	91
+niflheim,188,180,5	duplicate(HealerG)	Curandeira#hG2-15	91
+louyang,225,103,5	duplicate(HealerG)	Curandeira#hG2-16	91
+rachel,131,117,5	duplicate(HealerG)	Curandeira#hG2-17	91
+veins,212,124,5	duplicate(HealerG)	Curandeira#hG2-18	91
+moscovia,221,192,5	duplicate(HealerG)	Curandeira#hG2-19	91

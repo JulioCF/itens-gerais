@@ -1,0 +1,126 @@
+prontera,150,150,5	script	Anunciador	888,{
+
+//> Início das Configurações
+		// Observações: As cores das mensagens podem ser aleradas nas linhas:
+		//
+		// "DelayAnnounce("Mensagem","Torpedo","0xFFFF00");"
+		//
+		// Onde "0xFFFF00" será a cor delimitada.
+		
+		// Opções de menu, coloque 1 para habilitar menus de 'torpedo(normal), compra, venda, troca.
+		set .Opt,1;
+
+		// Palavras bloqueadas.
+		setarray .palavras$[1],"coloque","as","palavras","aqui"; //Coloque aqui as palavras bloqueadas, cada uma dentro das aspas.
+		
+		// Configuração do Tempo de Delay. (Padrão: 10 minutos)
+		set .DelayAnn,10;
+
+		// Configuração Zenys (Padrão: 200.000z)
+		set .Zeny,200000;
+
+		// Nível de BASE mínimo para uso do NPC. (Padrão: 40)
+		set .LevelUser,10;
+
+//> Início do Script
+	function DelayAnnounce;
+	if(!DelayAnnounce("DelayGet",getcharid(3),.DelayAnn))
+	{
+		mes "[Anunciador]";
+		mes "Desculpe, mas você deve esperar ^FF0000"+.DelayAnn+"^000000 minuto(s) para poder enviar outro torpedo.";
+		close;
+	}
+
+	mes "[Anunciador]";
+	mes "Olá "+strcharinfo(0)+", deseja enviar uma mensagem?";
+	mes "Total enviados: ^0000FF"+#envio+"^000000";
+	if (.DelayAnn > 0) { mes "Delay: ^0000FF"+.DelayAnn+" minutos.^000000"; }
+	if (.Zeny > 0) { mes "Valor: ^0000FF"+.Zeny+"z^000000"; }
+	if(select("Sim:Não") == 2) close;
+	
+	if(.Opt == 1)
+	{
+		switch(select("Torpedo","Venda","Compra","Troca"))
+		{
+		case 1:
+			DelayAnnounce("Mensagem","Torpedo","0xFFFF00");
+		case 2:
+			DelayAnnounce("Mensagem","vender","0x00BFFF");
+		case 3:
+			DelayAnnounce("Mensagem","comprar","0x00CD00");
+		case 4:
+			DelayAnnounce("Mensagem","trocar","0xFF0000");
+		}
+	} else { DelayAnnounce("Mensagem","Torpedo","0xFFFF00"); }
+	
+function	DelayAnnounce	{
+
+	if( GetArg(0) == "DelaySet" )
+	{
+		setd "$anndelay_"+GetArg(1),gettime(4)*24*60 + gettime(6)*60 + gettime(2);
+		return 0;
+	}
+	
+	else
+	
+	if( GetArg(0) == "DelayGet" )
+	{
+		set .@check, gettime(4)*24*60 + gettime(6)*60 + gettime(2) - getd("$anndelay_"+GetArg(1));
+		return !(.@check >= 0 && .@check < GetArg(2) );
+	}
+	
+	if( GetArg(0) == "Mensagem" )
+	{
+	next;
+	Restart:
+	mes "[Anunciador]";
+	mes "Muito bem, digite a sua mensagem:";
+	mes " ";
+	mes "Digite 'fechar' para sair.";
+	digit @msg$;
+	if(@msg$ == "fechar") { close; }
+	next;
+
+	if(Zeny < .Zeny)
+	{
+		mes "[Anunciador]";
+		mes "Me desculpe mas você não tem";
+		mes "zenys suficientes para usar";
+		mes "o serviço de torpedos.";
+		next;
+		mes "[Anunciador]";
+		mes "Você irá precisar de ^FF0000"+.Zeny+"z^000000.";
+		close;
+	}
+
+	if(BaseLevel < .LevelUser)
+	{
+		mes "[Anunciador]";
+		mes "Me desculpe mais por";
+		mes "questões de segurança,";
+		mes "você precisa ter o level";
+		mes "maior que ^FF0000"+.LevelUser+"^000000.";
+		close;
+	}
+
+	for(set .@i,1; .@i < getarraysize(.palavras$); set .@i,.@i+1)
+	{
+		if(compare(@msg$,.palavras$[.@i]))
+		{
+			mes "[Anunciador]";
+			mes "Desculpe, mais não é permitido palavrões no anuncio.";
+			close;
+		}
+	}
+	mes "[Anunciador]";
+	mes "Você digitou:";
+	mes "'^FF0000"+@msg$+"^000000'";
+	if(select("Correto!","Não, está errado...") == 2) { close2;	goto Restart; }
+	if(getarg(1) != "Torpedo") { announce "["+strcharInfo(0)+"] quer "+getarg(1)+": "+@msg$+".",bc_all,getarg(2); } else { announce "["+strcharInfo(0)+"](Torpedo) disse: "+@msg$+".",bc_all,getarg(2); }
+	; }
+	DelayAnnounce("DelaySet",getcharid(3));
+	if (.Zeny > 0) { set Zeny,Zeny-.Zeny; }
+	set #envio,#envio+1;
+	close;
+	}
+}

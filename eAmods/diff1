@@ -1,0 +1,21 @@
+Index: skill.c
+===================================================================
+--- skill.c	(revision 298)
++++ skill.c	(revision 299)
+@@ -12,6 +12,7 @@
+ #include "../common/random.h"
+ 
+ #include "skill.h"
++#include "atcommand.h"
+ #include "map.h"
+ #include "path.h"
+ #include "clif.h"
+@@ -18128,7 +18129,7 @@
+ 	char output[256];
+ 	nullpo_ret(sd);
+ 
+-	if ( !pc_can_give_items(sd) )
++	if ( !pc_can_give_items(pc_isGM(sd)) )
+ 	{
+ 		clif_skill_fail(sd,MC_VENDING,USESKILL_FAIL_LEVEL,0);
+ 		return 0;

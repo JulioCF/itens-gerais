@@ -1,0 +1,366 @@
+//===============================================================
+//= Ultimate Coin Exchange NPC
+//===============================================================
+//= v1.2
+//===============================================================
+//= by xxJakotsuxx
+//===============================================================
+//= A zeny to coin exchange script created for the
+//= ease of storing zeny. Created out of fustration
+//= over the amount of crappy coin scripts on eAthena.
+//===============================================================
+//= v1.1
+//= Added some special effects and "Current" to the list section.
+//===============================================================
+//= v1.2
+//= After giving it some thought thanks to GreenFabre, I decided 
+//= to change the dialogue to a more "translatable friendly"
+//= version. Added a display for required zeny when you choose to
+//= exchange zeny to coins.
+//===============================================================
+prontera,147,175,5	script	Ultimate Coin Exchange	878,{
+
+//======================= Customization Area ========================================
+setarray .coins[0],673,671,674,677,675; //bronze,gold,mithril,platinum,silver accordingly
+setarray .coinvalue[0],1000000,50000000,150000000,300000000,25000000; //bronze,gold,mithril,platinum,silver accordingly
+set .maxzeny,1000000000; // Maximum Zeny allowed to trade or maximum on server
+set .minzeny,1000000; // Minimum Zeny required to trade
+//======================= Do Not Edit Below =========================================
+set .name$,"^FF0000[Ultimate Coin Exchange]^000000"; // NPC Name
+set .plname$,"^0000FF["+strcharinfo(0)+"]^000000"; // Interacting Player Name
+set .coinmenu$,"^d5be8bBronze Coins^000000:^88969bSilver Coins^000000:^ccc252Gold Coins^000000:^88969bMithril Coins^000000:^b7b7b7Platinum Coins^000000:Nevermind."; //Menu for converting coin -> zeny
+set .zenymenu1$,"^d5be8bBronze Coins^000000:^88969bSilver Coins^000000:^ccc252Gold Coins^000000:^88969bMithril Coins^000000:^b7b7b7Platinum Coins^000000:Choose Coins!:Nevermind."; //1st Menu for converting zeny -> coins
+set .1stmenu$,"^00FFFFCoins to Zeny.^000000:^FFFF00Zeny to Coins.^000000";
+//===================================================================================
+
+	mes .name$;
+	mes "Hello! How are you today?";
+	next;
+	mes .plname$;
+	mes "I am just fine, thank you!";
+	next;
+	mes .name$;
+	mes "Would you like to exchange some things today?";
+	next;
+	if (select("...Yes:...No") == 2) close;
+	mes .name$;
+	mes "Very good. Please choose your exchange option.";
+	next;
+	switch(select(.1stmenu$)) {
+		case 1:
+			mes .name$;
+			mes "I see that you have:";
+			mes "^b7b7b7"+countitem(.coins[3])+" "+getitemname(.coins[3])+"s^000000,";
+			mes "^88969b"+countitem(.coins[2])+" "+getitemname(.coins[2])+"s^000000,";
+			mes "^ccc252"+countitem(.coins[1])+" "+getitemname(.coins[1])+"s^000000,";
+			mes "^88969b"+countitem(.coins[4])+" "+getitemname(.coins[4])+"s^000000,";
+			mes "And ^d5be8b"+countitem(.coins[0])+" "+getitemname(.coins[0])+"s^000000.";
+			next;
+			if ( countitem(.coins[3]) < 1 && countitem(.coins[2]) < 1 && countitem(.coins[1]) < 1 && countitem(.coins[4]) < 1 && countitem(.coins[0]) < 1 ) { 
+			mes .name$;
+			mes "You do not have enough coins to exchange.";
+			close;
+			}
+			mes .name$;
+			mes "Would you like to exchange some coins?";
+			next;
+			mes "^FF0000=========================^000000";
+			mes "^b7b7b7"+getitemname(.coins[3])+"s^000000 = "+.coinvalue[3]+"";
+			mes "^88969b"+getitemname(.coins[2])+"s^000000= "+.coinvalue[2]+"";
+			mes "^ccc252"+getitemname(.coins[1])+"s^000000= "+.coinvalue[1]+"";
+			mes "^88969b"+getitemname(.coins[4])+"s^000000= "+.coinvalue[4]+"";
+			mes "And ^d5be8b"+getitemname(.coins[0])+"s^000000= "+.coinvalue[0]+"";
+			mes "^FF0000=========================^000000";
+			next;
+			switch(select(.coinmenu$)) {
+				case 1:
+					callsub h_coin2zeny,.coins[0],.coinvalue[0];
+				case 2:
+					callsub h_coin2zeny,.coins[4],.coinvalue[4];
+				case 3:
+					callsub h_coin2zeny,.coins[1],.coinvalue[1];
+				case 4:
+					callsub h_coin2zeny,.coins[2],.coinvalue[2];
+				case 5:
+					callsub h_coin2zeny,.coins[3],.coinvalue[3];
+				case 6:
+					close;
+			}
+		case 2:
+			if ( Zeny < .minzeny ) {
+			mes .name$;
+			mes "You are too poor to exchange zeny. You must have at least ^ff0000"+ .minzeny +"^000000.";
+			close;
+			}
+			mes .name$;
+			mes "Oh my, you have a lot of zeny there.";
+			next;
+			mes "It seems you have ^FF0000"+ Zeny +" zeny^000000.";
+			next;
+			mes .plname$;
+			mes "Yes, I would like to exchange some of it today.";
+			next;
+			mes .name$;
+			mes "Perfect. Which would you like to exchange today?";
+			next;
+			callsub h_zenylist;
+			next;
+			switch(select(.zenymenu1$)) {
+				case 1:
+					next;
+					set Zeny,Zeny-(@bzenyc * .coinvalue[0]);
+					getitem .coins[0],@bzenyc;
+					mes .name$;
+					mes "Have a nice day.";
+					close;
+				case 2:
+					set Zeny,Zeny-(@szenyc * .coinvalue[4]);
+					getitem .coins[4],@szenyc;
+					mes .name$;
+					mes "Have a nice day.";
+					close;
+				case 3:
+					set Zeny,Zeny-(@gzenyc * .coinvalue[1]);
+					getitem .coins[1],@gzenyc;
+					mes .name$;
+					mes "Have a nice day.";
+					close;
+				case 4:
+					set Zeny,Zeny-(@mzenyc * .coinvalue[2]);
+					getitem .coins[2],@mzenyc;
+					mes .name$;
+					mes "Have a nice day.";
+					close;
+				case 5:
+					set Zeny,Zeny-(@pzenyc * .coinvalue[3]);
+					getitem .coins[3],@pzenyc;
+					mes .name$;
+					mes "Have a nice day.";
+					close;
+				case 6:
+					callsub h_zeny2coinchoose;
+				case 7:
+					close;
+			}
+	}
+	end;
+
+h_coin2zeny:
+	next;
+	mes .name$;
+	mes "How many ^0000FF"+getitemname(getarg(0))+"^000000 did you wish to exchange with me?";
+	next;
+	input @swapamount;
+	set @exchangevalue,@swapamount * getarg(1);
+	if ( (@swapamount > countitem( getarg(0) )) || (@swapamount < 1) || (countitem( getarg(0) ) < 1) ) {
+	emotion 23;
+	mes .name$;
+	mes "You do not have enough to exchange with.";
+	close;
+	}
+	if ( @exchangevalue > (.maxzeny - Zeny) ) {
+	mes .name$;
+	mes "You have too much zeny. If you exchange this much, you will go over the limit. Please store some zeny.";
+	close;
+	}
+	delitem getarg(0),@swapamount;
+	set Zeny,Zeny + @exchangevalue;
+	specialeffect2 632;
+	mes .name$;
+	mes "Have a great day.";
+	close;
+
+
+h_zenylist:
+	set @pzenyc, Zeny / .coinvalue[3];
+	set @mzenyc, Zeny / .coinvalue[2];
+	set @gzenyc, Zeny / .coinvalue[1];
+	set @szenyc, Zeny / .coinvalue[4];
+	set @bzenyc, Zeny / .coinvalue[0];
+	mes .name$;
+	mes "^FF0000=========================^000000";
+	mes "I can currently offer you each of the following:";
+	mes "^b7b7b7"+@pzenyc+" "+getitemname(.coins[3])+"s^000000,";
+	mes "^88969b"+@mzenyc+" "+getitemname(.coins[2])+"s^000000,";
+	mes "^ccc252"+@gzenyc+" "+getitemname(.coins[1])+"s^000000,";
+	mes "^88969b"+@szenyc+" "+getitemname(.coins[4])+"s^000000,";
+	mes "And ^d5be8b"+@bzenyc+" "+getitemname(.coins[0])+"s^000000.";
+	mes "Or you can choose what coins you want.";
+	mes "^FF0000=========================^000000";
+	return;
+
+h_zeny2coinchoose:
+	next;
+	mes .name$;
+	mes "Very good choice. You wish to choose the coins to exchange?";
+	next;
+	goto L_platswap;
+
+L_platswap:
+	mes .name$;
+	mes "Please tell me how many platinum coins to exchange.";
+	mes "^FF0000"+ getitemname(.coins[3]) +" = "+ .coinvalue[3] +".";
+	next;
+	input @platswap1;
+	if ( (@platswap1 > (Zeny / .coinvalue[3])) ) {
+	next;
+	emotion 23;
+	mes .name$;
+	mes "You do not have enough to exchange with.";
+	next;
+	goto L_platswap;
+	}
+	set @platzenyamount,@platswap1;
+	goto L_mithswap;
+	
+L_mithswap:
+	mes .name$;
+	mes "Please tell me how many mithril coins to exchange.";
+	mes "^FF0000"+ getitemname(.coins[2]) +" = "+ .coinvalue[2] +".";
+	mes "=========================";
+	mes "Current:";
+	mes ""+@platswap1+" "+getitemname(.coins[3])+".";
+	mes "=========================";
+	next;
+	input @mithswap1;
+	if ( (@mithswap1 > (Zeny / .coinvalue[2])) ) {
+	next;
+	emotion 23;
+	mes .name$;
+	mes "You do not have enough to exchange with.";
+	next;
+	goto L_mithswap;
+	}
+	if ( (@mithswap1 * .coinvalue[2]) > (Zeny - (@platswap1 * .coinvalue[3])) ) {
+	next;
+	mes .name$;
+	mes "You will not have enough to exchange that many after exchanging the coins.";
+	next;
+	goto L_mithswap;
+	}
+	set @mithzenyamount,@mithswap1;
+	goto L_goldswap;
+	
+L_goldswap:
+	mes .name$;
+	mes "Please tell me how many golds to swap.";
+	mes "^FF0000"+ getitemname(.coins[1]) +" = "+ .coinvalue[1] +".";
+	mes "=========================";
+	mes "Current:";
+	mes ""+@platswap1+" "+getitemname(.coins[3])+".";
+	mes ""+@mithswap1+" "+getitemname(.coins[2])+".";
+	mes "=========================";
+	next;
+	input @goldswap1;
+	if ( (@goldswap1 > (Zeny / .coinvalue[1])) ) {
+	next;
+	emotion 23;
+	mes .name$;
+	mes "You do not have enough to exchange with.";
+	next;
+	goto L_goldswap;
+	}
+	if ( (@goldswap1 * .coinvalue[1]) > (Zeny - ((@platswap1 * .coinvalue[3]) + (@mithswap1 * .coinvalue[2]))) ) {
+	next;
+	mes .name$;
+	mes "You will not have enough to exchange that many after exchanging the coins.";
+	next;
+	goto L_goldswap;
+	}
+	set @goldzenyamount,@goldswap1;
+	goto L_silvswap;
+	
+L_silvswap:
+	mes .name$;
+	mes "Please tell me how many silvers to swap.";
+	mes "^FF0000"+ getitemname(.coins[4]) +" = "+ .coinvalue[4] +".";
+	mes "=========================";
+	mes "Current:";
+	mes ""+@platswap1+" "+getitemname(.coins[3])+".";
+	mes ""+@mithswap1+" "+getitemname(.coins[2])+".";
+	mes ""+@goldswap1+" "+getitemname(.coins[1])+".";
+	mes "=========================";
+	next;
+	input @silvswap1;
+	if ( (@silvswap1 > (Zeny / .coinvalue[4])) ) {
+	next;
+	emotion 23;
+	mes .name$;
+	mes "You do not have enough to exchange with.";
+	next;
+	goto L_silvswap;
+	}
+	if ( (@silvswap1 * .coinvalue[4]) > (Zeny - ((@platswap1 * .coinvalue[3]) + (@mithswap1 * .coinvalue[2]) + (@goldswap1 * .coinvalue[1]))) ) {
+	next;
+	mes .name$;
+	mes "You will not have enough to exchange that many after exchanging the coins.";
+	next;
+	goto L_silvswap;
+	}
+	set @silvzenyamount,@silvswap1;
+	goto L_bronswap;
+	
+L_bronswap:
+	mes .name$;
+	mes "Please tell me how many bronze to swap.";
+	mes "^FF0000"+ getitemname(.coins[0]) +" = "+ .coinvalue[0] +".";
+	mes "=========================";
+	mes "Current:";
+	mes ""+@platswap1+" "+getitemname(.coins[3])+".";
+	mes ""+@mithswap1+" "+getitemname(.coins[2])+".";
+	mes ""+@goldswap1+" "+getitemname(.coins[1])+".";
+	mes ""+@silvswap1+" "+getitemname(.coins[4])+".";
+	mes "=========================";
+	next;
+	input @bronswap1;
+	if ( (@bronswap1 > (Zeny / .coinvalue[0])) ) {
+	next;
+	emotion 23;
+	mes .name$;
+	mes "You do not have enough to exchange with.";
+	next;
+	goto L_bronswap;
+	}
+	if ( (@bronswap1 * .coinvalue[0]) > (Zeny - ((@platswap1 * .coinvalue[3]) + (@mithswap1 * .coinvalue[2]) + (@goldswap1 * .coinvalue[1]) + (@silvswap1 * .coinvalue[4]))) ) {
+	next;
+	mes .name$;
+	mes "You will not have enough to exchange that many after exchanging the coins.";
+	next;
+	goto L_silvswap;
+	}
+	set @bronzenyamount,@bronswap1;
+	next;
+	mes .name$;
+	mes "So before I exchange with your decision... you want:";
+	mes "^b7b7b7"+@platswap1+" "+getitemname(.coins[3])+"s^000000,";
+	mes "^88969b"+@mithswap1+" "+getitemname(.coins[2])+"s^000000,";
+	mes "^ccc252"+@goldswap1+" "+getitemname(.coins[1])+"s^000000,";
+	mes "^88969b"+@silvswap1+" "+getitemname(.coins[4])+"s^000000,";
+	mes "And ^d5be8b"+@bronswap1+" "+getitemname(.coins[0])+"s^000000.";
+	mes "Is this correct?";
+	next;
+	if (select("Yes.:No.") == 2) {
+	mes .name$;
+	mes "Very well. Please choose again.";
+	next;
+	goto h_zeny2coinchoose;
+	}
+	next;
+	set Zeny,Zeny - (@platzenyamount * .coinvalue[3]);
+	set Zeny,Zeny - (@mithzenyamount * .coinvalue[2]);
+	set Zeny,Zeny - (@goldzenyamount * .coinvalue[1]);
+	set Zeny,Zeny - (@silvzenyamount * .coinvalue[4]);
+	set Zeny,Zeny - (@bronzenyamount * .coinvalue[0]);
+	getitem .coins[3],@platzenyamount;
+	getitem .coins[2],@mithzenyamount;
+	getitem .coins[1],@goldzenyamount;
+	getitem .coins[4],@silvzenyamount;
+	getitem .coins[0],@bronzenyamount;
+	specialeffect2 460;
+	mes .plname$;
+	mes "-With some form of magic he sticks the coins in your pockets without even seeing him move-";
+	next;
+	mes .name$;
+	mes "There you go. Have a nice day.";
+	close;
+}

@@ -1,0 +1,2 @@
+Os hexeds aqui fornecidos são hexeds funcionando e básicos, leia bem o conteúdo do
+changelog antes de usar.

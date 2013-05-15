@@ -1,0 +1,367 @@
+//===== eAthena Script ======================================================================
+//= Emperium Wars
+//===== Original By =========================================================================
+//= Toxic Aka Hellflaem
+//===== Credit =========================================================================
+//= Hellflaem
+//= ~AnnieRuru~ (Support)
+//= diedlikeahero (poring Ball)
+//= Aeromas
+//= Any one I forgot.
+//===== Current Version: ====================================================================
+//= 2.0
+//===== Compatible With: ====================================================================
+//= Any eAthena
+//===== Description: ========================================================================
+//= This is just a fun little gvg game,
+//= Any one person from 2 different guilds can play it.
+//= First guild to kill the other emp 5 times wins.
+//= Killing your own Emp takes away points.
+//===== Comments================================================================
+//= Edit it to your servers likings.
+//===========================================================================================
+new_1-1,53,137,4	script	Emperium Wars::empwar	723,{
+
+set $npcname$,"[Emperium Wars]";
+
+mes $npcname$;
+mes "Hello "+strcharinfo(0)+" what do you want?";
+next;
+switch(select("Sign up:Enter:Information:Nothing")) {
+
+	case 1:
+		if (($state_match == 1) && ($@guildID1!=0) && ($@guildID2!=0) && (getguildname($@guildID1)!="null") && (getguildname($@guildID2)!="null")) {
+		mes $npcname$;
+		mes "Sorry "+strcharinfo(0)+" , Two Guilds are signed up for this event already.";
+		close;
+		}
+
+		mes $npcname$;
+		mes "Hello "+strcharinfo(0)+" , Two Guilds are needed for this event.";
+		mes "Would you like to Sign up yours?";
+		mes "If so Please do so now.";
+		next;
+		switch(select("Guild 1:Guild 2:Nothing")) {
+
+			case 1:
+				// If a match is in play
+				if ($state_match == 1) {
+				mes $npcname$;
+				mes "The Sign Ups are currently unavailable because a match is in progress. Don't hesitate to try again in a few minutes!";
+				close;
+				}
+
+				// Does the player belong to a guild?
+				if (getcharid(2)==0) {
+				mes $npcname$;
+				mes "This Event is for Guilds, and you're not in a Guild. Come back with a Guild!";
+				close;
+				}
+
+				// If a team is already subscribed, and that team still exists
+				if (($@guildID1!=0) && (getguildname($@guildID1)!="null")) {
+
+				// if the player belongs to that team that's already subscribed
+				if ($@guildID1==getcharid(2)) {
+				mes $npcname$;
+				mes "Do you wish to unsubscribe your team?";
+				next;
+				if (select("Yes, we want to stop the match.","No, we're staying.")==2) close;
+
+				// if the player wishes to unsubscribe their team
+				announce "Team " + GetGuildName($@guildID1) + " has disbanded. We need another Guild to sign up now!",bc_yellow|bc_map;
+				set $@guildID1, 0;
+				close;
+				}
+				mes $npcname$;
+				mes "A Guild is already subscribed! It's Team "+getguildname($@guildID1)+".";
+				close;
+				}
+
+
+				// if there are no teams subscribed and that the subscriptions are open
+				mes $npcname$;
+				mes "Do you wish to subscribe your team?";
+				next;
+				if (select("Yes, we want to subscribe.","No.")==2) close;
+
+				// Team subscription
+				if ($@guildID1==0 || (getguildname($@guildID1)=="null")) {
+				set $@guildID1, getcharid(2);
+				initnpctimer;
+				mes $npcname$;
+				mes "Your Guild is now subscribed, good luck!";
+				announce "" + getguildname($@guildID1) + " Guild has subscribed For the Emperium War!",bc_yellow|bc_map;
+				doevent "empwar::OnSubscriptionguild";
+				close;
+
+				} else {
+
+				mes $npcname$;
+				mes "I'm sorry! Another Guild has subscribed before you...";
+				close;
+				}
+				end;
+
+
+			case 2:
+				// If a match is in play
+				if ($state_match == 1) {
+				mes $npcname$;
+				mes "The Sign ups are currently unavailable because a match is in progress. Don't hesitate to try again in a few minutes!";
+				close;
+				}
+	
+				// Does the player belong to a group?
+				if (getcharid(2)==0) {
+				mes $npcname$;
+				mes "This Event is for Guilds, and you're not in a Guild. Come back with a Guild!";
+				close;
+				}
+	
+				// Is the group of the player subscribed as the other guild already?
+				if (getcharid(2)==$@guildID1) {
+				mes $npcname$;
+				mes "Hey! A player from the opposing Guild! Get ready to face off one of the best Guild!";
+				mes "The formidable " + GetGuildName($@guildID2) + "";
+				close;
+				}
+
+				// If a team is already subscribed, and that team still exists
+				if (($@guildID2!=0) && (getguildname($@guildID2)!="null")) {
+				// if the player belongs to that team that's already subscribed
+				if ($@guildID2==getcharid(2)) {
+				mes $npcname$;
+				mes "Do you wish to unsubscribe your guild?";
+				next;
+				if (select("Yes, we want to stop the match.","No, we're staying.")==2) close;
+					
+				// if the player wishes to unsubscribe their team
+				announce "Team "+getguildname($@guildID2)+" has disbanded. We need another Guild to sign up!",bc_yellow|bc_map;
+				set $@guildID2, 0;
+				close;
+				}
+				mes $npcname$;
+				mes "A Guild is already subscribed! It's Team "+getguildname($@guildID2)+".";
+				close;
+				}
+	
+				// if there are no teams subscribed and that the subscriptions are open
+				mes $npcname$;
+				mes "Do you wish to subscribe your Guild?";
+				next;
+				if (select("Yes, we want to subscribe.","No.")==2) close;
+
+				// Team subscription
+				if ($@guildID2==0 || (getguildname($@guildID2)=="null")) {
+				set $@guildID2, getcharid(2);
+				initnpctimer;
+				mes $npcname$;
+				mes "Your Guild is now subscribed, good luck!";
+				announce ""+getguildname($@guildID2)+" Guild has subscribed to the Emperium War!",bc_yellow|bc_map;
+				doevent "empwar::OnSubscriptionguild";
+				close;
+			
+				} else {
+		
+				mes $npcname$;
+				mes "I'm sorry! Another Guild has subscribed before you...";
+				close;
+				}
+				end;
+
+			
+			case 3:
+				mes $npcname$;
+				mes "Bye.";
+				close;
+
+
+
+		}//2nd switch
+
+	case 2:
+		if (($@guildID1!=0) && ($@guildID2!=0) && (getguildname($@guildID1)!="null") && (getguildname($@guildID2)!="null")) {
+
+		if ((getcharid(2)==$@guildID1) && ($state_match == 1)) {
+		savepoint "bat_a01",171,340;
+		set @gave,0;
+		set @gotheal,0;
+		warp "bat_a01.gat", 171, 340; 
+		end;
+		}
+
+		if ((getcharid(2)==$@guildID2) && ($state_match == 1)) {
+		savepoint "bat_a01",155,48;
+		set @gave,0;
+		set @gotheal,0;
+		warp "bat_a01.gat", 155, 48;
+		end;
+
+		}
+
+		mes $npcname$;
+		mes "Your not in one of the Signed up guilds and/or the Game is over.";
+		close;
+
+		}
+		mes $npcname$;
+		mes "I can only warp you when there is two Guilds signed up.";
+		close;
+
+	case 3:
+		mes $npcname$;
+		mes "This Game is GvG";
+		mes "A Guild Must Kill the other Guilds Emperium 5 times";
+		mes "Before the other guild does.";
+		mes "If your Guild wins the people in your Guild on the";
+		mes "map when it ends gets the Prize by talking with one of the Exit npcs.";
+		mes "Good Luck.";
+		close;
+
+	case 4:
+		mes $npcname$;
+		mes "Bye.";
+		close;
+
+}//First switch
+
+end;
+
+OnSubscriptionguild:
+	if (($@guildID1!=0) && ($@guildID2!=0) && (getguildname($@guildID1)!="null") && (getguildname($@guildID2)!="null")) {
+		announce "Emperium War : We have 2 Guilds signed up now : "+getguildname($@guildID1)+" and "+getguildname($@guildID2)+".",bc_yellow|bc_map;
+		announce "Emperium War : The members of each Guild can come Enter the War now.",bc_yellow|bc_map;
+		set $state_match, 1;
+		donpcevent "empwar::OnBegin";
+	}
+		end;
+
+OnTimer800000:
+	if (($@guildID1!=0) && ($@guildID2!=0) && (getguildname($@guildID1)!="null") && (getguildname($@guildID2)!="null")) {
+	stopnpctimer;
+	end;
+	}
+	stopnpctimer;
+	set $@guildID2, 0;
+	set $@guildID1, 0;
+	end;
+
+OnBegin:
+	if (.points2 >= 5) {
+	Announce "The Emperium War is over!",8;
+	Announce "The Winner of Emperium War is the [" + GetGuildName($@guildID2) + "] guild.",0;
+	set $@Ewgid,getcharid(2);
+	donpcevent "empwar::OnEnded";
+	end;
+	}
+	
+	if (.points1 >= 5) {
+	Announce "The Emperium War is over!",8;
+	Announce "The Winner of Emperium War is the [" + GetGuildName($@guildID1) + "] guild.",0;
+	set $@Ewgid,getcharid(2);
+	donpcevent "empwar::OnEnded";
+	end;
+	}
+
+	initnpctimer;
+	MapRespawnGuildID "bat_a01",$@Ewgid,7;
+	monster "bat_a01",173,346,"EMPERIUM",1288,1,"empwar::OnEmpDead1";
+	monster "bat_a01",165,50,"EMPERIUM",1288,1,"empwar::OnEmpDead2";
+	end;
+
+OnEmpDead2:
+	if ( getcharid(2) == $@guildID2 ) {
+	stopnpctimer;
+	set .points2, .points2 -1;
+	dispbottom "Stop killing your own emp";
+	Announce "The [" + GetGuildName($@guildID2) + "] guild has lost a Point for killing there own Emperium and now has [" + .points2 + "] Points!.",0;
+	goto OnBegin;
+	end;
+	
+	} else {
+
+	stopnpctimer;
+	set .points1, .points1 +1 ;
+	Announce "The [" + GetGuildName($@guildID1) + "] guild has [" + .points1 + "] Points!.",0;
+	goto OnBegin;
+	}
+	end;
+
+OnEmpDead1:
+	if ( getcharid(2) == $@guildID1 ) {
+	stopnpctimer;
+	set .points1, .points1 -1;
+	dispbottom "Stop killing your own emp";
+	Announce "The [" + GetGuildName($@guildID1) + "] guild has lost a Point for killing there own Emperium and now has [" + .points1 + "] Points!.",0;
+	goto OnBegin;
+	end;
+
+	} else {
+
+	stopnpctimer;
+	set .points2, .points2 +1 ;
+	Announce "The [" + GetGuildName($@guildID2) + "] guild has [" + .points2 + "] Points!.",0;
+	goto OnBegin;
+	}
+	end;
+
+OnEnded:
+	stopnpctimer;
+	set $state_match, 0;
+	set .points1, 0;
+	set .points2, 0;
+	set $@guildID2, 0;
+	set $@guildID1, 0;
+	killmonsterall "bat_a01";
+	end;
+
+OnTime9000000:
+	Announce "The Emperium War is over, No one was the winner!",8;
+	set $@Ewgid, 0;
+	donpcevent "empwar::OnEnded";
+	end;
+
+}
+
+//Exit
+bat_a01,149,351,5	script	Exit::Ewexit	88,{
+
+set $rewarditem, 7539;
+
+	if((getcharid(2) == $@Ewgid) && (@gave == 0)){
+		getitem $rewarditem,rand(10,50);
+		savepoint "new_1-1",51,106;
+		set @gave,1;
+		warp "new_1-1.gat", 51, 106;
+		end;
+	}
+		savepoint "new_1-1",51,106;
+		warp "new_1-1.gat", 51, 106;
+		end;
+
+} // end of script
+
+
+bat_a01,148,349,5	script	Healer::Emphealer	742,{
+
+	if(@gotheal == 0) {
+	percentheal 100,100;
+	mes ""+strcharinfo(0)+",healed.";
+	set @gotheal, 1;
+	close;
+	}
+	mes ""+strcharinfo(0)+", was healed already.";
+	close;
+}
+
+//duplicates
+bat_a01,363,266,6	duplicate(Ewexit)	Exit#2	88,
+bat_a01,353,60,6	duplicate(Ewexit)	Exit#3	88,
+bat_a01,138,57,6	duplicate(Ewexit)	Exit#4	88,
+bat_a01,142,57,6	duplicate(Emphealer)	Healer#2	88,
+
+//bat_a01	mapflag	gvg
+bat_a01	mapflag	nowarpto
+bat_a01	mapflag	nowarp
+bat_a01	mapflag	nosave

@@ -1,0 +1,17 @@
+// Items Additional Database - Custom Items go here
+//
+// Structure of Database:
+// ID,Name,Name,Type,Price,Sell,Weight,ATK,DEF,Range,Slot,Job,Upper,Gender,Loc,wLV,eLV,Refineable,View,{ Script },{ OnEquip_Script },{ OnUnequip_Script }
+//
+
+// THQ Quest Items
+//=============================================================
+//1998,Jeramiah's_Jur,Jeramiah's Jur,3,,10,10,,,,,,,,,,,,,{},{},{}
+//1999,Zed's_Staff,Zed's Staff,3,,10,10,,,,,,,,,,,,,{},{},{}
+
+// Old Tuxedo and Wedding Dress, will display the outfit when worn.
+//==================================================================
+//2338,Wedding_Dress,Wedding Dress,5,43000,,500,,0,,0,0xFFFFFFFE,7,0,16,,0,1,0,{},{ setoption Option_Wedding,1; },{ setoption Option_Wedding,0; }
+//7170,Tuxedo,Tuxedo,5,43000,,10,,0,,0,0xFFFFFFFE,7,1,16,,0,1,0,{},{ setoption Option_Wedding,1; },{ setoption Option_Wedding,0; }
+
+20013,angel_wing,Asas De Anjo,5,,10,100,,3,,1,0xFFFFFFFF,7,2,1,,1,0,1009,{ bonus bInt,1; bonus bDex,1; bonus bHealPower,(getrefine()*3/2); bonus3 bAutoSpellWhenHit,"AL_HEAL",3,5; bonus3 bAutoSpellWhenHit,"PR_KYRIE",2,(30+70*(readparam(bInt)>=30)); },{},{}

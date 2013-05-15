@@ -1,0 +1,109 @@
+prontera,182,213,5	script	Torsen	807,{
+	If (GetGMLevel() > 79) {
+		Mes "[Torsen]";
+		Mes "Olá, seja bem-vindo(a) ao painel de controle.";
+		Mes "O que deseja?";
+		If (Select ("Entregar Item:Menu do Jogador") == 2) CallSub Player;
+		Next;
+		Mes "[Torsen]";
+		Mes "Digite o ID da conta:";
+		Input .@CID;
+		If ((.@CID < 2000000) || (.@CID > 2999999)) CallFunc "MesClose", "ID inválido.";
+		Next;
+		Mes "[Torsen]";
+		Mes "Digite o ID do item:";
+		Input .@IID;
+		If ((.@IID < 501) || (.@IID > 30000)) CallFunc "MesClose","ID inválido.";
+		Next;
+		Mes "[Torsen]";
+		Mes "Digite a quantidade:";
+		Input .@QID;
+		If ((!.@QID) || (.@QID > 30000)) CallFunc "MesClose", "Quantidade inválida.";
+		Next;
+		Mes "[Torsen]";
+		Mes "Pronto, o item foi entregue.";
+		Close2;
+		Query_SQL "INSERT INTO `torsen` (`account_id`, `item_id`, `amount`) VALUES ('"+.@CID+"', '"+.@IID+"', '"+.@QID+"')";
+		Query_sQL "INSERT INTO `torsenlog`(`account_id`, `item_id`, `amount`, `data_entrega`) VALUES ('"+.@CID+"', '"+.@IID+"', '"+.@QID+"', '"+GetTime(7)+"-"+GetTime(6)+"-"+GetTime(5)+" "+GetTime(3)+":"+GetTime(2)+":"+GetTime(1)+"')";
+		End;
+	}
+	Player:
+		Mes "[Torsen]";
+		Mes "Olá, sou o funcionário responsável pela entrega dos itens especiais. Estou a mando do administrador >Ghost< do servidor ^FF0000http://ragnarush.com/^000000";
+		Mes "Qual é o seu nome?";
+		Next;
+		Mes "[Torsen]";
+		Mes StrCharInfo(0)+"...?";
+		Mes "Bem vindo!";
+		Next;
+		Mes "^FF0000ATENÇÃO! Caixas e itens usáveis podem ser negociados e derrubados sem problemas, mas equipamentos fora de suas caixas, já contam os dias de uso e não podem ser negociados, apenas guardados nas kafra, tome muito cuidado e preste muita atenção!.^000000";
+		Query_SQL "SELECT `pickedup` FROM `torsenlog` WHERE `account_id`='"+GetCharID(3)+"'", .@PUP;
+		If (GetArraySize(.@PUP)) {
+			Next;
+			Mes "[Torsen]";
+			Mes "Você também pode olhar seu log para ver quais itens você já retirou.";
+			If (Select ("Desejo ver o log.:Não, obrigado.") == 1) {
+				Next;
+				Query_SQL "SELECT `item_id`,`amount`,`data_receb` FROM `torsenlog` WHERE `account_id`='"+GetCharID(3)+"'", .@IID, .@QID, .@DATE$;
+				Mes "Ordem:\r[^008B00ANO-MÊS-DIA^000000]\r(^FF0000QUANTIDADE^000000) ^0000CDNOME DO ITEM^000000";
+				Next;
+				For (Set .@k, 0; .@k < GetArraySize(.@IID); Set .@k, .@k + 1)
+					Mes "[^008B00"+.@DATE$[.@k]+"]\r(^FF0000"+.@QID[.@k]+"^000000) ^0000CD"+GetItemName(.@IID[.@k])+"^000000\r\r";
+				Close;
+			}
+		}
+		Next;
+		Mes "[Torsen]";
+		Mes "^0000CDSelecione na lista abaixo qual item você deseja retirar.";
+		Mes "Caso a lista esteja vazia, significa que você não possui mais nenhum item para retirar.";
+		Query_SQL "SELECT `item_id`, `amount` FROM `torsen` WHERE `account_id`='"+GetCharID(3)+"'", .@IID, .@QID;
+		If (!GetArraySize (.@IID)) {
+			Select ("0");
+			Close;
+		}
+		For (Set .@f, 0; .@f < GetArraySize(.@IID); Set .@f, .@f +1) {
+			Set .@qt$, "["+.@QID[.@f]+"] ";
+			Set .@m$, .@m$ + .@qt$ + GetItemName (.@IID[.@f]) +":";
+		}
+		Select (.@m$);
+		//If (!CheckWeight(GetItemName(.@IID[.@m$]), .@QID[.@m$]))
+		//	Mes "[Torsen]"; CallFunc "MesClose", "Voce nao tem peso suficiente";
+		Close2;
+		GetItem .@IID[.@m$], .@QID[.@m$];
+		Query_SQL "DELETE FROM `torsen` WHERE `account_id`='"+GetCharID(3)+"' AND `item_id`='"+.@IID[.@m$]+"' AND `amount`='"+.@QID[.@m$]+"'";
+		Query_sQL "UPDATE `torsenlog` SET `data_receb`='"+GetTime(7)+"-"+GetTime(6)+"-"+GetTime(5)+" "+GetTime(3)+":"+GetTime(2)+":"+GetTime(1)+"' WHERE `account_id`='"+GetCharID(3)+"' AND `item_id`='"+.@IID[.@m$]+"' AND `amount`='"+.@QID[.@m$]+"'";
+		Query_SQL "UPDATE `torsenlog` SET `pickedup`='1' WHERE `account_id`='"+GetCharID(3)+"' AND `item_id`='"+.@IID[.@m$]+"' AND `amount`='"+.@QID[.@m$]+"'";
+		End;
+}
+
+-	script	Torsen#Aviso	-1,{
+End;
+	OnPCLoginEvent:
+			Query_SQL "SELECT `item_id` FROM `torsen` WHERE `account_id`='"+GetCharID(3)+"'", .@IID;
+			If (!GetArraySize (.@IID)) End;
+			If (GetArraySize (.@IID) == 1)
+				DispBottom "[Torsen]: "+StrCharInfo(0)+", você tem item(s) para receber comigo. Estou em Prontera 180 x 210";
+			If (GetArraySize (.@IID) > 1)
+				DispBottom "[Torsen]: "+StrCharInfo(0)+", você tem alguns itens para receber comigo. Estou em Prontera 180 x 210";
+			End;
+}
+
+//*
+//CREATE TABLE IF NOT EXISTS `torsen` (
+// `account_id` int(11) unsigned NOT NULL DEFAULT '2000000',
+// `item_id` int(11) unsigned NOT NULL DEFAULT '0',
+// `amount` int(11) unsigned NOT NULL DEFAULT '0',
+// KEY `account_id` (`account_id`)
+// ) ENGINE=MYISAM;
+
+//CREATE TABLE IF NOT EXISTS `torsenlog` (
+// `account_id` int(11) unsigned NOT NULL DEFAULT '2000000',
+// `item_id` int(11) unsigned NOT NULL DEFAULT '0',
+// `amount` int(11) unsigned NOT NULL DEFAULT '0',
+// `data_entrega` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+// `data_receb` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+// `pickedup` tinyint(4) NOT NULL DEFAULT '0',
+// KEY `data_entrega` (`data_entrega`),
+// KEY `data_receb` (`data_receb`)
+// ) ENGINE=MYISAM;
+//*/

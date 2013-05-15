@@ -1,0 +1,398 @@
+// ===========================================================
+//===== Cronus Script ========================================
+//= Sistema de Refinação
+//===== Por: =================================================
+//= Adriano Barbosa
+//===== Versão Atual: ========================================
+//= 1.0
+//===== Compatibilidade: =====================================
+//= Cronus Emulador
+//===== Descrição: ===========================================
+// O Sistema de Refinação criado por mim concede ao jogador um modo Movel e Facil de Refinar Itens em qualquer Lugar do Jogo.
+// Quantidade maxima de Refinação por Item configuravel pelo Script.
+// O Script verifica se o Item que vai ser refinado esta Equipado.
+// O Script verifica se o Item que vai ser Refinado pode ser Refinado.
+// O Script verifica se o Item que vai ser Refinado ja tem sua Refinação Maxima.
+// A uma certa chance da Refinação Falhar.(OBS: Chance configurada no Script.)
+// ===========================================================
+//===== Configurações: =======================================
+// $MR - Quantidade Maxima de vezes que o Jogador pode Refinar um ITEM.
+// $chance - Valor em Porcentagem de Chance que o Jogador tem de Refinar o Item.
+// $sorte - Valor Total de Sorte que o Jogador pode ter assim definindo um Padrão de Sorte.
+// ===========================================================
+// Refinações
+// Os Itens no jogo podem ficar com Formato de uma Maça e como não sei Criar ITENs Custom
+// fica a gosto do Usuario do Script Alterar os ITENs.
+//============================================================
+/*
+16270,Refinação_Elmo,Refinação Elmo,2,1,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc ("Refinacao#Cabeça"); },{},{}
+16271,Refinação_Armadura,Refinação Armadura,2,1,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc ("Refinacao#Armadura"); },{},{}
+16272,Refinação_Arma_Mão_Esquerda,Refinação Arma Mão Esquerda,2,1,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc ("Refinacao#Mesquerda"); },{},{}
+16273,Refinação_Arma_Mão_Direita,Refinação Arma Mão Direita,2,1,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc ("Refinacao#MDireita"); },{},{}
+16274,Refinação_Manto,Refinação Manto,2,1,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc ("Refinacao#Manto"); },{},{}
+16275,Refinação_Bota,Refinação Bota,2,1,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc ("Refinacao#Bota"); },{},{}
+16276,Refinação_Acessorio1,Refinação Acessorio1,2,1,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc ("Refinacao#Acessorio1"); },{},{}
+16277,Refinação_Acessorio2,Refinação Acessorio2,2,1,,10,,,,,0xFFFFFFFF,7,2,,,,,,{ callfunc ("Refinacao#Acessorio2"); },{},{}
+*/
+// ===========================================================
+
+function	script	Refinacao#Cabeça	{
+
+	set $MR, 10;
+	set $chance, 50;
+	set $sorte, Rand(100);
+
+	if (getequipisequiped(EQI_HEAD_TOP))
+	{
+		if ((getequipisenableref(EQI_HEAD_TOP)) == 1)
+		{
+			if(getequiprefinerycnt(EQI_HEAD_TOP) < $MR)
+			{
+				if($sorte >= $chance)
+				{
+					dispbottom ""+getequipname(EQI_HEAD_TOP)+" Refinado com Sucesso.";
+					successrefitem 1;
+					end;
+				}
+				else
+				{
+					dispbottom "Refinação Mal Sucedida, o Item não foi Refinado.";
+					end;
+				}
+			}
+			else
+			{
+				dispbottom "Este ITEM ja tem sua Refinação Maxima.";
+				getitem 16270,1;
+				end;
+			}
+		}
+		else
+		{
+			dispbottom "Este ITEM não pode ser Refinado.";
+			getitem 16270,1;
+			end;
+		}
+	}
+	else
+	{
+		dispbottom "Você deve equipar um Elmo antes de Tentar Refinar.";
+		getitem 16270,1;
+		end;
+	}
+}
+
+function	script	Refinacao#Armadura	{
+
+	set $MR, 10;
+	set $chance, 50;
+	set $sorte, Rand(100);
+
+	if (getequipisequiped(EQI_ARMOR))
+	{
+		if ((getequipisenableref(EQI_ARMOR)) == 1)
+		{
+			if(getequiprefinerycnt(EQI_ARMOR) < $MR)
+			{
+				if($sorte >= $chance)
+				{
+					dispbottom ""+getequipname(EQI_ARMOR)+" Refinado com Sucesso.";
+					successrefitem 2;
+					end;
+				}
+				else
+				{
+					dispbottom "Refinação Mal Sucedida, o Item não foi Refinado.";
+				}
+			}
+			else
+			{
+				dispbottom "Este ITEM ja tem sua Refinação Maxima.";
+				getitem 16271,1;
+				end;
+			}
+		}
+		else
+		{
+			dispbottom "Este ITEM não pode ser Refinado.";
+			getitem 16271,1;
+			end;
+		}
+	}
+	else
+	{
+		dispbottom "Você deve equipar uma Armadura antes de Tentar Refinar.";
+		getitem 16271,1;
+		end;
+	}
+}
+
+function	script	Refinacao#Mesquerda	{
+
+	set $MR, 10;
+	set $chance, 50;
+	set $sorte, Rand(100);
+
+	if (getequipisequiped(EQI_HAND_L))
+	{
+		if ((getequipisenableref(EQI_HAND_L)) == 1)
+		{
+			if(getequiprefinerycnt(EQI_HAND_L) < $MR)
+			{
+				if($sorte >= $chance)
+				{
+					dispbottom ""+getequipname(EQI_HAND_L)+" Refinado com Sucesso.";
+					successrefitem 3;
+					end;
+				}
+				else
+				{
+					dispbottom "Refinação Mal Sucedida, o Item não foi Refinado.";
+				}
+			}
+			else
+			{
+				dispbottom "Este ITEM ja tem sua Refinação Maxima.";
+				getitem 16272,1;
+				end;
+			}
+		}
+		else
+		{
+			dispbottom "Este ITEM não pode ser Refinado.";
+			getitem 16272,1;
+			end;
+		}
+	}
+	else
+	{
+		dispbottom "Você deve equipar uma Arma na Mão Esquerda antes de Tentar Refinar.";
+		getitem 16272,1;
+		end;
+	}
+}
+
+function	script	Refinacao#MDireita	{
+
+	set $MR, 10;
+	set $chance, 50;
+	set $sorte, Rand(100);
+
+	if (getequipisequiped(EQI_HAND_R))
+	{
+		if ((getequipisenableref(EQI_HAND_R)) == 1)
+		{
+			if(getequiprefinerycnt(EQI_HAND_R) < $MR)
+			{
+				if($sorte >= $chance)
+				{
+					dispbottom ""+getequipname(EQI_HAND_R)+" Refinado com Sucesso.";
+					successrefitem 4;
+					end;
+				}
+				else
+				{
+					dispbottom "Refinação Mal Sucedida, o Item não foi Refinado.";
+				}
+			}
+			else
+			{
+				dispbottom "Este ITEM ja tem sua Refinação Maxima.";
+				getitem 16273,1;
+				end;
+			}
+		}
+		else
+		{
+			dispbottom "Este ITEM não pode ser Refinado.";
+			getitem 16273,1;
+			end;
+		}
+	}
+	else
+	{
+		dispbottom "Você deve equipar uma Arma na Mão Direita antes de Tentar Refinar.";
+		getitem 16273,1;
+		end;
+	}
+}
+
+function	script	Refinacao#Manto	{
+
+	set $MR, 10;
+	set $chance, 50;
+	set $sorte, Rand(100);
+
+	if (getequipisequiped(EQI_GARMENT))
+	{
+		if ((getequipisenableref(EQI_GARMENT)) == 1)
+		{
+			if(getequiprefinerycnt(EQI_GARMENT) < $MR)
+			{
+				if($sorte >= $chance)
+				{
+					dispbottom ""+getequipname(EQI_GARMENT)+" Refinado com Sucesso.";
+					successrefitem 5;
+					end;
+				}
+				else
+				{
+					dispbottom "Refinação Mal Sucedida, o Item não foi Refinado.";
+				}
+			}
+			else
+			{
+				dispbottom "Este ITEM ja tem sua Refinação Maxima.";
+				getitem 16274,1;
+				end;
+			}
+		}
+		else
+		{
+			dispbottom "Este ITEM não pode ser Refinado.";
+			getitem 16274,1;
+			end;
+		}
+	}
+	else
+	{
+		dispbottom "Você deve equipar um Manto antes de Tentar Refinar.";
+		getitem 16274,1;
+		end;
+	}
+}
+
+function	script	Refinacao#Bota	{
+
+	set $MR, 10;
+	set $chance, 50;
+	set $sorte, Rand(100);
+
+	if (getequipisequiped(EQI_SHOES))
+	{
+		if ((getequipisenableref(EQI_SHOES)) == 1)
+		{
+			if(getequiprefinerycnt(EQI_SHOES) < $MR)
+			{
+				if($sorte >= $chance)
+				{
+					dispbottom ""+getequipname(EQI_SHOES)+" Refinado com Sucesso.";
+					successrefitem 6;
+					end;
+				}
+				else
+				{
+					dispbottom "Refinação Mal Sucedida, o Item não foi Refinado.";
+				}
+			}
+			else
+			{
+				dispbottom "Este ITEM ja tem sua Refinação Maxima.";
+				getitem 16275,1;
+				end;
+			}
+		}
+		else
+		{
+			dispbottom "Este ITEM não pode ser Refinado.";
+			getitem 16275,1;
+			end;
+		}
+	}
+	else
+	{
+		dispbottom "Você deve equipar uma Bota antes de Tentar Refinar.";
+		getitem 16275,1;
+		end;
+	}
+}
+
+function	script	Refinacao#Acessorio1	{
+
+	set $MR, 10;
+	set $chance, 50;
+	set $sorte, Rand(100);
+
+	if (getequipisequiped(EQI_ACC_L))
+	{
+		if ((getequipisenableref(EQI_ACC_L)) == 1)
+		{
+			if(getequiprefinerycnt(EQI_ACC_L) < $MR)
+			{
+				if($sorte >= $chance)
+				{
+					dispbottom ""+getequipname(EQI_ACC_L)+" Refinado com Sucesso.";
+					successrefitem 7;
+					end;
+				}
+				else
+				{
+					dispbottom "Refinação Mal Sucedida, o Item não foi Refinado.";
+				}
+			}
+			else
+			{
+				dispbottom "Este ITEM ja tem sua Refinação Maxima.";
+				getitem 16276,1;
+				end;
+			}
+		}
+		else
+		{
+			dispbottom "Este ITEM não pode ser Refinado.";
+			getitem 16276,1;
+			end;
+		}
+	}
+	else
+	{
+		dispbottom "Você deve equipar um Acessorio antes de Tentar Refinar.";
+		getitem 16276,1;
+		end;
+	}
+}
+
+function	script	Refinacao#Acessorio2	{
+
+	set $MR, 10;
+	set $chance, 50;
+	set $sorte, Rand(100);
+
+	if (getequipisequiped(EQI_ACC_R))
+	{
+		if ((getequipisenableref(EQI_ACC_R)) == 1)
+		{
+			if(getequiprefinerycnt(EQI_ACC_R) < $MR)
+			{
+				if($sorte >= $chance)
+				{
+					dispbottom ""+getequipname(EQI_ACC_R)+" Refinado com Sucesso.";
+					successrefitem 8;
+					end;
+				}
+				else
+				{
+					dispbottom "Refinação Mal Sucedida, o Item não foi Refinado.";
+				}
+			}
+			else
+			{
+				dispbottom "Este ITEM ja tem sua Refinação Maxima.";
+				getitem 16277,1;
+				end;
+			}
+		}
+		else
+		{
+			dispbottom "Este ITEM não pode ser Refinado.";
+			getitem 16277,1;
+			end;
+		}
+	}
+	else
+	{
+		dispbottom "Você deve equipar um Acessorio antes de Tentar Refinar.";
+		getitem 16277,1;
+		end;
+	}
+}

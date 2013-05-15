@@ -1,0 +1,76 @@
+//===== eAthena Script ======================================================================
+//= Floating Server Rates
+//===== Original By =========================================================================
+//= Lupus
+//===== Current Version: ====================================================================
+//= 1.0
+//===== Compatible With: ====================================================================
+//= Any eAthena, that has 'setbattleflag' function
+//===== Description: ========================================================================
+//= It's a simply example of setbattleflag
+//= This script will change your server rates from 1x to 1.5x every 6 hours
+//= Note: It doesn't affect Card granted drops, MVP & Treasure Chests drops ^_-
+//=	It also doesn't affect CARD drops, because they are just 0.01%
+//===== Comments and Credits ================================================================
+//= You can make incredible scripts with 'setbattleflag'!
+//  Traduzindo alguns pontos por jonyll
+//  mudado por constantini a pedidos de jonyll
+//  http://www.eathena.ws/board/index.php?showtopic=247513
+//===========================================================================================
+
+
+prontera,3,4,5	script	FloatingRates	-1,{
+	end;
+
+
+//add any other HOURS
+
+OnClock0600:
+OnClock1300:
+OnClock2200:
+//OnClock0100:
+//OnClock0400:
+	set $@brate,130000;
+	set $@jrate,130000;
+	set $@drate,70000;
+	//Base exp
+	setbattleflag("base_exp_rate",$@brate);
+	//Job exp
+	setbattleflag("job_exp_rate",$@jrate);
+	//Drops
+	setbattleflag("item_rate_common",$@drate);
+	setbattleflag("item_rate_heal",$@drate);
+	setbattleflag("item_rate_use",$@drate);
+	setbattleflag("item_rate_equip",$@drate);
+	//we don't change card drops rate, because these values won't change them anyway
+	atcommand "@reloadmobdb";
+
+	announce "Sistema de rates flutuantes ativadas(duração de uma hora): 1."+($@brate-100)+"x 1."+($@jrate-100)+"x 1."+($@drate-100)+"x",bc_all,0xFF6060;
+	announce "Não afetam as cartas, digite @rates e confira! - Bom jogo a todos",bc_all,0xFF6060;
+	end;
+
+OnClock0700:
+OnClock1400:
+OnClock2300:
+//OnClock0200:
+//OnClock0500:
+//-------------------
+	set $@brate,100000;
+	set $@jrate,100000;
+	set $@drate,50000;
+	//Base exp
+	setbattleflag("base_exp_rate",$@brate);
+	//Job exp
+	setbattleflag("job_exp_rate",$@jrate);
+	//Drops
+	setbattleflag("item_rate_common",$@drate);
+	setbattleflag("item_rate_heal",$@drate);
+	setbattleflag("item_rate_use",$@drate);
+	setbattleflag("item_rate_equip",$@drate);
+	//we don't change card drops rate, because these values won't change them anyway
+	atcommand "@reloadmobdb";
+
+	announce "Rates flutuantes Finalizadas!.",bc_all,0xFF6060;
+	announce "Obrigado e bom jogo a todos!",bc_all,0xFF6060;
+	end;
+}

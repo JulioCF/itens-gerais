@@ -1,0 +1,102 @@
+//===================================================
+//=================== D&I Scripts ===================
+//======== Made By ZaweOwnedz & Iago.xP~ ============
+//=============== Recuse Imitações ==================
+//===================================================
+prontera,151,133,5	script	Presença	721,{
+
+set .@n$, "[ ^cc0000Presença^000000 ]";
+set @TempoHora, 3600;
+
+mes .@n$;
+mes "Olá, "+strcharinfo(0)+" !";
+mes "O que você gostaria de fazer ?";
+next;
+switch(select("Me explique:Marcar Presença:Ver Meus Pontos:Trocar Meus Pontos:Sair")){
+
+	if(BaseLevel < 80){
+	mes "Desculpe, mas você precisa ser mais velho para participar.";
+	mes "Me procure quando for level 80 ou mais.";
+	close;
+	}
+
+	case 1:
+		mes "É bem simples, quando você marcar presença aqui comigo, eu irei contar 1(uma) hora, se você permanecer 1(uma) hora logado em nosso servidor, você irá ganhar 3(três) pontos, para ganhar os pontos, basta vir falar comigo novamente, juntando 30(trinta) pontos, eu troco por um item";
+		next;
+		mes "Lembrando: Não será contado pontos para lojas com comando @at, loja aberta normalmente ou pessoas AFK";
+		close;
+	
+	case 2:
+		if(#presenca != 1){
+		set #TimeOn, gettimetick(2) + @TempoHora;
+		set #presenca,1;
+		mes .@n$;
+		mes "Seu tempo foi marcado !";
+		close;
+		}
+		if(#TimeOn >= gettimetick(2)){
+		mes .@n$;
+		mes "Você ainda não pode pegar os seus Pontos.";
+		mes "Espere ^FF0000"+((#TimeOn-gettimetick(2))/60)+"^000000 minutos.";
+		close;
+		}
+		mes .@n$;
+		mes "Receba agora os seus 3 pontos.";
+		set #pontos,#pontos+3;
+		set #presenca,0;
+		next;
+		mes .@n$;
+		mes "Pontos Entreges.";
+		close;
+	case 3:
+		mes .@n$;
+		mes "Você tem: ^FF0000"+#pontos+"^000000 Pontos de Presença!";
+		close;
+	case 4:
+		mes .@n$;
+		mes "Você tem: ^FF0000"+#pontos+"^000000 Pontos de Presença!";
+		mes "Deseja trocar 60 Pontos por 1 item?";
+		if(select("Sim:Não") == 2) close;
+		next;
+		mes .@n$;
+		if(#pontos < 60){
+		mes "Você não tem 60 Pontos de Presença.";
+		close;
+		}
+		set #pontos,#pontos-60;
+		getitem 13719,5;
+		//set #CASHPOINTS,#CASHPOINTS+1;
+		mes "Pontos trocados com sucesso.";
+		close;
+	case 5:
+		mes .@n$;
+		mes "Volte quando quiser marcar seu tempo !";
+		close;
+
+}
+
+OnWhisperGlobal:
+if(#presenca == 0){
+dispbottom "Você ainda não marcou presença !";
+end;
+}
+dispbottom "Faltam apenas "+((#TimeOn-gettimetick(2))/60)+" minutos.";
+end;
+
+OnPCLogoutEvent:
+if(#presenca == 1){
+if(checkvending(strcharinfo(0))){
+set #presenca,0;
+end;
+}
+set #TimeOff,#TimeOn - gettimetick(2);
+end;
+}
+
+OnPCLoginEvent:
+if(#presenca == 1){
+set #TimeOn, gettimetick(2) + #TimeOff;
+end;
+}
+
+}

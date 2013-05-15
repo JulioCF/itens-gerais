@@ -1,0 +1,135 @@
+//===== Cronus Script ======================================== 
+//= Arena MvP
+//===== Por: =================================================
+//= Darkchild
+//===== Versão Atual: ======================================== 
+//= 1.3a
+//===== Descrição: =========================================== 
+//= Arena MvP
+//===== Comentarios Adicionais: ==============================
+//= 1.2 Arena MvP otimizada. [Mooka]
+//= 1.3 Adicionado novas funções para reduzir o script. [Mooka]
+//= 1.3a Removido show [Keoy]
+//============================================================
+
+function	script	Ramvp	{
+
+	switch(getarg(0))
+	{
+case 1:
+	mes "[MvP Alpha]";
+		mes "Até mais!";
+			return;
+case 2:
+
+	mes "[MvP Beta]";
+		mes "Até mais!";
+			return;
+case 3:
+	mes "[MvP Theta]";
+		mes "Até mais!";
+			return;
+case 4:
+	mes "[MvP Epsilon]";
+		mes "Até mais!";
+			return;
+	}
+}
+
+
+function	script	Ramvp_M	{
+
+	if(!getarg(0,0))
+	{
+		mes "Do que você precisa?.";
+		switch(select("- Monstros Díficeis:- Curar-me:- Sair"))
+		{
+	case 1:
+		return;
+
+	case 2:
+		percentheal 100,100;
+		close;
+
+	case 3:
+		warp "prontera",156,179;
+		close;
+		}
+	}
+
+	mes "Do que você precisa?.";
+	if(select("- Cura:- Sair")==1)
+	{
+		percentheal 100,100;
+		close;
+	}
+		warp "prontera",156,179;
+		close;
+
+}
+
+function	script	Ramvp_Main	{
+
+	mes "[Guia do MvP]";
+	mes "Olá, eu sou o Guia deste local !";
+	mes "Deseja algo?";
+	next;
+	switch(select("- Introdução:- Eu quero voltar:- Me cure:- Cancelar"))
+	{
+case 1:
+	mes "[Guia do MvP]";
+	mes "Seja bem vindo a esse local sagrado do Ragnarök, aqui você poderá provar que é um guerreiro.";
+	next;
+	mes "[Guia do MvP]";
+	mes "Aqui nós gostamos de ser uma família, e como uma família que você aprende que devemos ajudar uns aos outros, assim se você quiser sobreviver você deve aprender a cooperar.";
+	next;
+	mes "[Guia do MvP]";
+	mes "A uma grande abundância de Arenas, você poderá entrar na que voccê quiser.";
+	next;
+	mes "[Guia do MvP]";
+	mes "Não trapaceie ou você será removido da Arena.";
+	next;
+	mes "[Guia do MvP]";
+	mes "Existem 4 porteiros, cada um levando para um MvP diferente e mais difícil.";
+	mes "Entre no que você achar melhor.";
+	mes "Boa Sorte!";
+	close;
+
+case 2:
+	warp "prontera",156,179;
+	close;
+
+case 3:
+	percentheal 100,100;
+	close;
+
+case 4:
+	close;
+
+	}
+}
+
+// === By Mooka === Menu de Alpha,Beta,Theta,Epsilon
+
+function	script	MenuLvl	{
+
+	if (getmapusers(getarg(0)) > getarg(1))
+	{
+		mes "[MvP "+getarg(3)+"]";
+		mes "Desculpe mas está arena está atualmente cheia, porém você pode escolher outra!";
+		close;
+	} callfunc("Ramvp",getarg(2));
+	warp getarg(0),102,102;
+	close;
+}
+
+// === By Mooka === Função dos NPC's Protetor
+
+function	script	Protector	{
+
+	mes "[Protetor]";
+	if(getarg(0,"")=="") callfunc("Ramvp_M",1);
+	callfunc("Ramvp_M");
+	warp getarg(0),102,102;
+	close;
+}

@@ -1,0 +1,188 @@
+//-----------------------------------------------
+// _________                                    
+// \_   ___ \_______  ____   ____  __ __  ______
+// /    \  \/\_  __ \/    \ /    \|  |  \/  ___/
+// \     \____|  | \(  ( ) )   |  \  |  /\___ \ 
+//  \______  /|__|   \____/|___|  /____//____  >
+//         \/                   \/           \/  
+//-----------------------------------------------
+// Traduzido para Português por Mara
+// coloque no início o nível mínimo para que a frase seja exibida
+  1:Para utilizar um comando, digita ele na caixa de mensagem que você geralmente utiliza para digitar.
+ 20:@h/@help - exibe o guia de ajuda.
+ 20:@h2/@help2 - exibe o segundo guia de ajuda.
+  1: 
+  1:--- MESSAGE CMD ---
+  1:@main [on|off|mensagem] - Liga ou desliga o chat global (@main must be on to see global chat messages)
+  1:@noask - Auto-rejeita convites/negociações
+ 20:@gmotd - Anuncia a Mensagem do Dia para todos os jogadores.
+ 20:@me <mensagem> - Exibe um texto normal como mensagem no formato: *nome mensagem* (como /me no mIRC)
+ 20:@fakename [Nome] - Modifica seu nome temporariamente.
+ 20:@npctalk [Nome do NPC],[Mensagem] - Força um NPC a exibir a mensagem no chat normal.
+ 40:/b/@broadcast <mensagem> - Envia uma mensagem de GM com o nome do GM (em amarelo)
+ 40:/nb <mensagem>/@kami <mensagem> - Envia uma mensagem de GM sem o nome do GM (em amarelo)
+ 40:@kamib <mensagem> - Envia uma mensagem de GM sem o nome do GM (em azul)
+ 40:/lb/@localbroadcast <mensagem> - Envia uma mensagem de GM com o nome do GM (em amarelo) SOMENTE no seu mapa
+ 40:/nlb <mensagem> - Envia uma mensagem de GM sem o nome do GM (em amarelo) SOMENTE no seu mapa
+  1: 
+  1:--- INFORMATION CMD ---
+  1:@commands - Exibe a lista de comando que você pode usar.
+  1:@rates - Exibe as taxas de experiências atuais.
+  1:@uptime - Exibe por quanto tempo o servidor permanece online.
+  1:@showdelay - Exibe/Esconde a mensagem "Há um tempo de espera entre as habilidades" ou relacionadas.
+  1:@exp - Exibe o nível atual e o progresso em %
+  1:@mobinfo/@monsterinfo/@mi [ID/Parte_do-nome do Monstro] - Exibe informações do Monstro (rates, stats, drops, MVP)
+  1:@iteminfo/@ii [ID/Parte_do_nome do Item] - Exibe informações do Item (tipo, preço, etc)
+  1:@whodrops [ID/Parte_do_nome do Item] - Exibe que monstro dropa o item (monstros com maior chance de drop)
+  1:@version - Exibe a revisão SVN do serivdor
+  1:@email <atual@email> <novo@email> - modifica o e-mail (proteção de personagens)
+  1:@where [nome_do_personagem] - Mostra a localização de um personagem
+  1:@time/@date/@server_date/@serverdate/@server_time/@servertime - Exibe a data/hora do servidor
+ 10:@showexp - Exibe/esconde a experiência ganha.
+ 10:@showzeny - Exibe/esconde o zeny ganho.
+ 10:@mobsearch [Nome|ID do Monstro] - Mostra a localização de certo monstro no mapa.
+ 20:@who/@whois/@w [texto_corresp] - Exibe a lista dos jogadores online e seu grupo/clã.
+ 20:@who2 [texto_corresp] - Exibe a lista dos jogadores online e sua profissão.
+ 20:@who3 [texto_corresp] - Exibe a lista dos jogadores online e sua localização.
+ 20:@whomap/@whomap2/@whomap3 [mapa] - @who/@who2/@who3, mas somente para um mapa específico.
+ 20:@whogm [texto_corresp] - @who+@who2+who3, mas somente para GMs.
+ 40:@charcartlist <nome_do_char> - Exibe todos os itens no carrinho do jogador.
+ 60: 
+ 60:@guildspy <nome_do_clã/id> - Você receberá todas as mensagens do canal do clã (Log de chats deve estar habilitado)
+ 60:@partyspy <nome_do_grupo/id> - Você receberá todas as mensagens do canal do grupo (Log de chats deve estar habilitado)
+ 99:@mapinfo [<0-3> [mapa]] - Informações sobre o mapa (informações gerais +: 0: no more, 1: players, 2: NPC, 3: shops/chat).
+  1: 
+  1:--- CHANGE GM STATE CMD ---
+  1:@die - Comete suicídio.
+ 10:@go <número/nome_da_cidade> - Move você para uma cidade.
+ 10:  -3: (Retorno 2)  1: morocc   5: izlude         9: yuno     13: niflheim
+ 10:  -2: (Retorno 1)  2: geffen   6: aldebaran     10: amatsu   14: louyang
+ 10:  -1: (Retorno 0)  3: payon    7: xmas (lutie)  11: gonryun  15: campo de treinamento
+ 10:   0: prontera     4: alberta  8: comodo        12: umbala   16: prisão
+ 10: 
+ 20:/shift/@jumpto/@warpto/@goto <nome_do_personagem> - Move você até o jogador
+ 20:@follow <nome_do_personagem> - segue um jogador
+ 20:@mountpeco - Monta/desmonta de um PecoPeco (A profissão é obrigatória, a habilidade não)
+ 20:@disguise <nome_do_monstro_ou_ID> - Transforma seu personagem numa aparência de monstro.
+ 20:@undisguise - Remove uma transformação.
+ 20:@model <ID do cabelo> <cor de cabelo> <cor de roupa> - Modifica sua aparência.
+ 20:@size <1-3> Muda seu tamanho (1-Pequeno 2-Grande 3-Normal)
+ 40:/hide/@hide - Torna seu personagem invisível (invisibilidade de GM). Digite /hide/@hide para desligar.
+ 40:@save - Define o ponto de retorno no mapa atual
+ 40:@load/@return - Move você para seu ponto de retorno
+ 40:/mm//mapmove/@warp/@rura/@mapmove <nome_do_mapa> <x> <y> - Move você para o local escolhido
+ 40:@jump [x [y]]- Move você do mesmo jeito que o item "Asa de Mosca".
+ 40:@job/@jobchange <ID_da_class> - Modifica sua profissão
+ 40: Estão listados todos os ID's conhecidos pelo Cliente.
+ 40: Alguns ID's não vão funcionar por não terem sido adicionados no servidor.
+ 40: Além disso, alguns ID's podem usar sprites temporárias.
+ 40:   0: Aprendiz       18: Alquimista        4015: Paladino
+ 40:   1: Espadachim     19: Bardo             4016: Mestre
+ 40:   2: Mago           20: Odalisca          4017: Professor
+ 40:   3: Arqueiro       23: Super Aprendiz    4018: Desordeiro
+ 40:   4: Noviço       4001: Aprendiz T.       4019: Criador
+ 40:   5: Mercador     4002: Espadachim T.     4020: Menestrel
+ 40:   6: Gatuno       4003: Mago T.           4021: Cigana
+ 40:   7: Cavaleiro    4004: Arqueiro T.       4046: Taekwon
+ 40:   8: Sacerdote    4005: Noviço T.         4047: Mestre Taekwon
+ 40:   9: Bruxo        4006: Mercador T.       4049: Espiritualista
+ 40:  10: Ferreiro     4007: Gatuno T.           24: Justiceiro
+ 40:  11: Caçador      4008: Lorde               25: Ninja
+ 40:  12: Mercenário   4009: Sumo Sacerdote
+ 40:  14: Templário    4010: Arquimago
+ 40:  15: Monge        4011: Mestre-Ferreiro
+ 40:  16: Sábio        4012: Atirador de Elite
+ 40:  17: Arruaceiro   4013: Algoz
+ 40: ---- Classes Mini ----
+ 40: 4023: Mini             4024: Mini Espadachim   4025: Mini Mago
+ 40: 4026: Mini Arqueiro    4027: Mini Noviço       4028: Mini Mercador
+ 40: 4029: Mini Gatuno      4030: Mini Cavaleiro    4031: Mini Sacerdote
+ 40: 4032: Mini Bruxo       4033: Mini Ferreiro     4034: Mini Caçador
+ 40: 4035: Mini Mercenário  4037: Mini Templário    4038: Mini Monge
+ 40: 4039: Mini Sábio       4040: Mini Arruaceiro   4041: Mini Alquimista
+ 40: 4042: Mini Bardo       4043: Mini Odalisca     4045: Mini S. Aprendiz
+ 40: ---- Mounts, Modes, And Others ----
+ 40:   13 Knight (Peco)    21 Crusader (Peco)  22 Wedding          26 Christmas
+ 40:   27 Summer 4014 Lord Knight (Peco) 4022 Paladin (Peco)  4036 Baby Knight (Peco)
+ 40: 4044 Baby Crusader (Peco) 4048 Star Gladiator (Union) 4080 Rune Knight (Dragon)
+ 40: 
+ 40:	<param1>	<param2>		<p3>(stackable)		<param3>		<param3>
+ 40:	1 Petrificado	(stackable)		01 Visão		32 PecoPeco		2048 Cabeça de Orc
+ 40:	2 Congelado	01 Envenenado		02 Escondido		64 Invisibilidade GM	4096 Sprite de Casamento
+ 40:	3 Atordoado	02 Amaldiçoado		04 Invisível		128 Carrinho no.2	8192 Revelação
+ 40:	4 Sonolento	04 Silêncio		08 Carrinho no.1	256 Carrinho no.3
+ 40:	6 escuridão	08 ???			16 Falcão		512 Carrinho no.4
+ 40:	16 escuridão	1024 Carrinho no.5
+ 40: 
+ 40:@heal [<HP> <SP>] - Cura o jogador com a quantide de HP/SP.
+ 40:@option <param1> <param2> <param3> - Adiciona efeitos visuais no/em volta do seu personagem.
+ 40:@dye/@ccolor <cor de roupa> - Modifica a cor de roupa.
+ 40:@hairstyle/@hstyle <ID de cabelo> - Modifica o tipo de cabelo.
+ 40:@haircolor/@hcolor <cor de cabelo> - Modifica a cor de cabelo.
+ 40:@speed <1-1000> - Modifica a velocidade de movimento. 1=mais rápido 1000=mais lerdo 150=padrão.
+ 40:@effect <id_do_efeito> [flag] - Exibe um efeito no personagem.
+ 40:@dropall - "dropa" todos os seus itens
+ 40:@storeall - põe tudo do personagem no armazém
+ 40:@killable - torna seu personagem apto para ser morto
+ 40:@memo [posição_para_retorno] - define/muda o ponto de retorno (sem local definido: amostra o atual).
+ 40:@spiritball <número: 1-1000> - Cria "esferas espirituais" como na habilidade "Invocar Esfera Espiritual"
+ 40:	(Se o número > 1000, o servidor pode se tornar instável ou ocorrer um "crash")
+ 40:@questskill <#> - Dá ao jogador uma habilidade de quest
+ 40:@lostskill <#> - Remove uma habilidade de quest
+ 40:@skillid <nome> - procura uma habilidade pelo nome
+ 40:@useskill <id_da_skill> <nv_da_skill> <alvo> - usa a habilidade no alvo
+ 40:  Aprendiz                  Espadachim                        Gatuno                   Mercador
+ 40:  142 = Primeiros Socorros  144 = Recuperar HP em Movimento   149 = Chutar Areia       153 = Cavalo-de-Pau
+ 40:  143 = Fingir de Morto     145 = Ataque Fatal                150 = Recuar             154 = Personalizar Carrinho
+ 40:  Arqueiro                  146 = Instinto de Sobrevivência   151 = Procurar Pedras    155 = Grito de Guerra
+ 40:  147 = Fabricar Flechas    Noviço                            152 = Arremessar Pedra   Mago
+ 40:  148 = Disparo Violento    156 = Luz Divina                                           157 = Proteção Arcana
+ 40: @skilltree <
+ 40: @marry <jogador1>,<jogador2> - casa dois jogadores
+ 40: @divorce <jogador>  - divorcia dois jogadores (só é necessário um dos nomes)
+ 60:@alive - Ressucita seu personagem.
+ 60:@lvup/@blevel/@baselvlup <number of levels> - Aumenta o nível de base.
+ 60:@joblvup/@jlevel/@joblvlup <número de níveis> - Aumenta o nível de classe.
+ 60:@allskill/@allskills/@skillall/@skillsall - Concede todas as habilidades da profissão e suas evoluções.
+ 60:@stpoint <número de pontos> - Garante a você o número desejado de pontos de atributo.
+ 60:@skpoint <número de pontos> - Garante a você o número desejado de pontos de habilidade.
+ 60:@zeny <quantidade> - Concede a você a quantidade especificada de Zenys.
+ 60:@cash <quantidade> - Concede a você a quantidade especificada de Cash Points. 
+ 60:@points <quantidade> - Concede a você a quantidade especificada de Kafra Points.
+ 60:@str,@agi,@vit,@int,@dex,@luk <quantidade> - Adiciona a quantidade desejada de stats. Por exemplo, "@str 10" aumenta sua for em 10 pontos
+ 60:@statall/@statsall/@allstats/@allstat [valor] - Adiciona o valor em todos os atributos (máximo caso não tenha o valor).
+ 60:@addwarp <nome do mapa> <coord x> <coord y>
+ 40: 
+ 40:--- MONSTERS CMD ---
+ 40:@killmonster2 - mata todos os monstros do mapa (sem drop)
+ 50:/monster <nome_do_monstro> - Invoca 1 monstro desejado.
+ 50:@spawn/@monster/@summon <nome_do_monstro_ou_ID> [<quantidade invocada> [<nome_do_monstro_desejado> [<coord x> [<coord y>]]]]
+ 50:@monster2 <desired_monster_name> <nome_do_monstro_ou_ID> [<quantidade invocada> [<coord x> [<coord y>]]]
+ 50:@spawn/@monster/@summon/@monster2 "nome do monstro desejado" <nome_do_monstro_ou_ID> [<quantidade invocada> [<coord x> [<coord y>]]]
+ 50:@spawn/@monster/@summon/@monster2 <nome_do_monstro_ou_ID> "nome do monstro desejado" [<quantidade invocada> [<coord x> [<coord y>]]]
+ 50:	Invoca o monstro desejado com o nome desejado.
+ 50:@monstersmall [ID|Nome do Mob] - Invoca uma versão pequena do monstro.
+ 50:@monsterbig [ID|Nome do Mob] - Invoca uma versão grande do monstro.
+ 60:@killmonster [mapa] - mata todos os monstros do mapa (com drop)
+ 40: 
+ 10:--- MISC CMD ---
+ 10:@autoloot [on|off|#] - Faz com que os itens vão diretamente para seu inventário.
+ 10:@autotrade/@at - Permite ao jogador usar 'Comércio' enquanto estiver offline.
+ 10:@changegm [Nome do Jogador] - Troca o líder do seu clã (Você deve er o líder)
+ 10:@changeleader [Nome do Jogador] - Troca o líder do seu grupo (Você deve er o líder)
+ 20:@request [Mensagem] - Envia uma mensagem a todos os GMs online (via gm whisper)
+ 40:@sound [Diretório para o arquivo na Data ou GRF] - Reproduz um som da data ou de grf localizada no client.
+ 50:@clone [Nome do Jogador] - Cria um clone de suporte do personagem.
+ 50:@slaveclone [Nome do Jogador] - Cria um clone de suporte do personagem que segue o seu criador.
+ 50:@evilclone [Nome do Jogador] - Cria um clone agressivo do personagem.
+ 60:@changesex - Modifica seu sexo.
+ 10: 
+  1:--- DUEL CMD ---
+  1:@duel - Inicia um duelo.
+  1:@invite - Convida um jogador para um duelo.
+  1:@accept - Aceita um convite de duelo.
+  1:@reject - Rejeita um convite de duelo.
+  1:@leave - Abandona um duelo.
+  1: 
+  1:--- MAIL SYSTEM --- (Somente SQL)
+  1:@mail - Abre a caixa de email.

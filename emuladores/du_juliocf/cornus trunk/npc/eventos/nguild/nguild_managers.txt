@@ -1,0 +1,144 @@
+//===== eAthena Script =======================================
+//= War of Emperium Managers for N Guild Castles
+//===== By: ==================================================
+//= kobra_k88
+//===== Current Version: =====================================
+//= 1.3
+//===== Compatible With: =====================================
+//= eAthena 0.1+; RO Episode 4+
+//===== Description: =========================================
+//=
+//==============================================
+//= Break down of arguments used in the function:
+//=   arg(0): name of Castle Manager
+//=   arg(1): name of guild castle.
+//=   arg(2): x1 coordinate for warp to treasure room
+//=   arg(3): y1 coordinate for warp to treasure room
+//=   arg(4): guild script suffix for kafra, etc.
+//===== Additional Comments: =================================
+//= 1.0 Based off existing guild scripts.  Do not know if it is accurate.[kobra_k88]
+//= 1.1 Added modified guild manager function. [L0ne_W0lf]
+//= 	Removed guardian summoning.
+//= 1.2 Corrected function name. (bugreport:1728) [L0ne_W0lf]
+//= 1.2t Script Adaptado , traduzido e revisado [Minos]
+//= 1.3 Pequena Otimizada no Script. [RoM]
+//============================================================
+
+//==============================================
+function	script	F_GldManager	{
+	set @GID, GetCastleData(getarg(1),1);
+	show "[ "+getarg(0)+" ]";
+	if (@GID == 0){
+		show "Eu estou aguardando meu mestre , bravo guerreiro , siga seu destino!";
+		return;
+	}
+	if (getcharid(2) != @GID){
+		show "Eu respondo apenas ao senhor ^5533FF" + getguildmaster(@GID) + "^000000 Mas o que! Você não faz parte do clã!!";
+		show "Guardiões! Matem esse intruso!";
+		return;
+	}
+	if (strcharinfo(0) != getguildmaster(@GID)){
+		show "Você não é o senhor ^5533FF" + getguildmaster(@GID) + "^000000! Eu só respondo ao senhor ^5533FF" + getguildmaster(@GID) + "^000000";
+		return 0;
+	}
+	show "Bem vindo senhor ^5533FF" + getguildmaster(@GID) + "^000000 ! Do que o senhor precisa?!";
+	next;
+	switch(select("Contratar ou demitir kafras","Entrar na sala do tesouro","Nada")){
+	Case 1:
+		show "[ "+getarg(0)+" ]";
+		if (GetCastleData(getarg(1),9) == 1){
+			show "Você gostaria de demitir a kafra?";
+			next;
+			if(select("Demitir","Não") == 2) close;
+			cutin "kafra_01",2;
+			show "[ Kafra ]";
+			show "Eu fiz algo de errado? Se sim , poderia me perdoar?";
+			next;
+			if(select("Demitir","Reconsiderar") == 2) close;
+			show "[ Kafra ]";
+			show "Tudo bem então....";
+			next;
+			disablenpc "Kafra Staff#"+getarg(4);
+			SetCastleData getarg(1),9,0;
+			cutin "kafra_01",255;
+			show "[ "+getarg(0)+" ]";
+			show "A kafra foi demitida.";
+			return;
+		}
+		if (getgdskilllv(@GID,10001) == 0){
+			show "Senhor, você não possui um contrato com a corporação kafra.";
+			show "Para contratar uma kafra, o seu clan deve possuir a habilidade ^5533FFContrado com Kafra^000000.";
+			return;
+		}
+		show "O senhor gostaria de contratar uma kafra? Para isso o senhor deverá ter ^5533FF10,000 Zenys^000000 disponíveis... ";
+		next;
+		if(select("Contratar.","Não contratar") == 2) close;
+		show "[ "+getarg(0)+" ]";
+		if (Zeny < 10000){
+			show "Senhor, você não possui dinheiro o suficiente!.";
+			return;
+		}
+		set Zeny,Zeny-10000;
+		enablenpc "Kafra Staff#"+getarg(4);
+		SetCastleData getarg(1),9,1;
+		show "Você contratou uma Kafra!.";
+		next;
+		cutin "kafra_01",2;
+		show "[ Kafra ]";
+		show "Como vai? Eu estou aqui para servir o seu clã!.";
+		next;
+		cutin "kafra_01",255;
+		show "[ "+getarg(0)+" ]";
+		show "Caso necessite de algo , fale comigo!.";
+		return;
+	Case 2:
+		show "[ "+getarg(0)+" ]";
+		show "Senhor , gostaria de entrar na sala do tesouro?.";
+		next;
+		switch(select("Entrar.","Não")){
+		Case 1:
+			show "[ "+getarg(0)+" ]";
+			show "Siga me por essa passagem";
+			show "Para sair apenas puxe a alavanca.";
+			next;
+			warp getarg(1),getarg(2),getarg(3);
+			return;
+		Case 2:
+			show "[ "+getarg(0)+" ]";
+			show "Os tesouros são produzidos todo dia.";
+			show "Você deverá pega-los antes deles desaparecerem.";
+			return;
+		}
+	Case 3:
+		show "[ "+getarg(0)+" ]";
+		show "Como você desejar.";
+		return;
+	}
+}
+
+// Castle 1 ==================================================================================
+nguild_alde,218,175,0	script	Frolo	55,{
+	callfunc "F_GldManager","Frolo","nguild_alde",119,223,"N01";
+	close;
+}
+
+
+// Castle 2 ==================================================================================
+nguild_gef,40,48,5	script	Leiber	55,{
+	callfunc "F_GldManager","Leiber","nguild_gef",155,112,"N02";
+	close;
+}
+
+
+// Castle 3 ==================================================================================
+nguild_pay,120,58,4	script	Dundar	55,{
+	callfunc "F_GldManager","Dundar","nguild_pay",290,7,"N03";
+	close;
+}
+
+
+// Castle 4 ==================================================================================
+nguild_prt,112,181,0	script	Thefton	55,{
+	callfunc "F_GldManager","Thefton","nguild_prt",15,209,"N04";
+	close;
+}

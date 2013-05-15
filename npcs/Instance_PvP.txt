@@ -1,0 +1,186 @@
+//===================================================
+//=  __  __                  __                     =
+//= /\ \/\ \                /\ \      __            =
+//= \ \ `\\ \    ___     ___\ \ \____/\_\     __    =
+//=  \ \ , ` \  / __`\  / __`\ \ '__`\/\ \  /'__`\  =
+//=   \ \ \`\ \/\ \_\ \/\ \_\ \ \ \_\ \ \ \/\  __/  =
+//=    \ \_\ \_\ \____/\ \____/\ \_,__/\ \_\ \____\ =
+//=     \/_/\/_/\/___/  \/___/  \/___/  \/_/\/____/ =
+//===================================================
+//= Instance PvP									=
+//= Created by Noobie								=
+//= Created for FlurryRO							=
+//= Language: English								=
+//= Map: 1@pvp										=
+//= for eAthena										=
+//= Revision 14006 or above							=
+//===================================================
+//= Credits											=
+//= Masao for his Support on the script				=
+//= Davven for creating the used Map				=
+//===================================================
+//= Version 1.0										=
+//===================================================
+//= Changelog										=
+//===================================================
+//= 0.9												=
+//= First Version									=
+//= 1.0												=
+//= Release~										=
+//===================================================
+// = Settings - Modify them as you feel you should	=
+// ==================================================
+-	script	PD_Settings	-1,{
+OnInit:
+	set $PD_Timelimit,600;	// Seconds for entering
+	set $PD_Minparty,2;		// # of players a party must have
+	//set $PD_ItemID,969;	// ItemID //Not working yet
+	end;
+}
+
+brasilis,200,258,5	script	Duel PVP	406,{
+
+	set .@name$,"^0000FFPvP Warper^000000";
+
+	getpartymember(getcharid(1)); 
+	if(!getcharid(1) || $@partymembercount < $PD_Minparty){
+			mes .@name$;
+			mes "Make or join the party with exactly "+$PD_Minparty+" member or try again.";
+		set PD_makeparty,1;
+		close;
+	}
+	if(PD_makeparty){
+		mes .@name$;
+		mes "Confirmed. You are in a party. What would you like to do?";
+		set PD_makeparty,0;
+		next;
+	}
+	mes .@name$;
+	mes "If you have generated the PvP Duel already, you can enter it.";
+	next;
+	if(getpartyleader(getcharid(1),2) == getcharid(0)){
+		select("Generate PvP Duel Instance:Enter the PvP Duel Instance:Return to Brasilis:Cancel");
+	} else {
+		select(":Enter the PvP Duel Instance:Return to Brasilis:Cancel");
+	}
+	switch(@menu){
+	case 1:
+		if(instance_id(1)){
+			if(has_instance("1@pvp") == ""){
+				mes .@name$;
+				mes "Your group is already registered at an other instance."; 
+				close;
+			}
+			mes .@name$;
+			mes "Your group is already registered."; 
+			mes "Select ^0000FFEnter the Duel^000000 in the main menu to enter."; 
+			close;
+		}
+		mes .@name$;
+		mes "^0000FFPvP Duel Instance^000000 - Try to reserve";
+		mes "After making a reservation, you have to talk to NPC behind and";
+		mes "select the menu 'Enter the Duel' to enter the PvP Duel";
+		close2;
+		set .@instance_id,instance_create("PvP_Duel",getcharid(1));
+		if(.@instance_id < 0){
+			mes .@name$;
+			mes "Failed to create PvP Duel Intsance."; 
+			mes "^FF0000PvP Duel Instances reached its limit.^000000"; 
+			mes "Please report this error to an administrator or GM."; 
+			close;
+		}
+		instance_attachmap("1@pvp",.@instance_id);
+		instance_set_timeout $PD_Timelimit,600,.@instance_id;
+		instance_init .@instance_id;
+		instance_attach instance_id(1);
+		end;
+	case 2:
+		if(!instance_id(1) || has_instance("1@pvp") == ""){
+			mes .@name$;
+			mes "The PvP Duel Instance does not exist.";
+			mes "Please confirm with your party leader wether the memorial dungeon";
+			mes "has been destructed or if the time given for entering has been expired.";
+			close;
+		}
+		instance_attach instance_id(1);
+		set PD_Lastinstid,instance_id(1);
+		set PD_map,1;
+		set @id,getcharid(1);
+		donpcevent instance_npcname("PD_Manager")+"::OnInstanceInit";
+		warpparty "1@pvp",51,46,@id;
+		//warp has_instance("1@pvp"),0,0;
+		close;
+	case 3:
+		warp "brasilis",195,259;
+		close;
+	case 4:
+		close;
+	}
+}
+
+1@pvp,0,0,0	script	PD_Manager	-1,{
+	end;
+
+OnInstanceInit:
+	if(strnpcinfo(3) == "PD_Manager")
+		end;
+	sleep 3000;
+	instance_announce .@instance_id,"Get Ready...",0x00FF00;
+	sleep 3000;
+	instance_announce .@instance_id,"4",0x00FF00;
+	sleep 3000;
+	instance_announce .@instance_id,"3",0x00FF00;
+	sleep 3000;
+	instance_announce .@instance_id,"2",0x00FF00;
+	sleep 3000;
+	instance_announce .@instance_id,"1",0x00FF00;
+	sleep 3000;
+	instance_announce .@instance_id,"GO!",0x00FF00;
+	atcommand "@pvpon";
+	end;
+
+OnPCKillEvent:
+	if(PD_map==1){
+	//getitem $PD_ItemID,1; //Not working yet
+	pvpoff "1@pvp";
+	sleep2 1000;
+	instance_attach instance_id(1);
+	instance_warpall "brasilis",195,259;
+	instance_destroy instance_id(1);
+	set PD_map,0;
+	end;
+	}
+	end;
+OnPCLogoutEvent:
+	if(PD_map==1){
+	pvpoff "1@pvp";
+	instance_attach instance_id(1);
+	instance_warpall "brasilis",195,259;
+	instance_destroy instance_id(1);
+	set PD_map,0;
+	end;
+}
+	end;
+
+OnPCDieEvent:
+	if(PD_map==1){
+	pvpoff "1@pvp";
+	sleep2 1000;
+	instance_attach instance_id(1);
+	instance_warpall "brasilis",195,259;
+	instance_destroy instance_id(1);
+	set PD_map,0;
+	end;
+}
+	end;
+	
+OnPCLoginEvent:
+	set PD_map,0;
+	end;
+}
+
+1@pvp	mapflag	pvp_noparty
+1@pvp	mapflag	pvp_noguild
+1@pvp	mapflag	partylock
+1@pvp	mapflag	nowarp
+1@pvp	mapflag	nowarpto

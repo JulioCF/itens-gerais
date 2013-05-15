@@ -1,0 +1,12 @@
+//====== Comentários ===========================================
+//= 1.0 - NPC Criado				       [Banned]
+//==============================================================
+-	script	OnPCBaseLvUpEvent	-1,{
+	OnPCBaseLvUpEvent:
+//	if(BaseLevel != 99) end;
+	if(BaseLevel == 99){
+	query_sql "SELECT `base_level` FROM `char` WHERE `base_level` = '99'", @MaxLevel;
+	if(@MaxLevel) end;
+	if(!@MaxLevel) announce "Parabéns ao Jogador "+ strcharinfo(0) +" , acaba de chegar ao nível 99!",8;
+	}
+}

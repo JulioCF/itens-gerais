@@ -1,0 +1,397 @@
+//===== eAthena Script =======================================
+//= Sala dos Cristais
+//===== By: ==================================================
+//= Mara [mkbu@passport.com]
+//===== Current Version: =====================================
+//= 3.4
+//===== Compatible With: =====================================
+//= Cronus SVN & eAthena SVN 6000+
+//===== Description: =========================================
+//= Um evento onde você entra em uma sala com o objetivo de
+//= conseguir bandeiras nacionais matando os cristais que
+//= existem por lá, porém além da Bandeira Nacional, há:
+//=  - 35% de chance de ser retirado da sala;
+//=  -  5% de chance de expulsão e voltar na rodada seguinte;
+//=  -  3% de chance de ganhar 2 Bandeiras Nacionais;
+//=  -  8% de chance de ganhar 1 Bandeira Nacional;
+//=  - 15% de chance de aumentar sua agilidade;
+//=  -  4% de chance de perder 1 Bandeira Nacional.
+//===== Additional Comments: =================================
+//= 1.0 - Script criado. [Mara]
+//= 1.1 - Corrigido pequeno BUG. [Mara]
+//= 1.2 - Adicionado PvP nos mapas. [Mara]
+//= 1.3 - Corrigido alguns erros nos monstros. [Mara]
+//= 1.4 - Alterada forma de drop da Bandeira Nacional. [Mara]
+//= 1.5 - Modificado ID do MOB (1954). [Mara]
+//= 1.6 - Horário modificado: de 2 em 2h. [Mara]
+//= 1.7 - Corrigido BUG de Horarios. [pedroamoury]
+//= 1.8 - Horarios Configurados para 2 em 2h Corretamente. [PHpedro]
+//= 1.9 - Corrigido Bug de Armadilha. [PHpedro]
+//= 2.0 - Corrigido Reload dos Monstros. [PHpedro]
+//= 2.1 - Corrigido Monstros nos Mapas. [PHpedro]
+//= 2.2 - Corrigido Bafomé na sala com Monstros. [PHpedro]
+//= 2.3 - Adicionado nowarp para players não entrarem por teleporte. [PHpedro]
+//= 2.4 - Corrigido Expulsamento nas Salas. [PHpedro]
+//= 2.5 - Adicionado Sala só para VIPs. [PHpedro]
+//= 2.6 - Corrigido if/else. [PHpedro]
+//= 2.7 - Criado variavel $msv. [PHpedro]
+//= 2.8 - Adicionado Nome para as Salas. [PHpedro]
+//= 2.9 - Modificado Expulsão da sala agora é teleportado para o lado da sala. [PHpedro]
+//= 3.0 - Alterações realizadas: [Mara]
+//=	* Removida variável inútil .n$ já que pode-se por padrão;
+//=	* Criada variável $nvp para customizar o nível VIP;
+//=	* Otimizada e removidas algumas funções;
+//=	* Corrigido erro na variável $cid que não existia;
+//=	* Alterada tipo da variável no rand para ocupar menos memória;
+//=	* Adicionado alguns comentários sobre os horários;
+//=	* Removido .gat nos mapas;
+//=	* Endireitada tabulação para maior compreensão dos comandos;
+//=	* Alterada checagem para melhor funcionamento;
+//=	* Removida checagem de VIP para Sala VIP;
+//=	* Adicionado horários para matar monstros nas salas;
+//=	* Aumentado o nº de jogadores nas salas;
+//=	* Corrigida algumas checagens para otimização;
+//=	* Retirada variável para o máximo de monstros;
+//=	* Criada array global para armazenar os valores;
+//=	* Criada nova maneira de por os mapflags;
+//=	* Editado nome de algumas armadilhas para melhor compreensão;
+//=	* Removida outras variáveis globais e estão na array;
+//=	* Otimizado warp das salas para reinicio do evento;
+//=	* Otimizado chamada de funções pelos horários;
+//=	* Retirado spawn automático dos Cristais;
+//=	* Retirada dependência de alteração na mob_db.txt;
+//=	* O evento dura até 10min;
+//=	* Alterada a flag dos anúncios;
+//=	* Adicionado tag em cada anúncio para melhor identificação;
+//=	* Otimizado o menu;
+//=	* Removido rand inútil e corrigido variável para checagem de mapa;
+//=	* Corrigida label para chamar função ao matar o monstro;
+//=	* Otimizado summon dos cristais e corrigido variável da porcentagem de drop;
+//=	* Removido sleep na remoção dos jogadores dos mapas;
+//=	* Ajeitada a cor do announce;
+//=	* Corrigido número de armadilhas por mapa;
+//=	* Removida a cor no nome do NPC -duh;
+//=	* Adicionado comando para remover todos os buffs e debuffs;
+//=	* Modificado os mapas e seus nomes para favorecer aos traps;
+//=	* Trocada sprite e localização  
+//=	* Integrado kill dos monstros ao final do evento;
+//=	* Trocado o nome por strnpcinfo(1);
+//=	* Integrado mapflags e função 2MesClose ao NPC principal;
+//=	* Integrada função TrapAct ao NPC principal do mesmo;
+//=	* Alterada as chances quando cair em armadilha (veja description);
+//=	* Atualizadas as frases da armadilha;
+//=	* Alterado modelo de armadilha: agora ela não existe mais (veja description);
+//=	* Integrada função ADisp ao NPC principal;
+//=	* Criado loja dinâmica para troca da Bandeira Nacional.
+//= 3.1 - Adicionado: [Mara]
+//=	* Habilitada configuração parcial in-game;
+//=	* Adicionado ranking mensal com premiação;
+//=	* Corrigido pequenos typos, exploits e erros.
+//= 3.2 - Modificações: [Mara]
+//=	* Removida configuração obrigatória do nível VIP no servidor;
+//=	* Pequenas mudanças nos rands;
+//=	* Teleporte para izlude caso haja algum exploit nos teleportes;
+//=	* Corrigido erro onde só jogadores com nível maior que o VIP tinham bonificação;
+//=	* Modificado efeito especial para um só;
+//=	* Alterada cor do announce para #00FFFF;
+//=	* Outras pequenas modificações que não precisam ser notificadas;
+//=	* Utilizada a mesma variável temporária para todas as ocasiões possíveis.
+//= 3.3 - Alterações: [Mara]
+//=	* Corrigido errinho no trocador;
+//=	* Otimizado exibição dos itens à venda por BN;
+//=	* Removida função m2c;
+//=	* Retirada query para adição automática da tabela.
+//= 3.4 - Novidades: [Mara]
+//=	* Corrigido problema nos horários;
+//=	* Agora é possível escolher quanto de cada item no trocador;
+//=	* Modificado o data type da tabela sql para melhor performance.
+//============================================================
+izlude,136,119,4	script	Sala dos Cristais	855,{	
+	if(getgmlevel()>79)
+	{
+		onconf:
+		if(!$cr[0]||!$cr[1]||!$cr[2])set(.@_CAINHO$,select("Menu Admnistrativo [CONFIGURAR!]"));
+		else set(.@_CAINHO$,select("Menu Administrativo:Menu do Jogador"));
+		if(@menu==2)callsub(onplayer);
+		while(set(.@_loop,1)) //thx to lord//svro :D~
+		{
+			mes("Painel de Configuração:");
+			mes("~ Lim. Jogadores Sala 1: "+$cr[0]);
+			mes("~ Lim. Jogadores Sala 2: "+$cr[1]);
+			mes("~ Lim. Jogadores Sala VIP: "+$cr[2]);
+			mes("~ BN para 1º Ranking: "+$cr[5]);
+			mes("~ Bonificação VIP: "+(($cr[4])?"Sim":"Não"));
+			mes("~ Nv. VIP do Servidor: "+$cr[3]);
+			next();
+			switch(select("Lim. de Jogadores Sala 1:Lim. de Jogadores Sala 2:Lim. de Jogadores Sala VIP:BN para o 1º Ranking:Bonificação VIP:Nível VIP do Servidor:Resetar Valores:Sair"))
+			{
+				case 1:
+				case 2:
+				case 3:
+					mes("["+strnpcinfo(1)+"]");
+					mes("Digite o limite de usuários na\rSala "+((@menu==3)?"VIP":@menu));
+					input(.@_mn,0);
+					next();
+					mes("["+strnpcinfo(1)+"]");
+					mes("Lim. Jogadores Sala "+((@menu==3)?"VIP":@menu)+": "+.@_mn);
+					set(.@_lastmenu,@menu);
+					select("Confirmar");
+					setarray($cr[.@_lastmenu-1],.@_mn);
+					next();
+					break;
+				case 4:
+					mes("["+strnpcinfo(1)+"]");
+					mes("Quantas Bandeira Nacional o 1º do ranking de \"kills\" de Cristal deve ganhar?");
+					input(.@_mn,0);
+					next();
+					mes("["+strnpcinfo(1)+"]");
+					mes("BN para 1º Ranking: "+.@_mn);
+					select("Confirmar");
+					setarray($cr[5],.@_mn);
+					next();
+					break;
+				case 5:
+					mes("["+strnpcinfo(1)+"]");
+					mes("Jogadores VIP tem chances de drop nos cristais alteradas, favorecendo a eles?");
+					next();
+					select("Sim.:Não.");
+					setarray($cr[4],((@menu==2)?0:1));
+					next();
+					break;
+				case 6:
+					mes("["+strnpcinfo(1)+"]");
+					mes("Digite o nível da conta VIP no seu servidor:");
+					input(.@_mn,0,20);
+					next();
+					mes("["+strnpcinfo(1)+"]");
+					mes("Nível da Conta VIP: "+.@_mn);
+					select("Confirmar");
+					setarray($cr[3],.@_mn);
+					next();
+					break;
+				case 7:
+					mes("["+strnpcinfo(1)+"]");
+					mes("Tem certeza que deseja resetar TODOS os valores já configurados?");
+					if(select("Não:Sim")==1)close();
+					next();
+					mes("["+strnpcinfo(1)+"]");
+					mes("Todos os valores foram resetados!");
+					cleararray($cr[0],0,getarraysize($cr));
+					next();
+					break;
+				case 8:
+					set(.@_loop,0);
+					break;
+			}
+		}
+		close();
+	}
+	onplayer:
+	mes("["+strnpcinfo(1)+"]");
+	if(!$ison)
+	{
+		mes("A sala dos cristais está fechada.");
+		close();
+	}
+	mes("Posso te teleportar para várias salas onde existem cristais que ao serem mortos podem ter o item Bandeira Nacional que poderá ser trocado depois por itens.");
+	next();
+	mes("["+strnpcinfo(1)+"]");
+	if((#trap)&&(#sct==$trapadd))
+	{
+		mes("Você caiu em uma armadilha de expulsão, volte na próxima rodada.");
+		close();
+	}
+	mes("Pois bem, escolha a sala que você deseja entrar:");
+	next();
+	select("Sala Romana [^FF0000"+getmapusers("knight_1-1")+"^000000/^008B00"+$cr[0]+"^000000]:Sala Grega [^FF0000"+getmapusers("knight_2-1")+"^000000/^008B00"+$cr[1]+"^000000]"+(getgmlevel()>$cr[3]?":Sala VIP [^FF0000"+getmapusers("wizard_2-1")+"^000000/^008B00"+$cr[2]+"^000000]":""));
+	mes("["+strnpcinfo(1)+"]");
+	if(getgmlevel()<$cr[3])
+	{
+		sc_end(-1);
+		if(getmapusers(((@menu==1)?"knight_1-1":((@menu==2)?"knight_2-1":((@menu==3)?"wizard_2-1":""))))>=$cr[@menu-1])
+		{
+			mes("Esta sala está lotada.");
+			close();
+		}
+		if(!$ison)
+		{
+			mes("A sala dos cristais está fechada.");
+			close();
+		}
+		warp(((@menu==1)?"knight_1-1":((@menu==2)?"knight_2-1":((@menu==3)?"wizard_2-1":"izlude"))),0,0);
+		end();
+	}
+	if(!$ison)
+	{
+		mes("A sala dos cristais está fechada.");
+		close();
+	}
+	warp(((@menu==1)?"knight_1-1":((@menu==2)?"knight_2-1":((@menu==3)?"wizard_2-1":""))),0,0);
+	end();
+	onclock0000:onclock1000:onclock1200:onclock1400:onclock1600:onclock1800:onclock2000:onclock2200:
+		if(!$cr[0]||!$cr[1]||!$cr[2])
+		{
+			announce("["+strnpcinfo(1)+"]: A sala dos cristais não foi iniciada porque ainda não foi configurada.",bc_all,"0x00FFFF");
+			end();
+		}
+		set($ison,1);
+		announce("["+strnpcinfo(1)+"]: A sala dos cristais está aberta por 10 minutos ou até destruirem todos os cristais!",bc_all,"0x00FFFF");
+		monster("knight_1-1",0,0,"Cristal",1877,10,strnpcinfo(0)+"::onmobdie");
+		monster("knight_2-1",0,0,"Cristal",1877,10,strnpcinfo(0)+"::onmobdie");
+		monster("wizard_2-1",0,0,"Cristal",1951,20,strnpcinfo(0)+"::onmobdie");
+		end();
+	onclock0010:onclock1010:onclock1210:onclock1410:onclock1610:onclock1810:onclock2010:onclock2210:
+		if(!$cr[0]||!$cr[1]||!$cr[2]||!$cr[3])end();
+		set($ison,set(.@_mn,0));
+		announce("["+strnpcinfo(1)+"]: A sala dos cristais foi fechada!",bc_all,"0x00FFFF");
+		set($trapadd,$trapadd+1);
+		for(;.@_mn<getarraysize($maps$);set(.@_mn,.@_mn+1))
+		{
+			mapwarp($maps$[.@_mn],"izlude",134,115);
+			killmonsterall($maps$[.@_mn]);
+		}
+		end();
+	onmobdie:
+		query_sql("select `kills` from `cristais_by_mara` where `char_id`='"+getcharid(0)+"'",.@_crk);
+		if(!getarraysize(.@_crk))query_sql("insert into `cristais_by_mara` (`char_id`,`name`,`kills`) values ('"+getcharid(0)+"','"+strcharinfo(0)+"','1')");
+		else query_sql("update `cristais_by_mara` set kills=kills+1  where `char_id`='"+getcharid(0)+"'");
+		specialeffect2(100);
+		if(set(.@rand,rand(100))<=(($cr[4])?((getgmlevel()>$cr[3])?25:35):35))
+		{
+			announce("Você quebra um cristal e...é retirado da sala.",bc_self,"0x40E0D0");
+        		warp("izlude",134,115);
+			end();
+		}
+		if(set(.@rane,rand(100))<=(($cr[4])?((getgmlevel()>=$cr[3])?3:5):5))
+		{
+			announce("Você quebra um cristal e...é retirado da sala por esta rodada.",bc_self,"0x40E0D0");
+        		warp("izlude",134,115);
+			set(#trap,1);
+			set(#sct,$TrapAdd);
+			end();
+		}
+		if(set(.@raed,rand(100))<=(($cr[4])?((getgmlevel()>=$cr[3])?5:3):3))
+		{
+        		announce("Você quebra um cristal e...recebe 2 Bandeira Nacional !!",bc_self,"0x40E0D0");
+			getitem(7549,2);
+			end();
+		}
+		if(set(.@rend,rand(100))<=(($cr[4])?((getgmlevel()>=$cr[3])?10:8):8))
+		{
+        		announce("Você quebra um cristal e...recebe 1 Bandeira Nacional !!",bc_self,"0x40E0D0");
+        		getitem(7549,1);
+			end();
+		}
+		if(set(.@eand,rand(100))<=(($cr[4])?((getgmlevel()>=$cr[3])?20:15):15))
+		{
+        		announce("Você quebra um cristal e...recebe Aumentar Agilidade Nv.10 !!",bc_self,"0x40E0D0");
+			sc_Start(32,240000,10);
+			skilleffect(29,0);
+			end();
+		}
+		if(set(.@ranf,rand(100))<=(($cr[4])?((getgmlevel()>=$cr[3])?3:4):4))
+		{
+			if (!countitem(7549))
+			{
+				announce("Você quebra um cristal e...é retirado da sala.",bc_self,"0x40E0D0");
+        			warp("izlude",142,128);
+				end();
+			} 
+			else
+			{
+				announce("Você quebra um cristal e...perde 1 Bandeira Nacional.",bc_self,"0x40E0D0");
+				delitem(7549,1);
+				end();
+			}
+		}
+		end();
+	oninit:
+		setarray($mf[0],0,1,2,3,4,5,12,13,15,22,29,30,31,33,34,35,41);
+		setarray($maps$[0],"knight_1-1","knight_2-1","wizard_2-1");
+		for(set(.@_mn,0);.@_mn<getarraysize($mf);set(.@_mn,.@_mn+1))setmapflag($maps$[0],setmapflag($maps$[1],setmapflag($maps$[2],$mf[.@_mn])));
+		end();
+
+	onpcloginevent:
+		if((!$cr[0]||!$cr[1]||!$cr[2])&&getgmlevel()>79)
+		{
+			mes("["+strnpcinfo(1)+"]");
+			mes("Desculpe pelo incômodo, mas você ainda não me configurou totalmente.");
+			mes("Isso pode causar bugs, então peço que o faça.");
+			callsub(onconf);
+		}
+		end();
+}
+izlude,138,120,4	script	Loja das Bandeiras	850,{
+	setarray($_id[0],607,501); /* ID dos Itens */
+	setarray($_qt[0],20,6);    /* Quantidade dos Itens */
+	setarray($_nb[0],4,2);	   /* Preço dos Itens */
+	/* À medida que os itens são colocados, coloque na ordem o número de Bandeira Nacional
+	 * para comprar o item. No exemplo ao lado, 20 Fruto de Yggdrasil (ID 607) custarão 4 Bandeira Nacional,
+	 * 6 Poção Vermelha (ID 501) custarão 2 Bandeira Nacional e assim por diante.
+	 * PS: Caso queira, remova os itens e os preços e adicione os seus. Você pode adicionar até 255 itens. */
+
+	mes("["+strnpcinfo(1)+"]");
+	mes("Olá, posso oferecer a você itens por Bandeira Nacional!");
+	mes("A lista dos itens aparecerá assim:");
+	mes("[BN necessária] Item");
+	for(set(.@_mn,0);.@_mn<getarraysize($_id);set(.@_mn,.@_mn+1))set(.@_m$,.@_m$+"["+$_nb[.@_mn]+" BN] "+getitemname($_id[.@_mn])+":");
+	next();
+	select (.@_m$);
+	mes("["+strnpcinfo(1)+"]");
+	if(countitem(7549)<$_nb[@menu-1])
+	{
+		mes("Você não possui Bandeira Nacional necessárias.");
+		close();
+	}
+	if(checkweight($_id[@menu-1],1)==0)
+	{
+		mes("Você nao tem peso suficiente para carregar este item.");
+		close();
+	}
+	mes("Pronto, aí está, 1 "+getitemname($_id[@menu-1]));
+	close2();
+	delitem(7549,$_nb[@menu-1]);
+	getitem($_id[@menu-1],$_qt[@menu-1]);
+	end();
+}
+izlude,140,121,4	script	Ranking dos Cristais	857,{
+	mes("["+strnpcinfo(1)+"]");
+	mes("Deseja ver o Ranking de quem mais destruiu os Cristais?");
+	mes("Todo o mês o primeiro do ranking ganha "+$cr[5]+" Bandeira Nacional.");
+	next();
+	query_sql("select `first` from `cristais_by_mara`",.@_mn);
+	if(select("Ver Ranking"+(getcharid(0)==.@_mn?":Pegar Prêmio":""))==2)
+	{
+		mes("["+strnpcinfo(1)+"]");
+		if(checkweight(7549,$cr)==0)
+		{
+			mes("Você está pesado demais!");
+			close();
+		}
+		mes("Aqui está: "+$cr[5]+" Bandeira Nacional!");
+		close2();
+		getitem(7549,$cr[5]);
+		query_sql("update `cristais_by_mara` set `first`=''");
+		end();
+	}
+	query_sql("select `kills`,`name` from `cristais_by_mara` order by `kills` desc",.@_cki,.@_nm$);
+	for(set(.@_mn,0);.@_mn<getarraysize(.@_cki);set(.@_mn,.@_mn+1))mes((.@_mn+1)+"º | "+.@_nm$[.@_mn]+" | "+.@_cki[.@_mn]+" Kills");
+	close();
+
+	onday0101:onday0201:onday0301:onday0401:onday0501:onday0601:onday0701:onday0801:onday0901:onday1001:onday1101:onday1201:
+		query_sql("select `char_id`,`name` from `cristais_by_mara` order by `kills` desc limit 1",.@_mn,.@_nmdx$);
+		query_sql("truncate table `cristais_by_mara`");
+		query_sql("insert into `cristais_by_mara` (`first`) values ('"+.@_mn+"')");
+		announce("[Sala dos Cristais]: O ranking foi resetado. O vencedor foi: "+.@_nmdx$,bc_all,"0x00FFFF");
+		end();
+}
+///*
+//create table if not exists `cristais_by_mara` (
+//`char_id` mediumint(8) primary key not null default '0',
+//`name` varchar(24) not null default '',
+//`kills` smallint(5) not null default '0',
+//`first` mediumint(8) not null default '0',
+// key `kills` (`kills`),
+// key `first` (`first`)
+//) engine=myisam;
+//*/

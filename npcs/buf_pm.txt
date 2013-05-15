@@ -1,0 +1,26 @@
+-	script	Nome do pm	-3,{
+	OnWhisperGlobal:
+	if(getgmlevel() >= 1)
+	
+	if(compare(@whispervar0$,"Nome da mensagem a ser enviado")){
+		skilleffect 29,0; sc_start 32, 600000, 10; 		// Increase Agi
+		skilleffect 34,0; sc_start 30, 600000, 10; 		// Blessing
+		skilleffect 33,0; sc_start SC_ANGELUS,6000000,10; 	// Angelus
+		skilleffect 75,0; sc_start 41, 600000,10; // Gloria
+		skilleffect 73,0; sc_start 39, 600000,10; // Kyrie Eleison
+		skilleffect 45,0; sc_start 110, 600000,10; // Concentração
+		skilleffect 361,0; sc_start 115, 600000,10; // Assump
+		skilleffect 8,0; sc_start SC_ENDURE,600000,10; //vigor
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,60000,10; //magni
+	    skilleffect 66,0; sc_start SC_IMPOSITIO,60000,10;		// impos
+		atcommand "@repairall";
+	
+	
+	}
+	
+	if(compare(@whispervar0$,"Nomedoserve")){
+		mes "Para receber buffs envie PM para : npc:nicebuf com PM buff";
+		close;
+		end;
+}	
+}

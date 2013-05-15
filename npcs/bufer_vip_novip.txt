@@ -1,0 +1,74 @@
+//===== Script ========================================
+//= Buff+Healerg
+//===== Por: =================================================
+//= ADM Hefesto/WorD
+//===== Versão Atual: ========================================
+//= 1.0
+//===== Compatibilidade: =====================================
+//= Cronus
+//===== Descrição: ===========================================
+//= Buffer vips/não vips com Cura e Efeitos
+//===== Comentários Adicionais: ==============================
+//= Não Retirar os Creditos
+//============================================================
+prontera,150,184,5	script	Buffer#hG1-1::HealerG	412,{
+
+if(getgmlevel()<1) goto novip;
+
+	sc_start 21, 180000,10;
+	sc_start 49, 180000,10;
+	sc_start 23, 180000,10;
+	sc_start 32, 180000,10;
+	sc_start 29, 180000,10;
+	sc_start 30, 180000,10;
+	sc_start 48, 180000,10;
+	sc_start 22, 180000,10;
+	sc_start 150, 180000,10;
+	sc_start 35, 180000,10;
+	sc_start 39, 180000,10;
+	sc_start 40, 180000,10;
+	sc_start 41, 180000,10;
+	sc_start 45, 180000,10;
+	sc_start 46, 180000,10;
+	sc_start 145, 180000,10;
+	sc_start 76, 180000,10;
+	sc_start 77, 180000,10;
+	sc_start 86, 180000,10;
+	sc_start 83, 180000,10;
+	sc_start 109, 180000,10;
+	sc_start 123, 180000,10;
+	sc_start 156, 180000,10;
+	sc_start 121, 180000,10;
+	sc_start 115, 180000,10;
+	sc_start 125, 180000,10;
+	sc_start 120, 180000,10;
+
+		percentheal 100,0;
+		percentheal 0,100;
+
+		atcommand "@effect 432";
+		atcommand "@effect 501";
+	close;
+novip:
+	sc_start 21, 180000,10;
+	sc_start 23, 180000,10;
+	sc_start 32, 180000,10;
+	sc_start 29, 180000,10;
+	sc_start 30, 180000,10;
+	sc_start 35, 180000,10;
+	sc_start 39, 180000,10;
+	sc_start 40, 180000,10;
+	sc_start 41, 180000,10;
+	sc_start 120, 180000,10;
+
+		percentheal 100,0;
+		percentheal 0,100;
+
+		skilleffect AC_CONCENTRATION, 0; 
+		skilleffect MER_INCAGI, 0; 
+		skilleffect AL_ANGELUS, 0;  
+	close;
+	}
+}
+
+// duplicatas

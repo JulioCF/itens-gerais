@@ -1,0 +1,152 @@
+-	script	Propaganda	-1,{
+
+OnPCLoginEvent:
+announce "Seja Bem Vindo "+strcharinfo(0)+", ao meu server!",bc_blue|bc_self;
+announce "Aproveite a semana de feirão!",bc_blue|bc_self;
+end;
+
+OnClock0030:
+announce "[RagnaXplod - 00:30hrs] Ajude nosso servidor a crescer...vote, chame seus amigos e cresça conosco!!!",8;
+end;
+OnClock0100:
+announce "[RagnaXplod - 01:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock0130:
+announce "[RagnaXplod - 01:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock0200:
+announce "[RagnaXplod - 02:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock0230:
+announce "[RagnaXplod - 02:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock0300:
+announce "[Atenção - 03:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock0330:
+announce "[RagnaXplod - 03:30hrs] Visite o Fórum e fique por dentro das novidades!",8;
+end;
+OnClock0400:
+announce "[Atenção - 04:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock0430:
+announce "[RagnaXplod - 04:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock0500:
+announce "[RagnaXplod - 05:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock0530:
+announce "[RagnaXplod - 05:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock0600:
+announce "[RagnaXplod 06:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock0630:
+announce "[RagnaXplod - 06:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock0700:
+announce "[Atenção - 07:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock0730:
+announce "[RagnaXplod - 07:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock0800:
+announce "[RagnaXplod - 08:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!!",8;
+end;
+OnClock0830:
+announce "[RagnaXplod - 08:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock0900:
+announce "[RagnaXplod - 09:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock0930:
+announce "[RagnaXplod - 09:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock1000:
+announce "[RagnaXplod - 10:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock1030:
+announce "[RagnaXplod - 10:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock1100:
+announce "[Atenção - 11:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock1130:
+announce "[RagnaXplod - 11:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock1200:
+announce "[RagnaXplod - Meio Dia] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock1230:
+announce "[RagnaXplod - 12:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock1300:
+announce "[RagnaXplod - 13:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock1330:
+announce "[RagnaXplod - 13:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock1400:
+announce "[RagnaXplod - 14:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock1430:
+announce "[RagnaXplod - 14:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock1500:
+announce "[Atenção - 15:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock1530:
+announce "[RagnaXplod - 15:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock1600:
+announce "[Atenção - 16:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock1630:
+announce "[RagnaXplod - 16:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock1700:
+announce "[RagnaXplod - 17:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock1730:
+announce "[RagnaXplod - 17:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock1800:
+announce "[RagnaXplod - 18:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock1830:
+announce "[RagnaXplod - 18:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock1900:
+announce "[Atenção - 19:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock1930:
+announce "[RagnaXplod - 19:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock2000:
+announce "[Atenção - 20:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock2030:
+announce "[RagnaXplod - 20:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock2100:
+announce "[RagnaXplod - 21:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock2130:
+announce "[RagnaXplod - 21:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock2200:
+announce "[RagnaXplod - 22:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock2230:
+announce "[RagnaXplod - 22:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock2300:
+announce "[RagnaXplod - 23:00hrs] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+OnClock2330:
+announce "[RagnaXplod - 23:30hrs] Servidor 100% gratuito, mas ainda sim precisamos de suas doações voluntárias!",8;
+end;
+OnClock0000:
+announce "[RagnaXplod - Meia Noite] Estamos no período de feirão, aproveite o @at liberado para todos. Compre, venda, negocie!",8;
+end;
+}

@@ -1,0 +1,63 @@
+prontera,145,209,5	script	Roleta Russa	100,{
+if($@RR_RR_RR==2){
+	mes "Jogo Iniciado";
+	close;
+}
+if($@RR_RR_Nu>=120){
+	mes "Sala Cheia.";
+	close;
+}
+select("[Join]");
+set $@RR_RR_Na$[set($@RR_RR_Nu,$@RR_RR_Nu+1)],strcharinfo(0);
+mes "Ok~";
+if($@RR_RR_Nu>=2&&!$@RR_RR_RR){
+	set $@RR_RR_RR,1;
+	doevent "RR::OnRRRRRR";
+}
+close;
+OnRRRRRR:
+	announce "[Roleta Russa]: A RR irá começar em 5min",bc_all;
+	sleep 300000;
+	for(set .rr,1;.rr<=$@RR_RR_Nu;set .rr,.rr+1){ 
+		if(!isloggedin(getcharid(3,$@RR_RR_Na$[.rr]))){
+			for(set .rr2,.rr;.rr2<=$@RR_RR_Nu;set .rr2,.rr2+1){
+				set $@RR_RR_Na$[.rr2],$@RR_RR_Na$[.rr2+1];
+			}
+			set .rr,.rr-1;
+		}else{
+			warpchar "guild_vs4",50,50,getcharid(0,$@RR_RR_Na$[.rr]);
+			set .rr4,.rr4+1;
+		}
+	}
+	set $@RR_RR_Nu,.rr4;
+	sleep 5000;
+	mapannounce "guild_vs4","[Roleta Russa]: A RR irá começar em 20seg",bc_map;
+	sleep 20000;
+	set $@RR_RR_RR,2;
+	mapannounce "guild_vs4","[Roleta Russa]: Começou!",bc_map;
+	sleep 100;
+	while(getmapusers("guild_vs4")!=1){
+		sleep 1000;
+		for(set .rr,1;.rr<=$@RR_RR_Nu;set .rr,.rr+1){
+			sleep 1000;
+			if(attachrid(getcharid(3,$@RR_RR_Na$[.rr]))){
+				if(strcharinfo(3)=="guild_vs4"){
+					set .@ui,522+rand(1,14);
+					atcommand "@effect "+.@ui;
+					if(.@ui==531){
+						sleep2 1000;
+						warp "SavePoint",0,0;
+					}
+
+				}
+				detachrid;
+			}
+		}
+	}
+	sleep 10000;
+	mapwarp "guild_vs4","guild_vs3",50,50;
+	deletearray $@RR_RR_Na$[0],128;
+	set $@RR_RR_RR,0;
+	set $@RR_RR_Nu,0;
+	end;
+}

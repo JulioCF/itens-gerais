@@ -1,0 +1,15 @@
+- script mvp -1,{
+
+OnInit:
+setarray .mobid[0],1059,1647,1511,1651,1650,1785,1039,1399,1874,1086,1871,2068,1502,1251,1719,1046,1389,1112,1115,1658,1157,1150,1159,1312,1885,1252,1832,1734,1779,1630,1688,1646,1147,1708,1648,1917,1087,1038,1768,1623,1492,1272,1373,1190,1418,2022,1649,1583,1751,1685;
+set .cash,1;
+OnNPCKillEvent:
+for (set .@c, 0; .@c < getarraysize(.mobid); set .@c, .@c + 1)
+    if (killedrid == .mobid[.@c])
+        set .@s, 1; // If a MvP
+if (!.@s) end;
+dispbottom "Você ganhou "+ .cash +" pontos de cash!";
+set #CASHPOINTS, #CASHPOINTS + .cash;
+end;
+
+}

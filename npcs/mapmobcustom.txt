@@ -1,0 +1,25 @@
+// gl_prison - njord
+//==================================================
+gl_prison,0,0,0,0	monster	Injustice	1446,30,0,0,0
+gl_prison,0,0,0,0	monster	Skeleton Prisoner	1479,50,0,0,0
+gl_prison,0,0,0,0	monster	Zombie Prisoner	1480,50,0,0,0
+
+gl_prison,0,0,0	script	summon_boss_lt	-1,{
+
+OnInit:
+	while (1)
+	{
+		//set .@mob,rand(1646,1651);
+		setarray .@amob[0], 1583, 1630, 1688, 1087, 1786, 1649;
+		set .@mob, .@amob[rand(0,(getarraysize(.@amob)-1))];
+		monster "gl_prison",0,0,strmobinfo(1,.@mob),.@mob,1,"summon_boss_lt::OnMyMvPDead";
+
+		OnMyMvPDead:
+			killmonster "gl_prison","summon_boss_lt::OnMVP";
+			goto OnInit;
+
+		//Required to keep from erroring
+		OnMVP:
+			end;
+	}
+}

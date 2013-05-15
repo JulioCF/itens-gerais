@@ -1,0 +1,804 @@
+//===== Cronus Script ========================================
+//= Multiple Extra Drops
+//===== Por: =================================================
+//= Cretino (Yuri Moreira Lima)
+//===== Versão Atual: ========================================
+//= 1.5
+//===== Compatibilidade: =====================================
+//= Cronus r3090+ | eAthena r14792+ | rAthena SVN
+//===== Descrição: ===========================================
+//= Adicione extra drops em seus mobs;
+//= Adicione extra drops globais com elementos e /ou raças;
+//= Remova e olhe todos os drops adicionados.
+//===== Comentários Adicionais: ==============================
+//= 1.0 Versão inicial - Cretino (Yuri Moreira Lima)
+//= 1.1 Agora você pode adicionar mobs com drops extra ilimitado - Cretino (Yuri Moreira Lima)
+//=     Função de alterar drops extra e porcentagem de um mob adicionada - Cretino (Yuri Moreira Lima)
+//= 1.2 Agora é possível adicionar drops extra global(Itens que serão dropados por qualquer mob) - Sugestão de JulioCF, feito por: Cretino (Yuri Moreira Lima)
+//=     Agora também é possível adicionar drops extra global com elementos e/ou raças - Cretino (Yuri Moreira Lima)
+//= 1.3 Sistema de porcentagem atualizado - Cretino (Yuri Moreira Lima)
+//=     Sistema otimizado - Cretino (Yuri Moreira Lima)
+//=     Correção nas funções 'drop#add', 'drop#remove', 'drop#show', 'drop#edit' - Cretino (Yuri Moreira Lima)
+//= 1.4 Sistema otimizado - Cretino (Yuri Moreira Lima)
+//=     Utilização do comando 'drop#add' mais detalhada nos comentários abaixo - Cretino (Yuri Moreira Lima)
+//= 1.5 Agora é possível adicionar drops extra global por tipo MvP - Cretino (Yuri Moreira Lima)
+//=     Atualização dos comandos 'drop#add', 'drop#remove', 'drop#show', 'drop#edit' - Cretino (Yuri Moreira Lima)
+//============================================================
+//Favor, não retirar os créditos.
+//Usou, gostou? Então agradeça!
+//Não custa nada e é de graça. ;)
+//Não autorizo que postem este script em outro lugar sem a minha permissão.
+//Por enquanto este script é exclusividade do Cronus-Emulator.
+
+//Utilização das funções
+//Mande 'PM' para 'npc:extradrop':
+
+///TABELA DE ELEMENTOS
+//Nenhum		= -1
+//Neutro		= 0
+//Água			= 1
+//Terra			= 2
+//Fogo			= 3
+//Vento			= 4
+//Veneno		= 5
+//Sagrado		= 6
+//Sombra		= 7
+//Fantasma		= 8
+//Morto-Vivo	= 9
+
+///TABELA DE RAÇAS
+//Nenhum		= -1
+//Amorfo		= 0
+//Morto-Vivo	= 1
+//Bruto			= 2
+//Planta		= 3
+//Inseto		= 4
+//Peixe			= 5
+//Demônio		= 6
+//Humanóide		= 7
+//Anjo			= 8
+//Dragão		= 9
+
+///drop#add#<type>#<mobid>#<itemid>#<rate>#<element>#<race>#<ismvp>
+//<type>	= O tipo que será utilizado para adicionar:
+//=>	  0 = Adiciona o item <itemid> no mob <mobid> com chance de <rate>%.
+//=>	  1 = Adiciona o item global <itemid> com chance de <rate>% com elemento <element> e raça <race>;
+//=>		  Caso a o elemento e/ou raça não seja especifícado será adicionado 'Nenhum {-1}' como elemento <element> e raça <race>.
+//<mobid>	= Id do mob
+//<itemid>	= Id do item
+//<rate>	= Chance de dropar o item, 1 = 0.01%, 10 = 0.10%, 100 = 1.00%, 1000 = 10.00%, 10000 = 100.00%
+//<element>	= Elemento do item global <itemid>, só usado se <type> for 1,
+//=>		  se o elemento <element> não for determinado, ele terá o valor padrão 'Nenhum {-1}'.
+//<race>	= Raça do item global <itemid>, só usado se <type> for 1,
+//=>		  se a raça <race> não for determinada, ela terá o valor padrão 'Nenhum {-1}'.
+//<ismvp>   = Se <ismvp> for 1, o item global será dropado somente por MvP.
+//=>          se <ismvp> for 0, será dropado por qualquer tipo de mob,
+//=>          isto também irá depender se você adicionou elemento e/ou raça ao item global.
+//Exemplos:
+//drop#add#0#1002#517#10
+//O comando acima adiciona o item 'Carne' {itemid = 517} no mob 'Poring' {mobid = 1002} com chance de '0.10%' {rate = 10} de dropar o item
+//drop#add#0#1002#511#10000
+//O comando acima adiciona o item 'Erva Verde' {itemid = 511} no mob 'Poring' {mobid = 1002} com chance de '100.00%' {rate = 10000} de dropar o item
+//drop#add#1#519#1697
+//O comando acima adiciona o item 'Leite' {itemid = 519} em modo global com chance de '16.97%' {rate = 1697} de dropar o item
+//(O modo global determina que o item é dropado por qualquer mob)
+//drop#add#1#520#1411#1#-1
+//O comando acima adiciona o item 'Folha de Hinalle' {itemid = 520} em modo global com chance de '14.11%' {rate = 1411}
+//E adiciona o elemento 'Água' {element = 1}
+//(O elemento determina que somente mobs do elemento 'Água' irão dropar o item global)
+//drop#add#1#521#1671#-1#5
+//O comando acima adiciona o item 'Folha de Aloe' {itemid = 521} em modo global com chance de '16.71%' {rate = 1671}
+//E adiciona a raça 'Peixe' {race = 5}
+//(A raça determina que somente mobs da raça 'Peixe' irão dropar o item global)
+//drop#add#1#522#5411#3#7
+//O comando acima adiciona o item 'Mastela' {itemid = 522} em modo global com chance de '54.11%' {rate = 5411}
+//E adiciona o elemento 'Fogo' {element = 3} e raça 'Humanóide' {race = 7}
+//(Usando o elemento e raça em um item global, irá determinar que somente mobs do elemento 'Fogo' e raça 'Humanóide' irão dropar o item)
+//drop#add#1#523#3147#-1#-1#1
+//O comando adiciona o item '' {itemid = 523} em modo global com chance de '31.47%' {rate = 3147}
+//E adiciciona o item para ser dropado somente por MvP {ismvp = 1}
+//drop#add#1#523#6931#3#7#1
+//O comando adiciona o item '' {itemid = 523} em modo global com chance de '31.47%' {rate = 3147}
+//E adiciona o elemento 'Fogo' {element = 3} e raça 'Humanóide' {race = 7} e modo mvp (adiciciona o item para ser dropado somente por MvP) {ismvp = 1}
+//(Usando o elemento, raça e modo mvp em um item global, irá determinar que somente mvps do elemento 'Fogo' e raça 'Humanóide' irão dropar o item)
+
+///drop#remove#<type>#<mobid>#<itemid>
+//<type>	= O tipo que será utilizado na remoção:
+//=>	  0 = Remove o item <itemid> do mob <mobid>,
+//=>	  1 = Remove todos os itens do mob <mobid>,
+//=>	  2 = Remove o item global <itemid>,
+//=>	  3 = Remove todos os item globais
+//<mobid>	= Id do mob
+//<itemid>	= Id do item (OBS: Caso o <type> seja 1, não é preciso adicionar <itemid>)
+//Exemplos:
+//drop#remove#1#1002
+//O comando acima remove todos os itens adicionados do mob 'Poring' {mobid = 1002}
+//drop#remove#0#1002#517
+//O comando acima remove o item 'Carne' {itemid = 517} do mob 'Poring' {mobid = 1002}
+//drop#remove#2#519
+//O comando acima remove o item global 'Leite' {itemid = 519}
+//drop#remove#3
+//O comando acima remove todos os itens globais adicionados
+
+///drop#show#<type>#<mobid>
+//<type> = O tipo que será utilizado para mostrar os itens extra dropados pelo mob, 0 = Mostra todos os itens extra dropados pelo mob <mobid>, 1 = Mostra todos itens extra dropados de todos os mobs adicionados.
+//<mobid> = Id do mob (OBS: Caso o <type> seja 1, não é preciso adicionar <mobid>)
+//Exemplos:
+//drop#show#1
+//O comando acima mostra todos itens extra dropados de todos mobs adicionados.
+//drop#show#0#1002
+//O comando acima motra todos itens extra dropados pelo mob 'Poring' {mobid = 1002}
+//drop#show#2
+//O comando acima mostra todos itens extra globais
+
+///drop#edit#<type>#<mobid>#<itemid>#<value>
+//<type>	= O tipo que será utilizado para alterar:
+//=>		0 = Alterar <itemid> atual por <value>,
+//=>		1 = Alterar chance atual de <itemid> por <value>,
+//=>		2 = Alterar <itemid> global atual por <value>,
+//=>		3 = Alterar chance global atual por <value>,
+//=>		4 = Alterar o elemento global do <itemid> por <value>
+//=>		5 = Alterar a raça global do <itemid> por <value>
+//=>        6 = Altera o item global para ser dropado somente por mvp ou não.
+//<mobid>	= Id do mob
+//<itemid>	= Id do item
+//<value>	= Valor
+//Exemplos:
+//drop#edit#0#1002#511#517
+//O comando acima altera o item 'Erva Verde' {itemid = 511} do mob 'Poring' {mobid = 1002} para 'Carne' {value = 517}
+//drop#edit#1#1002#517#1000
+//O comando acima altera a chance o item 'Carne' {itemid = 517} do mob 'Poring' {mobid = 1002} para 10.00% {value = 1000}
+//drop#edit#2#519#522
+//O comando acima altera o item global 'Leite' {itemid = 519} para 'Mastela' {value = 522}
+//drop#edit#3#522#158
+//O comando acima altera a chance do item global 'Mastela' {itemid = 522} para 1.58% {value = 158}
+//drop#edit#4#522#1
+//O comando acima altera o elemento global do item 'Mastela' {itemid = 522} para 'Elemento: Água' {value = 1}
+//drop#edit#5#522#0
+//O comando acima altera a raça global do item 'Mastela' {itemid = 522} para 'Raça: Amorfo' {value = 0}
+//drop#edit#5#522#-1
+//O comando acima altera a raça global do item 'Mastela' {itemid = 522} para 'Raça: Nenhum' {value = -1}
+//Em outras palavras, ele remove a raça do item
+//drop#edit#4#522#-1
+//O comando acima altera o elemento global do item 'Mastela' {itemid = 522} para 'Elemento: Nenhum' {value = -1}
+//Em outras palavras, ele remove o elemento do item
+//drop#edit#6#522#1
+//O comando acima altera o modo mvp do item global 'Mastela' {itemid = 522} para que seja dropado somente por 'MvP' {value = 1}
+//Isto também irá depender se você adicionou elemento e/ou raça ao item global.
+//drop#edit#6#522#0
+//O comando acima altera o modo mvp do item global 'Mastela' {itemid = 522} para que seja dropado por 'qualquer tipo de mob' {value = 0}
+//Isto também irá depender se você adicionou elemento e/ou raça ao item global.
+
+-	script	extradrop	-1,{
+	end;
+
+	OnInit:
+	//Configurações
+	Set .GM_Level, 99;	//Level de GM mínimo para usar o NPC
+	Set .First_Mob_Id, 1001;	//Id do primeiro mob da 'db/mob_db.txt'
+	Set .First_Item_Id, 501;	//Id do primeiro item da 'db/item_db.txt'
+	Set .DropStyle, 1;	//0 = Adiciona o item ao jogador, 1 = Dropa o item no mapa
+	Set .ShowMsg, 1;	//0 = Não mostra a mensagem 'Você dropou ...', 1 = Mostra a mensagem 'Você dropou ...'
+	Set .IsMvP, 14261;	//Não alterar aqui!
+	
+	//Só mexa se souber o que está fazendo
+	SetArray .Element$[0], "Neutro", "Água", "Terra", "Fogo", "Vento", "Veneno", "Sagrado", "Sombra", "Fantasma", "Morto-Vivo";	//Tabela de Elementos dos Mobs
+	SetArray .Race$[0], "Amorfo", "Morto-Vivo", "Bruto", "Planta", "Inseto", "Peixe", "Demônio", "Humanóide", "Anjo", "Dragão";	//Tabela de Raças dos Mobs
+	
+	end;
+	
+	OnWhisperGlobal:
+	//Só mexa se souber o que está fazendo
+	if (@whispervar0$ == "drop" && getgmlevel() >= .GM_Level)
+	{
+		SetArray .@Type[0], @whispervar2$, @whispervar3$, @whispervar4$, @whispervar5$, @whispervar6$, @whispervar7$;
+		
+		if (@whispervar1$ == "add")
+		{
+			if (.@Type[1] < .First_Mob_Id && .@Type[0] <= 0)
+			{
+				message strcharinfo(0), "Este mob_id não é válido.";
+				end;
+			}
+			
+			if (.@Type[2] < .First_Item_Id && .@Type[0] <= 0 || .@Type[1] < .First_Item_Id && .@Type[0] == 1)
+			{
+				message strcharinfo(0), "Este item_id não é válido.";
+				end;
+			}
+			
+			if (.@Type[0] <= 0 && .@Type[3] <= 0 || .@Type[0] == 1 && .@Type[2] <= 0)
+			{
+				message strcharinfo(0), "Chance inválida.";
+				end;
+			}
+			
+			if (.@Type[3] > 10000 && .@Type[0] <= 0 || .@Type[2] > 10000 && .@Type[0] == 1)	//Se a chance fornecida for maior que '10000 = 100%', ele 'seta' novamente o valor em '10000 = 100%'.
+				if (.@Type[0] <= 0)
+					Set .@Type[3], 10000;
+				else
+					Set .@Type[2], 10000;
+			
+			if (.@Type[0] == 1)
+			{
+				if (.@Type[3] > 9 || .@Type[4] > 9 || .@Type[3] < -1 || .@Type[4] < -1)
+				{
+					message strcharinfo(0), "Elemento e/ou raça inválida.";
+					end;
+				}
+				if (.@Type[5] < 0 || .@Type[5] > 1)
+				{
+					message strcharinfo(0), "Tipo inválido.";
+					end;
+				}
+			}
+				
+			if (.@Type[0] <= 0)
+			{
+				Set .@Monster$, getmonsterinfo(.@Type[1], MOB_NAME);
+				Set .@Percent_1, .@Type[3] / 100;
+				Set .@Percent_2, .@Type[3] % 100;
+				Set .@Percent_Result$, ""+.@Percent_1+"."+(.@Percent_2 <= 9 ? "0" : "")+""+.@Percent_2+"%";
+				Set .@Item_Name$, getitemname(.@Type[2]);
+				Set .@Drop$, "$Mob_"+.@Type[1]+"_Drop";
+				Set .@Rate$, "$Mob_"+.@Type[1]+"_Rate";
+				
+				if (getarraysize(getd(.@Drop$)) > 0)
+				{
+					for (Set .@a, 0; .@a < getarraysize(getd(.@Drop$)); Set .@a, .@a + 1)
+						if (getd(.@Drop$+"["+.@a+"]") == .@Type[2])
+						{
+							message strcharinfo(0), "O item '"+.@Item_Name$+"' {"+.@Type[2]+"}, já está adicionado no mob: '"+.@Monster$+"' {"+.@Type[1]+"}.";
+							end;
+						}
+					
+					SetD .@Drop$+"["+getarraysize(getd(.@Drop$))+"]", .@Type[2];
+					SetD .@Rate$+"["+getarraysize(getd(.@Rate$))+"]", .@Type[3];
+					message strcharinfo(0), "Mob: '"+.@Monster$+"' {"+.@Type[1]+"}, Drop adicionado: '"+.@Item_Name$+"' {"+.@Type[2]+"}, chance: "+.@Percent_Result$+". Total de extra drops do mob: "+getarraysize(getd(.@Drop$))+".";
+					end;
+				}
+				
+				//Adiciona se não existir a array.
+				SetD "$Mob_Id_"+($Mob_Count / 128)+"["+($Mob_Count % 128)+"]", .@Type[1];
+				Set $Mob_Count, $Mob_Count + 1;
+				SetD .@Drop$+"["+getarraysize(getd(.@Drop$))+"]", .@Type[2];
+				SetD .@Rate$+"["+getarraysize(getd(.@Rate$))+"]", .@Type[3];
+				message strcharinfo(0), "Mob: '"+.@Monster$+"' {"+.@Type[1]+"}, Drop adicionado: '"+.@Item_Name$+"' {"+.@Type[2]+"}, chance: "+.@Percent_Result$+". Total de extra drops do mob: "+getarraysize(getd(.@Drop$))+".";
+				end;
+			}
+			else if (.@Type[0] == 1)
+			{
+				Set .@Item_Name$, getitemname(.@Type[1]);
+				Set .@Percent_1, .@Type[2] / 100;
+				Set .@Percent_2, .@Type[2] % 100;
+				Set .@Percent_Result$, ""+.@Percent_1+"."+(.@Percent_2 <= 9 ? "0" : "")+""+.@Percent_2+"%";
+				
+				if (.@Type[3] > -1)
+					Set .@Element_Result$, ""+(@whispervar5$ != "" ? ", Elemento: "+.Element$[.@Type[3]]+" {"+.@Type[3]+"}" : ", Elemento: Nenhum {-1}")+"";
+					
+				if (.@Type[4] > -1)
+					Set .@Race_Result$, ""+(@whispervar6$ != "" ? ", Raça: "+.Race$[.@Type[4]]+" {"+.@Type[4]+"}" : ", Raça: Nenhum {-1}")+"";
+					
+				if (.@Type[3] == -1)
+					Set .@Element_Result$, ", Elemento: Nenhum {-1}";
+					
+				if (.@Type[4] == -1)
+					Set .@Race_Result$, ", Raça: Nenhum {-1}";
+				
+				if (.@Type[5] > 0)
+					Set .@IsMvP$, ", MvP: Sim {1}";
+				else
+					Set .@IsMvP$, ", MvP: Não {0}";
+				
+				if (getarraysize($Mob_Global_Drop) > 0)
+				{
+					for (Set .@a, 0; .@a < getarraysize($Mob_Global_Drop); Set .@a, .@a + 1)
+						if ($Mob_Global_Drop[.@a] == .@Type[1])
+						{
+							message strcharinfo(0), "O item '"+.@Item_Name$+"' {"+.@Type[1]+"}, já está adicionado como extra drop global.";
+							end;
+						}
+				}
+				
+				//Adiciona se não existir a array.
+				SetArray $Mob_Global_Drop[getarraysize($Mob_Global_Drop)], .@Type[1];
+				SetArray $Mob_Global_Rate[getarraysize($Mob_Global_Rate)], .@Type[2];
+				SetArray $Mob_Global_Element[getarraysize($Mob_Global_Element)], (@whispervar5$ == "" ? -1 : .@Type[3]);
+				SetArray $Mob_Global_Race[getarraysize($Mob_Global_Race)], (@whispervar6$ == "" ? -1 : .@Type[4]);
+				SetArray $Mob_Global_IsMvP[getarraysize($Mob_Global_IsMvP)], .@Type[5];
+				message strcharinfo(0), "Drop global adicionado: '"+.@Item_Name$+"' {"+.@Type[1]+"}, chance: "+.@Percent_Result$+""+.@Element_Result$+""+.@Race_Result$+""+.@IsMvP$+". Total de extra drops global: "+getarraysize($Mob_Global_Drop)+".";
+				end;
+			}
+		}
+		
+		if (@whispervar1$ == "remove")
+		{
+			if (.@Type[1] < .First_Mob_Id && .@Type[0] == 1 || .@Type[1] < .First_Mob_Id && .@Type[0] <= 0)
+			{
+				message strcharinfo(0), "Este mob_id não é válido.";
+				end;
+			}
+			
+			if (.@Type[2] < .First_Item_Id && .@Type[0] <= 0 || .@Type[1] < .First_Item_Id && .@Type[0] == 2)
+			{
+				message strcharinfo(0), "Este item_id não é válido.";
+				end;
+			}
+			
+			if (.@Type[0] == 2)
+				Set .@Item_Name$, getitemname(.@Type[1]);
+			else
+				Set .@Item_Name$, getitemname(.@Type[2]);
+				
+			if (.@Type[0] <= 1)
+				Set .@Monster$, getmonsterinfo(.@Type[1], MOB_NAME);
+			
+			if (.@Type[0] <= 0)
+			{	
+				for (Set .@a, 0; .@a < $Mob_Count; Set .@a, .@a + 1)
+				{
+					Set .@Mob_Id, getd("$Mob_Id_"+(.@a / 128)+"["+(.@a % 128)+"]");
+					Set .@Drop$, "$Mob_"+.@Mob_Id+"_Drop";
+					Set .@Rate$, "$Mob_"+.@Mob_Id+"_Rate";
+					
+					if (.@Mob_Id == .@Type[1])
+						for (Set .@b, 0; .@b < getarraysize(getd(.@Drop$)); Set .@b, .@b + 1)
+							if (getd(.@Drop$+"["+.@b+"]") == .@Type[2])
+							{
+								DeleteArray getd(.@Drop$+"["+.@b+"]"), 1;
+								DeleteArray getd(.@Rate$+"["+.@b+"]"), 1;
+									if (getarraysize(getd(.@Drop$)) <= 0)
+									{
+										DeleteArray getd("$Mob_Id_"+(.@a / 128)+"["+(.@a % 128)+"]"), 1;
+										Set $Mob_Count, $Mob_Count - 1;
+									}
+										
+								message strcharinfo(0), "O item '"+.@Item_Name$+"' {"+.@Type[2]+"}, foi apagado do mob: '"+.@Monster$+"' {"+.@Type[1]+"}.";
+								end;
+							}
+							
+				}
+				
+				message strcharinfo(0), "O item '"+.@Item_Name$+"' {"+.@Type[2]+"}, não está adicionado no mob: '"+.@Monster$+"' {"+.@Type[1]+"}.";
+				end;
+			}
+			else if (.@Type[0] == 1)
+			{
+				for (Set .@a, 0; .@a < $Mob_Count; Set .@a, .@a + 1)
+				{
+					Set .@Mob_Id, getd("$Mob_Id_"+(.@a / 128)+"["+(.@a % 128)+"]");
+					Set .@Drop$, "$Mob_"+.@Mob_Id+"_Drop";
+					Set .@Rate$, "$Mob_"+.@Mob_Id+"_Rate";
+					
+					if (.@Mob_Id == .@Type[1])
+					{
+						DeleteArray getd(.@Drop$), getarraysize(getd(.@Drop$));
+						DeleteArray getd(.@Rate$), getarraysize(getd(.@Rate$));
+						DeleteArray getd("$Mob_Id_"+(.@a / 128)+"["+(.@a % 128)+"]"), 1;
+						Set $Mob_Count, $Mob_Count - 1;
+						message strcharinfo(0), "Todos os itens foram apagados do mob: '"+.@Monster$+"' {"+.@Type[1]+"}.";
+						end;
+					}
+					
+				}
+				
+				message strcharinfo(0), "Não existe nada no mob: '"+.@Monster$+"' {"+.@Type[1]+"}.";
+				end;
+			}
+			else if (.@Type[0] == 2)
+			{
+				for (Set .@a, 0; .@a < getarraysize($Mob_Global_Drop); Set .@a, .@a + 1)
+				{
+					if ($Mob_Global_Drop[.@a] == .@Type[1])
+					{
+						DeleteArray $Mob_Global_Drop[.@a], 1;
+						DeleteArray $Mob_Global_Rate[.@a], 1;
+						DeleteArray $Mob_Global_Element[.@a], 1;
+						DeleteArray $Mob_Global_Race[.@a], 1;
+						DeleteArray $Mob_Global_IsMvP[.@a], 1;
+						message strcharinfo(0), "O item global '"+.@Item_Name$+"' {"+.@Type[1]+"}, foi apagado.";
+						end;
+					}
+				}
+				
+				message strcharinfo(0), "O item '"+.@Item_Name$+"' {"+.@Type[1]+"}, não é um item global.";
+				end;
+			}
+			else if (.@Type[0] == 3)
+			{
+				if (getarraysize($Mob_Global_Drop) > 0)
+				{
+					DeleteArray $Mob_Global_Drop, getarraysize($Mob_Global_Drop);
+					DeleteArray $Mob_Global_Rate, getarraysize($Mob_Global_Rate);
+					DeleteArray $Mob_Global_Element, getarraysize($Mob_Global_Element);
+					DeleteArray $Mob_Global_Race, getarraysize($Mob_Global_Race);
+					DeleteArray $Mob_Global_IsMvP, getarraysize($Mob_Global_IsMvP);
+					message strcharinfo(0), "Todos os itens globais foram apagados.";
+					end;
+				}
+				
+				message strcharinfo(0), "Não existe nenhum item global.";
+				end;
+			}
+		}
+		
+		if (@whispervar1$ == "show")
+		{
+			if (.@Type[1] < .First_Mob_Id && .@Type[0] <= 0)
+			{
+				message strcharinfo(0), "Este mob_id não é válido.";
+				end;
+			}
+			
+			if (.@Type[0] <= 0)
+				Set .@Monster$, getmonsterinfo(.@Type[1], MOB_NAME);
+				
+			Set .@Drop$, "$Mob_"+.@Type[1]+"_Drop";
+			Set .@Rate$, "$Mob_"+.@Type[1]+"_Rate";
+			
+			if (getarraysize(getd(.@Drop$)) > 0 && .@Type[0] <= 0)
+			{
+				dispbottom "======= Drops do mob: '"+.@Monster$+"' {"+.@Type[1]+"} =======";
+				for (Set .@a, 0; .@a < getarraysize(getd(.@Drop$)); Set .@a, .@a + 1)
+				{
+					Set .@Item_Name$, getitemname(getd(.@Drop$+"["+.@a+"]"));
+					Set .@Percent_1, getd(.@Rate$+"["+.@a+"]") / 100;
+					Set .@Percent_2, getd(.@Rate$+"["+.@a+"]") % 100;
+					Set .@Percent_Result$, ""+.@Percent_1+"."+(.@Percent_2 <= 9 ? "0" : "")+""+.@Percent_2+"%";
+					
+					dispbottom "Item: '"+.@Item_Name$+"' {"+getd(.@Drop$+"["+.@a+"]")+"}, chance: "+.@Percent_Result$+".";
+				}
+				
+				end;
+			}
+			else if (.@Type[0] == 1)
+			{
+				for (Set .@a, 0; .@a < $Mob_Count; Set .@a, .@a + 1)
+				{
+					Set .@Mob_Id, getd("$Mob_Id_"+(.@a / 128)+"["+(.@a % 128)+"]");
+					Set .@Monster$, getmonsterinfo(.@Mob_Id, MOB_NAME);
+					
+					dispbottom "======= Drops do mob: '"+.@Monster$+"' {"+.@Mob_Id+"} =======";
+						for (Set .@b, 0; .@b < getarraysize(getd("$Mob_"+.@Mob_Id+"_Drop")); Set .@b, .@b + 1)
+						{
+							Set .@Item_Name$, getitemname(getd("$Mob_"+.@Mob_Id+"_Drop"+"["+.@b+"]"));
+							Set .@Percent_1, getd("$Mob_"+.@Mob_Id+"_Rate"+"["+.@b+"]") / 100;
+							Set .@Percent_2, getd("$Mob_"+.@Mob_Id+"_Rate"+"["+.@b+"]") % 100;
+							Set .@Percent_Result$, ""+.@Percent_1+"."+(.@Percent_2 <= 9 ? "0" : "")+""+.@Percent_2+"%";
+							
+							dispbottom "Item: '"+.@Item_Name$+"' {"+getd("$Mob_"+.@Mob_Id+"_Drop"+"["+.@b+"]")+"}, chance: "+.@Percent_Result$+".";
+						}
+						
+					if ((.@a + 1) == $Mob_Count)
+						end;
+				}
+			}
+			else if (getarraysize($Mob_Global_Drop) > 0 && .@Type[0] == 2)
+			{
+				dispbottom "======= Drops Globais =======";
+				
+				for (Set .@a, 0; .@a < getarraysize($Mob_Global_Drop); Set .@a, .@a + 1)
+				{
+					Set .@Item_Name$, getitemname($Mob_Global_Drop[.@a]);
+					Set .@Percent_1, $Mob_Global_Rate[.@a] / 100;
+					Set .@Percent_2, $Mob_Global_Rate[.@a] % 100;
+					Set .@Percent_Result$, ""+.@Percent_1+"."+(.@Percent_2 <= 9 ? "0" : "")+""+.@Percent_2+"%";
+					
+					if ($Mob_Global_IsMvP[.@a] > 0)
+							Set .@IsMvP$, ", MvP: Sim {"+$Mob_Global_IsMvP[.@a]+"}";
+						else
+							Set .@IsMvP$, ", MvP: Não {"+$Mob_Global_IsMvP[.@a]+"}";
+					
+					if ($Mob_Global_Race[.@a] > -1 && $Mob_Global_Element[.@a] > -1)
+					{
+						Set .@Element_Result$, ", Elemento: "+.Element$[$Mob_Global_Element[.@a]]+" {"+$Mob_Global_Element[.@a]+"}";
+						Set .@Race_Result$, ", Raça: "+.Race$[$Mob_Global_Race[.@a]]+" {"+$Mob_Global_Race[.@a]+"}";
+						
+						dispbottom "Item global: '"+.@Item_Name$+"' {"+$Mob_Global_Drop[.@a]+"}, chance: "+.@Percent_Result$+""+.@Element_Result$+""+.@Race_Result$+""+.@IsMvP$+".";
+					}
+					else if ($Mob_Global_Race[.@a] > -1)
+					{
+						Set .@Race_Result$, ", Elemento: Nenhum {-1}, Raça: "+.Race$[$Mob_Global_Race[.@a]]+" {"+$Mob_Global_Race[.@a]+"}";
+						
+						dispbottom "Item global: '"+.@Item_Name$+"' {"+$Mob_Global_Drop[.@a]+"}, chance: "+.@Percent_Result$+""+.@Race_Result$+""+.@IsMvP$+".";
+					}
+					else if ($Mob_Global_Element[.@a] > -1)
+					{
+						Set .@Element_Result$, ", Elemento: "+.Element$[$Mob_Global_Element[.@a]]+" {"+$Mob_Global_Element[.@a]+"}, Raça: Nenhum {-1}";
+						
+						dispbottom "Item global: '"+.@Item_Name$+"' {"+$Mob_Global_Drop[.@a]+"}, chance: "+.@Percent_Result$+""+.@Element_Result$+""+.@IsMvP$+".";
+					}
+					else
+						dispbottom "Item global: '"+.@Item_Name$+"' {"+$Mob_Global_Drop[.@a]+"}, chance: "+.@Percent_Result$+", Elemento: Nenhum {-1}, Raça: Nenhum {-1}"+.@IsMvP$+".";
+				}
+				
+				end;
+			}
+			
+			if (.@Type[0] == 1)
+				message strcharinfo(0), "Não existe nenhum mob com drops extra.";
+			else if (.@Type[0] <= 0)
+				message strcharinfo(0), "Não existe nenhum drops extra no mob: '"+.@Monster$+"' {"+.@Type[1]+"}.";
+			else if (.@Type[0] == 2)
+				message strcharinfo(0), "Não existe nenhum drops extra global.";
+			
+			end;
+		}
+		
+		if (@whispervar1$ == "edit")
+		{
+			if (.@Type[1] < .First_Mob_Id && .@Type[0] <= 1)
+			{
+				message strcharinfo(0), "Este mob_id não é válido.";
+				end;
+			}
+			
+			if (.@Type[2] < .First_Item_Id && .@Type[0] <= 1 || .@Type[3] < .First_Item_Id && .@Type[0] <= 0 || .@Type[1] < .First_Item_Id && .@Type[0] == 2 || .@Type[2] < .First_Item_Id && .@Type[0] == 2 || .@Type[1] < .First_Item_Id && .@Type[0] >= 3 && .@Type[0] <= 6)
+			{
+				message strcharinfo(0), "Este item_id não é válido.";
+				end;
+			}
+			
+			if (.@Type[0] == 1 && .@Type[3] <= 0 || .@Type[0] == 3 && .@Type[2] <= 0)
+			{
+				message strcharinfo(0), "Chance inválida.";
+				end;
+			}
+			
+			if (.@Type[3] > 10000 && .@Type[0] == 1 || .@Type[2] > 10000 && .@Type[0] == 3)	//Se a chance fornecida for maior que '10000 = 100%', ele 'seta' novamente o valor em '10000 = 100%'.
+				Set .@Type[3], 10000;
+				
+			if (.@Type[0] == 4 || .@Type[0] == 5)
+			{
+				if (.@Type[2] < -1 || .@Type[2] > 9)
+				{
+					message strcharinfo(0), "Elemento e/ou raça inválida.";
+					end;
+				}
+			}
+			
+			if (.@Type[0] == 6)
+			{
+				if (.@Type[2] < 0 || .@Type[2] > 1)
+				{
+					message strcharinfo(0), "Tipo inválido.";
+					end;
+				}
+			}
+			
+			if (.@Type[0] <= 1)
+				Set .@Monster$, getmonsterinfo(.@Type[1], MOB_NAME);
+			
+			if (.@Type[0] <= 1)
+			{
+				Set .@Item_Name_1$, getitemname(.@Type[2]);
+				Set .@Item_Name_2$, getitemname(.@Type[3]);
+				Set .@Drop$, "$Mob_"+.@Type[1]+"_Drop";
+				Set .@Rate$, "$Mob_"+.@Type[1]+"_Rate";
+					
+				if (getarraysize(getd(.@Drop$)) > 0)
+				{
+					for (Set .@a, 0; .@a < getarraysize(getd(.@Drop$)); Set .@a, .@a + 1)
+						if (getd(.@Drop$+"["+.@a+"]") == .@Type[3] && .@Type[0] <= 0)
+						{
+							message strcharinfo(0), "O item '"+.@Item_Name_2$+"' {"+.@Type[3]+"}, já está adicionado no mob: '"+.@Monster$+"' {"+.@Type[1]+"}.";
+							end;
+						}
+						
+					for (Set .@a, 0; .@a < getarraysize(getd(.@Drop$)); Set .@a, .@a + 1)
+						if (getd(.@Drop$+"["+.@a+"]") == .@Type[2])
+						{
+							if (.@Type[0] <= 0)
+							{
+								message strcharinfo(0), "Mob: '"+.@Monster$+"' {"+.@Type[1]+"}, drop alterado, de: '"+.@Item_Name_1$+"' {"+.@Type[2]+"}, para: '"+.@Item_Name_2$+"' {"+.@Type[3]+"}.";
+								SetD .@Drop$+"["+.@a+"]", .@Type[3];
+								end;
+							}
+	
+							if (.@Type[0] == 1)
+							{
+								Set .@Percent_1, getd(.@Rate$+"["+.@a+"]") / 100;
+								Set .@Percent_2, getd(.@Rate$+"["+.@a+"]") % 100;
+								Set .@Percent_3, .@Type[3] / 100;
+								Set .@Percent_4, .@Type[3] % 100;
+								Set .@Percent_Result_1$, ""+.@Percent_1+"."+(.@Percent_2 <= 9 ? "0" : "")+""+.@Percent_2+"%";
+								Set .@Percent_Result_2$, ""+.@Percent_3+"."+(.@Percent_4 <= 9 ? "0" : "")+""+.@Percent_4+"%";
+								
+								message strcharinfo(0), "Mob: '"+.@Monster$+"' {"+.@Type[1]+"}, chance alterada do item '"+.@Item_Name_1$+"' {"+.@Type[2]+"}, de: "+.@Percent_Result_1$+", para: "+.@Percent_Result_2$+".";
+								SetD .@Rate$+"["+.@a+"]", .@Type[3];
+								end;
+							}
+						}
+					
+					message strcharinfo(0), "O item '"+.@Item_Name_1$+"' {"+.@Type[2]+"}, não está adicionado no mob: '"+.@Monster$+"' {"+.@Type[1]+"}.";
+					end;
+				}
+			}
+			else if (.@Type[0] > 1 && .@Type[0] < 7)
+			{
+				Set .@Item_Name_1$, getitemname(.@Type[1]);
+				
+				if (.@Type[0] > 1 && .@Type[0] < 4)
+					Set .@Item_Name_2$, getitemname(.@Type[2]);
+				
+				if (getarraysize($Mob_Global_Drop) > 0)
+				{
+					for (Set .@a, 0; .@a < getarraysize($Mob_Global_Drop); Set .@a, .@a + 1)
+						if ($Mob_Global_Drop[.@a] == .@Type[2] && .@Type[0] == 2)
+						{
+							message strcharinfo(0), "O item global '"+.@Item_Name_2$+"' {"+.@Type[2]+"}, já está adicionado.";
+							end;
+						}
+					
+					for (Set .@a, 0; .@a < getarraysize($Mob_Global_Drop); Set .@a, .@a + 1)
+						if ($Mob_Global_Drop[.@a] == .@Type[1])
+						{
+							if (.@Type[0] == 2)
+							{
+								message strcharinfo(0), "Drop global alterado, de: '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, para: '"+.@Item_Name_2$+"' {"+.@Type[2]+"}.";
+								SetArray $Mob_Global_Drop[.@a], .@Type[2];
+								end;
+							}
+							
+							if (.@Type[0] == 3)
+							{
+								Set .@Percent_1, $Mob_Global_Rate[.@a] / 100;
+								Set .@Percent_2, $Mob_Global_Rate[.@a] % 100;
+								Set .@Percent_3, .@Type[2] / 100;
+								Set .@Percent_4, .@Type[2] % 100;
+								Set .@Percent_Result_1$, ""+.@Percent_1+"."+(.@Percent_2 <= 9 ? "0" : "")+""+.@Percent_2+"%";
+								Set .@Percent_Result_2$, ""+.@Percent_3+"."+(.@Percent_4 <= 9 ? "0" : "")+""+.@Percent_4+"%";
+								
+								message strcharinfo(0), "Chance global alterada do item '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, de: "+.@Percent_Result_1$+", para: "+.@Percent_Result_2$+".";
+								SetArray $Mob_Global_Rate[.@a], .@Type[2];
+								end;
+							}
+							
+							if (.@Type[0] == 4)
+							{
+								if ($Mob_Global_Element[.@a] > -1 && .@Type[2] > -1)
+									message strcharinfo(0), "Elemento global alterada do item '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, de: "+.Element$[$Mob_Global_Element[.@a]]+" {"+$Mob_Global_Element[.@a]+"}, para: "+.Element$[.@Type[2]]+" {"+.@Type[2]+"}.";
+								else if ($Mob_Global_Element[.@a] > -1 && .@Type[2] == -1)
+									message strcharinfo(0), "Elemento global alterada do item '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, de: "+.Element$[$Mob_Global_Element[.@a]]+" {"+$Mob_Global_Element[.@a]+"}, para: Nenhum {-1}.";
+								else if (.@Type[2] == -1)
+									message strcharinfo(0), "Elemento global alterada do item '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, de: Nenhum {-1}, para: Nenhum {-1}.";
+								else
+									message strcharinfo(0), "Elemento global alterada do item '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, de: Nenhum {-1}, para: "+.Element$[.@Type[2]]+" {"+.@Type[2]+"}.";
+								
+								SetArray $Mob_Global_Element[.@a], .@Type[2];
+								end;
+							}
+							
+							if (.@Type[0] == 5)
+							{
+								if ($Mob_Global_Race[.@a] > -1 && .@Type[2] > -1)
+									message strcharinfo(0), "Raça global alterada do item '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, de: "+.Race$[$Mob_Global_Race[.@a]]+", para: "+.Race$[.@Type[2]]+" {"+.@Type[2]+"}.";
+								else if ($Mob_Global_Race[.@a] > -1 && .@Type[2] == -1)
+									message strcharinfo(0), "Raça global alterada do item '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, de: "+.Race$[$Mob_Global_Race[.@a]]+", para: Nenhum {-1}.";
+								else if (.@Type[2] == -1)
+									message strcharinfo(0), "Raça global alterada do item '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, de: Nenhum {-1}, para: Nenhum {-1}.";
+								else
+									message strcharinfo(0), "Raça global alterada do item '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, de: Nenhum {-1}, para: "+.Race$[.@Type[2]]+" {"+.@Type[2]+"}.";
+								
+								SetArray $Mob_Global_Race[.@a], .@Type[2];
+								end;
+							}
+							
+							if (.@Type[0] == 6)
+							{
+								if ($Mob_Global_IsMvP[.@a] > 0)
+									Set .@IsMvP_1$, "Sim {"+$Mob_Global_IsMvP[.@a]+"}";
+								else
+									Set .@IsMvP_1$, "Não {"+$Mob_Global_IsMvP[.@a]+"}";
+								
+								if (.@Type[2] > 0)
+									Set .@IsMvP_2$, "Sim {"+.@Type[2]+"}";
+								else
+									Set .@IsMvP_2$, "Não {"+.@Type[2]+"}";
+									
+								message strcharinfo(0), "Tipo MvP global alterado do item '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, de: "+.@IsMvP_1$+", para: "+.@IsMvP_2$+".";
+								SetArray $Mob_Global_IsMvP[.@a], .@Type[2];
+								end;
+							}
+						}
+				}
+				
+				message strcharinfo(0), "O item global '"+.@Item_Name_1$+"' {"+.@Type[1]+"}, não está adicionado.";
+				end;
+			}
+			
+			message strcharinfo(0), "Mob: '"+.@Monster$+"' {"+.@Type[1]+"}, não está adicionado.";
+			end;
+		}
+	}
+	end;
+}
+
+-	script	OnExtraDropEvent	-1,{
+	end;
+
+	OnNPCKillEvent:
+	//Só mexa se souber o que está fazendo
+	Set .GM_Level, getvariableofnpc(.GM_Level, "extradrop");
+	Set .First_Mob_Id, getvariableofnpc(.First_Mob_Id, "extradrop");
+	Set .First_Item_Id, getvariableofnpc(.First_Item_Id, "extradrop");
+	Set .DropStyle, getvariableofnpc(.DropStyle, "extradrop");
+	Set .ShowMsg, getvariableofnpc(.ShowMsg, "extradrop");
+	Set .IsMvP, getvariableofnpc(.IsMvP, "extradrop");
+	
+	for (Set .@a, 0; .@a <= 9; Set .@a, .@a + 1)
+		SetArray .Element$[.@a], getvariableofnpc(.Element$[.@a], "extradrop");
+
+	for (Set .@a, 0; .@a <= 9; Set .@a, .@a + 1)
+		SetArray .Race$[.@a], getvariableofnpc(.Race$[.@a], "extradrop");
+		
+	Set .@Rand, rand(10000);
+
+	getmapxy(.@map$, .@x, .@y, 0);	//Recebe o mapa e as coordenadas do jogador
+
+	for (Set .@a, 0; .@a < $Mob_Count; Set .@a, .@a + 1)
+	{
+		Set .@Mob_Id, getd("$Mob_Id_"+(.@a / 128)+"["+(.@a % 128)+"]");
+		Set .@Drop$, "$Mob_"+.@Mob_Id+"_Drop";
+		Set .@Rate$, "$Mob_"+.@Mob_Id+"_Rate";
+		
+		if (.@Mob_Id != killedrid)
+			continue;
+		
+		for (Set .@b, 0; .@b < getarraysize(getd(.@Drop$)); Set .@b, .@b + 1)
+		{
+			Set .@Item_Name$, getitemname(getd(.@Drop$+"["+.@b+"]"));
+			Set .@Percent_1, getd(.@Rate$+"["+.@b+"]") / 100;
+			Set .@Percent_2, getd(.@Rate$+"["+.@b+"]") % 100;
+			Set .@Percent_Result_1$, ""+.@Percent_1+"."+(.@Percent_2 <= 9 ? "0" : "")+""+.@Percent_2+"%";
+			
+			if (.@Rand >= getd(.@Rate$+"["+.@b+"]"))
+				continue;
+				
+			if (.DropStyle > 0)
+				makeitem getd(.@Drop$+"["+.@b+"]"), 1, .@map$, .@x, .@y;
+			else
+				getitem getd(.@Drop$+"["+.@b+"]"), 1;
+				
+			if (.ShowMsg > 0)
+				message strcharinfo(0), "Você dropou '"+.@Item_Name$+"' {"+getd(.@Drop$+"["+.@b+"]")+"}, chance: "+.@Percent_Result_1$+".";
+		}
+			
+	}
+	
+	if (getarraysize($Mob_Global_Drop) > 0)
+	{
+		if (killedrid >= .First_Mob_Id)
+		{
+			for (Set .@a, 0; .@a < getarraysize($Mob_Global_Drop); Set .@a, .@a + 1)
+			{
+				Set .@Item_Name$, getitemname($Mob_Global_Drop[.@a]);
+				Set .@Percent_1, $Mob_Global_Rate[.@a] / 100;
+				Set .@Percent_2, $Mob_Global_Rate[.@a] % 100;
+				Set .@Percent_Result_1$, ""+.@Percent_1+"."+(.@Percent_2 <= 9 ? "0" : "")+""+.@Percent_2+"%";
+				
+				if (.@Rand >= $Mob_Global_Rate[.@a])
+					continue;
+					
+				if ($Mob_Global_Race[.@a] > -1 && $Mob_Global_Race[.@a] != getmonsterinfo(killedrid, MOB_RACE))
+					continue;
+					
+				if ($Mob_Global_Element[.@a] > -1 && $Mob_Global_Element[.@a] != getmonsterinfo(killedrid, MOB_ELEMENT))
+					continue;
+					
+				if ($Mob_Global_IsMvP[.@a] > 0 && getmonsterinfo(killedrid, MOB_MODE) != .IsMvP)
+					continue;
+					
+				if (.DropStyle > 0)
+					makeitem $Mob_Global_Drop[.@a], 1, .@map$, .@x, .@y;
+				else
+					getitem $Mob_Global_Drop[.@a], 1;
+					
+				if (.ShowMsg > 0)
+					message strcharinfo(0), "Você dropou '"+.@Item_Name$+"' {"+$Mob_Global_Drop[.@a]+"}, chance: "+.@Percent_Result_1$+".";
+			}
+		}
+	}
+
+	end;
+}
