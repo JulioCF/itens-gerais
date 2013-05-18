@@ -1,17 +1,19 @@
 <?php
 // This is the application configuration file. All values have been set to
 // the default, and should be changed as needed.
+// Alguns comentários em PT-BR feitos por JulioCF
+//true = ativado | false = desativado
 return array(
-	'ServerAddress'        => 'localhost',              // This value is the hostname:port under which Flux runs. (e.g., example.com or example.com:80)
-	'BaseURI'              => '',                       // The base URI is the base web root on which your application lies.
-	'InstallerPassword'    => 'secretpassword',         // Installer/updater password.
+	'ServerAddress'        => 'localhost',              // Ponha seu endereço completo aqui caso sua CP esta em uma pasta em sua hospedagem, ex; 'http://www.meusite.com'
+	'BaseURI'              => '',                       // Ponha aqui a estenção do seu site onde estará a CP, ex; '/cp', caso a CP seja seu site, deixe em branco
+	'InstallerPassword'    => 'secretpassword',         // Coloque aqui uma senha secreta para instalação ou reinstalação da CP.
 	'RequireOwnership'     => true,                     // Require the executing user to be owner of the FLUX_ROOT/data/ directory tree? (Better for security)
 	                                                    // WARNING: This will be mostly IGNORED on non-POSIX-compliant OSes (e.g. Windows).
 	'DefaultLoginGroup'    => null,
 	'DefaultCharMapServer' => null,
-	'DefaultLanguage'      => 'pt_br',                  // Specify the default control panel language (see FLUX_ROOT/lang/ directory for available languages.)
-	'SiteTitle'            => 'Painel de Controle Flux',     // This value is only used if the theme decides to use it.
-	'ThemeName'            => 'default',                // The theme name of the theme you would like to use.  Themes are in FLUX_ROOT/themes.
+	'DefaultLanguage'      => 'pt_br',                  // Linguagem do Flux, já esta traduzido para PT-BR por Megasantos, o diretório do arquivo fica em /lang
+	'SiteTitle'            => 'Painel de Controle Flux',     // Título da CP.
+	'ThemeName'            => 'default',                // Tema da CP.  A pasta temas esta em /themes.
 	'ScriptTimeLimit'      => 0,                        // Script execution time limit. Specifies (in seconds) how long a page should run before timing out. (0 means forever)
 	'MissingEmblemBMP'     => 'empty.bmp',              //
 	'ItemIconNameFormat'   => '%d.gif',                 // The filename format for item icons (defaults to {itemid}.gif).
@@ -54,8 +56,8 @@ return array(
 	'RequireEmailConfirm'  => false,                    // Require e-mail confirmation during registration.
 	'RequireChangeConfirm' => false,                    // Require confirmation when changing e-mail addresses.
 	'EmailConfirmExpire'   => 48,                       // E-mail confirmations expire hours. Unconfirmed accounts will expire after this period of time.
-	'MailerFromAddress'    => 'Megasantos@localhost',   // The e-mail address displayed in the From field.
-	'MailerFromName'       => 'Megasantos',             // The name displayed with the From e-mail address.
+	'MailerFromAddress'    => 'localhost@localhost',   // Caso ocorra erros na CP, ponha o e-mail de contato.
+	'MailerFromName'       => 'admin',             // Caso ocorra erros na CP, ponha aqui no nome de contato.
 	'MailerUseSMTP'        => false,                    // Whether or not to use a separate SMTP server for sending mail.
 	'MailerSMTPUseSSL'     => false,                    // Whether or not mailer should connect using SSL (yes for GMail).
 	'MailerSMTPUseTLS'     => false,                    // Same as above SSL setting, but for TLS.  This setting will override the SSL setting.
@@ -76,7 +78,7 @@ return array(
 	'UseCleanUrls'         => false,                    // Set to true if you're running Apache and it supports mod_rewrite and .htaccess files.
 	'DebugMode'            => false,                    // Set to false to minimize technical details from being output by Flux. WARNING: DO NOT USE THIS OPTION ON A PUBLICALLY-ACCESSIBLE CP.
 	'UseCaptcha'           => true,                     // Use CAPTCHA image for account registration to prevent automated account creations. (Requires GD2/FreeType2)
-	'UseLoginCaptcha'      => false,                    // Use CAPTCHA image for account logins. (Requires GD2/FreeType2)
+	'UseLoginCaptcha'      => true,                    // Use CAPTCHA image for account logins. (Requires GD2/FreeType2)
 	'EnableReCaptcha'      => false,                    // Enables the use of reCAPTCHA instead of Flux's native GD2 library (http://www.google.com/recaptcha)
 	'ReCaptchaPublicKey'   => '...',                    // This is your reCAPTCHA public key [REQUIRED FOR RECAPTCHA] (sign up at http://www.google.com/recaptcha)
 	'ReCaptchaPrivateKey'  => '...',                    // This is your reCAPTCHA private key [REQUIRED FOR RECAPTCHA] (sign up at http://www.google.com/recaptcha)
@@ -189,6 +191,9 @@ return array(
 	// They route to modules and actions.  Whether they are displayed or
 	// not at any given time depends on the user's account group level and/or
 	// their login status.
+	// Menus do jogo
+	// Para por links, siga o exemplo da 'Fórum'
+	// Cuidado ao editar aqui!
 	'MenuItems' => array(
 		'Menu Principal'   => array(
 			'Inicial'          => array('module' => 'main'),
@@ -219,7 +224,7 @@ return array(
 			'Mob Database'  => array('module' => 'monster'),
 		),
 		'Staff' => array(
-			'brA Logs'       => array('module' => 'logdata'),
+			'Logs'       => array('module' => 'logdata'),
 			'CP Logs'       => array('module' => 'cplog'),
 			'IP\'s Banidos'   => array('module' => 'ipban'),
 			'Contas'      => array('module' => 'account'),
@@ -362,28 +367,28 @@ return array(
 	// Shouldn't need touching, however modifying loginerrors.php should be relatively safe.
 	'LoginErrors' => include('loginerrors.php'),
 	
-	// brA equip jobs mapping.
+	//  equip jobs mapping.
 	'EquipJobs' => include('equip_jobs.php'),
 	
-	// brA equip locations mapping.
+	//  equip locations mapping.
 	'EquipLocations' => include('equip_locations.php'),
 	
-	// brA equip upper mapping.
+	//  equip upper mapping.
 	'EquipUpper' => include('equip_upper.php'),
 	
-	// brA monster sizes mapping.
+	//  monster sizes mapping.
 	'MonsterSizes' => include('sizes.php'),
 	
-	// brA monster races mapping.
+	//  monster races mapping.
 	'MonsterRaces' => include('races.php'),
 	
-	// brA elements mapping.
+	//  elements mapping.
 	'Elements' => include('elements.php'),
 	
-	// brA attributes mapping.
+	//  attributes mapping.
 	'Attributes' => include('attributes.php'),
 	
-	// brA monster modes mapping.
+	//  monster modes mapping.
 	'MonsterModes' => include('monstermode.php'),
 	
 	// Item shop categories.
