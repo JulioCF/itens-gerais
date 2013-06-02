@@ -4,7 +4,7 @@
 
 .loginbox-admin-menu {
 	padding-top: 5px;
-	color: #94b4d5;
+	color: #B22222;
 }
 
 body {
@@ -12,7 +12,7 @@ body {
 	padding: 0;
 	font-family: "Lucida Grande", "Lucida Sans", Verdana, Tahoma, sans-serif;
 	font-size: 9pt;
-	color: #000;
+	color: #B22222;
 	background-color: #fff;
 }
 
@@ -35,7 +35,7 @@ tr, td, th {
 }
 
 h2 {
-	color: #444;
+	color: #B22222;
 	letter-spacing: -1px;
 }
 
@@ -43,7 +43,7 @@ h3 {
 	/*font-style: italic;*/
 	font-weight: normal;
 	font-size: 120%;
-	color: #444;
+	color: #B22222;
 	border-bottom: 1px dotted #ddd;
 	text-transform: uppercase;
 }
@@ -62,7 +62,7 @@ a img {
 }
 
 a {
-	color: #4083c6;
+	color: #B22222;
 	text-decoration: none;
 }
 
@@ -70,7 +70,7 @@ input[type=text], input[type=password], input[type=file], textarea {
 	font-family: "Lucida Grande", "Lucida Sans", Verdana, Tahoma, sans-serif;
 	padding: 4px;
 	font-size: 10pt;
-	color: #444;
+	color: #B22222;
 	border: 1px solid #ddd;
 	outline-width: 0;
 }
@@ -104,7 +104,7 @@ label:hover {
 	padding: 10px;
 	font-weight: normal;
 	font-size: 120%;
-	color: #204a87;
+	color: #B22222;
 	background-color: #F0FFFF;
 	border: 1px solid #87CEEB;
 }
@@ -145,7 +145,7 @@ label:hover {
 	padding: 10px 0 2px 0;
 	font-size: 100%;
 	text-align: center;
-	color: #fff;
+	color: #B22222;
 	border-bottom: 1px solid #555;
 }
 
@@ -153,7 +153,7 @@ label:hover {
 	margin: 0 auto;
 	display: block;
 	padding: 2px 5px 4px 18px;
-	color: #fff;
+	color: #B22222;
 	background-color: #303030;
 	text-align: left;
 	text-shadow: #000 1pt 1pt;
@@ -161,7 +161,7 @@ label:hover {
 }
 
 #admin_sidebar td.menuitem a:hover {
-	color: #fff;
+	color: #B22222;
 	background-color: #4a5259;
 	text-shadow: #4a5259 1pt 1pt;
 }
@@ -201,7 +201,7 @@ label:hover {
 	margin: 0 auto;
 	display: block;
 	padding: 2px 5px 4px 18px;
-	color: #fff;
+	color: #B22222;
 	background-color: #94b4d5;
 	text-align: left;
 	text-shadow: #708fae 1pt 1pt;
@@ -209,7 +209,7 @@ label:hover {
 }
 
 #sidebar td.menuitem a:hover {
-	color: #fff;
+	color: #B22222;
 	background-color: #708fae;
 	text-shadow: #708fae 1pt 1pt;
 }
@@ -237,7 +237,7 @@ label:hover {
 	padding: 10px;
 	font-weight: bold;
 	font-size: 120%;
-	color: #fff;
+	color: #B22222;
 	background-color: #f00;
 }
 
@@ -246,25 +246,25 @@ label:hover {
 	padding: 10px;
 	font-weight: bold;
 	font-size: 120%;
-	color: #fff;
+	color: #B22222;
 	background-color: #0c0;
 }
 
 .note {
 	padding: 5px;
-	color: #444;
+	color: #B22222;
 	background-color: #eaeaea;
 	font-style: italic;
 }
 
 .up {
 	font-weight: bold;
-	color: #0f0;
+	color: #B22222;
 	text-transform: uppercase;
 }
 
 .down {
-	color: #f00;
+	color: #B22222;
 	text-transform: uppercase;
 }
 
@@ -277,7 +277,7 @@ label:hover {
 }
 
 .submit_button:hover {
-	color: #fff;
+	color: #B22222;
 	background-color: #333;
 	border: 1px solid #111;
 	cursor: pointer;
@@ -417,7 +417,7 @@ label:hover {
 .raw-txn-log {
 	padding: 10px;
 	font-family: "Monaco", "Lucida Console", "Courier New", monospace;
-	background-color: #fff;
+	background-color: #B22222;
 	border: 1px solid #ddd;
 	width: 96%;
 	overflow: scroll;
@@ -442,7 +442,7 @@ label:hover {
 .info-text {
 	margin-bottom: 6px;
 	padding: 5px;
-	color: #666;
+	color: #B22222;
 	background-color: #fff;
 	border: 1px solid #ccc;
 	text-align: center;
@@ -454,7 +454,7 @@ label:hover {
 }
 
 .toggler a {
-	color: #26a;
+	color: #B22222;
 }
 
 .search-form, search-form2 {
@@ -467,7 +467,7 @@ label:hover {
 .search-form p, .search-form2 p {
 	margin: 0;
 	padding: 5px;
-	color: #aaa;
+	color: #B22222;
 	text-align: left;
 	border-bottom: 1px solid #ddd;
 }
@@ -477,7 +477,7 @@ label:hover {
 	margin: 0 0 3px 0;
 	font-size: 8pt;
 	font-style: italic;
-	color: #222;
+	color: #B22222;
 }
 
 .search-form input[type=text], .search-form2 input[type=text] {
@@ -513,35 +513,35 @@ label:hover {
 }
 
 #submenu {
-	color: #bbb;
+	color: #B22222;
 }
 
 #pagemenu {
 	margin-top: 5px;
 	padding: 5px 0;
 	font-size: 8pt;
-	color: #888;
+	color: #B22222;
 	border-width: 1px 0;
 	border-style: dotted;
 	border-color: #ddd;
 }
 
 #pagemenu a {
-	color: #777974;
+	color: #B22222;
 	text-decoration: underline;
 }
 
 #pagemenu a:hover {
-	color: #729fcf;
+	color: #B22222;
 }
 
 #loginbox {
 	margin-bottom: 10px;
-	color: #555;
+	color: #B22222;
 }
 
 #content {
-	color: #555;
+	color: #B22222;
 }
 
 #register_form table td, #login_form table td {
@@ -571,12 +571,12 @@ label:hover {
 #server_status {
 	border-spacing: 0;
 	border-collapse: collapse;
-	background-color: #fff;
+	background-color: #B22222;
 	border: 1px solid #ddd;
 }
 
 #server_status .server {
-	color: #222;
+	color: #B22222;
 }
 
 #server_status .status {
@@ -588,7 +588,7 @@ label:hover {
 	margin-bottom: 0px;
 	font-style: italic;
 	font-size: 8pt;
-	color: #ccc;
+	color: #B22222;
 	text-align: right;
 }
 
@@ -597,23 +597,23 @@ label:hover {
 	margin-bottom: 0px;
 	font-style: italic;
 	font-size: 8pt;
-	color: #aaa;
+	color: #B22222;
 	text-align: right;
 }
 
 .sortable {
-	color: #444;
+	color: #B22222;
 	text-decoration: underline;
 }
 
 .sortable:hover {
-	color: #000;
+	color: #B22222;
 }
 
 .character-stats {
 	border-spacing: 0;
 	border-collapse: collapse;
-	color: #ccc;
+	color: #B22222;
 }
 
 .character-stats td {
@@ -623,18 +623,18 @@ label:hover {
 }
 
 .character-stats .stat-name {
-	color: #666;
+	color: #B22222;
 }
 
 .character-stats .stat-value {
-	color: #000;
+	color: #B22222;
 }
 
 .credit-balance {
 	float: right;
 	display: inline-block;
 	padding: 10px;
-	color: #000;
+	color: #B22222;
 	background-color: #eee;
 	border: 1px dotted #ddd;
 }
@@ -642,7 +642,7 @@ label:hover {
 .credit-balance .balance-text {
 	display: inline-block;
 	margin-right: 5px;
-	color: #bbb;
+	color: #B22222;
 	text-transform: uppercase;
 }
 
@@ -679,7 +679,7 @@ label:hover {
 	display: inline-block;
 	margin: 0;
 	padding: 5px;
-	background-color: #eee;
+	background-color: #B22222;
 	border-right: 1px solid #ddd;
 }
 
@@ -705,40 +705,40 @@ label:hover {
 	margin: 0 0 5px 0;
 	padding: 0 0 2px 0;
 	font-size: 140%;
-	color: #222;
+	color: #B22222;
 	border-bottom: 1px solid #eee;
 }
 
 .shop-item-cost {
 	margin: 0;
-	color: #aaa;
+	color: #B22222;
 	text-transform: uppercase;
 }
 
 .cost {
 	font-size: 120%;
 	font-weight: bold;
-	color: #000;
+	color: #B22222;
 }
 
 .shop-item-qty {
 	margin: 0 0 2px 0;
-	color: #aaa;
+	color: #B22222;
 	font-size: 8pt;
 	font-style: italic;
 }
 
 .qty {
-	color: #888;
+	color: #B22222;
 	font-size: 10pt;
 }
 
 .shop-item-action {
-	color: #ddd;
+	color: #B22222;
 }
 
 .shop-item-action a {
-	color: #80a2c8;
+	color: #B22222;
 	border-bottom: 1px solid #eee;
 }
 
@@ -751,7 +751,7 @@ label:hover {
 }
 
 .shop-server-name {
-	color: #333;
+	color: #B22222;
 }
 
 .shop-item-info {
@@ -766,7 +766,7 @@ textarea {
 .cart-items-text {
 	margin: 0 0 5px 0;
 	padding: 5px;
-	color: #ddd;
+	color: #B22222;
 	background-color: #888;
 	border: 5px solid #777;
 }
@@ -782,18 +782,18 @@ textarea {
 }
 
 .cart-item-name {
-	color: #fff;
+	color: #B22222;
 	border-bottom: 1px dotted #aaa;
 }
 
 .cart-item-count {
 	font-size: 120%;
 	font-weight: bold;
-	color: #000;
+	color: #B22222;
 }
 
 .cart-sub-total {
-	color: #000;
+	color: #B22222;
 }
 
 .cart {
@@ -823,7 +823,7 @@ textarea {
 }
 
 .checkout-text a:hover {
-	color: #000;
+	color: #B22222;
 	border-bottom: 1px solid #aaa;
 }
 
@@ -843,18 +843,18 @@ textarea {
 .credit-amount-text {
 	font-size: 8pt;
 	text-transform: uppercase;
-	color: #bbb;
+	color: #B22222;
 	text-align: center;
 	letter-spacing: 1px;
 }
 
 .donation-amount {
 	font-weight: bold;
-	color: #000;
+	color: #B22222;
 }
 
 .credit-amount {
-	color: #555;
+	color: #B22222;
 }
 
 .reset-amount-text {
@@ -870,7 +870,7 @@ textarea {
 }
 
 .remaining-balance {
-	color: #000;
+	color: #B22222;
 }
 
 .exchange-rate {
@@ -890,14 +890,14 @@ textarea {
 
 .generic-form {
 	padding: 10px;
-	background-color: #fff;
+	background-color: #B22222;
 	border: 1px solid #ddd;
 	width: auto;
 }
 
 .generic-form-div {
 	padding: 10px;
-	background-color: #fff;
+	background-color: #B22222;
 	border: 1px solid #ddd;
 	width: auto;
 }
@@ -922,7 +922,7 @@ textarea {
 
 .generic-form-table td p {
 	margin: 6px 5px;
-	color: #000;
+	color: #B22222;
 }
 
 .security-code {
@@ -933,11 +933,11 @@ textarea {
 }
 
 .action {
-	color: #ddd;
+	color: #B22222;
 }
 
 .action a, .action span.anchor {
-	color: #80a2c8;
+	color: #B22222;
 	border-bottom: 1px solid #eee;
 	cursor: pointer;
 }
@@ -945,7 +945,7 @@ textarea {
 .block-link {
 	display: block;
 	padding: 3px;
-	color: #80a2c8;
+	color: #B22222;
 	border-bottom: 1px solid #eee;
 }
 
@@ -957,7 +957,7 @@ textarea {
 .woe-table {
 	border-spacing: 0;
 	border-collapse: collapse;
-	background-color: #fff;
+	background-color: #B22222;
 	border: 1px solid #ddd;
 }
 
@@ -980,7 +980,7 @@ textarea {
 
 .woe-table .time {
 	font-style: italic;
-	color: #333;
+	color: #B22222;
 }
 
 .script {
