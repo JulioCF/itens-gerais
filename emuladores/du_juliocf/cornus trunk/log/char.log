@@ -123,3 +123,9 @@
 16-10-2012 22:14:44: Id for the next created character: 150002.
 16-10-2012 22:14:44: The char-server is ready (Server is listening on the port 6121).
 16-10-2012 22:14:50: Map-Server 0 connected: 760 maps, from IP 192.168.25.7 port 5121. Map-server 0 loading complete.
+
+09-08-2013 11:01:45: The char-server starting...
+09-08-2013 11:01:45: mmo_char_init: 2 characters read in save/athena.txt.
+09-08-2013 11:01:45: Id for the next created character: 150002.
+09-08-2013 11:01:45: The char-server is ready (Server is listening on the port 6121).
+09-08-2013 11:01:55: Map-Server 0 connected: 760 maps, from IP 192.168.0.12 port 5121. Map-server 0 loading complete.

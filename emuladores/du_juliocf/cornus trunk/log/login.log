@@ -55,3 +55,5 @@
 2012-07-19 21:29:09	127.0.0.1	enui	100	login ok
 2012-10-16 22:14:44	0.0.0.0	login server	100	login server started
 2012-10-16 22:14:45	192.168.25.7	s1	100	charserver - Cronus@192.168.25.7:6121
+2013-08-09 11:01:45	0.0.0.0	login server	100	login server started
+2013-08-09 11:01:46	192.168.0.12	s1	100	charserver - Cronus@192.168.0.12:6121

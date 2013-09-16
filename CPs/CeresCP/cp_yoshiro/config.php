@@ -41,7 +41,7 @@ $CONFIG['md5_pass']		=	'0';			// Use MD5 password (enable = 1, disable = 0)
 $CONFIG['safe_pass']		=	'1';			// Force the use of a safer password with size 6 and at least 2 letter and 2 numbers (enable = 1, disable = 0)
 
 //Admin Area
-$CONFIG['cp_admin']		=	'80';			// CP admin functions
+$CONFIG['cp_admin']		=	'99';			// CP admin functions
 $CONFIG['gm_level']		=	'70';			// CP GM funtions
 $CONFIG['gm_hide']		=	'40';			// GMs this level and above will be hidden from whoisonline.php
 
@@ -69,11 +69,11 @@ $CONFIG['mapip']			=	'127.0.0.1';	// Zone/Map Server IP
 $CONFIG['mapport']		=	'5121';		// Zone/Map Server Port
 
 //default language
-$CONFIG['language']		=	'Portugues';		// default language (remember to check if the translation exist before set)
+$CONFIG['language']		=	'English';		// default language (remember to check if the translation exist before set)
 
 //cp features
 $CONFIG['disable_account']	=	'0';			// disable the account creation disable = 1, enable = 0
-$CONFIG['auth_image']		=	'0';			// enable the verification code image, to check if it's a real person using the cp, instead of a bot (brute-force atack) - Recommended, but requires gd library (enable = 1 disable = 0)
+$CONFIG['auth_image']		=	'1';			// enable the verification code image, to check if it's a real person using the cp, instead of a bot (brute-force atack) - Recommended, but requires gd library (enable = 1 disable = 0)
 $CONFIG['max_accounts']		=	'0';			// Max accounts allowed to be in the DB (0 = disabled)
 $CONFIG['password_recover']	=	'0';			// password recover enable = 1, disable = 0
 $CONFIG['reset_enable']		=	'1';			// reset position enable = 1, disable = 0

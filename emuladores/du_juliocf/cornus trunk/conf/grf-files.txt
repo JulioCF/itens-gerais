@@ -15,6 +15,12 @@
 // Você pode adicionar mais caso precise
 // grf: <caminho para a pasta data>
 
+//grf: C:\Program Files (x86)\LeveUp! Games\RagnarokOnline\data.grf
+grf: C:\Program Files (x86)\Gravity\Ragnarok Online\data.grf
+//grf: C:\Program Files (x86)\Gravity\Ragnarok Online\cdata.grf
+//grf: C:\Users\JulioCesar\Downloads\data_old\data_oldtimes.grf
+
+
 //------ Outros ---------------------------
 
 // Diretório da pasta data (sem colocá-la no comando data_dir)
