@@ -1,0 +1,16 @@
+body {
+	font-size: 11px;
+	font-family: Tahoma, Arial;
+	padding: 10px;
+	color: #ffffff;
+	margin: 0px;
+	border: 0px;
+	background: transparent url(bg.jpg) no-repeat;
+	background-attachment: fixed;
+}
+.header {
+	font-size: 120%;
+}
+.content {
+	padding: 5px;
+}

@@ -1,0 +1,287 @@
+{2.6.1.66}
+[2011-01-23] Aeomin - Possible fix to gibberish GRF file name (untested).
+---------------------------------------------
+{2.6.1.62}
+[2010-06-21] Aeomin - Some random stuff (too lazy to even mention)
+[2010-04-02] Aeomin - Windows 7 enhancement.
+[2010-04-02] Aeomin - Removed white outline on progress bar in Vista/7.
+[2010-04-02] Aeomin - Migrating to new compiler.
+---------------------------------------------
+{2.5.4.18}
+[2009-09-18] Aeomin - Fixed a bug in config parser that causes english language file mailfunction.
+---------------------------------------------
+{2.5.4.17}
+[2009-08-14] Aeomin - Hacked in old custom button support
+[2009-08-14] Aeomin - Fixed patcher leaves 0 byte temporary file when failed to download a patch file.
+[2009-08-14] Aeomin - Added conditional checks to reduce chance for patcher to hang when downloaded malformed patch file.
+~Lost track here...~
+---------------------------------------------
+{2.5.4.16}
+[2009-07-11] Aeomin - Implemented the new language system
+[2009-07-04] Aeomin - Reimplemented "FinishOnConnectionFailure"
+[2009-07-04] Aeomin - Implemented "HideProgressBarWhenFinish"
+[2009-07-04] Aeomin - Migrated text label.
+[2009-07-03] Aeomin - Recoded noticebox and progressbar to support the new config
+[2009-07-03] Aeomin - Enhanced GUI event manager.
+[2009-07-03] Aeomin - Fixed some bugs related to event thread
+[2009-07-02] Aeomin - Implemented a queue list and even handling thread.
+[2009-07-01] Aeomin - All buttons now using the new config parser.
+[2009-07-01] Aeomin - Updated some code to load config entry from the new config parser.
+[2009-06-30] Aeomin - Tweak config parser and bug fixes.
+[2009-06-30] Aeomin - Loaded new config parser.
+[2009-06-29] Aeomin - Renamed tools: ThorMaker -> ThorGenerator; Config_Packer -> ConfigEmbeder
+---------------------------------------------
+{V2.2.3.10} - Ever Alpha
+[2009-06-27] Aeomin - Fixed multiple typos caused language fallback to English.
+[2009-06-25] Aeomin - Deprecated old status file.
+[2009-06-24] Aeomin - Embed Sqlite3 and lua library
+[2009-06-22] Aeomin - Fixed misconfiguration causing patcher constantly restart.
+---------------------------------------------
+{V2.1.3.9 - Epsilon [UPDATE TO THIS IMMEDIATELY]}
+[2009-06-20] Aeomin - Fixed a serious bug that can render GRF corruption.
+---------------------------------------------
+{V2.1.3.8 - Delta [RC1]}
+[2009-06-14] Aeomin - Fixed Start button clone not working.
+[2009-06-07] Aeomin - Random code cleanup/inspection/fix.
+---------------------------------------------
+[2009-05-29] Aeomin - Fixed a Thor Maker bug.
+Major Changes Compare to Old Version
+ o Completely core code rewrite and revised.
+    - A lot hidden bugs has been fixed.
+ o Fully takes advantages of OOP.
+ o New file manager that can scan patch file type (instead identify by file extension).
+    - Also made easier for me to support new patch file format.
+ o GUI controlling mechanics completely rewrite.
+ o Tools proceeding to multilingual support.
+ o Patcher proceeding to real multilingual support.
+---------------------------------------------
+{V2.1.3.7 -  2.1 Gamma}
+[2009-05-31] Aeomin - Reimplemented client update.
+[2009-05-31] Aeomin - Fixed start button not working.
+[2009-05-31] Aeomin - Reimplemented GUI locking.
+---------------------------------------------
+{V2.1.2.6 -  2.1 Beta}
+[2009-05-31] Aeomin - Reimplemented patcher update.
+[2009-05-30] Aeomin - Fixed two patch list parsing bug.
+[2009-05-30] Aeomin - Completely rewrite progressbar controller.
+[2009-05-30] Aeomin - Implemented GUI event signal system.
+---------------------------------------------
+{V2.1.1.3 -  2.1 Alpha II}
+[2009-05-29] Aeomin - Partial deprecated code removal.
+[2009-05-29] Aeomin - Reimplemented blink.
+[2009-05-29] Aeomin - Reimplemented FTP support.
+[2009-05-28] Aeomin - Improved network module.
+[2009-05-28] Aeomin - Commented out some of old code (Complete removal requires resolve all the dependencies).
+[2009-05-28] Aeomin - Added error messages.
+---------------------------------------------
+{V2.1.1.0 -  2.1 Alpha I}
+[2009-05-27] Aeomin - Alpha I Availiable.
+[2009-05-17] Aeomin - Patcher rewrite in progress...
+---------------------------------------------
+{V2.0.1.15} - Never released
+[2009-05-16] Aeomin - Added Elianor's French translation.
+[2009-04-18] Aeomin - Hopefully fixed crash for those who don't have WMP installed(I should say..removed?).
+---------------------------------------------
+{V2.0.1.14}
+[2009-04-13] Aeomin - Possible fixed annoying random crash!
+---------------------------------------------
+{V2.0.1.13}
+[2009-04-13] Aeomin - Fixed a critical mistake that caused malfunction.
+---------------------------------------------
+{V2.0.1.12} - BROKEN
+[2009-03-24] Aeomin - Fixed FTP?
+[2009-03-11] Aeomin - Focus on fixing bug(s).
+[2009-03-11] Aeomin - TIME UP, old start button clone support is officially dropped!
+---------------------------------------------
+{V2.0.1.11}
+[2009-02-25] Aeomin - Possible fixed data corruption on some files.
+[2009-02-22] Aeomin - Fixed random typos.
+---------------------------------------------
+{V2.0.1.9/10}
+[2009-02-21] Aeomin - Patcher will load data from file if config data is embed (very useful when working on skin XD)
+[2009-02-20] Aeomin - Possible fix random crash (ah man.. I received more than 40 thousand crashreports - -").
+[2008-12-20] Aeomin - Added an option in ThorMaker that use old THOR format for patcher & game exe
+                      [Because THOR format is ever changing, update from old patcher will not able to work]
+---------------------------------------------
+{V2.0.1.8}
+[2008-12-19] Aeomin - Added import delete list feature in ThorMaker
+[2008-12-19] Aeomin - Start Button "Clones" config entries merged into custom buttons.
+                      (Although it will kept working for a while, eventually it will be removed.)
+[2008-12-19] Aeomin - Rewrote custom button generation.
+[2008-12-19] Aeomin - Code clean up.
+[2008-11-30] Aeomin - Able to use gpf patch file now, however this will only patch into default grf file.
+[2008-11-26] Aeomin - URL opens in default browser instead always IE in notice box.
+---------------------------------------------
+{V2.0.1.7}
+[2008-11-23] Aeomin - Enabled madExcept(www.madshi.net) to trace fatal errors.
+[2008-11-15] Aeomin - New default skin! (by Renn) 
+---------------------------------------------
+{V2.0.1.6}
+[2008-11-02] Aeomin - Buttons now change to grayscale + blend when disabled (PNG only).
+[2008-10-30] Aeomin - Fixed URL for "clone clients"
+[2008-10-27] Aeomin - Added Filgaja's German translation.
+---------------------------------------------
+{V2.0.1.5} [Experimental]
+[2008-10-25] Aeomin - Implemented new .THOR format, while keep old one supported,
+           New one will produce smaller size compare to old one with exchange of slower
+           speed in ThorMaker.
+[2008-10-24] Aeomin - .THOR format clean-up
+[2008-10-22] Aeomin - I'm tired of Vista UAC crap; added asAdministrator tag.
+[2008-10-22] Aeomin - Huge code clean up/recode (gotta make rooms for new config).
+             (Reduced few hundred lines of code)
+[2008-10-22] Aeomin - Fixed glitches related BGM
+[2008-10-21] Aeomin - Code cleanup, hopefully nothing breaks.
+[2008-10-21] Aeomin - Fixed patcher unable to play internet radio(streaming audio).
+---------------------------------------------
+{V2.0.1.4}
+[2008-10-20] Note: Features that require changes in config will not implemented
+                 until new config standard in.
+                 Also, you may want to prepare for the up coming new config,
+                 Old entries may deprecated sooner or later (probably few weeks after new config).
+[2008-10-20] Aeomin - Added support for full URL in patch list [Suggested by cutelilkittie]
+---------------------------------------------
+{V2.0.1.3}
+[2008-10-04] Aeomin - Should fixed a problem in defragment. 
+[2008-10-03] Aeomin - Replaced BGM playing component; but broke BGMLoop
+ [Now uses Windows Media Player, which means can play whatever WMP supports]
+[2008-08-22] Aeomin - Tweak bit on default skin.
+[2008-08-19] Aeomin - Added blur effect to default skin.. Apparently doesn't look good as expected.
+[2008-08-17] Aeomin - Enabled patcher update w/o compress (for those who having problem...)
+[2008-08-16] Aeomin - Added FadeOnDrag option.
+---------------------------------------------
+{V2.0.1.2}
+[2008-08-05] Aeomin - Finalize clean up, return to normal routine...
+                      [I figured there isn't much could do, the complexity of Thor Patcher
+                       required every bit of code.]
+[2008-08-05] Aeomin - Config clean up again.
+[2008-08-05] Aeomin - client*_Name replace client*_URL and remove support for non compress file.
+[2008-08-04] Aeomin - Improved ThorMaker(again), now able to add/update & delete file in single patch!
+[2008-08-04] Aeomin - Working in progress debug build.
+---------------------------------------------
+{V2.0.1.1}
+[2008-08-04] Aeomin - Added Force_Start in replacement of old OpBit
+[2008-08-04] Aeomin - [ThorMaker] - Improvement on File mode & Single File option (should be thumb up now).
+[2008-08-04] Aeomin - For those who had problem with file mode, now should finally fixed.
+                      (I finally faced this issue during test, this bug was exists since beginning..right?)
+[2008-08-04] Aeomin - More config comment change.
+---------------------------------------------
+{V2.0.1.0}
+[2008-08-02] Aeomin - Random config commenting improvement.
+[2008-08-02] Aeomin - Removed OpBit in remote config file.
+[2008-08-02] Aeomin - Fixed window title doesn't change, only taskbar.
+[2008-08-02] Aeomin - Removed title change in config packer, moved to config.
+[2008-08-02] Note: Please use normal progress bar unless you MUST for sake of fancy design,
+                   The image progress bar consumes a lot cpu power(which may impact performance).
+[2008-08-02] Aeomin - Image progress bar now supports PNG (Untested).
+[2008-08-02] Aeomin - Fixed image progress bar with jpg.
+[2008-08-02] Aeomin - Code clean up on button generate.
+---------------------------------------------
+{V2.0.0.6}
+[2008-07-27] Aeomin - Fixed a bug during file delete in GRF (BETTER UPDATE IF YOU USE IT...)
+[2008-07-06] Aeomin - Fixed a bug in patch list parsing (still struggle with zero patch problem?)
+---------------------------------------------
+{V2.0.0.5}
+[2008-06-26] Aeomin - Added config entry "BGMDir"
+[2008-06-26] Aeomin - Added "Volume" for BGM (MP3 Only)
+[2008-06-26] Aeomin - Moved BGM related config entried to dedicated section
+[2008-06-26] Aeomin - Supports .mid file for BGM (personally i hate it -.-")
+  Please note that, for some reason, midi loading is bit slow depend on file size.
+---------------------------------------------
+{V2.0.0.5?}
+[2008-06-24] Aeomin - OK, fixed "PatcherURL" transplant...
+---------------------------------------------
+[2008-06-01] Aeomin - Fixed encoding of chinese traditional language pack.
+[2008-05-26] Aeomin - Canceled statistic, not only annoying for people, but also overwhelm myself.
+[2008-05-??] Aeomin - Moved config entry "file_url" from local to remote (Change it anytime!)
+[2008-05-12] Aeomin - Fixed error cause by empty patch list (OLD HARMLESS BUG)
+[2008-05-12] Aeomin - Fixed a bug (though nothing is damaged nor anyone reported it)
+[2008-05-10] Aeomin - Able to change Status text color & progressbar color via config.
+[2008-05-03] Aeomin - Removed support in PatcherURL, use compressed one instead!
+---------------------------------------------
+[2008-05-01] Aeomin - FIXED A CARELESS BUG!!!!!!!! Thanks Leky for report this!
+[2008-04-27] Aeomin - Fixed space in location causes unexpect result
+[2008-04-25] Aeomin - Fixed possible problem in last fix [-.-"] (okay.. maybe not, but it's an reinforcement)
+---------------------------------------------
+[2008-04-25] Aeomin - Increased compatibility with GRF created by other tool (still 0x200)
+	- Highly recommended if you are facing file corrupted after patching!
+[2008-04-25] Aeomin - Added option TimeOut.
+[2008-04-24] Aeomin - Patcher window should be at center of screen now.
+[2008-04-24] Aeomin - Fixed config packer save config file to wrong place.
+---------------------------------------------
+[2008-04-23] Aeomin - Fixed an rare crash (Not in normal use).
+[2008-04-23] Aeomin - Sorry about rush update, patcher title should be your server's name now (if you typed in config packer)
+[2008-04-23] Aeomin - It seems that patcher self-update have some kind glitch, IMPROVED! (it SHOULD more smoother)
+It's highly recommended to test locally before put in public
+----------- CodeName : Footprints ------------
+o By default, patcher uses a new icon from Elixir's Custom Icon set.
+ - [http://www.eathena.ws/board/Hexed-Client-With-Custom-Icon-t183338.html]
+o Supports thor file in patcher self-update & game client, it helps reduce bandwidth usage (use new config entries) [Long waited feature?]
+o Code clean up.
+o Now progress bar able to use image. (of course require use new config packer)
+o New config entry "BGMLoop".
+o Now notice browser will not show if an error is encountered (such 404 page not found...)
+o Buttons are now support PNG(YES 24bit alpha!), along with my old old buttons set! [And yes, it's hours of my spare time]
+o Added language entry "LangPatchingComplete" as requested.
+o Taskbar blinks when patching completed while patcher is inactive.
+o Reduced confusion related to Thor Maker, now auto correct directory (No more confusion on which directory should choose...)
+o Redesigned Thor Maker's GUI, it should be more user-friendly!
+o New option entry "Continue On Connection Fail".
+o Tweaked thread, made it better in error detect.
+o Patcher now should fully support windows Vista!
+o Now patcher able to launch non ".exe" extension client.
+---------------------------------------------
+[2008-04-06] Aeomin - Fixed a serious bug that caused thread crash.
+---------------------------------------------
+[2008-04-03] Aeomin - Now patcher shows download speed when download patch file
+[2008-04-03] Aeomin - Now supports file delete, the new thor maker is done in a rush, will remake GUI soon.
+[2008-04-03] I have less time work on Thor Patcher now
+[2008-04-02] Aeomin - Preparation of file delete support [THORV$21]
+o Feature Plan : P2P(Peer to Peer) support[For patch file size >= 20MB?].
+o Feature Plan : Multi thread download support[For patch file size >= 1MB?].
+[2008-03-29] Aeomin - Included a small language pack (Translation may be poor...and yes i used google's language tool)
+---------------------------------------------
+[2008-03-28] Aeomin - EXPERIMENTAL VERSION
+[2008-03-28] Aeomin - Tweaked grf lib
+[2008-03-28] Aeomin - Add RGZ SUPPORT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+---------------------------------------------
+[2008-03-15] Aeomin - Possible fixed thread crash when individual file in patch was larger than *?MB
+---------------------------------------------
+[2008-03-09] Aeomin - Possible fix for those who encountered problem of file not extracted.
+---------Special: Charistmas Edition---------
+o Support delete file (not from GRF yet)
+o Support multi client update (becuase of start button clone, it was rather a hack actually...)
+o Start button clone supported! (Let player choose between 255 clients, sweet eh?)
+o Fixed stack overflow in thormaker (Yes, unicode filename works)
+o Add safe check to prevent dead loop when update patcher caused by incorrect hash
+o Supports multi GRF!
+o Fixed a hidden problem in thor format (oddly, that bug does not wish to 'jump out')
+o Enhanced Thor Maker (GUI still needs improve)
+o Splitted language entries to language.ini, however, old entries still work but in lower priority than language.ini
+o Now, Thor Patcher stores in file when downloading patch file instead save in memory first (Download speed improved).
+o Supports FTP for files.
+---------------------------------------------
+[2007-12-14] Aeomin - Patcher now deletes file before extract new file (hopefully fix problem of file not update)
+[2007-12-14] Aeomin - Fixed a problem caused when patch list index was not constant increase (eg. a commented out patch)
+[2007-12-11] Aeomin - Possible fix download problem caused by space or other symbols in patch name
+---------------------------------------------
+[2007-12-10] Aeomin - Fixed a serious bug that caused file not replace but duplicate in GRF
+---------------------------------------------
+[2007-12-02] Aeomin - Add support of BMP as background image (Support transparent)
+[2007-12-02] Aeomin - Attempt make PNG as background image --> FAILED BADLY.. (You may try, but...)
+---------------------------------------------
+[2007-12-02] Aeomin - Finished custom language entries
+[2007-12-02] Aeomin - Fixed some possible freeze problems
+[2007-12-01] Aeomin - Start working on language.
+[2007-12-01] Aeomin - Add background music support
+---------------------------------------------
+[2007-12-01] Aeomin - Fix problems with File Mode patches.
+---------------------------------------------
+[2007-11-28] Aeomin - First customizable version.
+[2007-11-28] Aeomin - implement most config entries.
+[2007-11-27] Aeomin - Brainstorm new entries in config file.
+[2007-11-27] Aeomin - Rewrite Config_Packer, makes possible to store not just config also resource data (images and such)
+---------------------------------------------
+[2007-11-26] Aeomin - Modified Config_Packer, now no longer need make backup of patcher
+	Config_Packer will automatically erase previous config data.
+---------------------------------------------
+Thanksgiving 2007 - Initial public version.
