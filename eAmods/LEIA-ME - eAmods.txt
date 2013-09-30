@@ -1,71 +1,40 @@
-Links de download dos arquivos eAmod-A e eAmod-B
+Links de download dos arquivos eAmod-A e eAmod-B e outros
 
 Arquivos upados por um contribuidor:
 
 ======================================
-Atualizado em: 15/05/2013
-eAmod-A
+Atualizado em: 30/09/2013
 
-Link: http://adf.ly/PEpCb
+eAmod-A: http://adf.ly/WgVUv
 
-eAmod-B
+--------
 
-Link: http://adf.ly/PEpHU
+eAmod-B: http://adf.ly/PEpHU
 
-Mapas eAmod: http://adf.ly/P5T7Z
+--------
 
-eAmod-A(mais atualizado)
+rAthena+eAmod(já instalado): http://adf.ly/WgVct
 
-Link: http://adf.ly/PEpKY
+--------
 
-eAmod Mapas:
-
-Link: http://adf.ly/PEpNg
+eAthena+eAmod(já instalado): http://adf.ly/WgVi8
 
 ======================================
-Atualizado em: 08/08/2012
-eAmod-A
+Atualizado em 30/09/2013
 
-Link: http://adf.ly/Bhn2x
+eAmod Mapas: http://adf.ly/WgVsX
 
-======================================
-Atualizado em: 08/08/2012
-eAmod-B
-
-Link: http://adf.ly/BhmCt
-
+Aplique da mesma maneira usada para mapas custons.
 
 ======================================
-
-eAmod-A
-
-Link: http://adf.ly/9J2ii
-
-======================================
-
-eAmod-B
-
-Link: http://adf.ly/9J2kv
-
-======================================
-
-rAthena+eAmod atualizado
-
-Link: http://adf.ly/AOLb7
-
-======================================
-
-======================================
+Atualizado em 30/09/2013
 
 CP do eAmod
 
-Link: http://adf.ly/AuxyB 
+Link: http://adf.ly/WgVlM
 
-Atenção! Existe um arquivo a ser upado em sua tabela do servidor de ragnarok
-Basta ler o arquivo de texto: Msg_Longa_Colada_0b00
-
-Porém como é uma mensagem colada do MSN, contém alguns errinhos, basta tirar os "quadrados" ou "interrogações" no fim de cada linha.
-bom uso a todos.
+Atenção! tabela da CP dentro do arquivo .zip
+denominado: CPeAmod_SQL.sql
 
 ======================= Diferenças entre versões ========================
 
@@ -81,7 +50,7 @@ Vai de cada um escolher melhor o seu e baixar.
 
 =========================================================================
 
-Vale lembrar que os responsáveis do GitHub e do site, jonyll.net, não tem nada a ver com os arquivos aqui expostos.
+Vale lembrar que os responsáveis do GitHub, não tem nada a ver com os arquivos aqui expostos.
 
 Lembrando também para exclarecer um detalhe.
 
